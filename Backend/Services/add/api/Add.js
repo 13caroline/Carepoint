@@ -1,5 +1,5 @@
 const dbconfig = require("../../../Config/Database_Info");
-const Company = require("../../../Services/company/add/Company")
+const Company = require("../../../Services/company/api/Company")
 
 const Add = dbconfig.sequelize.define('add', {
     idAdd: {
