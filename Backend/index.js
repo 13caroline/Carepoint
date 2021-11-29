@@ -10,6 +10,7 @@ const dbconfig = require("./config/Database_Info");
 const apiconfig = require("./config/API_Info");
 const login = require("./Services/login/login-data/login-data");
 const location = require("./Services/location/location-data/location-data");
+const auth = require("./Services/shared/auth")
 
 //const Location = require("./Services/location/api/Location");
 //const Add = require("./Services/add/api/Add");
@@ -32,7 +33,7 @@ async function startupWebServer() {
 
 async function startServices(app) {
     console.log('Starting Login Module');
-    login.StartupLogin(app);
+    auth.StartupAuth(app);
     console.log('Starting Regist Module');
     location.StartupLocation(app);
 }
