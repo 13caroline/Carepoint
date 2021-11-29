@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 
 const dbconfig = require("./config/Database_Info");
 const apiconfig = require("./config/API_Info");
-const login = require("./Services/login/login-data");
+const login = require("./Services/login/login-data/login-data");
 
 
 var port = apiconfig.Port;
@@ -34,7 +34,7 @@ async function startServices(app) {
     console.log('Starting Login Module');
     login.StartupLogin(app);
     console.log('Starting Regist Module');
-    regist.StartupRegist(app);
+    //regist.StartupRegist(app);
 }
 
 startupWebServer();

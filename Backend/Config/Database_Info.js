@@ -22,6 +22,17 @@ module.exports = {
 
 function startConnection() {
 
+    const Sqlize = require("sequelize") 	
+    const sqliz = new Sqlize(connection.dbName, connection.user.username, connection.user.password, connection.options)
+        
+    //Autenticação no SQL para ter a certeza que ligação foi feita!
+    sqliz.authenticate().then( () => {
+        console.log("Connected to the DB")
+    }).catch((err) => {
+        console.log("Connection Failed. " + err)
+    })
+
+    /*
     const conn = new Sqlize(
         connection.dbName,
         connection.user.username,
@@ -31,9 +42,11 @@ function startConnection() {
     conn.authenticate((err, client) => {
         if (err) return console.log(err);
 
+        console.log(client)
         module.exports.conn = client;
 
-    })
+        return;
+    })*/
 };
 
 function simpleExecute() {
