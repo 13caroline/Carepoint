@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 const dbconfig = require("./config/Database_Info");
 const apiconfig = require("./config/API_Info");
 const login = require("./Services/login/login-data/login-data");
+const location = require("./Services/location/location-data/location-data");
 
 //const Location = require("./Services/location/api/Location");
 //const Add = require("./Services/add/api/Add");
@@ -33,7 +34,7 @@ async function startServices(app) {
     console.log('Starting Login Module');
     login.StartupLogin(app);
     console.log('Starting Regist Module');
-    //regist.StartupRegist(app);
+    location.StartupLocation(app);
 }
 
 
