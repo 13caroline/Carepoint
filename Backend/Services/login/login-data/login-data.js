@@ -9,9 +9,8 @@ const { json } = require('express');
 function StartupLogin(app) {
     return new Promise((resolve, reject) => {
         try {
-            app.get('/operators', async(req, res) => {
-
-
+            app.get("/operators", (req,res) => {
+                
             });
 
 

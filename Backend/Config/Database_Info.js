@@ -1,39 +1,37 @@
-const Sqlize = require("sequelize");
-
 const connection = {
 
-    dbName: 'AKProj',
+    dbName: 'PI', //dbname here
     options: {
         host: 'localhost',
         dialect: 'mysql',
     },
     user: {
         username: 'root',
-        password: 'th0ldana'
+        password: 'xxx' //your pass here
     }
 };
 
+const Sequelize = require("sequelize");
+const sequelize = new Sequelize(connection.dbName, connection.user.username, connection.user.password, connection.options);
+
 module.exports = {
     connection,
-    startConnection
-
-
+    startConnection,
+    Sequelize: Sequelize,
+    sequelize: sequelize
 };
 
 function startConnection() {
-
-    const Sqlize = require("sequelize") 	
-    const sqliz = new Sqlize(connection.dbName, connection.user.username, connection.user.password, connection.options)
         
     //Autenticação no SQL para ter a certeza que ligação foi feita!
-    sqliz.authenticate().then( () => {
+    sequelize.authenticate().then( () => {
         console.log("Connected to the DB")
     }).catch((err) => {
         console.log("Connection Failed. " + err)
     })
 
     /*
-    const conn = new Sqlize(
+    const conn = new Sequelize(
         connection.dbName,
         connection.user.username,
         connection.user.password,
