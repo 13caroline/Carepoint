@@ -9,7 +9,7 @@ const Add = dbconfig.sequelize.define('add', {
     },
     description: {
         type: dbconfig.Sequelize.STRING(200),
-        required: true
+        allowNull: false
     }
 }, {
     freezeTableName: true,

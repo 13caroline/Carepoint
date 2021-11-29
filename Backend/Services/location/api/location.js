@@ -8,15 +8,15 @@ const Location = dbconfig.sequelize.define('location', {
     },
     name: {
         type: dbconfig.Sequelize.STRING(45),
-        required: true
+        allowNull: false
     },
     cordsX: {
         type: dbconfig.Sequelize.STRING(45),
-        required: false
+        allowNull: true
     },
     cordsY: {
         type: dbconfig.Sequelize.STRING(45),
-        required: false
+        allowNull: true
     }
 }, {
     freezeTableName: true,
