@@ -54,7 +54,10 @@ const User = dbconfig.sequelize.define('User', {
 //User.belongsTo(Location, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}})
 
 //Uma location tem um user, vai meter uma foreign key de uma Location em User
-Location.hasOne(User, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}, targetKey: 'idLocation'})
+//Location.hasOne(User, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}, targetKey: 'idLocation'})
+Location.hasMany(User, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}, targetKey: 'idLocation'})
+//User.belongsTo(Location, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}, targetKey: 'idLocation'})
+
 
 User.beforeCreate((user, options) => { 
     return bcrypt.hash(user.password, 10)

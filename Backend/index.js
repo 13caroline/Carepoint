@@ -12,7 +12,7 @@ const login = require("./Services/login/login-data/login-data");
 //const location = require("./Services/location/location-data/location-data");
 const auth = require("./Services/shared/auth")
 
-//Para testar!!!
+//Para testar!!!----------------------------------------------------------------------------------------------------------
 const Location = require("./Services/location/api/Location");
 const User = require("./Services/login/api/user");
 
@@ -23,6 +23,16 @@ const File = require("./Services/file/api/file");
 const Subscription = require("./Services/subscription/api/subscription");
 const Company = require("./Services/company/api/company");
 const Add = require("./Services/add/api/add");
+
+const ServiceProvider = require("./Services/serviceProvider/api/serviceProvider")
+
+const Area = require("./Services/area/api/area")
+const Category = require("./Services/category/api/category")
+const JobOffer = require("./Services/joboffer/api/joboffer")
+
+const Category_has_ServiceProvider = require("./Services/category_has_serviceProvider/api/category_has_serviceProvider")
+const Category_x_TimeSlots = require("./Services/category_x_timeSlots/api/category_x_timeSlots")
+//-------------------------------------------------------------------------------------------------------------------------
 
 var port = apiconfig.Port;
 

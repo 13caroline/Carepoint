@@ -15,7 +15,7 @@ const JobOffer = dbconfig.sequelize.define('JobOffer', {
         allowNull: false
     },
     beginDate: {
-        type: dbconfig.Sequelize.DATE,
+        type: dbconfig.Sequelize.DATEONLY,
         allowNull: false
     },
     postDate: {
@@ -39,9 +39,10 @@ const JobOffer = dbconfig.sequelize.define('JobOffer', {
         timestamps: false
 })
 
-JobOffer.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idUser',allowNull: false}})
-JobOffer.belongsTo(Category, {onDelete: 'CASCADE', foreignKey: {name : 'idCategory',allowNull: false}})
-JobOffer.belongsTo(Location, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}})
-JobOffer.sync({force : true})
+JobOffer.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idUser',allowNull: false}, targetKey: 'idUser'})
+Category.hasMany(JobOffer, {onDelete: 'CASCADE', foreignKey: {name: 'idCategory', allowNull: false}, targetKey: 'idCategory'})
+Location.hasMany(JobOffer, {onDelete: 'CASCADE', foreignKey: {name: 'idLocation', allowNull: false}, targetKey: 'idLocation'})
+
+JobOffer.sync()
 
 module.exports = JobOffer

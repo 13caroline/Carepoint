@@ -1,5 +1,5 @@
 const dbconfig = require ("../../../Config/Database_Info");
-const Area = require ("../../area/api/Area")
+const Area = require ("../../area/api/area")
 
 const Category = dbconfig.sequelize.define('Category', {
     idCategory: {
@@ -17,7 +17,8 @@ const Category = dbconfig.sequelize.define('Category', {
         timestamps: false
 })
 
-Category.belongsTo(Area, {onDelete: 'CASCADE', foreignKey: {name : 'Area_idArea',allowNull: false}})
-Category.sync({force : true})
+Category.belongsTo(Area, {onDelete: 'CASCADE', foreignKey: {name : 'idArea',allowNull: false}, targetKey: 'idArea'})
+
+Category.sync()
 
 module.exports = Category
