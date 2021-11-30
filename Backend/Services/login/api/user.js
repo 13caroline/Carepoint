@@ -63,4 +63,6 @@ User.beforeCreate((user, options) => {
         });
 });
 
-//User.sync({force : true})
+User.sync({force : true})
+
+module.exports = User

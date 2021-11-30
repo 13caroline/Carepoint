@@ -8,11 +8,11 @@ const Timeslots = dbconfig.sequelize.define('timeslots',{
     },
     day: {
         type: dbconfig.Sequelize.STRING(45),
-        allowNull: true
+        allowNull: false
     },
     begin: {
         type: dbconfig.Sequelize.TIME,
-        allowNull: true
+        allowNull: false
     },
     end: {
         type: dbconfig.Sequelize.TIME,
