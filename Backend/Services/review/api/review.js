@@ -25,8 +25,8 @@ const Review = dbconfig.sequelize.define('Review', {
         timestamps: false
 })
 
-Review.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idGive',allowNull: false}})
-Review.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idReceive',allowNull: false}})
-Review.sync({force : true})
+Review.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idGive',allowNull: false}, targetKey: 'idUser'})
+Review.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idReceive',allowNull: false}, targetKey: 'idUser'})
+Review.sync()
 
 module.exports = Review

@@ -21,7 +21,7 @@ const Subscription = dbconfig.sequelize.define('subscription',{
 }, {
     freezeTableName: true,
     timestamps: false
-  })
+})
 
 Subscription.sync()
 

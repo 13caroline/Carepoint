@@ -1,6 +1,6 @@
 const dbconfig = require ("../../../Config/Database_Info");
-const File = require ("../../file/api/file")
-const Subscription = require ("../../subscription/api/Subscription")
+const User = require ("../../login/api/user")
+const Subscription = require ("../../subscription/api/subscription")
 
 const Company = dbconfig.sequelize.define('Company', {
     idCompany: {
@@ -14,7 +14,7 @@ const Company = dbconfig.sequelize.define('Company', {
         allowNull: false
     },
     firm: {
-        type: dbconfig.Sequelize.INTEGER,
+        type: dbconfig.Sequelize.STRING(100),
         allowNull: true
     },
     nipc: {
@@ -26,8 +26,11 @@ const Company = dbconfig.sequelize.define('Company', {
         timestamps: false
 })
 
-Company.belongsTo(File, {onDelete: 'CASCADE', foreignKey: {name : 'idFile',allowNull: false}})
-Company.belongsTo(Subscription, {onDelete: 'CASCADE', foreignKey: {name : 'idSubscription',allowNull: false}})
-Company.sync({force : true})
+// A chave de Company é o ID 
+Company.belongsTo(User, {foreignKey: 'idCompany', targetKey:'idUser'})
+// Meter a FK de subscription em Company
+Subscription.hasOne(Company, { foreignKey: {name: 'idSubscription', allowNull: false }, onDelete: 'CASCADE', targetKey: 'idSubscription'})
+
+Company.sync()
 
 module.exports = Company

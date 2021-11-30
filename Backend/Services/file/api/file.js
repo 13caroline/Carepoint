@@ -17,7 +17,9 @@ const File = dbconfig.sequelize.define('File', {
         timestamps: false
 })
 
-File.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idUser',allowNull: false}})
-File.sync({force : true})
+//Colocar FK de User em File
+File.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idUser',allowNull: false}, targetKey: 'idUser'})
+
+File.sync()
 
 module.exports = File

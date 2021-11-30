@@ -1,5 +1,5 @@
 const dbconfig = require("../../../Config/Database_Info");
-const Company = require("../../../Services/company/api/Company")
+const Company = require("../../company/api/company")
 
 const Add = dbconfig.sequelize.define('add', {
     idAdd: {
@@ -18,7 +18,7 @@ const Add = dbconfig.sequelize.define('add', {
   })
 
 //Add.belongsTo(Company, {foreignKey: 'idCompany', targetKey: 'idCompany'})
-Add.belongsTo(Company, {onDelete: 'CASCADE', foreignKey: {name : 'idCompany',allowNull: false}})
+Add.belongsTo(Company, {onDelete: 'CASCADE', foreignKey: {name : 'idCompany',allowNull: false},  targetKey: 'idCompany'})
 
 Add.sync()
 

@@ -9,11 +9,20 @@ app.use(bodyParser.json());
 const dbconfig = require("./config/Database_Info");
 const apiconfig = require("./config/API_Info");
 const login = require("./Services/login/login-data/login-data");
-const location = require("./Services/location/location-data/location-data");
+//const location = require("./Services/location/location-data/location-data");
 const auth = require("./Services/shared/auth")
 
-//const Location = require("./Services/location/api/Location");
-//const Add = require("./Services/add/api/Add");
+//Para testar!!!
+const Location = require("./Services/location/api/Location");
+const User = require("./Services/login/api/user");
+
+const Message = require("./Services/message/api/message")
+const Review = require("./Services/review/api/review")
+
+const File = require("./Services/file/api/file");
+const Subscription = require("./Services/subscription/api/subscription");
+const Company = require("./Services/company/api/company");
+const Add = require("./Services/add/api/add");
 
 var port = apiconfig.Port;
 
@@ -35,7 +44,7 @@ async function startServices(app) {
     console.log('Starting Login Module');
     auth.StartupAuth(app);
     console.log('Starting Regist Module');
-    location.StartupLocation(app);
+    //location.StartupLocation(app);
 }
 
 

@@ -21,8 +21,8 @@ const Message = dbconfig.sequelize.define('Message', {
         timestamps: false
 })
 
-Message.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idGive',allowNull: false}})
-Message.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idReceive',allowNull: false}})
+Message.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idGive',allowNull: false}, targetKey: 'idUser'})
+Message.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idReceive',allowNull: false}, targetKey: 'idUser'})
 Message.sync({force : true})
 
 module.exports = Message

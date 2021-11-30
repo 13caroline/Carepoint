@@ -1,5 +1,5 @@
 const dbconfig = require ("../../../Config/Database_Info");
-const Location = require ("../../location/api/Location")
+const Location = require ("../../location/api/location")
 const bcrypt = require("bcryptjs")
 
 const User = dbconfig.sequelize.define('User', {
@@ -51,7 +51,10 @@ const User = dbconfig.sequelize.define('User', {
         timestamps: false
 })
 
-User.belongsTo(Location, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}})
+//User.belongsTo(Location, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}})
+
+//Uma location tem um user, vai meter uma foreign key de uma Location em User
+Location.hasOne(User, {onDelete: 'CASCADE', foreignKey: {name : 'idLocation',allowNull: false}, targetKey: 'idLocation'})
 
 User.beforeCreate((user, options) => { 
     return bcrypt.hash(user.password, 10)
@@ -63,6 +66,6 @@ User.beforeCreate((user, options) => {
         });
 });
 
-User.sync({force : true})
+User.sync()
 
 module.exports = User
