@@ -5,10 +5,11 @@ const Add = dbconfig.sequelize.define('add', {
     idAdd: {
         type: dbconfig.Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        allowNull: false
     },
     description: {
-        type: dbconfig.Sequelize.STRING(200),
+        type: dbconfig.Sequelize.STRING(2000),
         allowNull: false
     }
 }, {
@@ -16,7 +17,8 @@ const Add = dbconfig.sequelize.define('add', {
     timestamps: false
   })
 
-Add.belongsTo(Company, {foreignKey: 'idCompany', targetKey: 'idCompany'})
+//Add.belongsTo(Company, {foreignKey: 'idCompany', targetKey: 'idCompany'})
+Add.belongsTo(Company, {onDelete: 'CASCADE', foreignKey: {name : 'idCompany',allowNull: false}})
 
 Add.sync()
 
