@@ -30,7 +30,7 @@ const User = dbconfig.sequelize.define('User', {
         allowNull: false
     },
     type: {
-        type: dbconfig.Sequelize.STRING(45),
+        type: dbconfig.Sequelize.INTEGER,
         defaultValue: '0',
         allowNull: false
     },
