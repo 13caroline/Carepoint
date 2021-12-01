@@ -13,8 +13,8 @@ const category_Has_ServiceProvider = dbconfig.sequelize.define('Category_has_Ser
 });
 
 //Preciso repetir duas vezes (acho, estava assim na documentação pelo menos)
-Category.belongsToMany(ServiceProvider, { through: category_Has_ServiceProvider});
-ServiceProvider.belongsToMany(Category, { through: category_Has_ServiceProvider});
+Category.belongsToMany(ServiceProvider, { foreignKey: 'idCategory', through: category_Has_ServiceProvider});
+ServiceProvider.belongsToMany(Category, { foreignKey: 'idServiceProvider',through: category_Has_ServiceProvider});
 
 category_Has_ServiceProvider.sync()
 
