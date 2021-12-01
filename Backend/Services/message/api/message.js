@@ -23,6 +23,6 @@ const Message = dbconfig.sequelize.define('Message', {
 
 Message.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idGive',allowNull: false}, targetKey: 'idUser'})
 Message.belongsTo(User, {onDelete: 'CASCADE', foreignKey: {name : 'idReceive',allowNull: false}, targetKey: 'idUser'})
-Message.sync({force : true})
+Message.sync()
 
 module.exports = Message
