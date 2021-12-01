@@ -31,7 +31,7 @@ const JobOffer = dbconfig.sequelize.define('JobOffer', {
         allowNull: true
     },
     endDate: {
-        type: dbconfig.Sequelize.DATE,
+        type: dbconfig.Sequelize.DATEONLY,
         allowNull: true
     }
 }, {
