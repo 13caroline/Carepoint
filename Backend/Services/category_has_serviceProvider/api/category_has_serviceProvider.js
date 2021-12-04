@@ -3,6 +3,11 @@ const Category = require("../../category/api/category");
 const ServiceProvider = require("../../serviceProvider/api/serviceProvider");
 
 const category_Has_ServiceProvider = dbconfig.sequelize.define('Category_has_ServiceProvider', {
+    auxiliarID: {
+        type: dbconfig.Sequelize.INTEGER,
+        unique: true,
+        allowNull: false
+    },
     price : {
         type: dbconfig.Sequelize.DOUBLE,
         allowNull: true

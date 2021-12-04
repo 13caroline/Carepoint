@@ -17,8 +17,10 @@ const category_x_TimeSlots = dbconfig.sequelize.define('Category_x_TimeSlots', {
 });
 
 //Preciso repetir duas vezes (acho, estava assim na documentação pelo menos)
-TimeSlots.belongsToMany(Category_has_ServiceProvider, { foreignKey:'idTimeslot', through: category_x_TimeSlots});
-Category_has_ServiceProvider.belongsToMany(TimeSlots, { foreignKey:'idCategory', through: category_x_TimeSlots});
+//TimeSlots.belongsToMany(Category_has_ServiceProvider, { foreignKey:'idTimeSlot', through: category_x_TimeSlots});
+//Category_has_ServiceProvider.belongsToMany(TimeSlots, { foreignKey:'idComposite', through: category_x_TimeSlots, otherKey: 'auxiliarID'});
+TimeSlots.belongsToMany(Category_has_ServiceProvider, { foreignKey:'idTimeSlot', through: category_x_TimeSlots, targetKey:'auxiliarID'});
+Category_has_ServiceProvider.belongsToMany(TimeSlots, { foreignKey:'idComposite', through: category_x_TimeSlots, sourceKey:'auxiliarID'});
 
 category_x_TimeSlots.sync()
 
