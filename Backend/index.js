@@ -41,7 +41,17 @@ var port = apiconfig.Port;
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
+async function startupWebServer() {
+    try {
+        console.log('Connection Started');
+        await dbconfig.startConnection();
 
+        console.log('Services Started');
+        await startServices(app);
+    } catch (err) {
+        console.error(err);
+    }
+}
 
 async function startServices(app) {
     console.log('Starting Login Module');
