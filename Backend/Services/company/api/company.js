@@ -29,7 +29,7 @@ const Company = dbconfig.sequelize.define('Company', {
 // A chave de Company é o ID 
 Company.belongsTo(User, {foreignKey: 'idCompany', targetKey:'idUser'})
 // Meter a FK de subscription em Company
-Subscription.hasOne(Company, { foreignKey: {name: 'idSubscription', allowNull: false }, onDelete: 'CASCADE', targetKey: 'idSubscription'})
+Subscription.hasMany(Company, { foreignKey: {name: 'idSubscription', allowNull: false }, onDelete: 'CASCADE', targetKey: 'idSubscription'})
 
 Company.sync()
 
