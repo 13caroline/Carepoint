@@ -31,31 +31,27 @@ const Category = require("./Services/category/api/category")
 const JobOffer = require("./Services/joboffer/api/joboffer")
 
 const Category_has_ServiceProvider = require("./Services/category_has_serviceProvider/api/category_has_serviceProvider")
-const Category_x_TimeSlots = require("./Services/category_x_timeSlots/api/category_x_timeSlots")
+const Category_x_TimeSlots = require("./Services/category_x_timeSlots/api/category_x_timeSlots");
+const category_Has_ServiceProvider = require('./Services/category_has_serviceProvider/api/category_has_serviceProvider');
+
+
 //-------------------------------------------------------------------------------------------------------------------------
 
 var port = apiconfig.Port;
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
-async function startupWebServer() {
-    try {
-        console.log('Connection Started');
-        await dbconfig.startConnection();
 
-        console.log('Services Started');
-        await startServices(app);
-    } catch (err) {
-        console.error(err);
-    }
-}
 
 async function startServices(app) {
     console.log('Starting Login Module');
     auth.StartupAuth(app);
     console.log('Starting Regist Module');
+
     //location.StartupLocation(app);
+
 }
+
 
 
 startupWebServer();

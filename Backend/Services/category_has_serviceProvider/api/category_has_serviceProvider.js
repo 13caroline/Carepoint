@@ -23,4 +23,13 @@ ServiceProvider.belongsToMany(Category, { foreignKey: 'idServiceProvider',throug
 
 category_Has_ServiceProvider.sync()
 
+category_Has_ServiceProvider.beforeCreate((category_Has_ServiceProvider, options) => { 
+    return category_Has_ServiceProvider.max('auxiliarId').then((nID) => {
+        console.log(nID)
+        category_Has_ServiceProvider.auxiliarID=nID+1
+    }).catch((err) =>{
+        console.log(err)
+    })
+});
+
 module.exports = category_Has_ServiceProvider;
