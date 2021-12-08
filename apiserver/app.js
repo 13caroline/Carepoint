@@ -7,6 +7,36 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
+//Para testar!!!----------------------------------------------------------------------------------------------------------
+const Location = require("./models/location");
+const Location_Model = require("./models/location");
+const User = require("./models/user");
+
+const Message = require("./models/message")
+const Review = require("./models/review")
+
+const File = require("./models/file");
+const Subscription = require("./models/subscription");
+const Company = require("./models/company");
+const Add = require("./models/add");
+
+const ServiceProvider = require("./models/serviceProvider")
+
+const Area = require("./models/area")
+const Category = require("./models/category")
+const JobOffer = require("./models/joboffer")
+
+const Category_has_ServiceProvider = require("./models/category_has_serviceProvider")
+const Category_x_TimeSlots = require("./models/category_x_timeSlots");
+const category_Has_ServiceProvider = require('./models/category_has_serviceProvider');
+
+
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 var app = express();
 
 app.use(logger('dev'));

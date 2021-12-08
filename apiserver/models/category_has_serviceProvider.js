@@ -11,6 +11,10 @@ const category_Has_ServiceProvider = dbconfig.sequelize.define('Category_has_Ser
     price : {
         type: dbconfig.Sequelize.DOUBLE,
         allowNull: true
+    },
+    experience : {
+        type: dbconfig.Sequelize.INTEGER,
+        allowNull: false
     }
 }, {
     freezeTableName: true,

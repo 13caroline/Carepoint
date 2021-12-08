@@ -20,6 +20,10 @@ const Company = dbconfig.sequelize.define('Company', {
     nipc: {
         type: dbconfig.Sequelize.INTEGER,
         allowNull: false
+    },
+    endSub: {
+        type: dbconfig.Sequelize.DATE,
+        allowNull: true
     }
 }, {
         freezeTableName: true,

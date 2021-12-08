@@ -6,10 +6,6 @@ const category_x_TimeSlots = dbconfig.sequelize.define('Category_x_TimeSlots', {
     occupied : {
         type: dbconfig.Sequelize.BOOLEAN,
         allowNull: false
-    },
-    experience : {
-        type: dbconfig.Sequelize.INTEGER,
-        allowNull: false
     }
 }, {
     freezeTableName: true,
