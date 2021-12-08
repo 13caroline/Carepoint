@@ -1,13 +1,13 @@
 const connection = {
 
-    dbName: 'TestePI', //dbname here
+    dbName: 'PI', //dbname here
     options: {
         host: 'localhost',
         dialect: 'mysql',
     },
     user: {
         username: 'root',
-        password: 'hugosousinha13' //your pass here
+        password: 'th0ldana' //your pass here
     }
 };
 
