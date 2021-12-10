@@ -20,7 +20,7 @@ Out.newUser = (name,email,password) => {
         email: email,
         phoneNumber: "910905213",
         sex: "M",
-        type: "1",
+        type: "2",
         createdAt: '2020-01-09 07:30:40',
         lastActivity: '2020-04-29 14:48:37',
         active: 1,

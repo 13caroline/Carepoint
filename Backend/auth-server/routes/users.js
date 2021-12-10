@@ -11,7 +11,7 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
-router.post('/', (req, res) => {
+router.post('/register', (req, res) => {
   user = User.newUser(req.body.name, req.body.email, req.body.password)
   if (user) {
     axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {
@@ -33,7 +33,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
     if (e) {
       res.status(500).jsonp({ error: "Error within token generation: " + e })
     } else {
-      res.status(201).jsonp({ token: token })
+      res.status(200).jsonp({ token: token })
     }
   })
 })

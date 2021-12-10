@@ -1,0 +1,103 @@
+{
+	"info": {
+		"_postman_id": "2d642d25-7dab-41d5-ac05-a7aba2b6b05b",
+		"name": "PI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "theTest@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9041/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9041",
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jenkin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "teste123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "6666",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9041/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9041",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API_Server",
+			"item": [
+				{
+					"name": "TestSomeStuff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
