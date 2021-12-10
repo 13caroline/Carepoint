@@ -8,6 +8,7 @@ const usersRouter = require('./routes/users');
 
 const Passport = require('passport')
 require('./models/Config/Passport_config')(Passport)
+
 //-------------------------------------
 const User = require('./controllers/user');
 const passport = require('passport');

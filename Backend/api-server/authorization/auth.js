@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken')
 
 var Out = module.exports;
 
+//Verifica se token fornecido tem autorização de Admin.
 Out.checkAdminLevel = (req, res, next) => {
-    jwt.verify(req.body.token,'Project_PI', (err, payload) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
         if(!err){
             level = payload.level;
             if(level == 1){
@@ -15,8 +16,68 @@ Out.checkAdminLevel = (req, res, next) => {
             res.status(500).jsonp({ error: err })
         }
     })
-    jwt.verify(token, 'JWT_Test', (e,payload) => {
-        if(e) console.log('Erro a verificar token: ' + e)
-        else console.log('Decoded: ' + JSON.stringify(payload))
+}
+
+//Verifica se token fornecido tem autorização de Admin ou Consumer ou Service Provider.
+Out.checkAdminOrUserOrSP = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
+        if(!err){
+            level = payload.level;0
+            if(level == 1 && level == 2 && level == 3){
+                next()
+            }else{
+                res.status(401).jsonp({message: "No permission."})
+            }
+        }else{
+            res.status(500).jsonp({ error: err })
+        }
+    })
+}
+
+//Verifica se token fornecido tem autorização de consumer.
+Out.checkUserLevel = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
+        if(!err){
+            level = payload.level;
+            if(level == 1 && level == 3){
+                next()
+            }else{
+                res.status(401).jsonp({message: "No permission."})
+            }
+        }else{
+            res.status(500).jsonp({ error: err })
+        }
+    })
+}
+
+//Verifica se token fornecido tem autorização de company.
+Out.checkCompanyLevel = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
+        if(!err){
+            level = payload.level;
+            if(level == 1 && level == 4){
+                next()
+            }else{
+                res.status(401).jsonp({message: "No permission."})
+            }
+        }else{
+            res.status(500).jsonp({ error: err })
+        }
+    })
+}
+
+//Verifica se token fornecido tem autorização de service provider.
+Out.checkServiceProviderLevel = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
+        if(!err){
+            level = payload.level;
+            if(level == 1 && level == 2){
+                next()
+            }else{
+                res.status(401).jsonp({message: "No permission."})
+            }
+        }else{
+            res.status(500).jsonp({ error: err })
+        }
     })
 }

@@ -13,18 +13,18 @@ Out.consultar_id = (id) => {
     return User.findOne({where:{'idUser': id}})
 }
 
-Out.newUser = (name,email,password) => {
+Out.newUser = (body) => {
     User.create({
-        name: name,
-        password: password,
-        email: email,
-        phoneNumber: "910905213",
-        sex: "M",
-        type: "2",
+        name: body.name,
+        password: body.password,
+        email: body.email,
+        phoneNumber: body.phone,
+        sex: body.sex,
+        type: 2,
         createdAt: '2020-01-09 07:30:40',
         lastActivity: '2020-04-29 14:48:37',
         active: 1,
-        idLocation: 1
+        idLocation: body.idLocation
     })
 
     return User

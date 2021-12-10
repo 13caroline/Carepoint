@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/register', (req, res) => {
-  user = User.newUser(req.body.name, req.body.email, req.body.password)
+  user = User.newUser(req.body)
   if (user) {
     axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {
       email: req.body.email,
