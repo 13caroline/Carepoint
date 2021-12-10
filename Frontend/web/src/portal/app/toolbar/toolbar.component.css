@@ -1,0 +1,13 @@
+.logoutBTN{
+    
+    position:absolute;
+    right:50px;
+    scale: 2;
+}
+
+.toolbar{
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
+

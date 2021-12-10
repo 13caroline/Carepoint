@@ -5,6 +5,14 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthorizationModule} from "../../pages/authorization/authorization.module";
 import {RouterModule} from "@angular/router";
+import { ToolbarComponent } from './toolbar/toolbar.component';
+
+//Material
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+
 
 
 @NgModule({
@@ -13,10 +21,20 @@ import {RouterModule} from "@angular/router";
     AppRoutingModule,
     HttpClientModule,
     AuthorizationModule,
-    RouterModule
+    RouterModule,
+
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule
+  ],
+  exports:[
+    MatSidenavModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    ToolbarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
