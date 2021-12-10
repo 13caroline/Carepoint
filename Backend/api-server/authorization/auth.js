@@ -2,6 +2,21 @@ const jwt = require('jsonwebtoken')
 
 var Out = module.exports;
 
+//Obtem o email do JWT
+Out.getEmailFromJWT = (token) => {
+    email = null;
+
+    jwt.verify(token, 'Project_PI', (err, payload) => {
+        if(!err){
+            email = payload.email;
+        }else{
+            console.log(err);
+        }
+    })
+
+    return email;
+}
+
 //Verifica se token fornecido tem autorização de Admin.
 Out.checkAdminLevel = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
@@ -22,8 +37,8 @@ Out.checkAdminLevel = (req, res, next) => {
 Out.checkAdminOrUserOrSP = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
         if(!err){
-            level = payload.level;0
-            if(level == 1 && level == 2 && level == 3){
+            level = payload.level;
+            if(level == 1 || level == 2 || level == 3){
                 next()
             }else{
                 res.status(401).jsonp({message: "No permission."})
@@ -39,7 +54,7 @@ Out.checkUserLevel = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
         if(!err){
             level = payload.level;
-            if(level == 1 && level == 3){
+            if(level == 1 || level == 3){
                 next()
             }else{
                 res.status(401).jsonp({message: "No permission."})
@@ -55,7 +70,7 @@ Out.checkCompanyLevel = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
         if(!err){
             level = payload.level;
-            if(level == 1 && level == 4){
+            if(level == 1 || level == 4){
                 next()
             }else{
                 res.status(401).jsonp({message: "No permission."})
@@ -71,7 +86,7 @@ Out.checkServiceProviderLevel = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err,payload) => {
         if(!err){
             level = payload.level;
-            if(level == 1 && level == 2){
+            if(level == 1 || level == 2){
                 next()
             }else{
                 res.status(401).jsonp({message: "No permission."})

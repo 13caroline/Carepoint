@@ -96,6 +96,81 @@
 						"url": null
 					},
 					"response": []
+				},
+				{
+					"name": "New JobOffer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3RAZ21haWwuY29tIiwibGV2ZWwiOjEsImlhdCI6MTYzOTE1OTk1OCwiZXhwIjoxNjM5MTYzNTU4fQ.mrntXDbq_3fsePBUg5xFX1HMXQ6HB3Px09mK4S7ChDU",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "xxxxYYYYZzZzZ",
+									"type": "text"
+								},
+								{
+									"key": "beginDate",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "postDate",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "done",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "0",
+									"type": "text"
+								},
+								{
+									"key": "idUser",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "idCategory",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "idLocation",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9040/joboffer/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9040",
+							"path": [
+								"joboffer",
+								"new"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
