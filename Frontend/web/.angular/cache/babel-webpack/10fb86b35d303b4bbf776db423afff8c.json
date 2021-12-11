@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { registRoutes } from './regist/regist.routes';\nimport { loginRoutes } from './login/login.routes';\nexport const authorizationRoutes = [{\n  path: 'authorization',\n  children: [...registRoutes, ...loginRoutes]\n}];","map":null,"metadata":{},"sourceType":"module"}
