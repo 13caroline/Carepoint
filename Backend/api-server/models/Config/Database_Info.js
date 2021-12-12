@@ -7,7 +7,7 @@ const connection = {
     },
     user: {
         username: 'root',
-        password: 'XXXX' //your pass here
+        password: 'password' //your pass here
     }
 };
 
@@ -22,9 +22,9 @@ module.exports = {
 };
 
 function startConnection() {
-        
+
     //Autenticação no SQL para ter a certeza que ligação foi feita!
-    sequelize.authenticate().then( () => {
+    sequelize.authenticate().then(() => {
         console.log("Connected to the DB")
     }).catch((err) => {
         console.log("Connection Failed. " + err)
