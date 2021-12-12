@@ -1,6 +1,6 @@
 <template>
   <div id="about" tag="section">
-    <v-img src="@/assets/About.png" class="img">
+    <v-img src="@/assets/About.png" class="img" height="750px">
       <v-container class="mt-10">
         <v-row no-gutters style="height: 600px">
           <v-col
@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 .img {
-  height: 30%;
+  height: 20%;
   width: 100vw;
 }
 
