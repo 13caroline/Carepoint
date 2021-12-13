@@ -1,5 +1,5 @@
-const dbconfig = require ("./Config/Database_Info");
-const Area = require ("./area")
+const dbconfig = require("./Config/Database_Info");
+const Area = require("./area")
 
 const Category = dbconfig.sequelize.define('Category', {
     idCategory: {
@@ -13,11 +13,11 @@ const Category = dbconfig.sequelize.define('Category', {
         allowNull: false
     }
 }, {
-        freezeTableName: true,
-        timestamps: false
+    freezeTableName: true,
+    timestamps: false
 })
 
-Category.belongsTo(Area, {onDelete: 'CASCADE', foreignKey: {name : 'idArea',allowNull: false}, targetKey: 'idArea'})
+Category.belongsTo(Area, { onDelete: 'CASCADE', foreignKey: { name: 'idArea', allowNull: false }, targetKey: 'idArea' })
 
 Category.sync()
 

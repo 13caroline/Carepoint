@@ -8,7 +8,7 @@ Out.newJob = ((body) => {
 
     email = auth.getEmailFromJWT(body.token);
 
-    user_controller.consultar(email).then((user) => {
+    user_controller.consult(email).then((user) => {
         if (user) {
             jobOffer_model.create({
                 description: body.description,

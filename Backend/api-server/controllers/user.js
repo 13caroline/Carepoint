@@ -39,8 +39,7 @@ Out.insert = (user) => {
         type: user.type,
         createdAt: user.createdAt,
         lastActivity: user.createdAt,
-        active: user.active,
-        idLocation: user.idLocation
+        active: user.active
     });
 }
 

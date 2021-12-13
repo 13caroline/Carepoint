@@ -1,11 +1,12 @@
 const dbconfig = require("./Config/Database_Info")
-const Category = require ("./category")
+const Category = require("./category")
 
-const Area = dbconfig.sequelize.define('area',{
+const Area = dbconfig.sequelize.define('Area', {
     idArea: {
         type: dbconfig.Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        allowNull: false
     },
     name: {
         type: dbconfig.Sequelize.STRING(45),
@@ -14,7 +15,7 @@ const Area = dbconfig.sequelize.define('area',{
 }, {
     freezeTableName: true,
     timestamps: false
-  })
+})
 
 Area.sync()
 
