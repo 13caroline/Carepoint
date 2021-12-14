@@ -24,14 +24,16 @@ Out.list = () => {
 Out.insert = (category) => {
     return Category.create({
         idCategory: category.idCategory,
-        name: category.name
+        name: category.name,
+        idArea: category.idArea
     });
 }
 
 // Update Category
 Out.update = (id, category) => {
-    return Category.update({ returning: true }, { name: area.name }, {
-        where: { 'idArea': id },
+    return Category.update({ name: category.name, idArea: category.idArea }, {
+        where: { 'idCategory': id },
+        returning: true,
     });
 }
 

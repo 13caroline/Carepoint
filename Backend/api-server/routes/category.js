@@ -54,7 +54,7 @@ router.post('/', function(req, res) {
 // Update an Category
 router.put('/:id', function(req, res, next) {
     console.log(req.params.id, req.body)
-    Category.update(req.body)
+    Category.update(req.params.id, req.body)
         .then(data => res.status(201).jsonp({ data: data }))
         .catch(e => res.status(500).jsonp({ error: e }))
 })
