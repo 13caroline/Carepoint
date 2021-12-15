@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 100vh">
+  <div>
     <v-app-bar flat color="#FFFFFF" height="180">
       <v-container>
         <v-layout row>

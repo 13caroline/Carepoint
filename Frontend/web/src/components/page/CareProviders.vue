@@ -4,7 +4,7 @@
       <v-container>
         <v-row justify="center" align="center">
           <v-col cols="12" md="4" sm="2">
-            <v-card-title>
+            <v-card-title class="headline">
               Encontre a ajuda doméstica perfeita para si e sua família!
             </v-card-title>
 
@@ -75,7 +75,9 @@ export default {
 </script>
 
 <style scoped>
+
 span {
   font-size: small;
+  color: #78C4D4;
 }
 </style>
