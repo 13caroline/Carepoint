@@ -2,6 +2,8 @@
   <div id="home">
     <AppBar />
 
+    <login />
+
     <about />
 
     <care-providers />
@@ -19,8 +21,9 @@ export default {
   components: {
     AppBar: () => import("@/components/page/AppBar"),
     Foot: () => import("@/components/global/Footer"),
+    Login: () => import("@/components/page/Login"),
     About: () => import("@/components/page/About"),
-    CareProviders: () => import("@/components/page/CareProviders")
+    CareProviders: () => import("@/components/page/CareProviders"),
   },
 };
 </script>
