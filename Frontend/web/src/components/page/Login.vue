@@ -1,7 +1,8 @@
 <template>
   <div id="about" tag="section">
     <v-img src="@/assets/login.jpg" class="img" height="750px">
-      <v-row no-gutters style="height: 100%" align="center" justify="center">
+    <v-container>
+      <v-row align="center" justify="center">
         <v-col cols="3">
           <span>E-mail</span>
           <v-text-field
@@ -23,10 +24,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row>
-        <v-btn rounded color="black" dark> Increva-se </v-btn>
-        <v-btn rounded color="black" dark> Iniciar Sessão </v-btn>
+      <v-row  align="center" justify="center">
+        <v-btn text color="#78C4D4"> Increva-se </v-btn>
+        <v-btn dark depressed class="rounded-xl" color="#78C4D4"> Iniciar Sessão </v-btn>
       </v-row>
+      </v-container>
     </v-img>
   </div>
 </template>
