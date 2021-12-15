@@ -39,7 +39,8 @@ Out.insert = (user) => {
         type: user.type,
         createdAt: user.createdAt,
         lastActivity: user.createdAt,
-        active: user.active
+        active: user.active,
+        idLocation: user.idLocation
     });
 }
 
@@ -49,6 +50,6 @@ Out.update = (user) => {
 }
 
 //Delete user by email
-Out.remove = (email) => {
-    return User.destroy({ where: { 'email': email } });
+Out.remove = (id) => {
+    return User.destroy({ where: { 'idUser': id } });
 }

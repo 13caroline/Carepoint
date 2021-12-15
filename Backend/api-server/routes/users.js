@@ -86,9 +86,9 @@ router.put('/', function(req, res, next) {
  ****************************************************************************************/
 
 
-// Delete a user given is email address
-router.delete('/:email', function(req, res, next) {
-    User.remove(req.params.email)
+// Delete a user given is id address
+router.delete('/:id', function(req, res, next) {
+    User.remove(req.params.id)
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });

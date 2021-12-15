@@ -10,6 +10,7 @@ var jobOfferRouter = require('./routes/joboffer');
 var searchRouter = require('./routes/search');
 var categoryRouter = require('./routes/category')
 var areaRouter = require('./routes/area')
+var companyRouter = require('./routes/company')
 
 
 // Para construir a DB----------------------------------------------------------------------------------------------------------
@@ -32,6 +33,7 @@ app.use('/joboffer', jobOfferRouter);
 app.use('/search', searchRouter);
 app.use('/category', categoryRouter);
 app.use('/area', areaRouter);
+app.use('/company', companyRouter);
 
 
 // catch 404 and forward to error handler
