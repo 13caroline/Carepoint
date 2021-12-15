@@ -2,8 +2,8 @@
   <v-container id="careproviders" tag="section">
     <v-card flat>
       <v-container>
-        <v-row justify="space-between">
-          <v-col cols="12" md="6" sm="4">
+        <v-row justify="center" align="center">
+          <v-col cols="12" md="4" sm="2">
             <v-card-title>
               Encontre a ajuda doméstica perfeita para si e sua família!
             </v-card-title>
@@ -45,13 +45,13 @@
             </v-card-actions>
           </v-col>
 
-          <v-col cols="12" md="6" sm="4" class="ml-auto"> 
+          <v-col cols="12" md="4" sm="4"> 
             <v-img
-              align-center
+              class="rounded-xl"
               center
               src="@/assets/CareProviders.jpg"
-              max-height="220"
-              max-width="220"
+              height="250"
+              width="500"
             >
             </v-img>
           </v-col>
