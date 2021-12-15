@@ -45,11 +45,24 @@ Out.insert = (user) => {
 }
 
 // Update user
-Out.update = (user) => {
-    return User.update({ returning: true, where: { 'idUser': user.idUser } });
-}
-
-//Delete user by email
+Out.update = (id, user) => {
+        return User.update({
+            name: user.name,
+            password: user.password,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            sex: user.sex,
+            type: user.type,
+            createdAt: user.createdAt,
+            lastActivity: user.createdAt,
+            active: user.active,
+            idLocation: user.idLocation
+        }, {
+            where: { 'idUser': id },
+            returning: true,
+        });
+    }
+    //Delete user by email
 Out.remove = (id) => {
     return User.destroy({ where: { 'idUser': id } });
 }

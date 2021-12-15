@@ -1,13 +1,12 @@
 // Controller for the company model
 
-
 const Company = require('../models/company')
 
 var Out = module.exports;
 
-//GET by name
-Out.consult = (firm) => {
-    return Company.findOne({ where: { 'firm': firm } });
+//GET by nipc
+Out.consult_nipc = (nipc) => {
+    return Company.findOne({ where: { 'nipc': nipc } });
 }
 
 //GET by id
@@ -29,14 +28,19 @@ Out.insert = (company) => {
         firm: company.firm,
         nipc: company.nipc,
         endSub: company.endSub,
-        idUser: company.idUser
+        idUser: company.idUser,
+        idSubscription: company.idSubscription
     });
 }
 
 // Update Company
 Out.update = (id, company) => {
-    //TODO: falta update dos adds e o nipc não me parece que deva ser possível alterar
-    return Company.update({ firm: company.firm, link: company.link, endSub: company.endSub }, {
+    return Company.update({
+        firm: company.firm,
+        link: company.link,
+        nipc: company.nipc,
+        endSub: company.endSub
+    }, {
         where: { 'idCompany': id },
         returning: true,
     });

@@ -15,19 +15,19 @@ router.get('/', function(req, res, next) {
         .catch(e => res.status(500).jsonp({ error: e }))
 });
 
-
-// Consult a Company given its name
-router.get('/:name', function(req, res, next) {
-    Company.consult(req.params.name)
+// Consult a Company given its id
+router.get('/:id', function(req, res, next) {
+    console.log(req.body)
+    console.log(req.params.id)
+    Company.consult_id(req.params.id)
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });
 
 
-// Consult a Company given its id
-router.get('/:id/id', function(req, res, next) {
-    console.log(req.body)
-    Company.consult_id(req.params.id)
+// Consult a Company given its nipc
+router.get('/nipc/:nipc', function(req, res, next) {
+    Company.consult_nipc(req.params.nipc)
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });

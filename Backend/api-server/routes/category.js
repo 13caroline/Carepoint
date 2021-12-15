@@ -16,21 +16,23 @@ router.get('/', function(req, res, next) {
 });
 
 
+// Consult a Category given its id
+router.get('/:id', function(req, res, next) {
+    console.log(req.body)
+    Category.consult_id(req.params.id)
+        .then(data => res.status(200).jsonp(data))
+        .catch(e => res.status(500).jsonp({ error: e }))
+});
+
 // Consult a Category given its name
-router.get('/:name', function(req, res, next) {
+router.get('/name/:name', function(req, res, next) {
     Category.consult(req.params.name)
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });
 
 
-// Consult a Category given its id
-router.get('/:id/id', function(req, res, next) {
-    console.log(req.body)
-    Category.consult_id(req.params.id)
-        .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
-});
+
 
 /****************************************************************************************
  *                                   POST
