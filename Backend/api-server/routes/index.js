@@ -7,7 +7,7 @@ const auth = require('../authorization/auth')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.send("Empty location")
+        res.send("Void")
 });
 
 router.post('/login', (req,res) => {
