@@ -1,19 +1,81 @@
 <template>
-  <v-container
-    id="careproviders"
-    tag="section"
-  >
-     <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ut tortor tellus. Donec maximus curs us pulvinar.
-      Proin vehicula eros mauris, sit amet rutrum libero vestibulum ac. Morbi ullamcorper eu lacus vulputate consect.
-      Etur vivamus sagittis accumsan quam eu malesuada. Proin et ante vel libero ultrices cursus. Donec felis leo, cu
-      rsus eget hendrerit at, congue nec enim.
-    </p>
+  <v-container id="careproviders" tag="section">
+    <v-card flat>
+      <v-container>
+        <v-row justify="space-between">
+          <v-col cols="12" md="6" sm="4">
+            <v-card-title>
+              Encontre a ajuda doméstica perfeita para si e sua família!
+            </v-card-title>
+
+            <v-card-subtitle>
+              Crie um perfil gratuitamente e encontre o cuidador ideal!
+            </v-card-subtitle>
+
+            <v-card-text>
+              <v-form>
+                <span>Categoria</span>
+                <v-select
+                  v-model="category"
+                  :items="items"
+                  :rules="[(v) => !!v || 'Campo obrigatório.']"
+                  required
+                  outlined
+                  dense
+                  class="rounded-lg"
+                  color="#78C4D4"
+                ></v-select>
+
+                <span>Localização</span>
+                <v-text-field
+                  v-model="location"
+                  outlined
+                  dense
+                  class="rounded-lg"
+                  color="#78C4D4"
+                ></v-text-field>
+              </v-form>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn dark depressed class="rounded-xl" color="#78C4D4">
+                Procurar
+              </v-btn>
+            </v-card-actions>
+          </v-col>
+
+          <v-col cols="12" md="6" sm="4" class="ml-auto"> 
+            <v-img
+              align-center
+              center
+              src="@/assets/CareProviders.jpg"
+              max-height="220"
+              max-width="220"
+            >
+            </v-img>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
   </v-container>
 </template>
 
 <script>
-  export default {
-    name: 'HomePC',
-  }
+export default {
+  name: "HomePC",
+  data() {
+    return {
+      items: ["Companhia", "Compras", "Higiene", "Medicação", "Refeições"],
+      category: "",
+      location: "",
+    };
+  },
+};
 </script>
+
+<style scoped>
+span {
+  font-size: small;
+}
+</style>
