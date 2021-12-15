@@ -1,10 +1,9 @@
 <template>
   <div id="about" tag="section">
     <v-img src="@/assets/About.png" class="img" height="750px">
-      <v-container class="mt-10">
-        <v-row no-gutters style="height: 600px">
+        <v-row no-gutters style="height: 100%" align="center" class="pa-10" >
           <v-col
-            cols="12"
+            class="pa-16"
             md="4"
             sm="6"
             v-for="(n, index) in content"
@@ -19,13 +18,12 @@
               width="250"
               height="250"
             >
-              <v-card-text class="white--text text-center">
-                {{ n.text }}
+              <v-card-text class="white--text">
+                <p class="text-center">{{ n.text }} </p>
               </v-card-text>
             </v-card>
           </v-col>
         </v-row>
-      </v-container>
     </v-img>
   </div>
 </template>
@@ -61,6 +59,10 @@ export default {
 .card {
   height: 50;
   width: 50;
+  padding-top:10%;
+
 }
+
+
 </style>
 
