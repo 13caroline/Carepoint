@@ -2,7 +2,7 @@
   <div id="userTypePage">
     <app-bar />
 
-    <user-type />
+    <SingleSP />
 
     <Foot />
   </div>
@@ -15,8 +15,8 @@ export default {
   },
   components: {
     AppBar: () => import("@/components/register/AppBar"),
-    UserType: () => import("@/components/register/UserType"),
-    Foot: () => import("@/components/global/Footer")
+    SingleSP: () => import("@/components/register/SingleSPForm"),
+    Foot: () => import("@/components/global/Footer"),
   },
 };
 </script>

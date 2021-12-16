@@ -13,8 +13,13 @@ const routes = [
   },
   {
     path: '/register/type',
-    name: 'TypeUser',
+    name: 'Type User',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/UserTypeView.vue')
+  },
+  {
+    path: '/register/provider/solo',
+    name: 'Solo Service Provider Register',
+    component: () => import(/* webpackChunkName: "about" */ '../views/register/SingleSP.vue')
   }
 ]
 
