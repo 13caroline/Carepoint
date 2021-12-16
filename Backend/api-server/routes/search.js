@@ -16,6 +16,10 @@ function isUndefined(t){
 }
 
 router.get('/', (req, res, next) => {
+    var page = req.query.page;
+    var limit = 10; // possível alterar depois
+    var offset = (page * limit) - limit
+
     var cat_id = req.query.category;
     var location_id = req.query.location;
     var experience = req.query.experience;
@@ -23,12 +27,11 @@ router.get('/', (req, res, next) => {
 
     var valueString = isUndefined(cat_id) + isUndefined(location_id) + isUndefined(experience) + isUndefined(price);
 
-    var service_providers = "Erro a obter ServiceProviders";
-    var companies = "Erro a obter Companies";
+    console.log("Value String: " + valueString)
 
     switch (valueString) {
         case '1111':
-            search_controller.get_allParameters(cat_id,location_id,experience,price)
+            search_controller.get_allParameters(cat_id,location_id,experience,price, limit, offset)
             .then(sp => {
                 search_controller.get_CompaniesLocation(location_id)
                 .then(cp => {
@@ -43,7 +46,7 @@ router.get('/', (req, res, next) => {
             break;
         
         case '1110':
-            search_controller.get_allParameters(cat_id,location_id,experience,price)
+            search_controller.get_allParameters(cat_id,location_id,experience,1000)
             .then(sp => {
                 search_controller.get_CompaniesLocation(location_id)
                 .then(cp => {
@@ -58,7 +61,7 @@ router.get('/', (req, res, next) => {
             break;
         
         case '1101':
-            search_controller.get_allParameters(cat_id,location_id,experience,price)
+            search_controller.get_allParameters(cat_id,location_id,0,price)
             .then(sp => {
                 search_controller.get_CompaniesLocation(location_id)
                 .then(cp => {
@@ -253,13 +256,13 @@ router.get('/', (req, res, next) => {
             break;
 
         default:
-            search_controller.get_noParams()
+            search_controller.get_noParams(limit, offset)
             .then(sp => {
                 search_controller.get_noParamsCompany()
                 .then(cp => {
                     res.status(200).jsonp({
                         ServiceProviders: sp,
-                        Companies: cp
+                        Companies: "void"//cp
                     });
                 })
                 .catch((err) => res.status(500).jsonp("Error obtaining Providers"));
