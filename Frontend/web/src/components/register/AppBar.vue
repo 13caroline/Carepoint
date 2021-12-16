@@ -1,14 +1,17 @@
 <template>
   <div>
-    <v-app-bar flat color="#FFFFFF" height="90">
-      <v-spacer></v-spacer>
-      <v-img src="@/assets/logo.png" max-height="270" max-width="270" class="mt-12"> </v-img>
-
-      <v-spacer></v-spacer>
-
-      <v-btn outlined color="#78C4D4" depressed class="rounded-xl">
-        Iniciar Sessão
-      </v-btn>
+    <v-app-bar flat color="#FFFFFF" height="180">
+      <v-row justify="center" class="w-100">
+        <v-col cols="7" md="4" offset-md="4">
+          <v-img src="@/assets/logo.png" max-height="270" max-width="270">
+          </v-img>
+        </v-col>
+        <v-col cols="5" md="2">
+          <v-btn outlined color="#78C4D4" depressed class="rounded-xl">
+            Iniciar Sessão
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-app-bar>
   </div>
 </template>
