@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+
+// Routes
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var jobOfferRouter = require('./routes/joboffer');
@@ -11,6 +13,8 @@ var searchRouter = require('./routes/search');
 var categoryRouter = require('./routes/category')
 var areaRouter = require('./routes/area')
 var companyRouter = require('./routes/company')
+var locationRouter = require('./routes/location')
+var subscriptionRouter = require('./routes/subscription')
 
 
 // Para construir a DB----------------------------------------------------------------------------------------------------------
@@ -34,6 +38,8 @@ app.use('/search', searchRouter);
 app.use('/category', categoryRouter);
 app.use('/area', areaRouter);
 app.use('/company', companyRouter);
+app.use('/location', locationRouter);
+app.use('/subscription', subscriptionRouter);
 
 
 // catch 404 and forward to error handler
