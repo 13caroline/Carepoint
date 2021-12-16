@@ -8,6 +8,8 @@
 
     <care-providers />
 
+    <top-button />
+
     <Foot />
   </div>
 </template>
@@ -24,6 +26,7 @@ export default {
     Login: () => import("@/components/page/Login"),
     About: () => import("@/components/page/About"),
     CareProviders: () => import("@/components/page/CareProviders"),
+    TopButton: () => import("@/components/global/TopButton")
   },
 };
 </script>
