@@ -3,12 +3,12 @@
     <v-card flat>
       <v-container>
         <v-row justify="center" align="center">
-          <v-col cols="12" md="4" sm="2">
-            <v-card-title class="headline">
+          <v-col cols="12" md="6" sm="2">
+            <v-card-title class="headline card" >
               Encontre a ajuda doméstica perfeita para si e sua família!
             </v-card-title>
 
-            <v-card-subtitle>
+            <v-card-subtitle class="card">
               Crie um perfil gratuitamente e encontre o cuidador ideal!
             </v-card-subtitle>
 
@@ -79,5 +79,9 @@ export default {
 span {
   font-size: small;
   color: #78C4D4;
+}
+
+.card{
+  word-break: keep-all; 
 }
 </style>

@@ -1,33 +1,47 @@
 <template>
-  <div id="about" tag="section">
-    <v-img src="@/assets/login.jpg" class="img" height="750px">
-    <v-container>
-      <v-row align="center" justify="center">
-        <v-col cols="3">
-          <span>E-mail</span>
-          <v-text-field
-            v-model="email"
-            outlined
-            dense
-            class="rounded-xl txtfield"
-            background-color="white"
-            color="#78C4D4"
-          ></v-text-field>
-          <span>Password</span>
-          <v-text-field
-            v-model="password"
-            outlined
-            dense
-            class="rounded-xl txtfield"
-            background-color="white"
-            color="#78C4D4"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row  align="center" justify="center">
-        <v-btn text color="#78C4D4"> Increva-se </v-btn>
-        <v-btn dark depressed class="rounded-xl" color="#78C4D4"> Iniciar Sessão </v-btn>
-      </v-row>
+  <div id="login" tag="section">
+    <v-img src="@/assets/login.jpg" class="img">
+      <v-container>
+        <v-row align="center" justify="center" class="login_wrapper">
+          <v-card color = "transparent" flat class="loginform my-12">
+            <v-card-text class="justify-center">
+              <v-form ref="form" lazy-validation class="form">
+                <span>Email</span>
+                <v-text-field
+                  v-model="email"
+                  outlined
+                  dense
+                  class="rounded-lg"
+                  color="#78C4D4"
+                  background-color="white"
+                  required
+                ></v-text-field>
+
+                <span>Palavra-passe</span>
+                <v-text-field
+                  dense
+                  outlined
+                  color="#78c4d4"
+                  class="rounded-lg"
+                  name="password"
+                  type="password"
+                  v-model="password"
+                  background-color="white"
+                  required
+                />
+              </v-form>
+            </v-card-text>
+            <v-card-actions class="card-actions">
+              <v-spacer></v-spacer>
+              <v-btn depressed text color="#78c4d4">
+                Inscrever-se
+              </v-btn>
+              <v-btn depressed dark color="#78c4d4" type="submit" rounded>
+                Iniciar Sessão
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-row>
       </v-container>
     </v-img>
   </div>
@@ -40,21 +54,6 @@ export default {
   data: () => ({
     email: "",
     password: "",
-    styleObject: { background: "transparent", border: "1px solid white" },
-    content: [
-      {
-        text: "Lorem ipsum dolor sit amet, smod tempor incididunt ut labore et dolore magna aliqua.",
-        align: "start",
-      },
-      {
-        text: "Lorem ipsum dolor sit amet, smod tempor incididunt ut labore et dolore magna aliqua.",
-        align: "center",
-      },
-      {
-        text: "Lorem ipsum dolor sit amet, smod tempor incididunt ut labore et dolore magna aliqua.",
-        align: "end",
-      },
-    ],
   }),
 };
 </script>
@@ -62,12 +61,7 @@ export default {
 <style scoped>
 .img {
   width: 100vw;
-}
-
-.card {
-  height: 50;
-  width: 50;
-  padding-top: 10%;
+  height: 80vh;
 }
 
 span {
@@ -75,8 +69,23 @@ span {
   color: #78c4d4;
 }
 
-.txtfield {
-  outline-color: #78c4d4;
+.card-actions {
+  margin-top: 1px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form {
+  margin-top: 1rem;
+}
+
+.login_wrapper {
+  min-height: 60vh;
+}
+
+.loginform {
+  width: 100%;
+  max-width: 475px;
 }
 </style>
 
