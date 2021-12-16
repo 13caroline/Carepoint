@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) {
     }
     //By duration
     else if (req.query.duration) {
-        Subscription.value(req.query.duration)
+        Subscription.duration(req.query.duration)
             .then(data => res.status(200).jsonp(data))
             .catch(e => res.status(500).jsonp({ error: e }))
     }
