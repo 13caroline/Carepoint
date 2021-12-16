@@ -33,7 +33,7 @@
             </v-card-text>
             <v-card-actions class="card-actions">
               <v-spacer></v-spacer>
-              <v-btn depressed text color="#78c4d4">
+              <v-btn depressed text color="#78c4d4" @click="register()">
                 Inscrever-se
               </v-btn>
               <v-btn depressed dark color="#78c4d4" type="submit" rounded>
@@ -55,6 +55,11 @@ export default {
     email: "",
     password: "",
   }),
+  methods: {
+    register() {
+      this.$router.push("/register/type");
+    }
+  }
 };
 </script>
 
