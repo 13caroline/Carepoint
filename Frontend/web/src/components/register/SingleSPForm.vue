@@ -9,38 +9,46 @@
             </h3>
           </v-row>
           <v-row class="w-100">
-            <p class="body-2">Por favor preencha o seguinte formulário</p>
+            <p class="body-2 pb-5">Por favor preencha o seguinte formulário</p>
           </v-row>
 
           <v-form ref="form" v-model="valid" lazy-validation>
-            <span>Nome completo *</span>
-            <v-text-field
-              outlined
-              flat
-              dense
-              single-line
-              :rules="textRules"
-              color="#2596be"
-              v-model="nome"
-              name="nome"
-              required
-            />
+            <v-row>
+              <v-col class="py-0">
+                <span>Nome completo *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  single-line
+                  :rules="textRules"
+                  color="#2596be"
+                  v-model="nome"
+                  name="nome"
+                  required
+                />
+              </v-col>
+            </v-row>
 
-            <span>E-mail *</span>
-            <v-text-field
-              outlined
-              flat
-              dense
-              v-model="email"
-              single-line
-              :rules="emailRules"
-              color="#2596be"
-              name="email"
-              required
-            />
+            <v-row>
+              <v-col class="py-0">
+                <span>E-mail *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  v-model="email"
+                  single-line
+                  :rules="emailRules"
+                  color="#2596be"
+                  name="email"
+                  required
+                />
+              </v-col>
+            </v-row>
 
-            <v-row class="mt-1">
-              <v-col cols="12" sm="6" class="py-0">
+            <v-row>
+              <v-col cols="12" md="6" sm="6" class="py-0">
                 <span>Palavra-passe *</span>
                 <v-text-field
                   outlined
@@ -70,22 +78,11 @@
               </v-col>
             </v-row>
 
-            <v-row align="end" class="mb-1">
-              <v-col cols="auto" class="dial_code py-0">
-                <v-text-field
-                  outlined
-                  flat
-                  background-color="#E0E0E0"
-                  dense
-                  single-line
-                  color="#2596be"
-                  value="+351"
-                  readonly
-                />
-              </v-col>
+            <v-row>
               <v-col class="py-0">
                 <span>Contacto telefónico *</span>
                 <v-text-field
+                  prefix="+351"
                   outlined
                   flat
                   dense
@@ -98,34 +95,79 @@
                   required
                 />
               </v-col>
-              <v-col cols="12" sm class="py-0">
-                <span>Experiência *</span>
+              <v-col class="py-0">
+                <span>Localização *</span>
                 <v-text-field
                   outlined
                   flat
                   dense
                   single-line
                   color="#2596be"
-                  name="experiencia"
-                  v-model="experiencia"
-                  suffix="anos"
-                  maxlength="9"
+                  name="localizacao"
+                  v-model="localizacao"
                   required
                 />
               </v-col>
             </v-row>
-            
+
+            <v-row>
+              <v-col cols="12" sm="6" class="py-0">
+                <span>Raio de Atividade *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  v-model="raio"
+                  single-line
+                  color="#2596be"
+                  name="riao"
+                  suffix="km"
+                  required
+                />
+              </v-col>
+              <v-col class="py-0">
+                <span>Repetir palavra-passe *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  single-line
+                  v-model="password2"
+                  :rules="textRules"
+                  color="#2596be"
+                  type="password"
+                  required
+                />
+              </v-col>
+            </v-row>
+
+            <v-row>
+                <v-col class="py-0">
+              <span>Descrição *</span>
+              <v-textarea
+                auto-grow
+                outlined
+                flat
+                rows="3"
+                row-height="15"
+                color="#2596be"
+                required
+              ></v-textarea>
+              </v-col>
+            </v-row>
           </v-form>
           <span class="ma-0 caption">* Campos obrigatórios</span>
+          
+        
           <v-row align="end" justify="end">
-           <!-- <v-col cols="auto" class="pr-0">
-              <Cancelar :dialogs="cancelar" @clicked="close()"></Cancelar>
+            <v-col cols="8">
+              <!--<Cancelar :dialogs="cancelar" @clicked="close()"></Cancelar>-->
             </v-col>
             <v-col cols="auto" class="pl-0">
-              <v-btn color="#2596be" small dark class="ml-3" @click="registar()"
+              <v-btn color="#2596be" small dark class="ml-3" 
                 >Registar</v-btn
               >
-            </v-col>-->
+            </v-col>
           </v-row>
         </v-col>
       </v-row>
