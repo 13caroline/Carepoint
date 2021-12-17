@@ -89,13 +89,1232 @@
 			"name": "API_Server",
 			"item": [
 				{
-					"name": "TestSomeStuff",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": null
-					},
-					"response": []
+					"name": "Area",
+					"item": [
+						{
+							"name": "Getting all areas",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"area_id = pm.response.json()[0].idArea;",
+											"pm.collectionVariables.set(\"area_id\", area_id);",
+											"",
+											"area_name = pm.response.json()[0].name;",
+											"pm.collectionVariables.set(\"area_name\", area_name);",
+											"",
+											"console.log(pm.response);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/area",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"area"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get an area by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/area/{{area_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"area",
+										"{{area_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get an area by name",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/area/name/{{area_name}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"area",
+										"name",
+										"{{area_name}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new area",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_area_id = pm.response.json().data.idArea;",
+											"pm.collectionVariables.set(\"new_area_id\", new_area_id);",
+											"",
+											"pm.test('Post Area OK', function(){",
+											"    pm.response.to.have.status(201);",
+											"})",
+											"",
+											"",
+											"//console.log(pm.response);",
+											"//console.log(new_area_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json; charset=utf-8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Animais\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/area",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"area"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update an area",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Plantas\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/area/{{new_area_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"area",
+										"{{new_area_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove an area",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/area/{{new_area_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"area",
+										"{{new_area_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Location",
+					"item": [
+						{
+							"name": "Get list of locations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"location_id = pm.response.json()[0].idLocation;",
+											"pm.collectionVariables.set(\"location_id\", location_id);",
+											"",
+											"location_name = pm.response.json()[0].name;",
+											"pm.collectionVariables.set(\"location_name\", location_name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/location",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get location by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/location/{{location_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"location",
+										"{{location_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get location by name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/location/name/{{location_name}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"location",
+										"name",
+										"{{location_name}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a location",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_location_id = pm.response.json().data.idLocation;",
+											"pm.collectionVariables.set(\"new_location_id\", new_location_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Guimarães\",\n    \"cordsX\": \"33.52799\",\n    \"cordsY\": \"-7.78483\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/location",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update location",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Carvoeiro\",\n    \"cordsX\": \"33.52799\",\n    \"cordsY\": \"-7.78483\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/location/{{new_location_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"location",
+										"{{new_location_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove location",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/location/{{new_location_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"location",
+										"{{new_location_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get list of categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"category_id = pm.response.json()[0].idCategory;",
+											"pm.collectionVariables.set(\"category_id\", category_id);",
+											"",
+											"category_name = pm.response.json()[0].name;",
+											"pm.collectionVariables.set(\"category_name\", category_name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/category",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get category by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/category/{{category_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"category",
+										"{{category_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get category by name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/category/name/{{category_name}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"category",
+										"name",
+										"{{category_name}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a category",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_category_id = pm.response.json().data.idCategory;",
+											"pm.collectionVariables.set(\"new_category_id\", new_category_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Passeio\",\n    \"idArea\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/category",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cinema\",\n    \"idArea\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/category/{{new_category_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"category",
+										"{{new_category_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove location",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/category/{{new_category_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"category",
+										"{{new_category_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Subscription",
+					"item": [
+						{
+							"name": "Get list of subscriptions",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"subscription_id = pm.response.json()[0].idSubscription;",
+											"pm.collectionVariables.set(\"subscription_id\", subscription_id);",
+											"",
+											"subscription_type = pm.response.json()[0].type;",
+											"pm.collectionVariables.set(\"subscription_type\", subscription_type);",
+											"",
+											"subscription_value = pm.response.json()[1].value;",
+											"pm.collectionVariables.set(\"subscription_value\", subscription_value);",
+											"",
+											"subscription_duration = pm.response.json()[1].duration;",
+											"pm.collectionVariables.set(\"subscription_duration\", subscription_duration);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get subscription by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription/{{subscription_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription",
+										"{{subscription_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get subscription by type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription?type={{subscription_type}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "{{subscription_type}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get subscription by value",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription?value={{subscription_value}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription"
+									],
+									"query": [
+										{
+											"key": "value",
+											"value": "{{subscription_value}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get subscription by duration",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription?duration={{subscription_duration}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription"
+									],
+									"query": [
+										{
+											"key": "duration",
+											"value": "{{subscription_duration}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a subscription",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_subscription_id = pm.response.json().data.idSubscription;",
+											"pm.collectionVariables.set(\"new_subscription_id\", new_subscription_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": 10,\n    \"value\": 10.00,\n    \"duration\": \"2021-05-01T00:00:00.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/subscription",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update subscription",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"type\": 10,\n    \"value\": 299.00,\n    \"duration\": \"2021-05-01T00:00:00.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/subscription/{{new_subscription_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription",
+										"{{new_subscription_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove subscription",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription/{{new_subscription_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription",
+										"{{new_subscription_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Get list of users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"user_id = pm.response.json()[0].idUser;",
+											"pm.collectionVariables.set(\"user_id\", user_id);",
+											"",
+											"user_type = pm.response.json()[1].type;",
+											"pm.collectionVariables.set(\"user_type\", user_type);",
+											"",
+											"user_active = pm.response.json()[2].active;",
+											"pm.collectionVariables.set(\"user_active\", user_active);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get subscription by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/subscription/{{subscription_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"subscription",
+										"{{subscription_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by type",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/users?type={{user_type}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "{{user_type}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by active",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/users?active={{user_active}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "active",
+											"value": "{{user_active}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_user_id = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"new_user_id\", new_user_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cecilia Silva\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"gspzgwbuaukd@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 1,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 57\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cecilia Maria\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"gspzgwbuaukd@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 1,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 57\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users/{{new_user_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users",
+										"{{new_user_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/users/{{new_user_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users",
+										"{{new_user_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Company",
+					"item": [
+						{
+							"name": "Get list of companies",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"company_id = pm.response.json()[1].idCompany;",
+											"pm.collectionVariables.set(\"company_id\", company_id);",
+											"",
+											"company_nipc = pm.response.json()[1].nipc;",
+											"pm.collectionVariables.set(\"company_nipc\", company_nipc);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/company",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get company by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/company/{{company_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company",
+										"{{company_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get company by nipc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/company/nipc/{{company_nipc}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company",
+										"nipc",
+										"{{company_nipc}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a user to work with",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_user_id = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"new_user_id\", new_user_id);",
+											"",
+											"",
+											"company_name = pm.response.json().data.name;",
+											"pm.collectionVariables.set(\"category_name\", company_name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Company Lda\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"gspzgwbuaukd@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 4,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 57\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a company",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_company_id = pm.response.json().data.idCompany;",
+											"pm.collectionVariables.set(\"new_company_id\", new_company_id);",
+											"",
+											"console.log(new_company_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"https://www.ola.com/\",\n    \"firm\": \"{{$randomCompanyName}}\",\n    \"nipc\": 492821138,\n    \"endSub\": \"1900-03-29T23:38:44.000Z\",\n    \"idSubscription\": 8,\n    \"idUser\": \"{{new_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/company",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update company",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"https://www.izpzreohllxb.com/\",\n    \"firm\": \"{{$randomCompanyName}}\",\n    \"nipc\": 492821138,\n    \"endSub\": \"2022-03-29T23:38:44.000Z\",\n    \"idSubscription\": 8\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/company/{{new_company_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company",
+										"{{new_company_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove user",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/company/{{new_company_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company",
+										"{{new_company_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
 				},
 				{
 					"name": "New JobOffer",
@@ -171,8 +1390,164 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get All Service Providers & Companies",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:9040/search/?page=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9040",
+							"path": [
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "Obrigatório"
+								},
+								{
+									"key": "category",
+									"value": "5",
+									"description": "Opcional",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "1",
+									"description": "Opcional",
+									"disabled": true
+								},
+								{
+									"key": "experience",
+									"value": "4",
+									"description": "Opcional - retorna maior ou igual",
+									"disabled": true
+								},
+								{
+									"key": "price",
+									"value": "10",
+									"description": "Opcional - retorna menor ou igual",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "api-server",
+			"value": "http://localhost:9040"
+		},
+		{
+			"key": "api-server",
+			"value": ""
+		},
+		{
+			"key": "area_id",
+			"value": ""
+		},
+		{
+			"key": "area_name",
+			"value": ""
+		},
+		{
+			"key": "new_area_id",
+			"value": ""
+		},
+		{
+			"key": "location_id",
+			"value": ""
+		},
+		{
+			"key": "location_name",
+			"value": ""
+		},
+		{
+			"key": "new_location_id",
+			"value": ""
+		},
+		{
+			"key": "category_id",
+			"value": ""
+		},
+		{
+			"key": "category_name",
+			"value": ""
+		},
+		{
+			"key": "new_category_id",
+			"value": ""
+		},
+		{
+			"key": "subscription_id",
+			"value": ""
+		},
+		{
+			"key": "subscription_name",
+			"value": ""
+		},
+		{
+			"key": "subscription_type",
+			"value": ""
+		},
+		{
+			"key": "subscription_duration",
+			"value": ""
+		},
+		{
+			"key": "subscription_value",
+			"value": ""
+		},
+		{
+			"key": "new_subscription_id",
+			"value": ""
+		},
+		{
+			"key": "user_active",
+			"value": ""
+		},
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "user_type",
+			"value": ""
+		},
+		{
+			"key": "new_user_id",
+			"value": ""
+		},
+		{
+			"key": "company_id",
+			"value": ""
+		},
+		{
+			"key": "company_nipc",
+			"value": ""
+		},
+		{
+			"key": "new_company_id",
+			"value": ""
 		}
 	]
 }
