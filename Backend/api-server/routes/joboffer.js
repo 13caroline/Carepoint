@@ -41,4 +41,10 @@ router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
     .catch((err) => res.status(500).jsonp("Failure inserting job: " + err))
 })
 
+router.put('/conclude', auth.checkOwnershipJobOffer, (req, res, next) => {
+    jobOffer_controller.concludeJob(req.body.id_job_offer)
+    .then((job) => res.status(200).jsonp(job))
+    .catch((err) =>  res.status(500).jsonp("Failure marking job as completed: " + err))
+})
+
 module.exports = router;
