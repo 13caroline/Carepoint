@@ -19,7 +19,8 @@ const User = dbconfig.sequelize.define('User', {
     },
     email: {
         type: dbconfig.Sequelize.STRING(90),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     phoneNumber: {
         type: dbconfig.Sequelize.STRING(45),

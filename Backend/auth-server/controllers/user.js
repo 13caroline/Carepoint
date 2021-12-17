@@ -1,6 +1,4 @@
 const User = require('../models/user')
-const dbconfig = require('../models/Config/Database_Info');
-const passport = require('passport');
 
 var Out = module.exports;
 
@@ -13,21 +11,19 @@ Out.consultar_id = (id) => {
     return User.findOne({where:{'idUser': id}})
 }
 
-Out.newUser = (body) => {
-    User.create({
+Out.adicionarUser = (body) => {
+    return User.create({
         name: body.name,
         password: body.password,
         email: body.email,
-        phoneNumber: body.phone,
+        phoneNumber: body.phoneNumber,
         sex: body.sex,
-        type: 2,
-        createdAt: '2020-01-09 07:30:40',
-        lastActivity: '2020-04-29 14:48:37',
+        type: body.type,
+        createdAt: new Date(),
+        lastActivity: new Date(),
         active: 1,
-        idLocation: body.idLocation
+        idLocation: body.location
     })
-
-    return User
 }
 
 //PUT

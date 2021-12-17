@@ -1,6 +1,7 @@
 // Controller for the company model
 
 const Company = require('../models/company')
+const Ad = require('../models/add')
 
 var Out = module.exports;
 

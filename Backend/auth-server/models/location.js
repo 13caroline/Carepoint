@@ -23,6 +23,4 @@ const Location = dbconfig.sequelize.define('location', {
     timestamps: false
   })
 
-Location.sync()
-
 module.exports = Location
