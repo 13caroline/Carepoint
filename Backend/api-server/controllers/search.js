@@ -221,8 +221,12 @@ Out.get_money = (price) => {
 *
 * returns: Todos os Service Providers que se encontram dentro dessas limitações
 */
-Out.get_noParams = () => {
-    return dbconfig.sequelize.query('SELECT * FROM get_service_providers')
+Out.get_noParams = (limit, offset) => {
+    return dbconfig.sequelize.query('CALL get_service_providers (:lm, :off)',
+        {replacements: {
+            lm: limit,
+            off: offset
+        }})
 }
 
 // ****************************************************************************************************************************************** //
@@ -238,7 +242,10 @@ Out.get_noParams = () => {
 * returns: Todos os Service Providers que se encontram dentro dessas limitações
 */
 Out.get_CompaniesLocation = (location) => {
-    return dbconfig.sequelize.query('CALL get_companies_location (:idL)')
+    return dbconfig.sequelize.query('CALL get_companies_location (:idL)',
+        {replacements: {
+            idL: location
+        }})
 }
 
 /*
