@@ -29,24 +29,4 @@ function startConnection() {
     }).catch((err) => {
         console.log("Connection Failed. " + err)
     })
-
-    /*
-    const conn = new Sequelize(
-        connection.dbName,
-        connection.user.username,
-        connection.user.password,
-        connection.options
-    )
-    conn.authenticate((err, client) => {
-        if (err) return console.log(err);
-
-        console.log(client)
-        module.exports.conn = client;
-
-        return;
-    })*/
 };
-
-function simpleExecute() {
-
-}
