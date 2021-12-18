@@ -11,12 +11,12 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var jobOfferRouter = require('./routes/joboffer');
 var searchRouter = require('./routes/search');
-var categoryRouter = require('./routes/category')
-var areaRouter = require('./routes/area')
-var companyRouter = require('./routes/company')
-var locationRouter = require('./routes/location')
-var subscriptionRouter = require('./routes/subscription')
-
+var categoryRouter = require('./routes/category');
+var areaRouter = require('./routes/area');
+var companyRouter = require('./routes/company');
+var locationRouter = require('./routes/location');
+var subscriptionRouter = require('./routes/subscription');
+var serviceProvRouter = require('./routes/serviceProvider');
 
 // Para construir a DB----------------------------------------------------------------------------------------------------------
 require('./models/Config/Database_build')
@@ -28,7 +28,7 @@ var app = express();
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
@@ -42,7 +42,7 @@ app.use('/area', areaRouter);
 app.use('/company', companyRouter);
 app.use('/location', locationRouter);
 app.use('/subscription', subscriptionRouter);
-
+app.use('/serviceProvider', serviceProvRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

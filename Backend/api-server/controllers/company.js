@@ -1,7 +1,6 @@
 // Controller for the company model
 
 const Company = require('../models/company')
-const Ad = require('../models/add')
 
 var Out = module.exports;
 
@@ -40,7 +39,8 @@ Out.update = (id, company) => {
         firm: company.firm,
         link: company.link,
         nipc: company.nipc,
-        endSub: company.endSub
+        endSub: company.endSub,
+        idSubscription: company.idSubscription
     }, {
         where: { 'idCompany': id },
         returning: true,
