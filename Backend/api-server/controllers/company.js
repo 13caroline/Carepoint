@@ -4,12 +4,12 @@ const Company = require('../models/company')
 
 var Out = module.exports;
 
-//GET by nipc
+//GET Company by nipc
 Out.consult_nipc = (nipc) => {
     return Company.findOne({ where: { 'nipc': nipc } });
 }
 
-//GET by id
+//GET Company by id
 Out.consult_id = (id) => {
     return Company.findOne({ where: { 'idCompany': id } });
 }

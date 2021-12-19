@@ -5,7 +5,7 @@ const ServiceProvider = require('../models/serviceProvider')
 
 var Out = module.exports;
 
-//GET by id
+//GET Service Provider by id
 Out.consult_id = (id) => {
     return ServiceProvider.findOne({ where: { 'idSP': id } });
 }
@@ -29,7 +29,7 @@ Out.insert = (serviceProvider) => {
     });
 }
 
-// Update ServiceProvider
+// Update a ServiceProvider
 Out.update = (id, serviceProvider) => {
     return ServiceProvider.update({
         description: serviceProvider.description,
@@ -44,7 +44,7 @@ Out.update = (id, serviceProvider) => {
     });
 }
 
-//Delete ServiceProvider by id
+//Delete a ServiceProvider by id
 Out.remove = (id) => {
     return ServiceProvider.destroy({ where: { 'idSP': id } });
 }

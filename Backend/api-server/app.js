@@ -17,6 +17,9 @@ var companyRouter = require('./routes/company');
 var locationRouter = require('./routes/location');
 var subscriptionRouter = require('./routes/subscription');
 var serviceProvRouter = require('./routes/serviceProvider');
+var addRouter = require('./routes/add');
+var reviewRouter = require('./routes/review');
+
 
 // Para construir a DB----------------------------------------------------------------------------------------------------------
 require('./models/Config/Database_build')
@@ -43,6 +46,10 @@ app.use('/company', companyRouter);
 app.use('/location', locationRouter);
 app.use('/subscription', subscriptionRouter);
 app.use('/serviceProvider', serviceProvRouter);
+app.use('/add', addRouter);
+app.use('/review', reviewRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
