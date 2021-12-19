@@ -30,6 +30,11 @@ const routes = [
     path: '/register/consumer',
     name: 'Consumer',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/Consumer.vue')
+  },
+  { //Route de teste para a barra de dentro da conta
+    path: '/register/appBarTeste',
+    name: 'appbarteste',
+    component: () => import('../components/page/AppBarAccount.vue')
   }
 ]
 
