@@ -5,7 +5,7 @@
         <v-col cols="8">
           <v-row class="w-100">
             <h3 class="font-weight-regular text-uppercase">
-              Registar como Prestador de Cuidados Individual
+              Registar como Consumidor
             </h3>
           </v-row>
           <v-row class="w-100">
@@ -80,7 +80,7 @@
             </v-row>
 
             <v-row>
-              <v-col class="py-0" cols="12" md="3">
+              <v-col class="py-0">
                 <span>Contacto telefónico *</span>
                 <v-text-field
                   prefix="+351"
@@ -109,21 +109,7 @@
                   required
                 />
               </v-col>
-              <v-col class="py-0">
-                <span>Raio de Atividade *</span>
-                <v-text-field
-                  outlined
-                  flat
-                  dense
-                  v-model="radius"
-                  single-line
-                  color="#78C4D4"
-                  name="raius"
-                  suffix="km"
-                  type="number"
-                  required
-                />
-              </v-col>
+
               <v-col class="py-0">
                 <span>Sexo *</span>
                 <v-select
@@ -136,40 +122,6 @@
                   required
                   :items="items"
                 />
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col class="py-0">
-                <span>Qualificações *</span>
-                <v-textarea
-                  auto-grow
-                  outlined
-                  flat
-                  rows="2"
-                  row-height="15"
-                  color="#78C4D4"
-                  required
-                  :rules="textRules"
-                  v-model="qualification"
-                ></v-textarea>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col class="py-0">
-                <span>Descrição *</span>
-                <v-textarea
-                  auto-grow
-                  outlined
-                  flat
-                  rows="3"
-                  row-height="15"
-                  color="#78C4D4"
-                  required
-                  :rules="textRules"
-                  v-model="description"
-                ></v-textarea>
               </v-col>
             </v-row>
 

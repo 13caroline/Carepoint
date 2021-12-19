@@ -20,6 +20,16 @@ const routes = [
     path: '/register/provider/solo',
     name: 'Solo Service Provider Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/SingleSP.vue')
+  },
+  {
+    path: '/register/provider/collective',
+    name: 'Collective Service Provider Register',
+    component: () => import(/* webpackChunkName: "about" */ '../views/register/CollectiveSP.vue')
+  },
+  {
+    path: '/register/consumer',
+    name: 'Consumer',
+    component: () => import(/* webpackChunkName: "about" */ '../views/register/Consumer.vue')
   }
 ]
 

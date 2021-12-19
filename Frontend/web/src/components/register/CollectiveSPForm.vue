@@ -5,7 +5,7 @@
         <v-col cols="8">
           <v-row class="w-100">
             <h3 class="font-weight-regular text-uppercase">
-              Registar como Prestador de Cuidados Individual
+              Registar como Prestador de Cuidados Coletivo
             </h3>
           </v-row>
           <v-row class="w-100">
@@ -15,7 +15,7 @@
           <v-form ref="form" v-model="valid">
             <v-row>
               <v-col class="py-0">
-                <span>Nome completo *</span>
+                <span>Nome *</span>
                 <v-text-field
                   outlined
                   flat
@@ -80,7 +80,7 @@
             </v-row>
 
             <v-row>
-              <v-col class="py-0" cols="12" md="3">
+              <v-col class="py-0">
                 <span>Contacto telefónico *</span>
                 <v-text-field
                   prefix="+351"
@@ -96,63 +96,59 @@
                 />
               </v-col>
               <v-col class="py-0">
-                <span>Localização *</span>
+                <span>Firma *</span>
                 <v-text-field
                   outlined
                   flat
                   dense
                   single-line
                   color="#78C4D4"
-                  name="localization"
-                  v-model="localization"
+                  name="firm"
+                  v-model="firm"
                   :rules="textRules"
                   required
-                />
-              </v-col>
-              <v-col class="py-0">
-                <span>Raio de Atividade *</span>
-                <v-text-field
-                  outlined
-                  flat
-                  dense
-                  v-model="radius"
-                  single-line
-                  color="#78C4D4"
-                  name="raius"
-                  suffix="km"
-                  type="number"
-                  required
-                />
-              </v-col>
-              <v-col class="py-0">
-                <span>Sexo *</span>
-                <v-select
-                  outlined
-                  flat
-                  dense
-                  v-model="sex"
-                  color="#78C4D4"
-                  name="sex"
-                  required
-                  :items="items"
                 />
               </v-col>
             </v-row>
 
             <v-row>
               <v-col class="py-0">
-                <span>Qualificações *</span>
-                <v-textarea
-                  auto-grow
+                <span>NIPC *</span>
+                <v-text-field
                   outlined
                   flat
-                  rows="2"
-                  row-height="15"
+                  color="#78C4D4"
+                  required
+                  dense
+                  maxlength="9"
+                  v-model="nipc"
+                ></v-text-field>
+              </v-col>
+              <v-col class="py-0">
+                <span>Localização *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="qualification"
-                ></v-textarea>
+                  v-model="localization"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col class="py-0">
+                <span>Endereço do Sítio *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  color="#78C4D4"
+                  required
+                  :rules="textRules"
+                  v-model="site"
+                ></v-text-field>
               </v-col>
             </v-row>
 
@@ -195,7 +191,6 @@
                 color="#78c4d4"
                 class="rounded-xl white--text"
                 required
-                type="submit"
                 :disabled="!valid"
                 >Registar</v-btn
               >
@@ -238,11 +233,10 @@ export default {
       password2: "",
       contact: "",
       localization: "",
-      radius: 0,
-      qualification: "",
+      site: "",
+      firm: "", 
       description: "",
-      sex: "",
-      items: ["Feminino", "Masculino", "Indefinido"],
+      nipc: "", 
     };
   },
   components: {
@@ -264,10 +258,6 @@ h3 {
 span {
   color: #797878;
   font-size: small;
-}
-
-::v-deep .my-checkbox .v-label {
-  font-size: 12px;
 }
 </style>
 

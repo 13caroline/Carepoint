@@ -4,6 +4,9 @@
       <v-row align="center">
         <v-col>
           <div class="text-center">
+            <h3 class="font-weight-regular text-uppercase pb-10">
+              Inscrever-se na Carepoint
+            </h3>
             <div class="my-2" v-for="p in options" :key="p.name">
               <v-btn
                 outlined
@@ -27,7 +30,7 @@
             class="rounded-xl"
             center
             src="@/assets/usertype.jpg"
-            max-height="250"
+            max-height="220"
             contain
           >
           </v-img>
@@ -69,5 +72,9 @@ export default {
 .button:hover {
   background-color: #78c4d4;
   color: white !important;
+}
+
+h3 {
+  color: #78c4d4;
 }
 </style>
