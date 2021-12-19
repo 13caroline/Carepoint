@@ -23,7 +23,7 @@
 								},
 								{
 									"key": "password",
-									"value": "12345",
+									"value": "66666",
 									"type": "text"
 								}
 							]
@@ -44,7 +44,74 @@
 					"response": []
 				},
 				{
-					"name": "Register",
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Gore Magala",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "theTest3745@gmail.com",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "6666",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "sex",
+									"value": "M",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "2",
+									"description": "2 = Consumer",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "1",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "910214632",
+									"description": "Opcional!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9041/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9041",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Service Provider",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -54,16 +121,158 @@
 								{
 									"key": "name",
 									"value": "Jenkin",
+									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "teste123@gmail.com",
+									"value": "theTest32@gmail.com",
+									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "password",
 									"value": "6666",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "sex",
+									"value": "M",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "3",
+									"description": "3 = Service Provider Individual",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "1",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "910214632",
+									"description": "Opcional!",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Such a big description",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "2020-01-09 07:30:40",
+									"description": "Opcional",
+									"type": "text"
+								},
+								{
+									"key": "distance",
+									"value": "69420",
+									"description": "Opcional",
+									"type": "text"
+								},
+								{
+									"key": "qualifications",
+									"value": "I am qualified to walk",
+									"description": "Opcional",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9041/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9041",
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Jenkin",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "theTest2@gmail.com",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "6666",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "sex",
+									"value": "M",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "4",
+									"description": "4 = Company",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "1",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "910214632",
+									"description": "Opcional!",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "https://www.youtube.com/watch?v=o-YBDTqX_ZU",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "firm",
+									"value": "idk",
+									"description": "Obrigatório!",
+									"type": "text"
+								},
+								{
+									"key": "nipc",
+									"value": "1125215",
+									"description": "Obrigatório",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "we descriptin",
+									"description": "Obrigatório",
 									"type": "text"
 								}
 							]
@@ -1168,7 +1377,7 @@
 							"response": []
 						},
 						{
-							"name": "Create a user to work with",
+							"name": "Create an user to work with",
 							"event": [
 								{
 									"listen": "test",
@@ -1317,137 +1526,891 @@
 					]
 				},
 				{
-					"name": "New JobOffer",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
+					"name": "Service Provider",
+					"item": [
+						{
+							"name": "Get list of Service Providers",
+							"event": [
 								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3RAZ21haWwuY29tIiwibGV2ZWwiOjEsImlhdCI6MTYzOTE1OTk1OCwiZXhwIjoxNjM5MTYzNTU4fQ.mrntXDbq_3fsePBUg5xFX1HMXQ6HB3Px09mK4S7ChDU",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "xxxxYYYYZzZzZ",
-									"type": "text"
-								},
-								{
-									"key": "beginDate",
-									"value": "0",
-									"type": "text"
-								},
-								{
-									"key": "postDate",
-									"value": "0",
-									"type": "text"
-								},
-								{
-									"key": "price",
-									"value": "100",
-									"type": "text"
-								},
-								{
-									"key": "done",
-									"value": "0",
-									"type": "text"
-								},
-								{
-									"key": "endDate",
-									"value": "0",
-									"type": "text"
-								},
-								{
-									"key": "idUser",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "idCategory",
-									"value": "1",
-									"type": "text"
-								},
-								{
-									"key": "idLocation",
-									"value": "1",
-									"type": "text"
+									"listen": "test",
+									"script": {
+										"exec": [
+											"sp_id = pm.response.json()[1].idSP;",
+											"pm.collectionVariables.set(\"sp_id\", sp_id);",
+											"",
+											"sp_description = pm.response.json()[1].description;",
+											"pm.collectionVariables.set(\"sp_description\", sp_description);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
-						},
-						"url": {
-							"raw": "http://localhost:9040/joboffer/new",
-							"protocol": "http",
-							"host": [
-								"localhost"
 							],
-							"port": "9040",
-							"path": [
-								"joboffer",
-								"new"
-							]
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/serviceProvider",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"serviceProvider"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get service provider by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/serviceProvider/{{sp_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"serviceProvider",
+										"{{sp_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create an user to work with",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_user_id = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"new_user_id\", new_user_id);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Maria Pereira\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"mariapereira@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 3,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 55\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a service provider",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_SP = pm.response.json().data.idSP;",
+											"pm.collectionVariables.set(\"new_SP\", new_SP);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"cuido de pessoas idosas\",\n    \"dateOfBirth\": \"1964-03-11\",\n    \"endSub\": \"2022-11-26T21:18:47.000Z\",\n    \"distance\": 112,\n    \"qualifications\": \"Formação de Cuidadora\",\n    \"idSubscription\": 5,\n    \"idUser\": \"{{new_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/serviceProvider",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"serviceProvider"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update service provider",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"cuido de pessoas idosas\",\n    \"dateOfBirth\": \"1964-03-11\",\n    \"endSub\": \"2022-11-26T21:18:47.000Z\",\n    \"distance\": 112,\n    \"qualifications\": \"{{$randomJobType}}\",\n    \"idSubscription\": 5,\n    \"idUser\": \"{{new_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/serviceProvider/{{new_SP}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"serviceProvider",
+										"{{new_SP}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove service provider",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/serviceProvider/{{new_SP}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"serviceProvider",
+										"{{new_SP}}"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
 				},
 				{
-					"name": "Get All Service Providers & Companies",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
-						},
-						"url": {
-							"raw": "http://localhost:9040/search/?page=1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "9040",
-							"path": [
-								"search",
-								""
-							],
-							"query": [
+					"name": "Adds",
+					"item": [
+						{
+							"name": "Get list of adds",
+							"event": [
 								{
-									"key": "page",
-									"value": "1",
-									"description": "Obrigatório"
-								},
-								{
-									"key": "category",
-									"value": "5",
-									"description": "Opcional",
-									"disabled": true
-								},
-								{
-									"key": "location",
-									"value": "1",
-									"description": "Opcional",
-									"disabled": true
-								},
-								{
-									"key": "experience",
-									"value": "4",
-									"description": "Opcional - retorna maior ou igual",
-									"disabled": true
-								},
-								{
-									"key": "price",
-									"value": "10",
-									"description": "Opcional - retorna menor ou igual",
-									"disabled": true
+									"listen": "test",
+									"script": {
+										"exec": [
+											"add_id = pm.response.json()[3].idAdd;",
+											"pm.collectionVariables.set(\"add_id\", add_id);",
+											""
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/add",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get add by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/add/{{add_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"add",
+										"{{add_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create an user to work with",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_user_id = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"new_user_id\", new_user_id);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Maria Pereira\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"mariapereira@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 3,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 55\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a company to work with",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_company_id = pm.response.json().data.idCompany;",
+											"pm.collectionVariables.set(\"new_company_id\", new_company_id);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"link\": \"https://www.ola.com/\",\n    \"firm\": \"{{$randomCompanyName}}\",\n    \"nipc\": 492821138,\n    \"endSub\": \"1900-03-29T23:38:44.000Z\",\n    \"idSubscription\": 8,\n    \"idUser\": \"{{new_user_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/company",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"company"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create an add",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_add = pm.response.json().data.idAdd;",
+											"pm.collectionVariables.set(\"new_add\", new_add);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"cuido de pessoas idosas\",\n    \"idCompany\": \"{{new_company_id}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/add",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update an add",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"ola\",\n    \"idCompany\": {{new_company_id}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/add/{{new_add}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"add",
+										"{{new_add}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove an add",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/add/{{new_add}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"add",
+										"{{new_add}}"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Review",
+					"item": [
+						{
+							"name": "Get list of reviews",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"review_id = pm.response.json()[2].idReview;",
+											"pm.collectionVariables.set(\"review_id\", review_id);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/review",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get review by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/review/{{review_id}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"review",
+										"{{review_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a review's giver",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"id_giver = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"id_giver\", id_giver);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Maria Pereira\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"mariapereira@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 3,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 55\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a review's receiver",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"id_receiver = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"id_receiver\", id_receiver);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{$randomCompanyName}}}\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"company@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"M\",\n    \"type\": 4,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 55\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a reveiw",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_review = pm.response.json().data.idReview;",
+											"pm.collectionVariables.set(\"new_review\", new_review);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"muito bom trabalho\",\n    \"rating\": 8,\n    \"postDate\": \"2023-09-08T01:58:50.000Z\",\n    \"idGive\": \"{{id_giver}}\",\n    \"idReceive\": \"{{id_receiver}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/review",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"review"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update a review",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"description\": \"grande profissionalismo\",\n    \"rating\": 8,\n    \"postDate\": \"2023-09-08T01:58:50.000Z\",\n    \"idGive\": \"{{id_giver}}\",\n    \"idReceive\": \"{{id_receiver}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/review/{{new_review}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"review",
+										"{{new_review}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove a review",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{api-server}}/review/{{new_review}}",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"review",
+										"{{new_review}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Search",
+					"item": [
+						{
+							"name": "Get All Service Providers & Companies",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:9040/search/?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"search",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Obrigatório"
+										},
+										{
+											"key": "category",
+											"value": "5",
+											"description": "Opcional",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "1",
+											"description": "Opcional",
+											"disabled": true
+										},
+										{
+											"key": "experience",
+											"value": "4",
+											"description": "Opcional - retorna maior ou igual",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "10",
+											"description": "Opcional - retorna menor ou igual",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "JobOffer",
+					"item": [
+						{
+							"name": "New JobOffer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2Mzk3NjYzMzEsImV4cCI6MTYzOTc2OTkzMX0.RdGLaDvucfEArNVwe5ENZHLXsy3hWw7Y-cfn-1inck8",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "Shagaru Magala",
+											"type": "text"
+										},
+										{
+											"key": "beginDate",
+											"value": "2020-01-09 07:30:40",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "100",
+											"type": "text"
+										},
+										{
+											"key": "endDate",
+											"value": "2020-04-29 14:48:37",
+											"type": "text"
+										},
+										{
+											"key": "idUser",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "idCategory",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "idLocation",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/joboffer/new",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"joboffer",
+										"new"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Job Offers",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/joboffer/?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"joboffer",
+										""
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Obrigatório"
+										},
+										{
+											"key": "category",
+											"value": "2",
+											"description": "Opcional (passar o id)",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "1",
+											"description": "Opcional (passar o id)",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "100",
+											"description": "Opcional -> Returns equal or greater",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2Mzk3NjYzMzEsImV4cCI6MTYzOTc2OTkzMX0.RdGLaDvucfEArNVwe5ENZHLXsy3hWw7Y-cfn-1inck8",
+											"type": "text"
+										},
+										{
+											"key": "id_job_offer",
+											"value": "103",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/joboffer/conclude",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"joboffer",
+										"conclude"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
@@ -1547,6 +2510,42 @@
 		},
 		{
 			"key": "new_company_id",
+			"value": ""
+		},
+		{
+			"key": "sp_description",
+			"value": ""
+		},
+		{
+			"key": "sp_id",
+			"value": ""
+		},
+		{
+			"key": "new_SP",
+			"value": ""
+		},
+		{
+			"key": "add_id",
+			"value": ""
+		},
+		{
+			"key": "new_add",
+			"value": ""
+		},
+		{
+			"key": "review_id",
+			"value": ""
+		},
+		{
+			"key": "id_giver",
+			"value": ""
+		},
+		{
+			"key": "id_receiver",
+			"value": ""
+		},
+		{
+			"key": "new_review",
 			"value": ""
 		}
 	]
