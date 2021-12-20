@@ -129,3 +129,21 @@ Out.checkOwnershipJobOffer = (req, res, next) => {
         }
     })
 }
+
+//Vai verificar se o id do User que está a tentar ser alterado é o mesmo do id do User logged in
+Out.matchUsers = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
+        if(!err){
+            user_controller.consult(payload.email)
+            .then((user) => {
+                if(user.idUser = req.body.idUser){
+                    next()
+                }else{
+                    res.status(401).jsonp({message: "No permission."})
+                }
+            })
+        }else{
+            res.status(500).jsonp({message: "Invalid JWT token."})
+        }
+    })
+}

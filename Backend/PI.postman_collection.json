@@ -23,7 +23,7 @@
 								},
 								{
 									"key": "password",
-									"value": "66666",
+									"value": "teste",
 									"type": "text"
 								}
 							]
@@ -1279,6 +1279,56 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Update password",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3RAZ21haWwuY29tIiwibGV2ZWwiOjEsImlhdCI6MTY0MDAyMDY1NywiZXhwIjoxNjQwMDI0MjU3fQ._e7-EKNWCSvdDSaGFX_JAt0l3-DrMEOH6Cu53Ua42ho",
+											"type": "text"
+										},
+										{
+											"key": "repeatPassword1",
+											"value": "12345",
+											"type": "text"
+										},
+										{
+											"key": "repeatPassword2",
+											"value": "12345",
+											"type": "text"
+										},
+										{
+											"key": "newPassword",
+											"value": "teste",
+											"type": "text"
+										},
+										{
+											"key": "idUser",
+											"value": "234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/updatePassword",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"updatePassword"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
@@ -2376,7 +2426,7 @@
 							"response": []
 						},
 						{
-							"name": "New Request",
+							"name": "Complete Job Offer",
 							"request": {
 								"method": "PUT",
 								"header": [],

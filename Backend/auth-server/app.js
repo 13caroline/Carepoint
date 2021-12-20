@@ -12,7 +12,7 @@ require('./models/Config/Passport_config')(Passport)
 //-------------------------------------
 const User = require('./controllers/user');
 const passport = require('passport');
-User.testeCreate();
+//User.testeCreate();
 //-------------------------------------
 
 const app = express();

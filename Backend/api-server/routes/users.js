@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs')
 
-const User = require('../controllers/user')
+const User = require('../controllers/user');
+const auth = require('../authorization/auth');
 
 
 /****************************************************************************************
@@ -75,12 +77,57 @@ router.post('/', function(req, res) {
 
 
 // Update an user
+/*
 router.put('/:id', function(req, res, next) {
     User.update(req.params.id, req.body)
         .then(data => res.status(201).jsonp({ data: data }))
         .catch(e => res.status(500).jsonp({ error: e }))
 })
+*/
 
+router.put('/update', auth.matchUsers, (req, res, next) => {
+    
+    switch (req.body.type){
+        case '2':
+            User.updateConsumer(req.body)
+            .then((user) => res.status(201).jsonp(user))
+            .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+        
+        case '3':
+            User.updateServiceProvider(req.body)
+            .then((user) => res.status(201).jsonp(user))
+            .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+
+        case '4':
+            User.updateCompany(req.body)
+            .then((user) => res.status(201).jsonp(user))
+            .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+
+        default:
+            break;
+    }
+})
+
+router.put('/updatePassword', auth.matchUsers, (req, res, next) => {
+    User.consult_id(req.body.idUser)
+    .then((user) => {
+        if(bcrypt.compareSync(req.body.repeatPassword1, user.password)){
+            if(bcrypt.compareSync(req.body.repeatPassword2, user.password)){
+                bcrypt.hash(req.body.newPassword, 10)
+                .then((cryptPass) => {
+                    User.updatePassword(req.body.idUser, cryptPass)
+                    .then((user) => res.status(201).jsonp(user))
+                    .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+                })
+                .catch((err) => res.status(500).jsonp("Failure changing password: " + err))
+            }else{
+                res.status(400).jsonp("Repeat Password 2 errada.")
+            }
+        }else{
+            res.status(400).jsonp("Repeat Password 1 errada.")
+        }
+    })
+})
 
 /****************************************************************************************
  *                                   DELETE
