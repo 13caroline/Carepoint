@@ -3,12 +3,12 @@
     <v-app-bar flat color="#FFFFFF" height="120">
       <v-row justify="center" class="w-100">
         <v-col cols="7" md="4" offset-md="4">
-          <v-img src="@/assets/logo.png" max-height="270" max-width="270">
+          <v-img @click="acao()" src="@/assets/logo.png" max-height="270" max-width="270">
           </v-img>
         </v-col>
         <v-col cols="5" md="2">
           <v-menu offset-y offset-overflow>
-            <template v-slot:activator="{ on, attrs }">
+            <template v-slot:activator="{ on, attrs } ">
               <v-img
                 v-bind="attrs"
                 v-on="on"
@@ -21,7 +21,7 @@
             </template>
             <v-list>
               <v-list-item v-for="(item, index) in items" :key="index">
-                <v-list-item-title class="menuOpcao" @click="processClick()">{{ item.title }}</v-list-item-title>
+                <v-list-item-title class="menuOpcao" @click="processClick(item)">{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -49,8 +49,28 @@ export default {
     login() {
       this.$router.push("/");
     },
-    processClick() {
-      console.log("Option");
+    acao(){
+      console.log("Vai para página inicial")
+    },
+    processClick(itemAtual) {
+      console.log(itemAtual.title)
+      switch(itemAtual.title){
+        case "Perfil":
+          this.$router.push("/register/profile");
+          break;
+        case "Publicar anúncio":
+          console.log("Vai para publicar anuncio");
+          break;
+        case "Anúncios":
+          console.log("Vai para Anúncios");
+          break;
+        case "Terminar Sessão":
+          console.log("Terminar Sessão");
+          break;
+      }
+      
+      
+    
     },
   },
 };
