@@ -12,7 +12,7 @@
               <v-img
                 v-bind="attrs"
                 v-on="on"
-                class="userImg"
+                class="userImg ml-auto"
                 src="@/assets/userImgTest.jpg"
                 max-height="70"
                 max-width="70"
@@ -21,7 +21,7 @@
             </template>
             <v-list>
               <v-list-item v-for="(item, index) in items" :key="index">
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
+                <v-list-item-title class="menuOpcao" @click="processClick()">{{ item.title }}</v-list-item-title>
               </v-list-item>
             </v-list>
           </v-menu>
@@ -49,8 +49,8 @@ export default {
     login() {
       this.$router.push("/");
     },
-    openDialog() {
-      console.log("Abriu");
+    processClick() {
+      console.log("Option");
     },
   },
 };
@@ -60,5 +60,13 @@ export default {
 .userImg {
   border-radius: 50%;
   cursor: pointer;
+}
+
+.menuOpcao{
+  cursor: pointer;
+}
+
+.menuOpcao:hover{
+  font-weight: bold;
 }
 </style>
