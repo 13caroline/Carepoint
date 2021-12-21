@@ -8,7 +8,7 @@ DROP PROCEDURE IF EXISTS get_companies;
 DELIMITER &&  
 CREATE PROCEDURE get_service_providers (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE,IN limite INT, IN inicio INT)  
 BEGIN  
-    SELECT user.idUser, user.name,user.lastActivity,user.active,serviceprovider.description,location.name AS location, location.cordsX, location.cordsY FROM user
+    SELECT user.idUser, user.name,user.lastActivity,user.active,serviceprovider.description,location.name AS location, location.cordsX, location.cordsY, file.image FROM user
     INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
@@ -51,7 +51,7 @@ BEGIN
 				ELSE 1
                 END
 	GROUP BY user.idUser
-    ORDER BY CASE WHEN serviceprovider.idSubscription in (5,6,7) then 1 else 2 end, serviceprovider.endSub ASC LIMIT limite OFFSET inicio;
+    ORDER BY serviceprovider.endSubVip DESC LIMIT limite OFFSET inicio;
 END &&  
 DELIMITER ;
 
@@ -60,7 +60,7 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE get_companies (IN id INT,IN limite INT, IN inicio INT)  
 BEGIN  
-    SELECT user.idUser, user.name,company.link,company.firm,company.nipc,PI.add.description,location.name AS location,location.cordsX, location.cordsY FROM user
+    SELECT user.idUser, user.name,company.link,company.firm,company.nipc,PI.add.description,location.name AS location,location.cordsX, location.cordsY, file.image FROM user
     INNER JOIN company ON user.idUser = company.idCompany 
     INNER JOIN PI.add ON user.idUser = PI.add.idCompany
     INNER JOIN location ON user.idLocation = location.idLocation
@@ -69,7 +69,7 @@ BEGIN
 					THEN user.idLocation = id
 				ELSE 1
                 END
-    ORDER BY CASE WHEN company.idSubscription in (11,12,13) then 1 else 2 end, company.endSub ASC LIMIT limite OFFSET inicio;
+    ORDER BY company.endSubVip DESC LIMIT limite OFFSET inicio;
 END &&  
 DELIMITER ;
 
