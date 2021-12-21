@@ -7,19 +7,26 @@
             <h3 class="font-weight-regular text-uppercase pb-10">
               Inscrever-se na Carepoint
             </h3>
-            <div class="my-2" v-for="p in options" :key="p.name">
-              <v-btn
-                outlined
-                color="#78C4D4"
-                depressed
-                class="rounded-lg button"
-                width="30vw"
-                large
-                @click="register(p.route)"
-              >
-                {{ p.name }}
-              </v-btn>
-            </div>
+            <v-row
+              class="my-2"
+              justify="center"
+              v-for="p in options"
+              :key="p.name"
+            >
+              <v-col cols="12" md="6">
+                <v-btn
+                  block
+                  outlined
+                  color="#78C4D4"
+                  depressed
+                  class="rounded-lg button"
+                  large
+                  @click="register(p.route)"
+                >
+                  {{ p.name }}
+                </v-btn>
+              </v-col>
+            </v-row>
           </div>
         </v-col>
       </v-row>
@@ -54,17 +61,23 @@ export default {
   data() {
     return {
       options: [
-        { name: "Prestador de Serviços Individual", route:"/register/provider/solo" },
-        { name: "Prestador de Serviços Coletivo", route:"/register/provider/collective" },
-        { name: "Consumidor", route:"/register/consumer" },
+        {
+          name: "Prestador de Serviços Individual",
+          route: "/register/provider/solo",
+        },
+        {
+          name: "Prestador de Serviços Coletivo",
+          route: "/register/provider/collective",
+        },
+        { name: "Consumidor", route: "/register/consumer" },
       ],
     };
   },
   methods: {
     register(route) {
       this.$router.push(route);
-    }
-  }
+    },
+  },
 };
 </script>
 
