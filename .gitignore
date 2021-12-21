@@ -1,2 +1,3 @@
 Backend/api-server/node_modules/
 Backend/auth-server/node_modules/
+Frontend/web/package-lock.json
