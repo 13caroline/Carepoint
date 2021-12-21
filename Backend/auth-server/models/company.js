@@ -16,13 +16,17 @@ const Company = dbconfig.sequelize.define('Company', {
     },
     firm: {
         type: dbconfig.Sequelize.STRING(100),
-        allowNull: true
+        allowNull: false
     },
     nipc: {
         type: dbconfig.Sequelize.INTEGER,
         allowNull: false
     },
     endSub: {
+        type: dbconfig.Sequelize.DATE,
+        allowNull: true
+    },
+    endSubVip: {
         type: dbconfig.Sequelize.DATE,
         allowNull: true
     }
@@ -35,5 +39,7 @@ const Company = dbconfig.sequelize.define('Company', {
 Company.belongsTo(User, { foreignKey: 'idCompany', targetKey: 'idUser', type: INTEGER })
     // Meter a FK de subscription em Company
 Subscription.hasMany(Company, { foreignKey: { name: 'idSubscription', allowNull: false, defaultValue: 1 }, onDelete: 'CASCADE', targetKey: 'idSubscription' })
+
+Company.sync()
 
 module.exports = Company

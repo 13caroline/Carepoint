@@ -1,6 +1,7 @@
 const dbconfig = require ("./Config/Database_Info");
 const User = require ("./user")
 const Subscription = require ("./subscription")
+const Category = require("./category")
 
 const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
     idSP: {
@@ -21,6 +22,10 @@ const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
         type: dbconfig.Sequelize.DATE,
         allowNull: true
     },
+    endSubVip: {
+        type: dbconfig.Sequelize.DATE,
+        allowNull: true
+    },
     distance: {
         type: dbconfig.Sequelize.INTEGER,
         allowNull: true
@@ -38,5 +43,7 @@ const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
 ServiceProvider.belongsTo(User, {foreignKey: 'idSP', targetKey:'idUser'})
 // Meter a FK de subscription em ServiceProvider
 Subscription.hasMany(ServiceProvider, { foreignKey: {name: 'idSubscription', allowNull: false }, onDelete: 'CASCADE', targetKey: 'idSubscription'})
+
+ServiceProvider.sync()
 
 module.exports = ServiceProvider

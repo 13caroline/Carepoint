@@ -16,13 +16,17 @@ const Company = dbconfig.sequelize.define('Company', {
     },
     firm: {
         type: dbconfig.Sequelize.STRING(100),
-        allowNull: true
+        allowNull: false
     },
     nipc: {
         type: dbconfig.Sequelize.INTEGER,
         allowNull: false
     },
     endSub: {
+        type: dbconfig.Sequelize.DATE,
+        allowNull: true
+    },
+    endSubVip: {
         type: dbconfig.Sequelize.DATE,
         allowNull: true
     }

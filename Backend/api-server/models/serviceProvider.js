@@ -22,6 +22,10 @@ const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
         type: dbconfig.Sequelize.DATE,
         allowNull: true
     },
+    endSubVip: {
+        type: dbconfig.Sequelize.DATE,
+        allowNull: true
+    },
     distance: {
         type: dbconfig.Sequelize.INTEGER,
         allowNull: true
