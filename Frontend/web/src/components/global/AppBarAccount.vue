@@ -24,6 +24,7 @@
                 max-width="70"
               >
               </v-img>
+              
             </template>
             <v-list>
               <v-list-item v-for="(item, index) in items" :key="index">
