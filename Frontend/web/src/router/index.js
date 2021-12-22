@@ -36,10 +36,10 @@ const routes = [
     name: 'profile',
     component: () => import('../views/global/Profile.vue')
   },
-  { //Route de teste para a barra de dentro da conta
-    path: '/register/appBarTeste',
-    name: 'appbarteste',
-    component: () => import('../components/page/AppBarAccount.vue')
+  {
+    path: '/consumer/profile',
+    name: 'Consumer Profile',
+    component: () => import(/* webpackChunkName: "about" */'../views/profile/MainConsumer.vue')
   }
 ]
 

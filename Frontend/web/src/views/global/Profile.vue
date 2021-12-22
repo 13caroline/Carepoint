@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <Bar/>
+  <div>
+    <Bar />
 
-       <!-- <v-row>
+    <!-- <v-row>
           <v-col justify="center">
             Teste
             <v-card class="card" justify="center">
@@ -18,53 +18,49 @@
           </v-col>
         </v-row>-->
 
-        <v-container>
-          <v-layout row wrap justify-space-around>
-            <v-flex xs4 md3>
-              <v-card class="cardPic">
-              <v-img
+    <v-container>
+      <v-layout row wrap justify-space-around>
+        <v-flex xs4 md3>
+          <v-card class="cardPic">
+            <v-img
               class="profilePic"
               mx-auto
-                v-bind="attrs"
-                v-on="on"
-                src="@/assets/userImgTest.jpg"
-                
-              >
-              </v-img> 
-              </v-card>
-            </v-flex>
+              v-bind="attrs"
+              v-on="on"
+              src="@/assets/userImgTest.jpg"
+            >
+            </v-img>
+          </v-card>
+        </v-flex>
 
-            <v-flex xs4 md3>
-              <v-btn outline block class="success">2</v-btn>
-            </v-flex>
-          </v-layout>
-        </v-container>
+        <v-flex xs4 md3>
+          <v-btn outline block class="success">2</v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
 
-    <Foot/>
-    </div>
+    <Foot />
+  </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {
-    }
+    return {};
   },
   components: {
-    Bar: () => import('@/components/page/AppBarAccount.vue'),
-    Foot: () => import("@/components/global/Footer")
+    Bar: () => import("@/components/global/AppBarAccount"),
+    Foot: () => import("@/components/global/Footer"),
   },
- 
 };
 </script>
 
 <style>
-
-.profilepic{
+.profilepic {
   outline-color: black;
 }
 
-.cardPic{
+.cardPic {
   outline-color: lightsalmon;
 }
 </style>

@@ -1,14 +1,20 @@
 <template>
   <div>
-    <v-app-bar flat color="#FFFFFF" height="120">
+    <v-app-bar flat color="#FFFFFF" height="180">
       <v-row justify="center" class="w-100">
         <v-col cols="7" md="4" offset-md="4">
-          <v-img class="logo" @click="acao()" src="@/assets/logo.png" max-height="270" max-width="270">
+          <v-img
+            class="logo"
+            @click="acao()"
+            src="@/assets/logo.png"
+            max-height="220"
+            max-width="220"
+          >
           </v-img>
         </v-col>
         <v-col cols="5" md="2">
           <v-menu offset-y offset-overflow>
-            <template v-slot:activator="{ on, attrs } ">
+            <template v-slot:activator="{ on, attrs }">
               <v-img
                 v-bind="attrs"
                 v-on="on"
@@ -21,7 +27,11 @@
             </template>
             <v-list>
               <v-list-item v-for="(item, index) in items" :key="index">
-                <v-list-item-title class="menuOpcao" @click="processClick(item)">{{ item.title }}</v-list-item-title>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick(item)"
+                  >{{ item.title }}</v-list-item-title
+                >
               </v-list-item>
             </v-list>
           </v-menu>
@@ -40,7 +50,7 @@ export default {
         { title: "Perfil" },
         { title: "Publicar anúncio" },
         { title: "Anúncios" },
-        { title: "Terminar Sessão"},
+        { title: "Terminar Sessão" },
       ],
       cardOptions: false,
     };
@@ -49,12 +59,12 @@ export default {
     login() {
       this.$router.push("/");
     },
-    acao(){
-      console.log("Vai para página inicial")
+    acao() {
+      console.log("Vai para página inicial");
     },
     processClick(itemAtual) {
-      console.log(itemAtual.title)
-      switch(itemAtual.title){
+      console.log(itemAtual.title);
+      switch (itemAtual.title) {
         case "Perfil":
           this.$router.push("/global/profile");
           break;
@@ -68,9 +78,6 @@ export default {
           console.log("Terminar Sessão");
           break;
       }
-      
-      
-    
     },
   },
 };
@@ -82,16 +89,15 @@ export default {
   cursor: pointer;
 }
 
-.logo:hover{
-    cursor: pointer;
-
-}
-
-.menuOpcao{
+.logo:hover {
   cursor: pointer;
 }
 
-.menuOpcao:hover{
+.menuOpcao {
+  cursor: pointer;
+}
+
+.menuOpcao:hover {
   font-weight: bold;
 }
 </style>
