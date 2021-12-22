@@ -3,7 +3,7 @@
     <v-app-bar flat color="#FFFFFF" height="120">
       <v-row justify="center" class="w-100">
         <v-col cols="7" md="4" offset-md="4">
-          <v-img @click="acao()" src="@/assets/logo.png" max-height="270" max-width="270">
+          <v-img class="logo" @click="acao()" src="@/assets/logo.png" max-height="270" max-width="270">
           </v-img>
         </v-col>
         <v-col cols="5" md="2">
@@ -56,7 +56,7 @@ export default {
       console.log(itemAtual.title)
       switch(itemAtual.title){
         case "Perfil":
-          this.$router.push("/register/profile");
+          this.$router.push("/global/profile");
           break;
         case "Publicar anúncio":
           console.log("Vai para publicar anuncio");
@@ -80,6 +80,11 @@ export default {
 .userImg {
   border-radius: 50%;
   cursor: pointer;
+}
+
+.logo:hover{
+    cursor: pointer;
+
 }
 
 .menuOpcao{
