@@ -3,8 +3,8 @@
     <v-row>
       <v-col
         cols="auto"
-        lg="6"
-        md="6"
+        lg="4"
+        md="4"
         class="mx-auto mx-sm-0"
         v-for="a in ads"
         :key="a.name"
@@ -40,7 +40,9 @@
             width="300"
           >
             <v-card-text>
-                    <span class="activity">última vez ativo há {{a.activity}}</span>
+              <span class="activity d-flex justify-end pb-2"
+                >última vez ativo há {{ a.activity }}</span
+              >
               <v-row justify="center">
                 <v-col cols="auto">
                   <v-avatar class="profile" color="grey" size="100">
@@ -50,21 +52,23 @@
               </v-row>
 
               <v-row justify="center" class="mx-auto">
-                  <span class="indication font-weight-bold">
-                    {{ a.name }}
-                  </span>
-              </v-row>
-
-              <v-row justify="center" class="mx-auto"> 
-                  <span class="indication">
-                    {{ a.localization }}
-                  </span>
+                <span class="indication font-weight-bold">
+                  {{ a.name }}
+                </span>
               </v-row>
 
               <v-row justify="center" class="mx-auto">
-                  <span class="description">
-                    {{ a.description }}
-                  </span>
+                <span class="indication">
+                  {{ a.localization }}
+                </span>
+              </v-row>
+
+              <v-divider class="mx-4 mt-5"></v-divider>
+
+              <v-row justify="center" class="mx-auto">
+                <span class="description">
+                  {{ a.description }}
+                </span>
               </v-row>
             </v-card-text>
           </v-card>
@@ -91,7 +95,7 @@ export default {
         },
         {
           name: "Carolina Cunha",
-          activity: "2 dias",
+          activity: "5 minutos",
           description:
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
           localization: "Fafe",
@@ -149,5 +153,9 @@ export default {
   text-justify: auto;
   color: grey;
   margin-top: 2em;
+}
+
+.activity {
+  font-size: smaller;
 }
 </style>
