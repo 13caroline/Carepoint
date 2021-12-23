@@ -1290,27 +1290,27 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3RAZ21haWwuY29tIiwibGV2ZWwiOjEsImlhdCI6MTY0MDAyMDY1NywiZXhwIjoxNjQwMDI0MjU3fQ._e7-EKNWCSvdDSaGFX_JAt0l3-DrMEOH6Cu53Ua42ho",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDAyNzIyNTIsImV4cCI6MTY0MDI3NTg1Mn0.kbT6relitMz48nq8E4huWotl_ZZut_FdLMYEnfjLw50",
 											"type": "text"
 										},
 										{
 											"key": "repeatPassword1",
-											"value": "12345",
+											"value": "poopy",
 											"type": "text"
 										},
 										{
 											"key": "repeatPassword2",
-											"value": "12345",
+											"value": "poopy",
 											"type": "text"
 										},
 										{
 											"key": "newPassword",
-											"value": "teste",
+											"value": "6666",
 											"type": "text"
 										},
 										{
 											"key": "idUser",
-											"value": "234",
+											"value": "203",
 											"type": "text"
 										}
 									]
@@ -1325,6 +1325,51 @@
 									"path": [
 										"users",
 										"updatePassword"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Image",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDAyNzIyNTIsImV4cCI6MTY0MDI3NTg1Mn0.kbT6relitMz48nq8E4huWotl_ZZut_FdLMYEnfjLw50",
+											"type": "text"
+										},
+										{
+											"key": "idUser",
+											"value": "202",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/C:/Users/Thol/Pictures/nobuShcok.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/updatePhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"updatePhoto"
 									]
 								}
 							},
