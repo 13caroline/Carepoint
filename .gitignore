@@ -1,5 +1,5 @@
 Backend/api-server/node_modules/
 Backend/auth-server/node_modules/
 Backend/api-server/uploads/
-Backend/api-server/models/Config/Database_Info.js
-Backend/auth-server/models/Config/Database_Info.js
+Backend/api-server/models/Config/Database_Info
+Backend/auth-server/models/Config/Database_Info
