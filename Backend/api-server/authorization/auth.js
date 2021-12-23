@@ -136,14 +136,14 @@ Out.matchUsers = (req, res, next) => {
         if(!err){
             user_controller.consult(payload.email)
             .then((user) => {
-                if(user.idUser = req.body.idUser){
+                if(user.idUser == req.body.idUser){
                     next()
                 }else{
-                    res.status(401).jsonp({message: "No permission."})
+                    res.status(401).jsonp("No permission.")
                 }
             })
         }else{
-            res.status(500).jsonp({message: "Invalid JWT token."})
+            res.status(500).jsonp("Invalid JWT token.")
         }
     })
 }

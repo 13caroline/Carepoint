@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 
+const multer  = require('multer')
+const storage = multer.memoryStorage();
+const upload = multer({ dest: 'uploads/', storage: storage })
+
+const Blob = require('node-blob');
+
 const User = require('../controllers/user');
 const auth = require('../authorization/auth');
 
@@ -127,6 +133,13 @@ router.put('/updatePassword', auth.matchUsers, (req, res, next) => {
             res.status(400).jsonp("Repeat Password 1 errada.")
         }
     })
+})
+
+//auth.matchUsers,
+router.put('/updatePhoto', upload.single('image'), (req, res, next) => {
+    User.updatePhoto(req.body.idUser, [req.file.buffer])
+    .then((user) => res.status(201).jsonp(user))
+    .catch((err) => res.status(500).jsonp("Error updating user: " + err))
 })
 
 /****************************************************************************************

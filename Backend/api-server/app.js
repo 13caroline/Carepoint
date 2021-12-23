@@ -1,9 +1,9 @@
 var createError = require('http-errors');
-var express = require('express');
+const express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 
 // Routes
@@ -27,7 +27,7 @@ require('./models/Config/Database_build')
 
 
 var app = express();
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(logger('dev'));
 app.use(express.json());

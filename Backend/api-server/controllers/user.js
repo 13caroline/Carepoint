@@ -111,6 +111,14 @@ Out.updatePassword = (userId, pass) => {
     )
 }
 
+Out.updatePhoto = (userId, photo) => {
+    return dbconfig.sequelize.query('CALL update_file (:id, :photo)',
+    {replacements: {
+        id: userId,
+        photo: photo
+    }})
+}
+
     //Delete user by email
 Out.remove = (id) => {
     return User.destroy({ where: { 'idUser': id } });

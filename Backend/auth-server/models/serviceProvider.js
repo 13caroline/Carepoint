@@ -1,7 +1,6 @@
 const dbconfig = require ("./Config/Database_Info");
 const User = require ("./user")
 const Subscription = require ("./subscription")
-const Category = require("./category")
 
 const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
     idSP: {
