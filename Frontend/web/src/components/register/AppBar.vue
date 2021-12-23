@@ -7,9 +7,28 @@
           </v-img>
         </v-col>
         <v-col cols="5" md="2">
-          <v-btn outlined color="#78C4D4" depressed class="rounded-xl" @click="login()"> 
+          <v-btn outlined color="#78C4D4" depressed class="rounded-xl hidden-xs-only" @click="login()"> 
             Iniciar Sessão
           </v-btn>
+          <v-app-bar-nav-icon outlined color="#78C4D4" class="rounded-xl hidden-sm-and-up" @click.stop="drawer = !drawer">          </v-app-bar-nav-icon>
+          
+          <v-navigation-drawer app v-model="drawer" absolute temporary right>
+            
+            <v-list dense nav>  
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon>mdi-view-dashboard</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title @click="login()">Iniciar Sessão</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+
+          </v-navigation-drawer>
+
+          
         </v-col>
       </v-row>
     </v-app-bar>
@@ -20,7 +39,10 @@
 export default {
   name: "appbar",
   data() {
-    return {};
+    return {
+      drawer: null,
+      
+    };
   },
   methods: {
     login() {
