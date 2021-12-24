@@ -1,27 +1,6 @@
 <template>
   <div>
     <Bar />
-    <!--  <v-container>
-          <v-layout row wrap justify-center>
-            <v-flex xs4 md3>
-              <v-card class="cardPic">
-              <v-img
-              contain
-              max-height="300"
-              class="profilePic"
-                v-bind="attrs"
-                v-on="on"
-                src="@/assets/userImgTest.jpg"
-              >
-              </v-img> 
-              </v-card>
-            </v-flex>
-
-            <v-flex xs4 md3>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        -->
     <v-container>
       <v-layout row wrap justify-center align-center>
         
@@ -47,10 +26,12 @@
                 </template>
               </v-img>
             </div>
+            <v-btn outline>Editar Imagem</v-btn>
           </v-col>
           </v-flex>
           <v-flex xs4 md5>
           <v-col>
+            <h3>Dados pessoais</h3>
             <v-card  class="dadosCard" outlined >
               <v-list-item class="my-auto">
                 <v-list-item-content>
@@ -67,17 +48,27 @@
                   <div>
                     <v-row>
                       <v-col justify-end>
-                        <p class="infos">Email</p>
+                        <p class="infos">Telemóvel</p>
                       </v-col>
                       <v-col >
-                        <p class="respos">maria_silva_41@gmail.com</p>
+                        <p class="respos">918273339</p>
                       </v-col>
                     </v-row>
                   </div>
                   <div>
                     <v-row>
                       <v-col >
-                        <p class="infos">Localização</p>
+                        <p class="infos">Sexo</p>
+                      </v-col>  
+                      <v-col>
+                        <p class="respos">Feminino</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col >
+                        <p class="infos">Localidade</p>
                       </v-col>
                       <v-col>
                         <p class="respos">Porto</p>
@@ -87,13 +78,43 @@
                 </v-list-item-content>
               </v-list-item>
             </v-card>
+            <h3>Dados de acesso</h3>
+            <v-card  class="dadosCard" outlined>
+              <v-list-item class="my-auto">
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col justify-end>
+                        <p class="infos">Email</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">maria_silva_41@gmail.com</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col justify-end>
+                        <p class="infos">Password</p>
+                      </v-col>
+                      <v-col >
+                        <p class="respos">pass</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+
+            
           </v-col>
           </v-flex>
       </v-layout>
       <v-layout row wrap justify-center align-center>
        <v-row>
          <v-flex xs4 md3>
-          <v-btn outline>Editar Imagem</v-btn>
+          
           </v-flex>
         </v-row>
         </v-layout>
@@ -110,7 +131,7 @@ export default {
     };
   },
   components: {
-    Bar: () => import("@/components/global/AppBarAccount"),
+    Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
   },
 };
@@ -121,9 +142,6 @@ export default {
   outline-color: black;
 }
 
-.cardPic {
-  outline-color: lightsalmon;
-}
 
 span {
   font-weight: bold;
@@ -131,6 +149,7 @@ span {
 
 .dadosCard{
   margin-bottom: 5em;
+  
 }
 
 .respos{
