@@ -25,17 +25,32 @@
                 </template>
               </v-img>
             </div>
-             <template>
-            <v-btn  raised rounded class="editImg" color="#78C4D4" outlined @click="onPick()"> Alterar fotografia </v-btn>
-            <input type="file" class="editImg" style="display: none" ref="fileInput" accept="image/*">
-             </template>
+            <template>
+              <v-btn
+                raised
+                rounded
+                class="editImg"
+                color="#78C4D4"
+                outlined
+                @click="onPick()"
+              >
+                Alterar fotografia
+              </v-btn>
+              <input
+                type="file"
+                class="editImg"
+                style="display: none"
+                ref="fileInput"
+                accept="image/*"
+              />
+            </template>
             <!--<v-btn  color="#78C4D4" >Alterar fotografia</v-btn>-->
           </v-col>
         </v-flex>
         <v-flex xs4 md5>
           <v-col>
             <h3>Dados pessoais</h3>
-            <v-card  class="dadosCard" outlined>
+            <v-card class="dadosCard" outlined>
               <v-list-item class="my-auto">
                 <v-list-item-content>
                   <div>
@@ -80,9 +95,10 @@
                   </div>
                 </v-list-item-content>
               </v-list-item>
-              
-                <v-icon  v-on="on" class="editIcon" @click="doesSomething()">mdi-pencil</v-icon>
-              
+
+              <v-icon class="editIcon" @click="openEditDialog()"
+                >mdi-pencil</v-icon
+              >
             </v-card>
             <h3>Dados de acesso</h3>
             <v-card class="dadosCard" outlined>
@@ -110,6 +126,9 @@
                   </div>
                 </v-list-item-content>
               </v-list-item>
+              <v-icon  class="editIcon" @click="openEditDialogAccess()"
+                >mdi-pencil</v-icon
+              >
             </v-card>
           </v-col>
         </v-flex>
@@ -120,73 +139,85 @@
         </v-row>
       </v-layout>
 
-      <v-dialog
-      v-model="dialog"
-      persistent
-      max-width="600px"
-    >
-      <v-card>
-        <v-card-title>
-          <span class="text-h5">Dados Pessoais</span>
-        </v-card-title>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  label="Nome"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  label="Telemóvel"
-                  type="password"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-select
-                  :items="['0-17', '18-29', '30-54', '54+']"
-                  label="Localidade"
-                  required
-                ></v-select>
-              </v-col>
-              <v-col
-                cols="12"
-                sm="6"
-              >
-                <v-autocomplete
-                  :items="['Masculino','Feminino','Outro']"
-                  label="Sexo"
-                  multiple
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
-            Close
-          </v-btn>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="dialog = false"
-          >
-            Save
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">Dados Pessoais</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <span>Nome</span>
+                  <v-text-field
+                    disabled
+                    placeholder="Maria Silva"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <span>Telemóvel</span>
+                  <v-text-field type="password" required></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-select
+                    :items="['Porto', 'Lisboa']"
+                    label="Localidade"
+                    required
+                  ></v-select>
+                </v-col>
+                <v-col cols="12" sm="6">
+                  <v-select
+                    :items="['Masculino', 'Feminino', 'Outro']"
+                    label="Sexo"
+                  ></v-select>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Close
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <v-dialog v-model="dialogAccess" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="text-h5">Dados de acesso</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <span>Email</span>
+                  <v-text-field                
+                    placeholder="maria_silva_41@gmail.com"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <span>Password</span>
+                  <v-text-field type="password" placeholder="******"></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Close
+            </v-btn>
+            <v-btn color="blue darken-1" text @click="dialog = false">
+              Save
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
 
     <Foot />
@@ -198,21 +229,28 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogAccess: false,
+      maxNumberOfChoices: 1,
     };
   },
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
   },
+  computed: {
+  },
   methods: {
-    doesSomething(){
-      console.log("Does something")
+    openEditDialog() {
       this.dialog = true;
     },
-    onPick(){
-      this.$refs.fileInput.click()
-    }
-  }
+    openEditDialogAccess() {
+      this.dialogAccess = true;
+    },
+    onPick() {
+      this.$refs.fileInput.click();
+    },
+    
+  },
 };
 </script>
 
@@ -233,11 +271,10 @@ span {
   font-weight: bold;
 }
 
-.editImg{
+.editImg {
   margin-top: 10%;
-  margin-left:11%;
-  border:  solid #78C4D4;
-
+  margin-left: 11%;
+  border: solid #78c4d4;
 }
 </style>
 
