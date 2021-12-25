@@ -25,8 +25,10 @@
                 </template>
               </v-img>
             </div>
-            <v-btn raised rounded class="editImg" color="#78C4D4" outlined @click="onPick()"> Alterar fotografia </v-btn>
+             <template>
+            <v-btn  raised rounded class="editImg" color="#78C4D4" outlined @click="onPick()"> Alterar fotografia </v-btn>
             <input type="file" class="editImg" style="display: none" ref="fileInput" accept="image/*">
+             </template>
             <!--<v-btn  color="#78C4D4" >Alterar fotografia</v-btn>-->
           </v-col>
         </v-flex>
@@ -78,7 +80,9 @@
                   </div>
                 </v-list-item-content>
               </v-list-item>
-                <v-icon class="editIcon" @click="doesSomething()">mdi-pencil</v-icon>
+              
+                <v-icon  v-on="on" class="editIcon" @click="doesSomething()">mdi-pencil</v-icon>
+              
             </v-card>
             <h3>Dados de acesso</h3>
             <v-card class="dadosCard" outlined>
@@ -115,6 +119,74 @@
           <v-flex xs4 md3> </v-flex>
         </v-row>
       </v-layout>
+
+      <v-dialog
+      v-model="dialog"
+      persistent
+      max-width="600px"
+    >
+      <v-card>
+        <v-card-title>
+          <span class="text-h5">Dados Pessoais</span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  label="Nome"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Telemóvel"
+                  type="password"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-select
+                  :items="['0-17', '18-29', '30-54', '54+']"
+                  label="Localidade"
+                  required
+                ></v-select>
+              </v-col>
+              <v-col
+                cols="12"
+                sm="6"
+              >
+                <v-autocomplete
+                  :items="['Masculino','Feminino','Outro']"
+                  label="Sexo"
+                  multiple
+                ></v-autocomplete>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false"
+          >
+            Close
+          </v-btn>
+          <v-btn
+            color="blue darken-1"
+            text
+            @click="dialog = false"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     </v-container>
 
     <Foot />
@@ -124,7 +196,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      dialog: false,
+    };
   },
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
@@ -133,6 +207,7 @@ export default {
   methods: {
     doesSomething(){
       console.log("Does something")
+      this.dialog = true;
     },
     onPick(){
       this.$refs.fileInput.click()
