@@ -1,85 +1,48 @@
 <template>
-  <div>
-    <Bar />
-    <v-container>
-      <v-layout row wrap justify-center align-center>
-        <v-flex xs4 md3>
-          <v-col cols="12" md="auto">
-            <div class="foto mx-auto">
-              <v-img
-                src="@/assets/userImgTest.jpg"
-                class="grey lighten-2 mx-2 rounded"
-                cover
-              >
-                <template v-slot:placeholder>
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                  >
-                    <v-progress-circular
-                      indeterminate
-                      color="grey lighten-5"
-                    ></v-progress-circular>
-                  </v-row>
-                </template>
-              </v-img>
-            </div>
-            <template>
-              <v-btn
-                raised
-                rounded
-                class="editImg"
-                color="#78C4D4"
-                outlined
-                @click="onPick()"
-              >
-                Alterar fotografia
-              </v-btn>
-              <input
-                type="file"
-                class="editImg"
-                style="display: none"
-                ref="fileInput"
-                accept="image/*"
-              />
-            </template>
-            <!--<v-btn  color="#78C4D4" >Alterar fotografia</v-btn>-->
+    <div>
+        <Bar />
+
+        <v-container>
+        <v-card flat>
+        <v-row>
+          <v-col cols="auto" class="ml-auto">
+            <v-btn
+              class="body-2 mr-2"
+              small
+              color="#2596be"
+              dark
+              @click="addFoto()"
+            >
+              Adicionar fotografia
+              <v-icon small class="ml-2">fas fa-camera</v-icon>
+            </v-btn>
+            <v-btn
+              class="body-2"
+              small
+              color="#2596be"
+              dark
+              to="/cliente/prefencias/editar"
+            >
+              Editar dados
+              <v-icon small class="ml-2">fas fa-pen</v-icon>
+            </v-btn>
           </v-col>
-        </v-flex>
-        <v-flex xs4 md5>
-          <v-col>
-            <h3>Dados pessoais</h3>
-            <v-card class="dadosCard" outlined>
-              <v-list-item class="my-auto">
+        </v-row>
+
+        <h3 class="pa-3">Dados Pessoais</h3>
+        <v-divider></v-divider>
+        <v-row class="w-100 ma-0" align="start">
+          <v-col cols="12" sm>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
                 <v-list-item-content>
                   <div>
                     <v-row>
-                      <v-col justify-end>
+                      <v-col>
                         <p class="infos">Nome</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">Maria Silva</p>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div>
-                    <v-row>
-                      <v-col justify-end>
-                        <p class="infos">Telemóvel</p>
-                      </v-col>
-                      <v-col>
-                        <p class="respos">918273339</p>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div>
-                    <v-row>
-                      <v-col>
-                        <p class="infos">Sexo</p>
-                      </v-col>
-                      <v-col>
-                        <p class="respos">Feminino</p>
+                        <p class="respos">Nome de pessoa</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -89,148 +52,116 @@
                         <p class="infos">Localidade</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">Porto</p>
+                        <p class="respos">Morada</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos mb-0">Sexo</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos mb-0">Feminino</p>
                       </v-col>
                     </v-row>
                   </div>
                 </v-list-item-content>
               </v-list-item>
-
-              <v-icon class="editIcon" @click="openEditDialog()"
-                >mdi-pencil</v-icon
-              >
             </v-card>
-            <h3>Dados de acesso</h3>
-            <v-card class="dadosCard" outlined>
-              <v-list-item class="my-auto">
+          </v-col>
+          <v-col cols="auto" order="first" order-sm="last">
+            <div class="foto h-100 mt-5">
+              <v-img
+                src="@/assets/userImgTest.jpg"
+                aspect-ratio="1"
+                class="grey lighten-2 mx-2 rounded"
+                cover
+              >
+                <template v-slot:placeholder>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  > 
+                    <v-progress-circular
+                      indeterminate
+                      color="grey lighten-5"
+                    ></v-progress-circular>
+                  </v-row>
+                </template>
+              </v-img>
+            </div>
+          </v-col>
+        </v-row>
+
+        <h3 class="pa-3">Dados de Acesso</h3>
+        <v-divider></v-divider>
+
+        <v-row class="w-100" align="start">
+          <v-col>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
                 <v-list-item-content>
                   <div>
                     <v-row>
-                      <v-col justify-end>
-                        <p class="infos">Email</p>
+                      <v-col>
+                        <p class="infos">E-mail</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">maria_silva_41@gmail.com</p>
+                        <p class="respos">email@email.com</p>
                       </v-col>
                     </v-row>
                   </div>
                   <div>
                     <v-row>
-                      <v-col justify-end>
-                        <p class="infos">Password</p>
+                      <v-col>
+                        <p class="infos mb-0">Palavra-passe</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">pass</p>
+                        <p class="respos mb-0">*****</p>
                       </v-col>
                     </v-row>
                   </div>
                 </v-list-item-content>
               </v-list-item>
-              <v-icon  class="editIcon" @click="openEditDialogAccess()"
-                >mdi-pencil</v-icon
-              >
             </v-card>
           </v-col>
-        </v-flex>
-      </v-layout>
-      <v-layout row wrap justify-center align-center>
-        <v-row>
-          <v-flex xs4 md3> </v-flex>
         </v-row>
-      </v-layout>
 
-      <v-dialog v-model="dialog" persistent max-width="600px">
-        <v-card>
-          <v-card-title>
-            <span class="text-h5">Dados Pessoais</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12">
-                  <span>Nome</span>
-                  <v-text-field
-                    disabled
-                    placeholder="Maria Silva"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <span>Telemóvel</span>
-                  <v-text-field type="password" required></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="['Porto', 'Lisboa']"
-                    label="Localidade"
-                    required
-                  ></v-select>
-                </v-col>
-                <v-col cols="12" sm="6">
-                  <v-select
-                    :items="['Masculino', 'Feminino', 'Outro']"
-                    label="Sexo"
-                  ></v-select>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Close
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Save
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
+        <h3 class="pa-3">Dados de Contacto</h3>
+        <v-divider></v-divider>
+        <v-row class="w-100" align="start">
+          <v-col>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos mb-0">Número de telefone</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos mb-0">915293745</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+               </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card>
+        </v-container>
 
-      <v-dialog v-model="dialogAccess" persistent max-width="600px">
-        <v-card>
-          <v-card-title>
-            <span class="text-h5">Dados de acesso</span>
-          </v-card-title>
-          <v-card-text>
-            <v-container>
-              <v-row>
-                <v-col cols="12">
-                  <span>Email</span>
-                  <v-text-field                
-                    placeholder="maria_silva_41@gmail.com"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12">
-                  <span>Password</span>
-                  <v-text-field type="password" placeholder="******"></v-text-field>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Close
-            </v-btn>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Save
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-container>
-
-    <Foot />
-  </div>
+        <Foot />
+    </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      dialog: false,
-      dialogAccess: false,
-      maxNumberOfChoices: 1,
     };
   },
   components: {
@@ -240,12 +171,6 @@ export default {
   computed: {
   },
   methods: {
-    openEditDialog() {
-      this.dialog = true;
-    },
-    openEditDialogAccess() {
-      this.dialogAccess = true;
-    },
     onPick() {
       this.$refs.fileInput.click();
     },
@@ -254,27 +179,34 @@ export default {
 };
 </script>
 
-<style>
-.profilepic {
-  outline-color: black;
-}
 
-span {
-  font-weight: bold;
+<style scoped>
+.infos {
+  text-align: start;
 }
-
-.dadosCard {
-  margin-bottom: 5em;
-}
-
 .respos {
+  text-align: end;
   font-weight: bold;
 }
-
-.editImg {
-  margin-top: 10%;
-  margin-left: 11%;
-  border: solid #78c4d4;
+.body-2 {
+  font-size: 0.8rem !important;
+}
+.head {
+  font-size: 2.75rem !important;
+}
+.font-weight-bold {
+  font-size: 15px;
+}
+.font-weight-regular {
+  font-size: 14px;
+}
+.font-weight-bold.col-sm-12.col-md-auto.col-auto {
+  padding-bottom: 0;
+}
+.row.col.col-6 {
+  margin-top: 0;
+}
+.foto {
+  width: 170px;
 }
 </style>
-
