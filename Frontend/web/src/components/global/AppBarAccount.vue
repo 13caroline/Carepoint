@@ -70,7 +70,7 @@ export default {
           this.$router.push("/global/profile");
           break;
         case "Publicar anúncio":
-          console.log("Vai para publicar anuncio");
+          this.$router.push("/global/postad");
           break;
         case "Anúncios":
           console.log("Vai para Anúncios");
