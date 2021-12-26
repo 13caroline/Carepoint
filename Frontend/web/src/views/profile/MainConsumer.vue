@@ -11,6 +11,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <top-button />
     <Foot />
   </div>
 </template>
@@ -24,6 +25,7 @@ export default {
     AppBar: () => import("@/components/global/AppBarAccount"),
     Ads: () => import("@/components/global/Ads"),
     Search: () => import("@/components/global/Search"),
+    TopButton: () => import("@/components/global/TopButton"),
     Foot: () => import("@/components/global/Footer"),
   },
 };
