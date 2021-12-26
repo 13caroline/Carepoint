@@ -61,7 +61,7 @@ export default {
     },
     
     login() {
-      this.$router.push("/consumer/profile");
+      this.$router.push("/consumer/page");
     }
   }
 };
