@@ -80,7 +80,7 @@
             </v-row>
 
             <v-row>
-              <v-col class="py-0" cols="12" md="3">
+              <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Contacto telefónico *</span>
                 <v-text-field
                   prefix="+351"
@@ -95,7 +95,7 @@
                   required
                 />
               </v-col>
-              <v-col class="py-0">
+              <v-col class="py-0" cols="12" md="3">
                 <span>Localização *</span>
                 <v-text-field
                   outlined
@@ -109,7 +109,7 @@
                   required
                 />
               </v-col>
-              <v-col class="py-0">
+              <v-col class="py-0" cols="12" md="3" sm="6" >
                 <span>Raio de Atividade *</span>
                 <v-text-field
                   outlined
@@ -124,7 +124,7 @@
                   required
                 />
               </v-col>
-              <v-col class="py-0">
+              <v-col class="py-0" cols="12" md="3" sm="6">
                 <span>Sexo *</span>
                 <v-select
                   outlined
