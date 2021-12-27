@@ -5,7 +5,7 @@
         <v-col cols="7" md="4" offset-md="4">
           <v-img
             class="logo"
-            @click="acao()"
+            @click="goToMainPage()"
             src="@/assets/logo.png"
             max-height="220"
             max-width="220"
@@ -80,6 +80,9 @@ export default {
           break;
       }
     },
+    goToMainPage(){
+        this.$router.push('/consumer/page')
+    }
   },
 };
 </script>
