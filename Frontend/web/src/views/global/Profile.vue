@@ -21,7 +21,7 @@
               small
               color="#2596be"
               dark
-              to="/cliente/prefencias/editar"
+              to="/consumer/edit/profile" 
             >
               Editar dados
               <v-icon small class="ml-2">fas fa-pen</v-icon>
