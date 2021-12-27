@@ -11,10 +11,19 @@
             <v-btn outlined color="#78C4D4" depressed class="rounded-xl hidden-xs-only" @click="login()"> 
               Iniciar Sessão
             </v-btn>
-            <v-app-bar-nav-icon outlined color="#78C4D4" class="rounded-xl hidden-sm-and-up" @click.stop="drawer = !drawer">          </v-app-bar-nav-icon>
-            
-            <v-navigation-drawer app v-model="drawer" absolute overlay-opacity="100" temporary right >
-              
+
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  text
+                  v-bind="attrs"
+                  v-on="on"
+                  outlined color="#78C4D4" 
+                  class="rounded-xl hidden-sm-and-up"
+                >
+                  <v-icon>mdi-format-list-bulleted-square</v-icon>
+                </v-btn>
+              </template>
               <v-list dense nav>  
                 <v-list-item v-for="(item, i) in items" :key="i" @click="menuActionClick(item.action)">
                   <v-list-item-icon>
@@ -25,11 +34,8 @@
                     <v-list-item-title v-text="item.text"></v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
-              
-              
               </v-list>
-
-            </v-navigation-drawer>
+            </v-menu>
 
             
           </v-col>
@@ -44,7 +50,6 @@ export default {
   name: "appbar",
   data() {
     return {
-      drawer: null,
       items: [
         { text: 'Iniciar Sessão', icon: 'mdi-view-dashboard', action: "login" },
         { text: 'Ajuda', icon: 'mdi-view-dashboard', action: null },
