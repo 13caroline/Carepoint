@@ -83,8 +83,8 @@
                         ></v-text-field>
                       </v-col>
                     </div>
-                    <div>
-                      <v-col>
+                    <v-row class="mx-auto">
+                      <v-col cols="12" md="6">
                         <span>Localização</span>
                         <v-text-field
                           outlined
@@ -94,19 +94,19 @@
                           value="localização"
                         ></v-text-field>
                       </v-col>
-                    </div>
-                    <div>
-                      <v-col>
+                   
+                      <v-col cols="12" md="6">
                         <span>Sexo</span>
-                        <v-text-field
+                        <v-select
                           outlined
                           color="#2596be"
                           :rules="textRules"
+                          :items="sex"
                           dense
                           value="sexo"
-                        ></v-text-field>
+                        ></v-select>
                       </v-col>
-                    </div>
+                    </v-row>
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -149,7 +149,7 @@
             dense
             color="#78c4d4"
             depressed
-            class="rounded-xl white--text"
+            class="rounded-lg white--text"
             @click="editarDados()"
             >Confirmar</v-btn
           >
@@ -165,6 +165,7 @@ export default {
   data: () => ({
     utilizador: {},
     password: "",
+    sex: ["Feminino", "Masculino", "Indefinido"],
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;
@@ -188,7 +189,7 @@ export default {
   }),
   methods: {
     close() {
-      this.$router.push("/cliente/preferencias");
+      this.$router.push("/consumer/profile");
     },
   },
   components: {

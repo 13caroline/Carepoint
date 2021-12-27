@@ -36,7 +36,7 @@
               <v-btn depressed text color="#78c4d4" @click="register()">
                 Inscrever-se
               </v-btn>
-              <v-btn depressed dark color="#78c4d4" type="submit" rounded @click="login()">
+              <v-btn depressed dark color="#78c4d4" type="submit" class="rounded-lg" @click="login()">
                 Iniciar Sessão
               </v-btn>
             </v-card-actions>

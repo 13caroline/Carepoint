@@ -39,7 +39,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn dark depressed class="rounded-xl" color="#78C4D4">
+              <v-btn dark depressed class="rounded-lg" color="#78C4D4">
                 Procurar
               </v-btn>
             </v-card-actions>

@@ -193,7 +193,7 @@
               <v-btn
                 dense
                 color="#78c4d4"
-                class="rounded-xl white--text"
+                class="rounded-lg white--text"
                 required
                 type="submit"
                 :disabled="!valid"

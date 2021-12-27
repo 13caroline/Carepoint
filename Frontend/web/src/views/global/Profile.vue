@@ -7,31 +7,52 @@
         <v-row>
           <v-col cols="auto" class="ml-auto">
             <v-btn
-              class="body-2 mr-2"
+              class="body-2 mr-2 rounded-xl button"
               small
-              color="#2596be"
+              color="#78C4D4"
+              outlined
               dark
               @click="addFoto()"
             >
-              Adicionar fotografia
+              Alterar fotografia
               <v-icon small class="ml-2">fas fa-camera</v-icon>
             </v-btn>
+            
             <v-btn
-              class="body-2"
+              class="body-2 rounded-xl button"
               small
-              color="#2596be"
+              color="#78C4D4"
+              outlined
               dark
               to="/consumer/edit/profile" 
             >
               Editar dados
               <v-icon small class="ml-2">fas fa-pen</v-icon>
             </v-btn>
+
+            <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                class="body-2 mx-2"
+                small
+                color="#78C4D4"
+                v-bind="attrs"
+                v-on="on"
+                fab
+                
+                dark
+              >
+                <v-icon small>fas fa-hand-holding-medical</v-icon>
+              </v-btn>
+            </template>
+            <span class="caption">Quero ser prestador</span>
+          </v-tooltip>
           </v-col>
         </v-row>
 
-        <h3 class="pa-3">Dados Pessoais</h3>
+        <h3 class="pa-3 group font-weight-light text-uppercase">Dados Pessoais</h3>
         <v-divider></v-divider>
-        <v-row class="w-100 ma-0" align="start">
+        <v-row class="w-100" align="start">
           <v-col cols="12" sm>
             <v-card class="h-100 mt-5" outlined>
               <v-list-item>
@@ -59,10 +80,10 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos mb-0">Sexo</p>
+                        <p class="infos">Sexo</p>
                       </v-col>
                       <v-col>
-                        <p class="respos mb-0">Feminino</p>
+                        <p class="respos">Feminino</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -95,7 +116,7 @@
           </v-col>
         </v-row>
 
-        <h3 class="pa-3">Dados de Acesso</h3>
+        <h3 class="mt-6 group font-weight-light text-uppercase">Dados de Acesso</h3>
         <v-divider></v-divider>
 
         <v-row class="w-100" align="start">
@@ -129,7 +150,7 @@
           </v-col>
         </v-row>
 
-        <h3 class="pa-3">Dados de Contacto</h3>
+        <h3 class="mt-6 group font-weight-light text-uppercase">Dados de Contacto</h3>
         <v-divider></v-divider>
         <v-row class="w-100" align="start">
           <v-col>
@@ -139,7 +160,7 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos mb-0">Número de telefone</p>
+                        <p class="infos mb-0">Contacto telefónico</p>
                       </v-col>
                       <v-col>
                         <p class="respos mb-0">915293745</p>
@@ -208,5 +229,13 @@ export default {
 }
 .foto {
   width: 170px;
+}
+.group {
+  color: #282424;
+  font-size: 20px;
+}
+.button:hover {
+  background-color: #78c4d4;
+  color: white !important;
 }
 </style>

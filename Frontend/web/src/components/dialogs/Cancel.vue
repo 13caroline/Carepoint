@@ -5,7 +5,7 @@
         <v-btn
           dense
           color="#78c4d4"
-          class="rounded-xl"
+          class="rounded-lg"
           outlined
           background-color="white"
           required

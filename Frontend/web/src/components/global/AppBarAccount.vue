@@ -70,7 +70,7 @@ export default {
           this.$router.push("/consumer/profile");
           break;
         case "Publicar anúncio":
-          this.$router.push("/consumer/postad");
+          this.$router.push("/consumer/post/ad");
           break;
         case "Anúncios":
           console.log("Vai para Anúncios");

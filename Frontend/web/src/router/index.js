@@ -42,7 +42,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */'../views/profile/MainConsumer.vue')
   },
   {
-    path: '/consumer/postad',
+    path: '/consumer/post/ad',
     name: 'Post Ad',
     component: () => import('../views/global/PostAd.vue')
   },
