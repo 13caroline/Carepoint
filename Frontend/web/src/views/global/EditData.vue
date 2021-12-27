@@ -141,10 +141,10 @@
         </v-form>
       </v-card>
       <v-row align="end" justify="end" class="w-100">
-        <v-col cols="auto" class="ml-auto">
+        <v-col cols="auto" >
           <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
         </v-col>
-        <v-col cols="auto">
+        <v-col cols="auto pl-0">
           <v-btn
             dense
             color="#78c4d4"

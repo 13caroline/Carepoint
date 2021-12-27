@@ -64,7 +64,6 @@ export default {
       console.log("Vai para página inicial");
     },
     processClick(itemAtual) {
-      console.log(itemAtual.title);
       switch (itemAtual.title) {
         case "Perfil":
           this.$router.push("/consumer/profile");
@@ -76,7 +75,7 @@ export default {
           console.log("Vai para Anúncios");
           break;
         case "Terminar Sessão":
-          console.log("Terminar Sessão");
+          this.$router.push("/");
           break;
       }
     },

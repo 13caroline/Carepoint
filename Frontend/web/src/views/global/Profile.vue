@@ -33,13 +33,12 @@
             <v-tooltip top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                class="body-2 mx-2"
+                class="body-2 ma-2"
                 small
                 color="#78C4D4"
                 v-bind="attrs"
                 v-on="on"
                 fab
-                
                 dark
               >
                 <v-icon small>fas fa-hand-holding-medical</v-icon>

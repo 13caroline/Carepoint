@@ -172,7 +172,7 @@
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
-              v-model="checkbox"
+              v-model="termos"
               :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
               label="Li e aceito os Termos e Condições"
               required
@@ -207,6 +207,7 @@ export default {
   name: "SingleSPForm",
   data() {
     return {
+      termos: false,
       dialogs: {},
       valid: false,
       cancelar: { title: "o seu registo", text: "o seu registo" },
@@ -258,6 +259,10 @@ h3 {
 span {
   color: #797878;
   font-size: small;
+}
+
+::v-deep .my-checkbox .v-label {
+  font-size: 12px;
 }
 </style>
 

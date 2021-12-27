@@ -109,7 +109,7 @@
 
               <v-col cols="12" md="6">
                 <span>Categoria *</span>
-                <v-select
+                <v-autocomplete
                   flat
                   color="#2596be"
                   dense
@@ -118,9 +118,9 @@
                   :items="categoria"
                   v-model="category"
                   multiple
-                  chips
+                  small-chips
                   required
-                ></v-select>
+                ></v-autocomplete>
               </v-col>
             </v-row>
 
@@ -153,10 +153,10 @@
 
             <span class="ma-0 caption">* Campos obrigatórios</span>
             <v-row align="end" justify="end" class="w-100">
-              <v-col cols="auto" class="ml-auto">
+              <v-col cols="auto">
                 <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
               </v-col>
-              <v-col cols="auto">
+              <v-col cols="auto pl-0">
                 <v-btn
                   dense
                   color="#78c4d4"
