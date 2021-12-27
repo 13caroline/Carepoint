@@ -15,38 +15,52 @@
       </v-btn>
     </template>
     <v-card>
-      <v-card-title>Alterar fotografia</v-card-title>
-      <v-divider></v-divider>
-      <v-card-text>
-        <v-row class="ma-auto">
-          <v-col>
+      <v-container>
+        <v-card-title>Alterar fotografia</v-card-title>
+        <v-divider></v-divider>
+        <v-card-text>
+          <div class="ma-auto">
             <span>Carregar fotografia</span>
             <v-file-input
-              append-icon="mdi-camera"
+              append-icon="fas fa-camera"
               v-model="image"
               type="file"
               class="input"
+              color="#78C4D4"
+              prepend-icon=""
               outlined
               dense
               @change="onFileChange"
             />
-          </v-col>
-        </v-row>
-        <v-col>
-          <h4>Preview</h4>
-          <v-img
-            :src="imageUrl"
-            style="border: 1px dashed #ccc; min-height: 250px"
-          />
-        </v-col>
-      </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn color="blue darken-1" text @click="dialog = false">
-          Close
-        </v-btn>
-        <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
-      </v-card-actions>
+          </div>
+          <div>
+            <span>Preview</span>
+            <v-img
+              :src="imageUrl"
+              style="border: 1px dashed #ccc; min-height: 250px"
+            />
+          </div>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <v-row align="end" justify="end">
+            <v-col cols="auto">
+              <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
+            </v-col>
+            <v-col cols="auto" class="pl-0">
+              <v-btn
+                dense
+                color="#78c4d4"
+                class="rounded-lg white--text"
+                required
+                type="submit"
+                :disabled="!image"
+                >Confirmar</v-btn
+              >
+            </v-col>
+          </v-row>
+        </v-card-actions>
+      </v-container>
     </v-card>
   </v-dialog>
 </template>
@@ -59,9 +73,13 @@ export default {
       dialog: false,
       image: null,
       imageUrl: "",
+        cancelar: { title: "a alteração da sua fotografia", text: "a alteração da sua fotografia" },
+
     };
   },
-
+  components: {
+    Cancel: () => import("@/components/dialogs/Cancel"),
+  },
   methods: {
     createImage(file) {
       const reader = new FileReader();
@@ -76,6 +94,11 @@ export default {
         return;
       }
       this.createImage(file);
+    },
+    close() {
+        this.imageUrl = "";
+        this.image = null;
+        this.dialog = false;
     },
   },
 };
