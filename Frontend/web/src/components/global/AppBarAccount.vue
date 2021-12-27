@@ -67,10 +67,10 @@ export default {
       console.log(itemAtual.title);
       switch (itemAtual.title) {
         case "Perfil":
-          this.$router.push("/global/profile");
+          this.$router.push("/consumer/profile");
           break;
         case "Publicar anúncio":
-          this.$router.push("/global/postad");
+          this.$router.push("/consumer/postad");
           break;
         case "Anúncios":
           console.log("Vai para Anúncios");

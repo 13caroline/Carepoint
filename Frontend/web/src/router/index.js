@@ -32,7 +32,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/register/Consumer.vue')
   },
   {
-    path: '/global/profile',
+    path: '/consumer/profile',
     name: 'profile',
     component: () => import('../views/global/Profile.vue')
   },
@@ -42,9 +42,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */'../views/profile/MainConsumer.vue')
   },
   {
-    path: '/global/postad',
+    path: '/consumer/postad',
     name: 'Post Ad',
     component: () => import('../views/global/PostAd.vue')
+  },
+  {
+    path: '/consumer/edit/profile',
+    name: 'Edit Profile',
+    component: () => import('../views/global/EditData.vue')
   }
 ]
 
