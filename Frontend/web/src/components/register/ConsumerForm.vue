@@ -80,7 +80,7 @@
             </v-row>
 
             <v-row>
-              <v-col class="py-0" cols="12" xs="12" md="4" sm="4">
+              <v-col class="py-0" cols="12" md="4" sm="7">
                 <span>Contacto telefónico *</span>
                 <v-text-field
                   prefix="+351"
@@ -95,7 +95,22 @@
                   required
                 />
               </v-col>
-              <v-col class="py-0" cols="12" xs="12" md="8" sm="8">
+
+              <v-col class="py-0" md="4" sm="5">
+                <span>Sexo *</span>
+                <v-select
+                  outlined
+                  flat
+                  dense
+                  v-model="sex"
+                  color="#78C4D4"
+                  name="sex"
+                  required
+                  :items="items"
+                />
+              </v-col>
+            
+              <v-col class="py-0" cols="12" md="4">
                 <span>Localização *</span>
                 <v-text-field
                   outlined
@@ -107,20 +122,6 @@
                   v-model="localization"
                   :rules="textRules"
                   required
-                />
-              </v-col>
-
-              <v-col class="py-0" xs="12" md="4" sm="4">
-                <span>Sexo *</span>
-                <v-select
-                  outlined
-                  flat
-                  dense
-                  v-model="sex"
-                  color="#78C4D4"
-                  name="sex"
-                  required
-                  :items="items"
                 />
               </v-col>
             </v-row>
