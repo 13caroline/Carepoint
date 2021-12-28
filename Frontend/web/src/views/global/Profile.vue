@@ -28,6 +28,7 @@
                   v-on="on"
                   fab
                   dark
+                  @click="wannaBeSP()"
                 >
                   <v-icon small>fas fa-hand-holding-medical</v-icon>
                 </v-btn>
@@ -187,6 +188,9 @@ export default {
     onPick() {
       this.$refs.fileInput.click();
     },
+    wannaBeSP(){
+      this.$router.push('/consumer/becomesp')
+    }
   },
 };
 </script>

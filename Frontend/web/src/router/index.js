@@ -50,6 +50,11 @@ const routes = [
     path: '/consumer/edit/profile',
     name: 'Edit Profile',
     component: () => import('../views/global/EditData.vue')
+  },
+  {
+    path: '/consumer/becomesp',
+    name: 'Become Service Provider',
+    component: () => import('../views/global/BecomeSP.vue')
   }
 ]
 
