@@ -60,6 +60,11 @@ const routes = [
     path: '/ad/info',
     name: 'Ad Info',
     component: () => import('../views/global/AdInfo.vue')
+  },
+  {
+    path: '/consumer/become/service/provider',
+    name: 'Become Service Provider',
+    component: () => import('../views/global/BecomeSP.vue')
   }
 ]
 
