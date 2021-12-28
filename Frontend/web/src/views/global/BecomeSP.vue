@@ -1,10 +1,11 @@
 <template>
   <div>
+      <Bar/>
     <v-container class="fill-height">
       <v-row justify="center" class="mb-4">
         <v-col cols="8">
           <v-row class="w-100">
-            <h3 class="font-weight-regular text-uppercase">
+            <h3 class="font-weight-regular text-uppercase subtitle">
               Registar como Prestador de Cuidados Individual
             </h3>
           </v-row>
@@ -14,103 +15,79 @@
 
           <v-form ref="form" v-model="valid">
             <v-row>
+              <h3 class="pa-3 group font-weight-light text-uppercase">
+                Dados Pessoais
+
+              </h3>
+                 
+            </v-row>
+            <v-row>
+                         
+<v-divider class="mb-4 mt-n2 divider"></v-divider>
+            </v-row>
+            <v-row>
               <v-col class="py-0">
                 <span>Descrição *</span>
-                <v-text-field
+                <v-textarea
+                  auto-grow
                   outlined
                   flat
-                  dense
-                  single-line
+                  rows="3"
+                  row-height="15"
+                  color="#78C4D4"
+                  required
                   :rules="textRules"
-                  color="#78C4D4"
-                  v-model="name"
-                  name="name"
-                  required
-                />
+                  v-model="description"
+                ></v-textarea>
               </v-col>
             </v-row>
 
             <v-row>
-              <v-col class="py-0">
-                <span>E-mail *</span>
-                <v-text-field
-                  outlined
-                  flat
-                  dense
-                  v-model="email"
-                  single-line
-                  :rules="emailRules"
-                  color="#78C4D4"
-                  name="email"
-                  required
-                />
+
+ <v-col >
+                <span>Data de nascimento *</span>
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      append-icon="fas fa-calendar-alt"
+                      readonly
+                      dense
+                      outlined
+                      required
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    @input="menu = false"
+                    locale="pt PT"
+                    :max="new Date().toISOString().substr(0, 10)"
+                  ></v-date-picker>
+                </v-menu>
               </v-col>
             </v-row>
 
+
+  
+
+
+            <v-row> </v-row>
             <v-row>
-              <v-col cols="12" md="6" sm="6" class="py-0">
-                <span>Palavra-passe *</span>
-                <v-text-field
-                  outlined
-                  flat
-                  dense
-                  v-model="password"
-                  :rules="passwordRules"
-                  single-line
-                  color="#78C4D4"
-                  name="password"
-                  type="password"
-                  required
-                />
-              </v-col>
-              <v-col class="py-0">
-                <span>Repetir palavra-passe *</span>
-                <v-text-field
-                  outlined
-                  flat
-                  dense
-                  single-line
-                  v-model="password2"
-                  :rules="passwordRules"
-                  color="#78C4D4"
-                  type="password"
-                  required
-                />
-              </v-col>
+              <h3 class="pa-3 group font-weight-light text-uppercase">
+                Dados Profissionais
+              </h3>
             </v-row>
-
-            <v-row>
-              <v-col class="py-0" cols="12" md="6" sm="6">
-                <span>Contacto telefónico *</span>
-                <v-text-field
-                  prefix="+351"
-                  outlined
-                  flat
-                  dense
-                  single-line
-                  color="#78C4D4"
-                  name="contact"
-                  v-model="contact"
-                  maxlength="9"
-                  required
-                />
-              </v-col>
-            
-              <v-col class="py-0" cols="12" md="6" sm="6">
-                <span>Sexo *</span>
-                <v-select
-                  outlined
-                  flat
-                  dense
-                  v-model="sex"
-                  color="#78C4D4"
-                  name="sex"
-                  required
-                  :items="items"
-                />
-              </v-col>
+            <v-row class="mb-4 mt-n2">
+                <v-divider class="divider"></v-divider>
             </v-row>
-
             <v-row>
               <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Localização *</span>
@@ -160,23 +137,6 @@
               </v-col>
             </v-row>
 
-            <v-row>
-              <v-col class="py-0">
-                <span>Descrição *</span>
-                <v-textarea
-                  auto-grow
-                  outlined
-                  flat
-                  rows="3"
-                  row-height="15"
-                  color="#78C4D4"
-                  required
-                  :rules="textRules"
-                  v-model="description"
-                ></v-textarea>
-              </v-col>
-            </v-row>
-
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
@@ -201,74 +161,67 @@
                 required
                 type="submit"
                 :disabled="!valid"
-                >Registar</v-btn
+                @click="goToSub()"
+                >Próximo</v-btn
               >
             </v-col>
           </v-row>
         </v-col>
       </v-row>
     </v-container>
+    <Foot/>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SingleSPForm",
+  name: "BecomeSP",
   data() {
     return {
+      menu: false,
       termos: false,
       dialogs: {},
       valid: false,
+      date: new Date().toISOString().substr(0, 10),
       cancelar: { title: "o seu registo", text: "o seu registo" },
-      emailRules: [
-        (value) => !!value || "Campo inválido",
-        (value) => {
-          const pattern =
-            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(value) || "Campo inválido";
-        },
-      ],
-      passwordRules: [
-        (v) => !!v || "Palavra-passe inválida",
-        (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",
-        (v) => /(?=.*\d)/.test(v) || "Deve ter um número",
-        (v) =>
-          (v && v.length >= 5) ||
-          "A palavra-passe deve ter pelo menos 5 caracteres",
-      ],
       textRules: [(v) => !!v || "Campo inválido"],
       name: "",
-      email: "",
-      password: "",
-      password2: "",
       contact: "",
       localization: "",
       radius: 0,
       qualification: "",
       description: "",
-      sex: "",
-      items: ["Feminino", "Masculino", "Indefinido"],
     };
   },
   components: {
     Cancel: () => import("@/components/dialogs/Cancel"),
+    Foot: () => import("@/components/global/Footer"),
+    Bar: () => import("@/components/global/AppBarAccount.vue"),
+
   },
   methods: {
     close() {
       this.$router.back();
     },
+    goToSub(){
+        this.$router.push('/register/subscription')
+    }
   },
 };
 </script>
 
 <style scoped>
-h3 {
+.subtitle {
   color: #78c4d4;
 }
 
 span {
   color: #797878;
   font-size: small;
+}
+
+.divider{
+    color: black;
 }
 
 ::v-deep .my-checkbox .v-label {

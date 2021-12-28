@@ -189,7 +189,7 @@ export default {
       this.$refs.fileInput.click();
     },
     wannaBeSP(){
-      this.$router.push('/consumer/becomesp')
+      this.$router.push('/consumer/become/service/provider')
     }
   },
 };
