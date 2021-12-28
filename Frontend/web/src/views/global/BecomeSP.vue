@@ -1,6 +1,6 @@
 <template>
   <div>
-      <Bar/>
+    <Bar />
     <v-container class="fill-height">
       <v-row justify="center" class="mb-4">
         <v-col cols="8">
@@ -14,16 +14,12 @@
           </v-row>
 
           <v-form ref="form" v-model="valid">
-            <v-row>
-              <h3 class="pa-3 group font-weight-light text-uppercase">
-                Dados Pessoais
+            <h3 class="pa-3 group font-weight-light text-uppercase">
+              Dados Pessoais
+            </h3>
 
-              </h3>
-                 
-            </v-row>
             <v-row>
-                         
-<v-divider class="mb-4 mt-n2 divider"></v-divider>
+              <v-divider class="mb-4 divider"></v-divider>
             </v-row>
             <v-row>
               <v-col class="py-0">
@@ -43,8 +39,7 @@
             </v-row>
 
             <v-row>
-
- <v-col >
+              <v-col>
                 <span>Data de nascimento *</span>
                 <v-menu
                   v-model="menu"
@@ -75,18 +70,11 @@
               </v-col>
             </v-row>
 
-
-  
-
-
-            <v-row> </v-row>
+            <h3 class="pa-3 group font-weight-light text-uppercase">
+              Dados profissionais
+            </h3>
             <v-row>
-              <h3 class="pa-3 group font-weight-light text-uppercase">
-                Dados Profissionais
-              </h3>
-            </v-row>
-            <v-row class="mb-4 mt-n2">
-                <v-divider class="divider"></v-divider>
+              <v-divider class="mb-4 divider"></v-divider>
             </v-row>
             <v-row>
               <v-col class="py-0" cols="12" md="6" sm="6">
@@ -169,7 +157,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <Foot/>
+    <Foot />
   </div>
 </template>
 
@@ -197,15 +185,14 @@ export default {
     Cancel: () => import("@/components/dialogs/Cancel"),
     Foot: () => import("@/components/global/Footer"),
     Bar: () => import("@/components/global/AppBarAccount.vue"),
-
   },
   methods: {
     close() {
       this.$router.back();
     },
-    goToSub(){
-        this.$router.push('/register/subscription')
-    }
+    goToSub() {
+      this.$router.push("/register/subscription");
+    },
   },
 };
 </script>
@@ -220,12 +207,17 @@ span {
   font-size: small;
 }
 
-.divider{
-    color: black;
+.divider {
+  color: black;
 }
 
 ::v-deep .my-checkbox .v-label {
   font-size: 12px;
+}
+
+.group {
+  color: #282424;
+  font-size: 20px;
 }
 </style>
 

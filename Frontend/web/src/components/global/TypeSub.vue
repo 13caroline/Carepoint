@@ -45,8 +45,21 @@
                   </v-col>
                 </v-row>
 
+                <v-row>
+                  <v-col class="mx-auto">
+                  <v-checkbox
+              v-model="termos"
+              :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
+              label="Pretendo maior visibilidade"
+              required
+              class="my-checkbox"
+              color="#78c4d4"
+            ></v-checkbox>
+            </v-col>
+                </v-row>
+
                 <v-row justify="center" class="mx-auto">
-                  <span class="price pt-6">{{ s.priceS }}</span>
+                  <span class="price">{{ s.priceS }}</span>
                 </v-row>
               </v-card-text>
 
@@ -149,6 +162,11 @@ export default {
 
 .activity {
   font-size: smaller;
+}
+
+
+::v-deep .my-checkbox .v-label {
+  font-size: 12px;
 }
 
 .price {
