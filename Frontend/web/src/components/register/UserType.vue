@@ -32,7 +32,7 @@
       </v-row>
 
       <v-row align="center">
-        <v-col>
+        <v-col cols="12" md="6">
           <v-img
             class="rounded-xl"
             center
@@ -42,7 +42,7 @@
           >
           </v-img>
         </v-col>
-        <v-col>
+        <v-col cols="12" md = "6">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

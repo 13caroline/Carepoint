@@ -32,6 +32,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/register/Consumer.vue')
   },
   {
+    path: '/register/subscription',
+    name: 'Subscription',
+    component: () => import(/* webpackChunkName: "about" */ '../views/register/Subscription.vue')
+  },
+  {
     path: '/consumer/profile',
     name: 'profile',
     component: () => import('../views/global/Profile.vue')
@@ -50,6 +55,11 @@ const routes = [
     path: '/consumer/edit/profile',
     name: 'Edit Profile',
     component: () => import('../views/global/EditData.vue')
+  },
+  {
+    path: '/ad/info',
+    name: 'Ad Info',
+    component: () => import('../views/global/AdInfo.vue')
   }
 ]
 

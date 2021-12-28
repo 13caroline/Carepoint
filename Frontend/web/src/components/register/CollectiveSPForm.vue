@@ -192,6 +192,7 @@
                 class="rounded-lg white--text"
                 required
                 :disabled="!valid"
+                to="/register/subscription"
                 >Registar</v-btn
               >
             </v-col>

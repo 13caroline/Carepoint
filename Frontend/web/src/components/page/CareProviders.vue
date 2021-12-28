@@ -3,7 +3,7 @@
     <v-card flat>
       <v-container>
         <v-row justify="center" align="center">
-          <v-col cols="12" md="6" sm="2">
+          <v-col cols="12" md="6">
             <v-card-title class="headline card" >
               Encontre a ajuda doméstica perfeita para si e sua família!
             </v-card-title>
@@ -45,7 +45,7 @@
             </v-card-actions>
           </v-col>
 
-          <v-col cols="12" md="4" sm="4"> 
+          <v-col cols="12" md="4"> 
             <v-img
               class="rounded-xl"
               center

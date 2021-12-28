@@ -6,31 +6,10 @@
         lg="4"
         md="4"
         class="mx-auto mx-sm-0"
-        v-for="a in ads"
-        :key="a.name"
+        v-for="(a, index) in ads"
+        :key="index"
       >
         <div class="user">
-          <!--<img
-            aspect-ratio="1"
-            src="@/assets/userImgTest.jpg"
-            class="w-100 grey lighten-2 rounded"
-          />
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                class="mt-2 w-100"
-                text
-                outlined
-                v-bind="attrs"
-                v-on="on"
-                small
-                id="no-background-hover"
-              >
-                {{ a.name }}
-              </v-btn>
-            </template>
-            <span class="caption">Ver Mais</span>
-          </v-tooltip>-->
           <v-card
             class="card rounded-xl overflow-auto"
             outlined
@@ -38,6 +17,7 @@
             :style="styleObject"
             height="400"
             width="300"
+            to="/ad/info"
           >
             <v-card-text>
               <span class="activity d-flex justify-end pb-2"

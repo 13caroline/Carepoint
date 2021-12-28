@@ -199,7 +199,8 @@
                 color="#78c4d4"
                 class="rounded-lg white--text"
                 required
-                type="submit"
+                type="submit"                
+                to="/register/subscription"
                 :disabled="!valid"
                 >Registar</v-btn
               >
