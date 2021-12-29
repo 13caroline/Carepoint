@@ -52,6 +52,7 @@ export default {
         { title: "Publicar anúncio" },
         { title: "Anúncios" },
         { title: "Terminar Sessão" },
+        { title: "Meus anúncios"}
       ],
       cardOptions: false,
     };
@@ -77,6 +78,8 @@ export default {
         case "Terminar Sessão":
           this.$router.push("/");
           break;
+        case "Meus anúncios":
+        this.$router.push("/consumer/my/advirtisements");
       }
     },
     goToMainPage(){

@@ -65,6 +65,11 @@ const routes = [
     path: '/consumer/become/service/provider',
     name: 'Become Service Provider',
     component: () => import('../views/global/BecomeSP.vue')
+  },
+  {
+    path: '/consumer/my/advirtisements',
+    name: 'My advertisements',
+    component: () => import('../views/global/MyAdvertisements')
   }
 ]
 
