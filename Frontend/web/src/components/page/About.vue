@@ -3,7 +3,7 @@
     <v-img src="@/assets/About.png" class="img" height="750px">
         <v-row no-gutters style="height: 100%" align="center" class="pa-10" >
           <v-col
-            class="pa-16"
+            class="pa-md-16 pb-1"
             md="4"
             sm="6"
             v-for="(n, index) in content"
@@ -11,12 +11,12 @@
             :align-self="n.align"
           >
             <v-card
-              class="card"
+              class="card mx-8"
               outlined
               tile
               :style="styleObject"
-              width="250"
-              height="250"
+              width="225"
+              height="225"
             >
               <v-card-text class="white--text">
                 <p class="text-center">{{ n.text }} </p>

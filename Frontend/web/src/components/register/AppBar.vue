@@ -3,16 +3,16 @@
     <v-container>
       <v-app-bar flat color="#FFFFFF" height="120">
         <v-row justify="center" class="w-100">
-          <v-col cols="7" md="4" offset-md="4">
+          <v-col cols="9" md="6" offset-md="4" offset="0">
             <v-img src="@/assets/logo.png" max-height="270" max-width="270">
             </v-img>
           </v-col>
-          <v-col cols="5" md="2">
+          <v-col cols="3" md="2">
             <v-btn
               outlined
               color="#78C4D4"
               depressed
-              class="rounded-xl hidden-xs-only"
+              class="rounded-xl hidden-xs-only  mt-5 mr-sm-1"
               @click="login()"
             >
               Iniciar Sessão
@@ -25,7 +25,7 @@
                   v-bind="attrs"
                   v-on="on"
                   color="#78C4D4"
-                  class="rounded-xl hidden-sm-and-up"
+                  class="rounded-xl hidden-sm-and-up mt-4"
                 >
                   <v-icon>fas fa-bars</v-icon>
                 </v-btn>

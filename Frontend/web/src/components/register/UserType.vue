@@ -13,7 +13,7 @@
               v-for="p in options"
               :key="p.name"
             >
-              <v-col cols="12" md="6">
+              <v-col cols="9" md="6" sm="7">
                 <v-btn
                   block
                   outlined
@@ -62,11 +62,11 @@ export default {
     return {
       options: [
         {
-          name: "Prestador de Serviços Individual",
+          name: "Prestador Individual",
           route: "/register/provider/solo",
         },
         {
-          name: "Prestador de Serviços Coletivo",
+          name: "Prestador Coletivo",
           route: "/register/provider/collective",
         },
         { name: "Consumidor", route: "/register/consumer" },
