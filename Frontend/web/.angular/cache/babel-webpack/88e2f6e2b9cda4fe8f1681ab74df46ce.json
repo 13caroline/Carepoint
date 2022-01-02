@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { FormLoginComponent } from \"./form-login/form-login.component\";\nexport const loginRoutes = [{\n  path: \"login\",\n  component: FormLoginComponent\n}];","map":null,"metadata":{},"sourceType":"module"}

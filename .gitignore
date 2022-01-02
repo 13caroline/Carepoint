@@ -1,3 +1,7 @@
 Backend/api-server/node_modules/
 Backend/auth-server/node_modules/
+<<<<<<< HEAD
 Backend/api-server/uploads/
+=======
+Frontend/web/package-lock.json
+>>>>>>> vue

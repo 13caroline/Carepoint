@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { FormRegistComponent } from './form-regist/form-regist.component';\nexport const registRoutes = [{\n  path: 'regist',\n  component: FormRegistComponent\n}];","map":null,"metadata":{},"sourceType":"module"}
