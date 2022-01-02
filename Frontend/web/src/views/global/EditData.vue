@@ -17,8 +17,7 @@
                         <v-text-field
                           outlined
                           dense
-                          value="email@email.com"
-                          disabled
+                          v-model="email"
                         ></v-text-field>
                       </v-col>
                     </div>
@@ -77,7 +76,7 @@
                         <v-text-field
                           outlined
                           dense
-                          value="Nome"
+                          v-model="name"
                           color="#2596be"
                           :rules="textRules"
                         ></v-text-field>
@@ -91,7 +90,7 @@
                           dense
                           color="#2596be"
                           :rules="textRules"
-                          value="localização"
+                          v-model="location"
                         ></v-text-field>
                       </v-col>
                    
@@ -103,7 +102,7 @@
                           :rules="textRules"
                           :items="sex"
                           dense
-                          value="sexo"
+                          v-model="sex"
                         ></v-select>
                       </v-col>
                     </v-row>
@@ -126,7 +125,8 @@
                         <v-text-field
                           outlined
                           dense
-                          value="915286745"
+                          v-model="contact"
+                          prefix="+351"
                           color="#2596be"
                           :rules="numberRules"
                           maxlength="9"

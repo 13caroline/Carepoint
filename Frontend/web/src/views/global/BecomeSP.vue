@@ -14,12 +14,11 @@
           </v-row>
 
           <v-form ref="form" v-model="valid">
-            <h3 class="pa-3 group font-weight-light text-uppercase">
-              Dados Pessoais
+            <h3 class="group font-weight-light text-uppercase">
+              Dados pessoais
             </h3>
-
             <v-row>
-              <v-divider class="mb-4 divider"></v-divider>
+              <v-divider class="mt-4 mb-4 divider"></v-divider>
             </v-row>
             <v-row>
               <v-col class="py-0">
@@ -70,11 +69,11 @@
               </v-col>
             </v-row>
 
-            <h3 class="pa-3 group font-weight-light text-uppercase">
+            <h3 class="mt-6 group font-weight-light text-uppercase">
               Dados profissionais
             </h3>
             <v-row>
-              <v-divider class="mb-4 divider"></v-divider>
+              <v-divider class="mt-4 mb-4 divider"></v-divider>
             </v-row>
             <v-row>
               <v-col class="py-0" cols="12" md="6" sm="6">

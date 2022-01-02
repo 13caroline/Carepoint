@@ -38,7 +38,7 @@
           </v-col>
         </v-row>
 
-        <h3 class="pa-3 group font-weight-light text-uppercase">
+        <h3 class="group font-weight-light text-uppercase">
           Dados Pessoais
         </h3>
         <v-divider></v-divider>
