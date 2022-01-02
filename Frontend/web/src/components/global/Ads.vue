@@ -21,7 +21,7 @@
           >
             <v-card-text>
               <span class="activity d-flex justify-end pb-2"
-                >última vez ativo há {{ a.activity }}</span
+                >última vez ativo há {{ ads.lastActivty }}</span
               >
               <v-row justify="center">
                 <v-col cols="auto">
@@ -33,13 +33,13 @@
 
               <v-row justify="center" class="mx-auto">
                 <span class="indication font-weight-bold">
-                  {{ a.name }}
+                  {{ ads.name }}
                 </span>
               </v-row>
 
               <v-row justify="center" class="mx-auto">
                 <span class="indication">
-                  {{ a.localization }}
+                  {{ ads.localization }}
                 </span>
               </v-row>
 
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "Ads",
 
@@ -111,6 +112,32 @@ export default {
       ],
     };
   },
+
+    created: async function () {
+    try {
+      let response = await axios.post(
+        "http://localhost:9040/serviceProvider",
+        {
+          //id: this.id,
+        },
+        //{ headers: { Authorization: "Bearer " + store.getters.token } }
+      );
+      console.log(this.dados)
+      if (response) {
+        this.ads = response.data.ServiceProviders;
+        /*this.dados.image = this.dados.image
+          ? "data:image/jpeg;charset=utf-8;base64," + this.dados.image
+          : require("@/assets/image_placeholder.png");
+      */}
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
+  }
 };
 </script>
 

@@ -5,3 +5,5 @@ Backend/api-server/uploads/
 =======
 Frontend/web/package-lock.json
 >>>>>>> vue
+Backend/api-server/models/Config/Database_Info.js
+Backend/auth-server/models/Config/Database_Info.js
