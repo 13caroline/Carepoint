@@ -83,7 +83,8 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
     if (e) {
       res.status(500).jsonp({ error: "Error within token generation: " + e })
     } else {
-      res.status(200).jsonp({ token: token })
+      res.status(200).jsonp({ token: token,
+                              type: req.user.type })
     }
   })
 })
