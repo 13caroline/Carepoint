@@ -21,25 +21,25 @@
           >
             <v-card-text>
               <span class="activity d-flex justify-end pb-2"
-                >última vez ativo há {{ ads.lastActivty }}</span
+                >última vez ativo {{ difDate(a.lastActivity) }}</span
               >
               <v-row justify="center">
                 <v-col cols="auto">
                   <v-avatar class="profile" color="grey" size="100">
-                    <v-img src="@/assets/userImgTest.jpg"></v-img>
+                    <v-img :src="image"></v-img>
                   </v-avatar>
                 </v-col>
               </v-row>
 
               <v-row justify="center" class="mx-auto">
                 <span class="indication font-weight-bold">
-                  {{ ads.name }}
+                  {{ a.name }}
                 </span>
               </v-row>
 
               <v-row justify="center" class="mx-auto">
                 <span class="indication">
-                  {{ ads.localization }}
+                  {{ a.location }}
                 </span>
               </v-row>
 
@@ -60,71 +60,41 @@
 
 <script>
 import axios from "axios"
+import moment from "moment"
 export default {
   name: "Ads",
 
   data() {
     return {
+      image:'',
       styleObject: { border: "1px solid #78C4D4" },
       ads: [
-        {
-          name: "Carolina Cunha",
-          activity: "2 dias",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          localization: "Fafe",
-        },
-        {
-          name: "Carolina Cunha",
-          activity: "5 minutos",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          localization: "Fafe",
-        },
-        {
-          name: "Carolina Cunha",
-          activity: "2 dias",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          localization: "Fafe",
-        },
-        {
-          name: "Carolina Cunha",
-          activity: "2 dias",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          localization: "Fafe",
-        },
-        {
-          name: "Carolina Cunha",
-          activity: "2 dias",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          localization: "Fafe",
-        },
-        {
-          name: "Carolina Cunha",
-          activity: "2 dias",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          localization: "Fafe",
-        },
+        
       ],
     };
+  },
+  methods: {
+    difDate(dateLA){
+      return moment(dateLA).locale('pt').fromNow()
+  },
   },
 
     created: async function () {
     try {
-      let response = await axios.post(
-        "http://localhost:9040/serviceProvider",
+      let response = await axios.get(
+        "http://localhost:9040/search/?page=1",
         {
           //id: this.id,
         },
         //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
-      console.log(this.dados)
+      console.log(response.data.ServiceProviders)
+      this.image='data:image/jpeg;base64,' + btoa(response.data.ServiceProviders.image);
       if (response) {
-        this.ads = response.data.ServiceProviders;
+         this.ads = response.data.ServiceProviders.map(an => {
+      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + btoa(an.image) : require("@/assets/logo.png")
+      return an;    
+      })
         /*this.dados.image = this.dados.image
           ? "data:image/jpeg;charset=utf-8;base64," + this.dados.image
           : require("@/assets/image_placeholder.png");
