@@ -34,22 +34,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/joboffer', jobOfferRouter);
-app.use('/search', searchRouter);
-app.use('/category', categoryRouter);
-app.use('/area', areaRouter);
-app.use('/company', companyRouter);
-app.use('/location', locationRouter);
-app.use('/subscription', subscriptionRouter);
-app.use('/serviceProvider', serviceProvRouter);
-app.use('/add', addRouter);
-app.use('/review', reviewRouter);
-
-
 // Add headers before the routes are defined
 app.use(function (req, res, next) {
 
@@ -69,6 +53,19 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/joboffer', jobOfferRouter);
+app.use('/search', searchRouter);
+app.use('/category', categoryRouter);
+app.use('/area', areaRouter);
+app.use('/company', companyRouter);
+app.use('/location', locationRouter);
+app.use('/subscription', subscriptionRouter);
+app.use('/serviceProvider', serviceProvRouter);
+app.use('/add', addRouter);
+app.use('/review', reviewRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
