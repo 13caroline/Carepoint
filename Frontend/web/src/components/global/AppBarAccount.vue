@@ -48,11 +48,11 @@ export default {
   data() {
     return {
       items: [
+        { title: "Anúncios" },
+        { title: "Meus anúncios"},
         { title: "Perfil" },
         { title: "Publicar anúncio" },
-        { title: "Anúncios" },
         { title: "Terminar Sessão" },
-        { title: "Meus anúncios"}
       ],
       cardOptions: false,
     };

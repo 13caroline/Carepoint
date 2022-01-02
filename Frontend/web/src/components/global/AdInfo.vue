@@ -75,23 +75,53 @@
     </v-row>
 
     <v-row class="w-100 ma-0">
-        <v-col cols="12" md="4" sm="4">
-            <p class="infos font-weight-bold">Contactos</p>
-            <div class="infos">+351 9151212141</div>
-            <div class="infos">exemplo@exemplo.com</div>
-        </v-col>
+      <v-col cols="12" md="4" sm="4">
+        <p class="infos font-weight-bold">Contactos</p>
+        <div class="infos">+351 9151212141</div>
+        <div class="infos">exemplo@exemplo.com</div>
+      </v-col>
+
+      <v-col cols="12" md="8" sm="8">
+        <p class="infos font-weight-bold">Horário</p>
+        <VueSchedule
+          v-model="schedule"
+          bg="white"
+            bgHover="gray"
+            bgActive="#c0e4ec"
+        />
+      </v-col>
+    </v-row>
+
+    <v-row class="w-100 ma-0">
+      <v-col cols="12" md="4" sm="4">
+        <p class="infos font-weight-bold">Comentários</p>
+      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
+import 'vue-daily-scheduler/dist/vue-schedule.min.css'
+import VueSchedule from "vue-daily-scheduler";
 export default {
   name: "Ads",
 
   data() {
     return {
       category: ["Companhia", "Compras", "Medicação", "Higiene"],
+      schedule: {
+        0: [],
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+      },
     };
+  },
+  components: {
+    VueSchedule,
   },
 };
 </script>
