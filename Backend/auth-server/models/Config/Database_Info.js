@@ -7,7 +7,7 @@ const connection = {
     },
     user: {
         username: 'root',
-        password: 'xxx' //your pass here
+        password: 'root' //your pass here
     }
 };
 

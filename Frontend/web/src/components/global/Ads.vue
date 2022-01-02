@@ -12,11 +12,10 @@
         <div class="user">
           <v-card
             class="card rounded-xl overflow-auto"
-            outlined
+            color="#c0e4ec"
             tile
-            :style="styleObject"
             height="400"
-            width="300"
+            width="500"
             to="/ad/info"
           >
             <v-card-text>
@@ -26,7 +25,7 @@
               <v-row justify="center">
                 <v-col cols="auto">
                   <v-avatar class="profile" color="grey" size="100">
-                    <v-img :src="image"></v-img>
+                    <v-img :src="a.image"></v-img>
                   </v-avatar>
                 </v-col>
               </v-row>
@@ -47,7 +46,10 @@
 
               <v-row justify="center" class="mx-auto">
                 <span class="description">
-                  {{ a.description }}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat. 
                 </span>
               </v-row>
             </v-card-text>
@@ -88,13 +90,13 @@ export default {
         },
         //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
-      console.log(response.data.ServiceProviders)
-      this.image='data:image/jpeg;base64,' + btoa(response.data.ServiceProviders.image);
       if (response) {
-         this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + btoa(an.image) : require("@/assets/logo.png")
-      return an;    
-      })
+         this.ads = response.data.ServiceProviders;
+         this.ads.image = this.ads.image
+          ? "data:image/jpeg;charset=utf-8;base64," + this.ads.image
+          : require("@/assets/userTest.png")
+   
+      console.log(this.ads.image)
         /*this.dados.image = this.dados.image
           ? "data:image/jpeg;charset=utf-8;base64," + this.dados.image
           : require("@/assets/image_placeholder.png");
@@ -122,7 +124,6 @@ export default {
 
 .indication {
   text-align: center;
-  color: #78c4d4;
 }
 
 .description {

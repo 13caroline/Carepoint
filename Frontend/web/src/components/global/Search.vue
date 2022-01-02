@@ -6,7 +6,7 @@
         outlined
         flat
         dense
-        class="rounded-xl"
+        class="rounded-xl mb-4"
         color="#78C4D4"
         v-model="search"
         append-icon="mdi-magnify"
@@ -29,10 +29,10 @@
       <v-slider
         v-model="distance"
         inverse-label
-        label="200€"
+        label="12km"
         color="#78C4D4"
         thumb-label
-        max="12km"
+        max="12"
         min="0"
       ></v-slider>
     </div>
@@ -48,6 +48,31 @@
         v-model="category"
       ></v-select>
     </div>
+    <div>
+      <span>Classificação </span>
+      <v-slider
+        v-model="rating"
+        inverse-label
+        label="10"
+        color="#78C4D4"
+        thumb-label
+        max="10"
+        min="0"
+      ></v-slider>
+    </div>
+    <div>
+      <span>Sexo</span>
+      <v-radio-group v-model="row" row class="radio">
+        <v-radio label="Feminino" value="feminino" color="#78C4D4"></v-radio>
+        <v-radio label="Masculino" value="masculino" color="#78C4D4"></v-radio>
+      </v-radio-group>
+    </div>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn depressed dark color="#78c4d4" type="submit" class="rounded-lg">
+        Procurar
+      </v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -72,5 +97,9 @@ export default {
 span {
   color: #797878;
   font-size: small;
+}
+
+.radio {
+  font-size: 10px;
 }
 </style>
