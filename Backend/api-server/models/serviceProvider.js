@@ -33,7 +33,11 @@ const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
     qualifications: {
         type: dbconfig.Sequelize.STRING(1000),
         allowNull: true
-    }
+    },
+    averageRating: {
+        type: dbconfig.Sequelize.DOUBLE,
+        allowNull: false
+    },
 }, {
         freezeTableName: true,
         timestamps: false
