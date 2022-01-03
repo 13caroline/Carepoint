@@ -1,5 +1,6 @@
 // Controller for the serviceProvider model
 
+const dbconfig = require('../models/Config/Database_Info');
 const ServiceProvider = require('../models/serviceProvider')
 
 
@@ -13,6 +14,27 @@ Out.consult_id = (id) => {
 //GET all Service Providers
 Out.list = () => {
     return ServiceProvider.findAll();
+}
+
+Out.sp_profile = (id) => {
+    return dbconfig.sequelize.query('CALL get_service_provider_profile (:id)',
+    {replacements: {
+        id: id
+    }})
+}
+
+Out.get_reviews = (id) => {
+    return dbconfig.sequelize.query('CALL get_reviews (:id)',
+    {replacements: {
+        id: id
+    }})
+}
+
+Out.get_categories = (id) => {
+    return dbconfig.sequelize.query('CALL get_sp_category_info (:id)',
+    {replacements: {
+        id: id
+    }})
 }
 
 //Creates a new ServiceProvider

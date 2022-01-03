@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const ServiceProvider = require('../controllers/serviceProvider')
 
@@ -8,12 +8,29 @@ const ServiceProvider = require('../controllers/serviceProvider')
  *                                   GET
  ****************************************************************************************/
 
-// List all Service Providers given
-router.get('/', function(req, res, next) {
-    ServiceProvider.list()
-        .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
-});
+// List a Service Provider given it's id
+router.get('/', (req, res, next) => {
+    
+    var iden = req.query.id;
+
+    ServiceProvider.sp_profile(iden)
+    .then((profile) => {
+        ServiceProvider.get_reviews(iden)
+        .then((reviews) => {
+            ServiceProvider.get_categories(iden)
+            .then((categories) => {
+                res.status(200).jsonp({
+                    ServiceProvider: profile,
+                    reviews: reviews,
+                    categories: categories
+                })
+            })
+            .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+        })
+        .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+    })
+    .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+})
 
 // Consult a ServiceProvider given its id
 router.get('/:id', function(req, res, next) {
@@ -24,7 +41,10 @@ router.get('/:id', function(req, res, next) {
         .catch(e => res.status(500).jsonp({ error: e }))
 });
 
-
+//Obter toda a informação referente a um service provider
+/*router.get('/profile/', (req, res, next) => {
+})
+*/
 /****************************************************************************************
  *                                   POST
  ****************************************************************************************/
