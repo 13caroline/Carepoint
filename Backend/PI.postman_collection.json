@@ -1122,10 +1122,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api-server}}/users",
+									"raw": "http://localhost:9040/users",
+									"protocol": "http",
 									"host": [
-										"{{api-server}}"
+										"localhost"
 									],
+									"port": "9040",
 									"path": [
 										"users"
 									]
@@ -1353,12 +1355,7 @@
 											"type": "file",
 											"src": "/C:/Users/Thol/Pictures/nobuShcok.png"
 										}
-									],
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									]
 								},
 								"url": {
 									"raw": "http://localhost:9040/users/updatePhoto",
@@ -1795,6 +1792,32 @@
 									"path": [
 										"serviceProvider",
 										"{{new_SP}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service Provider Profile",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/?id=60",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "60"
+										}
 									]
 								}
 							},
