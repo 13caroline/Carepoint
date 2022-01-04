@@ -7,6 +7,8 @@ DROP PROCEDURE IF EXISTS update_company;
 DROP PROCEDURE IF EXISTS update_serviceProvider_endSub;
 DROP PROCEDURE IF EXISTS update_company_endSub;
 DROP PROCEDURE IF EXISTS update_joboffer;
+DROP PROCEDURE IF EXISTS update_serviceProvider_vip;
+DROP PROCEDURE IF EXISTS update_company_vip;
 
 -- Update: consumer info
 DELIMITER &&  
@@ -291,3 +293,83 @@ BEGIN
         
 END &&  
 DELIMITER ;
+
+
+-- Update: serviceProvider vip
+DELIMITER &&  
+CREATE PROCEDURE update_serviceProvider_vip (IN id INT, IN in_type INT)  
+BEGIN  
+
+	SET @last_endSubVip = (SELECT serviceprovider.endSubVip FROM serviceprovider WHERE serviceprovider.idSP = id);
+    SET @price_per_day = 0.07;
+	SET foreign_key_checks = 0;
+    
+	UPDATE pi.serviceprovider SET serviceprovider.endSubVip= CASE
+					WHEN serviceprovider.endSubVip IS NULL AND in_type = 1 AND DATE_SUB(serviceprovider.endSub,INTERVAL 1 MONTH) >= now() THEN DATE_ADD(now(),INTERVAL 1 MONTH)
+                    WHEN serviceprovider.endSubVip IS NULL AND in_type = 2 AND DATE_SUB(serviceprovider.endSub,INTERVAL 3 MONTH) >= now() THEN DATE_ADD(now(),INTERVAL 3 MONTH)
+                    WHEN serviceprovider.endSubVip IS NULL AND in_type = 3 AND DATE_SUB(serviceprovider.endSub,INTERVAL 6 MONTH) >= now() THEN DATE_ADD(now(),INTERVAL 6 MONTH)
+                    WHEN serviceprovider.endSubVip IS NULL AND in_type = 1 AND DATE_SUB(serviceprovider.endSub,INTERVAL 1 MONTH) < now() THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NULL AND in_type = 2 AND DATE_SUB(serviceprovider.endSub,INTERVAL 3 MONTH) < now() THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NULL AND in_type = 3 AND DATE_SUB(serviceprovider.endSub,INTERVAL 6 MONTH) < now() THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NULL AND in_type = 4  THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 1 AND DATE_SUB(serviceprovider.endSub,INTERVAL 1 MONTH) >= now() THEN DATE_ADD(serviceprovider.endSubVip,INTERVAL 1 MONTH)
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 2 AND DATE_SUB(serviceprovider.endSub,INTERVAL 3 MONTH) >= now() THEN DATE_ADD(serviceprovider.endSubVip,INTERVAL 3 MONTH)
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 3 AND DATE_SUB(serviceprovider.endSub,INTERVAL 6 MONTH) >= now() THEN DATE_ADD(serviceprovider.endSubVip,INTERVAL 6 MONTH)
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 1 AND DATE_SUB(serviceprovider.endSub,INTERVAL 1 MONTH) < now() THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 2 AND DATE_SUB(serviceprovider.endSub,INTERVAL 3 MONTH) < now() THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 3 AND DATE_SUB(serviceprovider.endSub,INTERVAL 6 MONTH) < now() THEN serviceprovider.endSub
+                    WHEN serviceprovider.endSubVip IS NOT NULL AND in_type = 4  THEN serviceprovider.endSub
+                    ELSE serviceprovider.endSubVip
+                    END
+		WHERE serviceprovider.idSP = id;
+        SET foreign_key_checks = 1;
+        
+        SET @new_endSubVip = (SELECT serviceprovider.endSubVip FROM serviceprovider WHERE serviceprovider.idSP = id);
+        
+        IF @last_endSubVip IS NULL THEN SELECT DATEDIFF(@new_endSubVip,now())*@price_per_day;
+        ELSE SELECT DATEDIFF(@new_endSubVip,@last_endSubVip)*@price_per_day;
+        END IF;
+	
+END &&  
+DELIMITER ;
+
+
+-- Update: Company vip
+DELIMITER &&  
+CREATE PROCEDURE update_company_vip (IN id INT, IN in_type INT)  
+BEGIN  
+
+	SET @last_endSubVip = (SELECT company.endSubVip FROM company WHERE company.idCompany = id);
+    SET @price_per_day = 0.12;
+	SET foreign_key_checks = 0;
+    
+	UPDATE pi.company SET company.endSubVip= CASE
+					WHEN company.endSubVip IS NULL AND in_type = 1 AND DATE_SUB(company.endSub,INTERVAL 1 MONTH) >= now() THEN DATE_ADD(now(),INTERVAL 1 MONTH)
+                    WHEN company.endSubVip IS NULL AND in_type = 2 AND DATE_SUB(company.endSub,INTERVAL 3 MONTH) >= now() THEN DATE_ADD(now(),INTERVAL 3 MONTH)
+                    WHEN company.endSubVip IS NULL AND in_type = 3 AND DATE_SUB(company.endSub,INTERVAL 6 MONTH) >= now() THEN DATE_ADD(now(),INTERVAL 6 MONTH)
+                    WHEN company.endSubVip IS NULL AND in_type = 1 AND DATE_SUB(company.endSub,INTERVAL 1 MONTH) < now() THEN company.endSub
+                    WHEN company.endSubVip IS NULL AND in_type = 2 AND DATE_SUB(company.endSub,INTERVAL 3 MONTH) < now() THEN company.endSub
+                    WHEN company.endSubVip IS NULL AND in_type = 3 AND DATE_SUB(company.endSub,INTERVAL 6 MONTH) < now() THEN company.endSub
+                    WHEN company.endSubVip IS NULL AND in_type = 4  THEN company.endSub
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 1 AND DATE_SUB(company.endSub,INTERVAL 1 MONTH) >= now() THEN DATE_ADD(company.endSubVip,INTERVAL 1 MONTH)
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 2 AND DATE_SUB(company.endSub,INTERVAL 3 MONTH) >= now() THEN DATE_ADD(company.endSubVip,INTERVAL 3 MONTH)
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 3 AND DATE_SUB(company.endSub,INTERVAL 6 MONTH) >= now() THEN DATE_ADD(company.endSubVip,INTERVAL 6 MONTH)
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 1 AND DATE_SUB(company.endSub,INTERVAL 1 MONTH) < now() THEN company.endSub
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 2 AND DATE_SUB(company.endSub,INTERVAL 3 MONTH) < now() THEN company.endSub
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 3 AND DATE_SUB(company.endSub,INTERVAL 6 MONTH) < now() THEN company.endSub
+                    WHEN company.endSubVip IS NOT NULL AND in_type = 4  THEN company.endSub
+                    ELSE company.endSubVip
+                    END
+		WHERE company.idCompany = id;
+        SET foreign_key_checks = 1;
+        
+        SET @new_endSubVip = (SELECT company.endSubVip FROM company WHERE company.idCompany = id);
+        
+        IF @last_endSubVip IS NULL THEN SELECT DATEDIFF(@new_endSubVip,now())*@price_per_day;
+        ELSE SELECT DATEDIFF(@new_endSubVip,@last_endSubVip)*@price_per_day;
+        END IF;
+	
+END &&  
+DELIMITER ;
+
+
