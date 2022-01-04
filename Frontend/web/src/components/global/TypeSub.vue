@@ -1,84 +1,59 @@
 <template>
   <v-container>
     <v-item-group>
-      <v-row>
+      <v-row justify="center">
         <v-col
           cols="auto"
-          lg="4"
-          md="4"
           class="mx-auto mx-sm-0"
           v-for="s in sub"
-          :key="s.type"
+          :key="s.name"
         >
-          <div class="user">
-            <v-card
-              class="card rounded-xl overflow-auto"
-              outlined
-              tile
-              :style="styleObject"
-              height="450"
-              width="300"
-            >
-              <v-card-title class="ma-5">
-                <v-row justify="center">
-                  {{ s.type }}
-                </v-row>
-              </v-card-title>
+          <v-card
+            class="card rounded-xl overflow-auto"
+            outlined
+            tile
+            :style="styleObject"
+            height="400"
+            @click="subscribe(s.id)"
+          >
+            <v-card-title class="ma-5">
+              <v-row justify="center">
+                {{ s.name }}
+              </v-row>
+            </v-card-title>
 
-              <v-card-text>
-                <v-row
-                  justify="center"
-                  class="mx-auto"
-                  v-for="(p, index) in s.pros"
-                  :key="index"
-                >
-                  <v-col cols="12" md="9" sm="7">
-                    <span>
-                      {{ p.title }}
-                    </span>
-                  </v-col>
+            <v-card-text>
+              <v-row
+                justify="center"
+                class="mx-auto"
+                v-for="(p, index) in s.pros"
+                :key="index"
+              >
+                <v-col cols="12" md="9" sm="7">
+                  <span>
+                    {{ p.title }}
+                  </span>
+                </v-col>
 
-                  <v-col cols="12" md="3" sm="2">
-                    <v-icon smal :color="p.color">
-                      {{ `fas fa-${p.icon}` }}
-                    </v-icon>
-                  </v-col>
-                </v-row>
+                <v-col cols="12" md="3" sm="2">
+                  <v-icon smal :color="p.color">
+                    {{ `fas fa-${p.icon}` }}
+                  </v-icon>
+                </v-col>
+              </v-row>
 
-                <v-row>
-                  <v-col class="mx-auto">
-                  <v-checkbox
-              v-model="termos"
-              :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
-              label="Pretendo maior visibilidade"
-              required
-              class="my-checkbox"
-              color="#78c4d4"
-            ></v-checkbox>
-            </v-col>
-                </v-row>
+              <v-row justify="center" class="mx-auto mt-10">
+                <span class="price" v-if="id == 3">{{ s.priceS }} €</span>
+                <span class="price" v-else>{{ s.priceC }} €</span>
+              </v-row>
+            </v-card-text>
 
-                <v-row justify="center" class="mx-auto">
-                  <span class="price">{{ s.priceS }}</span>
-                </v-row>
-              </v-card-text>
-
-              <v-card-actions class="mt-4">
-                <v-row justify="center" class="mx-auto">
-                  <v-btn
-                    depressed
-                    dark
-                    color="#78c4d4"
-                    type="submit"
-                    class="rounded-lg"
-                  >
-                    Subscrever
-                  </v-btn>
-                </v-row>
-              </v-card-actions>
-            </v-card>
-          </div>
+          </v-card>
         </v-col>
+      </v-row>
+
+      <v-row justify="center">
+        <visibility :dados="clicked"/>
       </v-row>
     </v-item-group>
   </v-container>
@@ -86,14 +61,17 @@
 
 <script>
 export default {
+  components: { Visibility: () => import("@/components/dialogs/Visibility") },
   name: "Ads",
-
+  props: ["id"],
   data() {
     return {
+      clicked: {subscription: 0, type: this.id},
       styleObject: { border: "1px solid #78C4D4" },
       sub: [
         {
-          type: "Subscrição Mensal",
+          id: 1,
+          name: "Subscrição Mensal",
           pros: [
             { title: "Publicar anúncios", icon: "check", color: "#AED581" },
             { title: "Adicionar agenda", icon: "check", color: "#AED581" },
@@ -108,10 +86,12 @@ export default {
               color: "#EF9A9A",
             },
           ],
-          priceS: "4.99€",
+          priceS: "4.99",
+          priceC: "7.99"
         },
         {
-          type: "Subscrição Trimestral",
+          id: 3,
+          name: "Subscrição Trimestral",
           pros: [
             { title: "Publicar anúncios", icon: "check", color: "#AED581" },
             { title: "Adicionar agenda", icon: "check", color: "#AED581" },
@@ -126,10 +106,12 @@ export default {
               color: "#EF9A9A",
             },
           ],
-          priceS: "11.99€",
+          priceS: "11.99",
+          priceC: "17.99"
         },
         {
-          type: "Subscrição Semestral",
+          id: 6,
+          name: "Subscrição Semestral",
           pros: [
             { title: "Publicar anúncios", icon: "check", color: "#AED581" },
             { title: "Adicionar agenda", icon: "check", color: "#AED581" },
@@ -144,10 +126,19 @@ export default {
               color: "#AED581",
             },
           ],
-          priceS: "19.99€",
+          priceS: "19.99",
+          priceC: "29.99"
         },
       ],
     };
+  },
+  methods: {
+    save() {
+      this.$emit("regista", this);
+    },
+    subscribe(id){
+      this.clicked.subscription = id;
+    },
   },
 };
 </script>
@@ -164,13 +155,16 @@ export default {
   font-size: smaller;
 }
 
-
 ::v-deep .my-checkbox .v-label {
   font-size: 12px;
 }
 
 .price {
-  color: grey;
   font-size: 20px;
 }
+
+.card:hover {
+  background-color: #c0e4ec;
+}
+
 </style>

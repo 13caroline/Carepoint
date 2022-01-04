@@ -23,7 +23,7 @@
                   single-line
                   :rules="textRules"
                   color="#78C4D4"
-                  v-model="name"
+                  v-model="form.name"
                   name="name"
                   required
                 />
@@ -37,7 +37,7 @@
                   outlined
                   flat
                   dense
-                  v-model="email"
+                  v-model="form.email"
                   single-line
                   :rules="emailRules"
                   color="#78C4D4"
@@ -54,7 +54,7 @@
                   outlined
                   flat
                   dense
-                  v-model="password"
+                  v-model="form.password"
                   :rules="passwordRules"
                   single-line
                   color="#78C4D4"
@@ -70,7 +70,7 @@
                   flat
                   dense
                   single-line
-                  v-model="password2"
+                  v-model="form.password2"
                   :rules="passwordRules"
                   color="#78C4D4"
                   type="password"
@@ -90,41 +90,76 @@
                   single-line
                   color="#78C4D4"
                   name="contact"
-                  v-model="contact"
+                  v-model="form.phoneNumber"
                   maxlength="9"
                   required
                 />
               </v-col>
-            
+
               <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Sexo *</span>
                 <v-select
                   outlined
                   flat
                   dense
-                  v-model="sex"
+                  v-model="form.sex"
                   color="#78C4D4"
                   name="sex"
                   required
                   :items="items"
+                  item-value="value"
+                  item-text="name"
                 />
               </v-col>
             </v-row>
 
             <v-row>
-              <v-col class="py-0" cols="12" md="6" sm="6">
+              <v-col class="py-0">
                 <span>Localização *</span>
                 <v-text-field
                   outlined
                   flat
                   dense
+                  v-model="form.location"
                   single-line
-                  color="#78C4D4"
-                  name="localization"
-                  v-model="localization"
                   :rules="textRules"
+                  color="#78C4D4"
+                  name="location"
                   required
                 />
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col class="py-0">
+                <span>Data de nascimento *</span>
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="date"
+                      append-icon="fas fa-calendar-alt"
+                      readonly
+                      dense
+                      outlined
+                      required
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="date"
+                    @input="menu = false"
+                    locale="pt PT"
+                    :max="new Date().toISOString().substr(0, 10)"
+                  ></v-date-picker>
+                </v-menu>
               </v-col>
               <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Raio de Atividade *</span>
@@ -132,7 +167,7 @@
                   outlined
                   flat
                   dense
-                  v-model="radius"
+                  v-model="form.distance"
                   single-line
                   color="#78C4D4"
                   name="raius"
@@ -155,7 +190,7 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="qualification"
+                  v-model="form.qualifications"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -172,7 +207,7 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="description"
+                  v-model="form.description"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -199,8 +234,8 @@
                 color="#78c4d4"
                 class="rounded-lg white--text"
                 required
-                type="submit"                
-                to="/register/subscription"
+                type="submit"
+                @click="next()"
                 :disabled="!valid"
                 >Registar</v-btn
               >
@@ -213,10 +248,13 @@
 </template>
 
 <script>
+import axios from "axios"
 export default {
   name: "SingleSPForm",
   data() {
     return {
+      menu: false,
+      date: new Date().toISOString().substr(0, 10),
       termos: false,
       dialogs: {},
       valid: false,
@@ -238,17 +276,25 @@ export default {
           "A palavra-passe deve ter pelo menos 5 caracteres",
       ],
       textRules: [(v) => !!v || "Campo inválido"],
-      name: "",
-      email: "",
-      password: "",
-      password2: "",
-      contact: "",
-      localization: "",
-      radius: 0,
-      qualification: "",
-      description: "",
-      sex: "",
-      items: ["Feminino", "Masculino", "Indefinido"],
+      form: {
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
+        phoneNumber: "",
+        location: "",
+        sex: "",
+        type: 3,
+        description: "",
+        dateOfBirth: "",
+        distance: 0,
+        qualifications: "",
+      },
+      items: [
+        { name: "Feminino", value: "F" },
+        { name: "Masculino", value: "M" },
+        { name: "Indefinido", value: "I" },
+      ],
     };
   },
   components: {
@@ -257,6 +303,50 @@ export default {
   methods: {
     close() {
       this.$router.back();
+    },
+    next() {
+      this.$router.push("/register/subscription/" + this.form.type)
+    },
+    registUser: async function () {
+      if (this.$refs.form.validate()) {
+        try {
+          await axios.post("http://localhost:9041/users/register", {
+            name: this.form.name,
+            email: this.form.email,
+            password: this.form.password,
+            sex: this.form.sex,
+            type: this.form.type,
+            location: 1,
+            phoneNumber: this.form.phoneNumber,
+            description: this.form.description,
+            dateOfBirth: this.form.dateOfBirth,
+            distance: this.form.distance,
+            qualifications: this.form.qualifications,
+          });
+
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Utilizador criado com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
+        } catch (e) {
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            timeout: 4000,
+          });
+        }
+      } else {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Por favor preencha todos os campos.",
+          timeout: 4000,
+        });
+      }
     },
   },
 };

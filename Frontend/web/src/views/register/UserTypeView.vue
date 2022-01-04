@@ -2,7 +2,7 @@
   <div id="userTypePage">
     <app-bar />
 
-    <user-type />
+    <user-type/>
 
     <Foot />
   </div>

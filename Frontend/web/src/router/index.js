@@ -32,7 +32,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/register/Consumer.vue')
   },
   {
-    path: '/register/subscription',
+    path: '/register/subscription/:id',
     name: 'Subscription',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/Subscription.vue')
   },

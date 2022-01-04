@@ -144,6 +144,7 @@
                 <v-text-field
                   outlined
                   flat
+                  dense
                   color="#78C4D4"
                   required
                   :rules="textRules"

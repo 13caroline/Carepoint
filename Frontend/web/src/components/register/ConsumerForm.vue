@@ -23,7 +23,7 @@
                   single-line
                   :rules="textRules"
                   color="#78C4D4"
-                  v-model="name"
+                  v-model="form.name"
                   name="name"
                   required
                 />
@@ -37,7 +37,7 @@
                   outlined
                   flat
                   dense
-                  v-model="email"
+                  v-model="form.email"
                   single-line
                   :rules="emailRules"
                   color="#78C4D4"
@@ -54,7 +54,7 @@
                   outlined
                   flat
                   dense
-                  v-model="password"
+                  v-model="form.password"
                   :rules="passwordRules"
                   single-line
                   color="#78C4D4"
@@ -70,7 +70,7 @@
                   flat
                   dense
                   single-line
-                  v-model="password2"
+                  v-model="form.password2"
                   :rules="passwordRules"
                   color="#78C4D4"
                   type="password"
@@ -90,7 +90,7 @@
                   single-line
                   color="#78C4D4"
                   name="contact"
-                  v-model="contact"
+                  v-model="form.phoneNumber"
                   maxlength="9"
                   required
                 />
@@ -102,11 +102,13 @@
                   outlined
                   flat
                   dense
-                  v-model="sex"
+                  v-model="form.sex"
                   color="#78C4D4"
                   name="sex"
                   required
                   :items="items"
+                  item-value="value"
+                  item-text="name"
                 />
               </v-col>
             
@@ -118,8 +120,8 @@
                   dense
                   single-line
                   color="#78C4D4"
-                  name="localization"
-                  v-model="localization"
+                  name="location"
+                  v-model="form.location"
                   :rules="textRules"
                   required
                 />
@@ -150,6 +152,7 @@
                 required
                 type="submit"
                 :disabled="!valid"
+                @click="registUser()"
                 >Registar</v-btn
               >
             </v-col>
@@ -161,6 +164,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: "SingleSPForm",
   data() {
@@ -186,17 +190,21 @@ export default {
           "A palavra-passe deve ter pelo menos 5 caracteres",
       ],
       textRules: [(v) => !!v || "Campo inválido"],
-      name: "",
-      email: "",
-      password: "",
-      password2: "",
-      contact: "",
-      localization: "",
-      radius: 0,
-      qualification: "",
-      description: "",
-      sex: "",
-      items: ["Feminino", "Masculino", "Indefinido"],
+      form: {
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
+        phoneNumber: "",
+        location: "",
+        sex: "",
+        type: 2,
+      },
+      items: [
+        {name: "Feminino", value: "F"},
+        {name: "Masculino", value: "M"},
+        {name: "Indefinido", value: "I"}
+      ] 
     };
   },
   components: {
@@ -206,6 +214,46 @@ export default {
     close() {
       this.$router.back();
     },
+
+    registUser: async function (){
+      if(this.$refs.form.validate()){
+        try{
+          await axios.post("http://localhost:9041/users/register", {
+            name: this.form.name, 
+            email: this.form.email, 
+            password: this.form.password, 
+            sex: this.form.sex,
+            type: this.form.type, 
+            location: 1, 
+            phoneNumber: this.form.phoneNumber,
+          });
+
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Utilizador criado com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
+
+        } catch(e){
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            timeout: 4000,
+          });
+        }
+      }
+      else { 
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Por favor preencha todos os campos.",
+          timeout: 4000,
+        });
+      }
+    }
   },
 };
 </script>

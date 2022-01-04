@@ -61,7 +61,7 @@ export default {
   data() {
     return {
       options: [
-        {
+        { 
           name: "Prestador Individual",
           route: "/register/provider/solo",
         },
