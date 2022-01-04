@@ -11,6 +11,20 @@ Out.consultar_id = (id) => {
     return User.findOne({where:{'idUser': id}})
 }
 
+Out.activate = (email) => {
+    return User.update(
+        {active: 1},
+        {where: { 'email' : email}}
+    )
+}
+
+Out.deactivate = (email) => {
+    return User.update(
+        {active: 0},
+        {where: { 'email' : email}}
+    )
+}
+
 Out.adicionarUser = (body) => {
     return User.create({
         name: body.name,
@@ -21,7 +35,7 @@ Out.adicionarUser = (body) => {
         type: body.type,
         createdAt: new Date(),
         lastActivity: new Date(),
-        active: 1,
+        active: 0,
         idLocation: body.location
     })
 }

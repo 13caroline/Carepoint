@@ -291,6 +291,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDEzMTY5NzksImV4cCI6MTY0MTMyMDU3OX0.Ar0En-J8TjOMssZV2qr1OMKz8sf4OhMIyU03d9RZfGk",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9041/users/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9041",
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

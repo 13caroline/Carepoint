@@ -12,6 +12,8 @@ const User = require('../controllers/user');
 const Company = require('../controllers/company');
 const Ad = require('../controllers/Add');
 
+const auth = require('../authorization/auth');
+
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -83,18 +85,35 @@ router.post('/login', passport.authenticate('local'), (req, res, next) => {
     if (e) {
       res.status(500).jsonp({ error: "Error within token generation: " + e })
     } else {
-      res.status(200).jsonp({ token: token,
-                              type: req.user.type })
+      User.activate(req.user.email)
+      .then((dt) => {
+        res.status(200).jsonp({ token: token,
+                                type: req.user.type })
+      })
+      .catch((er) => {
+        res.status(200).jsonp({ token: token,
+                                type: req.user.type })
+      })
     }
   })
 })
 
-router.get('/logout', (req, res) => {
-  req.logOut()
+router.post('/logout', (req, res) => {
 
-  delete req.session;
+  token = req.body.token
+  if(token === undefined){
+    res.status(500).jsonp({error: "No JWT Token Provided!!!!"});
+  }
+  else{
+    email = auth.getEmailFromJWT(token)
 
-  //res.status(200).clearCookie('connect.sid', {path: '/'}).json({status: "Success"});
+    req.logOut()
+    delete req.session;
+
+    User.deactivate(email)
+    .then((dt) => res.status(200).jsonp("Logged Out Successfully")) 
+    .catch((er) => res.status(200).jsonp("Logged Out Successfully"))
+  }
 })
 
 module.exports = router;
