@@ -73,7 +73,7 @@ export default {
           this.$router.push("/consumer/post/ad");
           break;
         case "Anúncios":
-          console.log("Vai para Anúncios");
+          this.$router.push("/consumer/page")
           break;
         case "Terminar Sessão":
           this.$router.push("/");

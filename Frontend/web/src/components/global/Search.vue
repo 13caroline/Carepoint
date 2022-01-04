@@ -87,6 +87,8 @@ export default {
       distance: "",
       price: "",
       search: "",
+      rating:0,
+      row:null,
     };
   },
 };

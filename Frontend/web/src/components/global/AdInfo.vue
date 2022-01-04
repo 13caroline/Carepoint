@@ -4,21 +4,24 @@
       <v-col cols="auto">
         <div class="foto h-100 mt-5">
           <v-img
-            src="@/assets/userImgTest.jpg"
+            :src="image"
             aspect-ratio="1"
             class="grey lighten-2 mx-2 rounded"
             cover
           >
-            <template v-slot:placeholder>
+            <!--<template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
                   indeterminate
                   color="grey lighten-5"
                 ></v-progress-circular>
               </v-row>
-            </template>
+            </template>-->
           </v-img>
         </div>
+        <p class="infos font-weight-bold mt-6">Contactos</p>
+        <div class="infos">{{ serviceProviderData.phoneNumber }}</div>
+        <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
       <v-col cols="12" sm>
@@ -26,21 +29,19 @@
           <v-list-item>
             <v-list-item-content>
               <div>
-                <p class="infos font-weight-bold">{{ serviceProvider.name }}</p>
+                <p class="infos font-weight-bold">{{ serviceProviderData.name }}</p>
+              </div>
+              <p class="infos font-weight-bold">Anos de experiência</p>
+              <div
+               v-for="(a, index) in serviceProvider.categories"
+              :key="index"
+              >
+              <span>{{a.name}} : {{a.experience}}</span>
+                
               </div>
               <div>
-                <p class="infos font-weight-bold">Anos de experiência</p>
-              </div>
-              <div>
-                <p class="desc">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                  minim veniam, quis nostrud exercitation ullamco laboris nisi
-                  ut aliquip ex ea commodo consequat.
+                <p class="desc mt-3">
+                  {{serviceProviderData.description}}
                 </p>
                 <v-divider></v-divider>
               </div>
@@ -61,13 +62,13 @@
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
             <v-chip
-              v-for="c in category"
-              :key="c"
+              v-for="(c,index) in serviceProvider.categories"
+              :key="index"
               outlined
               color="#78C4D4"
               label
             >
-              {{ c }}
+              {{ c.name }}
             </v-chip>
           </v-chip-group>
         </div>
@@ -76,9 +77,7 @@
 
     <v-row class="w-100 ma-0">
       <v-col cols="12" md="4" sm="4">
-        <p class="infos font-weight-bold">Contactos</p>
-        <div class="infos">{{ serviceProvider.phoneNumber }}</div>
-        <div class="infos">{{ serviceProvider.email }}</div>
+        
       </v-col>
 
       <v-col cols="12" md="8" sm="8">
@@ -98,7 +97,7 @@
       :key="index"
     >
       <v-card
-        class="card pa-5 rounded-xl overflow-auto"
+        class="card pa-5 rounded-xl overflow-auto mt-2"
         outlined
         tile
         :style="styleObject"
@@ -108,7 +107,7 @@
       <v-row align="center">
         <v-col cols="12" md="11" sm="11">
           <div>
-            <span class="font-weight-bold">{{ a.postDate }}</span>
+            <span class="font-weight-bold">{{formatDate(a.postDate)}}</span>
           </div>
           <div justify="center" class="mx-auto">
             <span class="infos ">
@@ -130,12 +129,14 @@
 import "vue-daily-scheduler/dist/vue-schedule.min.css";
 //import VueSchedule from "vue-daily-scheduler";
 import axios from "axios";
+import moment from "moment";
 
 export default {
   name: "Ads",
 
   data() {
     return {
+      image:'',
       styleObject: { border: "1px solid #78c4d4" },
       category: ["Companhia", "Compras", "Medicação", "Higiene"],
       schedule: {
@@ -147,6 +148,7 @@ export default {
         5: [],
         6: [],
       },
+      serviceProviderData: {},
       serviceProvider: {
         reviews: [
           {
@@ -159,6 +161,11 @@ export default {
       },
     };
   },
+  methods: {
+    formatDate(d) {
+      return moment(d,moment.ISO_8601).locale('pt').format("MMMM Do YYYY, h:mm:ss a");
+    },
+  },
   components: {
     // VueSchedule,
   },
@@ -166,14 +173,16 @@ export default {
   created: async function () {
     try {
       let response = await axios.get(
-        "http://localhost:9040/serviceProvider/51",
+        "http://localhost:9040/serviceProvider/?id=122",
         {
           //id: this.id,
         }
         //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
-      console.log(response);
-      //this.serviceProvider = response.data;
+      console.log(response)
+      this.serviceProviderData = response.data.ServiceProvider[0],
+      this.serviceProvider = response.data;
+      this.image= 'data:image/jpeg;base64,' + btoa(this.serviceProviderData.image.data);
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

@@ -93,6 +93,7 @@
                   v-model="form.phoneNumber"
                   maxlength="9"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
 
@@ -174,6 +175,7 @@
                   suffix="km"
                   type="number"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
             </v-row>
@@ -248,7 +250,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "SingleSPForm",
   data() {
@@ -305,7 +307,7 @@ export default {
       this.$router.back();
     },
     next() {
-      this.$router.push("/register/subscription/" + this.form.type)
+      this.$router.push("/register/subscription/" + this.form.type);
     },
     registUser: async function () {
       if (this.$refs.form.validate()) {
@@ -347,6 +349,11 @@ export default {
           timeout: 4000,
         });
       }
+    },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
     },
   },
 };

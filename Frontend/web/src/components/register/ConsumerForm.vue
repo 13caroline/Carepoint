@@ -93,6 +93,7 @@
                   v-model="form.phoneNumber"
                   maxlength="9"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
 
@@ -111,7 +112,7 @@
                   item-text="name"
                 />
               </v-col>
-            
+
               <v-col class="py-0" cols="12" md="4">
                 <span>Localização *</span>
                 <v-text-field
@@ -253,7 +254,12 @@ export default {
           timeout: 4000,
         });
       }
-    }
+    },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
+    },
   },
 };
 </script>
