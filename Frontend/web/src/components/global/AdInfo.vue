@@ -4,24 +4,24 @@
       <v-col cols="auto">
         <div class="foto h-100 mt-5">
           <v-img
-            src="@/assets/userImgTest.jpg"
+            :src="image"
             aspect-ratio="1"
             class="grey lighten-2 mx-2 rounded"
             cover
           >
-            <template v-slot:placeholder>
+            <!--<template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
                   indeterminate
                   color="grey lighten-5"
                 ></v-progress-circular>
               </v-row>
-            </template>
+            </template>-->
           </v-img>
         </div>
         <p class="infos font-weight-bold mt-6">Contactos</p>
-        <div class="infos">{{ serviceProvider.ServiceProvider[0].phoneNumber }}</div>
-        <div class="infos">{{ serviceProvider.ServiceProvider[0].email }}</div>
+        <div class="infos">{{ serviceProviderData.phoneNumber }}</div>
+        <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
       <v-col cols="12" sm>
@@ -29,7 +29,7 @@
           <v-list-item>
             <v-list-item-content>
               <div>
-                <p class="infos font-weight-bold">{{ serviceProvider.ServiceProvider[0].name }}</p>
+                <p class="infos font-weight-bold">{{ serviceProviderData.name }}</p>
               </div>
               <p class="infos font-weight-bold">Anos de experiência</p>
               <div
@@ -41,7 +41,7 @@
               </div>
               <div>
                 <p class="desc mt-3">
-                  {{serviceProvider.ServiceProvider[0].description}}
+                  {{serviceProviderData.description}}
                 </p>
                 <v-divider></v-divider>
               </div>
@@ -62,8 +62,8 @@
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
             <v-chip
-              v-for="c in serviceProvider.categories"
-              :key="c"
+              v-for="(c,index) in serviceProvider.categories"
+              :key="index"
               outlined
               color="#78C4D4"
               label
@@ -136,6 +136,7 @@ export default {
 
   data() {
     return {
+      image:'',
       styleObject: { border: "1px solid #78c4d4" },
       category: ["Companhia", "Compras", "Medicação", "Higiene"],
       schedule: {
@@ -147,6 +148,7 @@ export default {
         5: [],
         6: [],
       },
+      serviceProviderData: {},
       serviceProvider: {
         reviews: [
           {
@@ -161,7 +163,7 @@ export default {
   },
   methods: {
     formatDate(d) {
-      return moment(d).locale('pt').format("MMMM Do YYYY, h:mm:ss a");
+      return moment(d,moment.ISO_8601).locale('pt').format("MMMM Do YYYY, h:mm:ss a");
     },
   },
   components: {
@@ -177,8 +179,10 @@ export default {
         }
         //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
-      console.log(response);
+      console.log(response)
+      this.serviceProviderData = response.data.ServiceProvider[0],
       this.serviceProvider = response.data;
+      this.image= 'data:image/jpeg;base64,' + btoa(this.serviceProviderData.image.data);
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

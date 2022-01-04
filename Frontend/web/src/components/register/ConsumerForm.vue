@@ -93,6 +93,7 @@
                   v-model="contact"
                   maxlength="9"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
 
@@ -109,7 +110,7 @@
                   :items="items"
                 />
               </v-col>
-            
+
               <v-col class="py-0" cols="12" md="4">
                 <span>Localização *</span>
                 <v-text-field
@@ -205,6 +206,11 @@ export default {
   methods: {
     close() {
       this.$router.back();
+    },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
     },
   },
 };

@@ -25,7 +25,7 @@
               <v-row justify="center">
                 <v-col cols="auto">
                   <v-avatar class="profile" color="grey" size="100">
-                    <v-img :src="a.image"></v-img>
+                    <v-img :src="processImage(a.image.data)"></v-img>
                   </v-avatar>
                 </v-col>
               </v-row>
@@ -79,6 +79,9 @@ export default {
     difDate(dateLA){
       return moment(dateLA).locale('pt').fromNow()
   },
+  processImage(img){
+    return 'data:image/jpeg;base64,' + btoa(img);
+  }
   },
 
     created: async function () {
@@ -91,16 +94,13 @@ export default {
         //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
       if (response) {
-         this.ads = response.data.ServiceProviders;
-         this.ads.image = this.ads.image
-          ? "data:image/jpeg;charset=utf-8;base64," + this.ads.image
-          : require("@/assets/userTest.png")
-   
-      console.log(this.ads.image)
-        /*this.dados.image = this.dados.image
-          ? "data:image/jpeg;charset=utf-8;base64," + this.dados.image
-          : require("@/assets/image_placeholder.png");
-      */}
+        console.log(response)
+         this.ads = response.data.ServiceProviders
+        
+   /*this.ads = response.data.ServiceProviders.map(an => {
+      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
+         })*/
+      }
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

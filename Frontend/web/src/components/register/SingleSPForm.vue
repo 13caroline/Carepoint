@@ -93,9 +93,10 @@
                   v-model="contact"
                   maxlength="9"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
-            
+
               <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Sexo *</span>
                 <v-select
@@ -139,6 +140,7 @@
                   suffix="km"
                   type="number"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
             </v-row>
@@ -199,7 +201,7 @@
                 color="#78c4d4"
                 class="rounded-lg white--text"
                 required
-                type="submit"                
+                type="submit"
                 to="/register/subscription"
                 :disabled="!valid"
                 >Registar</v-btn
@@ -257,6 +259,11 @@ export default {
   methods: {
     close() {
       this.$router.back();
+    },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode); 
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault(); 
     },
   },
 };

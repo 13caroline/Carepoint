@@ -93,6 +93,7 @@
                   v-model="contact"
                   maxlength="9"
                   required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
               <v-col class="py-0" cols="12" xs="12" md="8" sm="8">
@@ -112,7 +113,7 @@
             </v-row>
 
             <v-row>
-              <v-col class="py-0 " cols="12" md="3" sm="4">
+              <v-col class="py-0" cols="12" md="3" sm="4">
                 <span>NIPC *</span>
                 <v-text-field
                   outlined
@@ -122,6 +123,7 @@
                   dense
                   maxlength="9"
                   v-model="nipc"
+                  v-on:keypress="isNumber($event)"
                 ></v-text-field>
               </v-col>
               <v-col class="py-0" cols="12" md="9" sm="8">
@@ -236,9 +238,9 @@ export default {
       contact: "",
       localization: "",
       site: "",
-      firm: "", 
+      firm: "",
       description: "",
-      nipc: "", 
+      nipc: "",
     };
   },
   components: {
@@ -248,6 +250,11 @@ export default {
     close() {
       this.$router.back();
     },
+  },
+  isNumber(e) {
+    let char = String.fromCharCode(e.keyCode);
+    if (/^[0-9]+$/.test(char)) return true;
+    else e.preventDefault(); 
   },
 };
 </script>
