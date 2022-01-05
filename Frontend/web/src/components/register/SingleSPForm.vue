@@ -258,10 +258,10 @@ export default {
   data() {
     return {
       menu: false,
-      date: new Date().toISOString().substr(0, 10),
       termos: false,
       dialogs: {},
       valid: false,
+      date: new Date().toISOString().substr(0, 10),
       cancelar: { title: "o seu registo", text: "o seu registo" },
       emailRules: [
         (value) => !!value || "Campo inválido",
@@ -288,9 +288,9 @@ export default {
         phoneNumber: "",
         location: "",
         sex: "",
-        type: 3,
+        type: "3",
         description: "",
-        dateOfBirth: "",
+        
         distance: 0,
         qualifications: "",
       },
@@ -310,8 +310,9 @@ export default {
     },
     next: async function() {
       if (this.$refs.form.validate()) {
+        console.log(this.date)
         try {
-          await axios.post("http://localhost:9041/users/register", {
+          let response = await axios.post("http://localhost:9041/users/register", {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,
@@ -320,10 +321,11 @@ export default {
             location: 1,
             phoneNumber: this.form.phoneNumber,
             description: this.form.description,
-            dateOfBirth: this.form.dateOfBirth,
+            dateOfBirth: this.date,
             distance: this.form.distance,
             qualifications: this.form.qualifications,
           });
+          console.log(response.data)
           this.$router.push("/register/subscription/" + this.form.type);
           this.$snackbar.showMessage({
             show: true,

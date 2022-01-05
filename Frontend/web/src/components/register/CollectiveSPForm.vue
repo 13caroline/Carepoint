@@ -23,7 +23,7 @@
                   single-line
                   :rules="textRules"
                   color="#78C4D4"
-                  v-model="name"
+                  v-model="form.name"
                   name="name"
                   required
                 />
@@ -37,7 +37,7 @@
                   outlined
                   flat
                   dense
-                  v-model="email"
+                  v-model="form.email"
                   single-line
                   :rules="emailRules"
                   color="#78C4D4"
@@ -54,7 +54,7 @@
                   outlined
                   flat
                   dense
-                  v-model="password"
+                  v-model="form.password"
                   :rules="passwordRules"
                   single-line
                   color="#78C4D4"
@@ -70,8 +70,10 @@
                   flat
                   dense
                   single-line
-                  v-model="password2"
-                  :rules="[(form.password === form.password2) || 'Password must match']"
+                  v-model="form.password2"
+                  :rules="[
+                    form.password === form.password2 || 'Password must match',
+                  ]"
                   color="#78C4D4"
                   type="password"
                   required
@@ -90,7 +92,7 @@
                   single-line
                   color="#78C4D4"
                   name="contact"
-                  v-model="contact"
+                  v-model="form.phoneNumber"
                   maxlength="9"
                   required
                   v-on:keypress="isNumber($event)"
@@ -105,7 +107,7 @@
                   single-line
                   color="#78C4D4"
                   name="firm"
-                  v-model="firm"
+                  v-model="form.firm"
                   :rules="textRules"
                   required
                 />
@@ -122,7 +124,7 @@
                   required
                   dense
                   maxlength="9"
-                  v-model="nipc"
+                  v-model="form.nipc"
                   v-on:keypress="isNumber($event)"
                 ></v-text-field>
               </v-col>
@@ -135,7 +137,7 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="localization"
+                  v-model="form.location"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -150,7 +152,7 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="site"
+                  v-model="form.link"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -167,7 +169,7 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="description"
+                  v-model="form.description"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -195,7 +197,7 @@
                 class="rounded-lg white--text"
                 required
                 :disabled="!valid"
-                to="/register/subscription"
+                @click="next()"
                 >Registar</v-btn
               >
             </v-col>
@@ -207,8 +209,9 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "SingleSPForm",
+  name: "CollectiveSPForm",
   data() {
     return {
       termos: false,
@@ -232,16 +235,20 @@ export default {
           "A palavra-passe deve ter pelo menos 5 caracteres",
       ],
       textRules: [(v) => !!v || "Campo inválido"],
-      name: "",
-      email: "",
-      password: "",
-      password2: "",
-      contact: "",
-      localization: "",
-      site: "",
-      firm: "",
-      description: "",
-      nipc: "",
+      form: {
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
+        sex: "I",
+        phoneNumber: "",
+        location: "",
+        link: "",
+        firm: "",
+        description: "",
+        nipc: "",
+        type: "4",
+      },
     };
   },
   components: {
@@ -251,11 +258,58 @@ export default {
     close() {
       this.$router.back();
     },
-  },
-  isNumber(e) {
-    let char = String.fromCharCode(e.keyCode);
-    if (/^[0-9]+$/.test(char)) return true;
-    else e.preventDefault(); 
+    next: async function () {
+      if (this.$refs.form.validate()) {
+        try {
+          let response = await axios.post(
+            "http://localhost:9041/users/register",
+            {
+              name: this.form.name,
+              email: this.form.email,
+              password: this.form.password,
+              sex: this.form.sex,
+              type: this.form.type,
+              location: 1,
+              phoneNumber: this.form.phoneNumber,
+              description: this.form.description,
+              link: this.form.link,
+              firm: this.form.firm,
+              nipc: this.form.nipc,
+            }
+          );
+          console.log(response.data);
+          this.$router.push("/register/subscription/" + this.form.type);
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Utilizador criado com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
+        } catch (e) {
+          console.log(e);
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            timeout: 4000,
+          });
+        }
+      } else {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Por favor preencha todos os campos.",
+          timeout: 4000,
+        });
+      }
+    },
+
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
+    },
   },
 };
 </script>

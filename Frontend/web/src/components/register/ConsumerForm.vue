@@ -199,7 +199,7 @@ export default {
         phoneNumber: "",
         location: "",
         sex: "",
-        type: 2,
+        type: "2",
       },
       items: [
         {name: "Feminino", value: "F"},

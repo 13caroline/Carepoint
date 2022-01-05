@@ -24,7 +24,6 @@
                 max-width="70"
               >
               </v-img>
-              
             </template>
             <v-list>
               <v-list-item v-for="(item, index) in items" :key="index">
@@ -43,13 +42,15 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
   name: "appbar",
   data() {
     return {
       items: [
         { title: "Anúncios" },
-        { title: "Meus anúncios"},
+        { title: "Meus anúncios" },
         { title: "Perfil" },
         { title: "Publicar anúncio" },
         { title: "Terminar Sessão" },
@@ -73,18 +74,31 @@ export default {
           this.$router.push("/consumer/post/ad");
           break;
         case "Anúncios":
-          this.$router.push("/consumer/page")
+          this.$router.push("/consumer/page");
           break;
         case "Terminar Sessão":
+          this.logout();
           this.$router.push("/");
           break;
         case "Meus anúncios":
-        this.$router.push("/consumer/my/advirtisements");
+          this.$router.push("/consumer/my/advirtisements");
       }
     },
-    goToMainPage(){
-        this.$router.push('/consumer/page')
-    }
+    goToMainPage() {
+      this.$router.push("/consumer/page");
+    },
+    logout: async function () {
+      try {
+        await axios.post("http://localhost:9041/users/logout", {
+          token: store.getters.token,
+        });
+        this.$store.commit("limpaStore");
+        this.$router.push("/");
+      } catch (e) {
+        this.$store.commit("limpaStore");
+        this.$router.push("/");
+      }
+    },
   },
 };
 </script>

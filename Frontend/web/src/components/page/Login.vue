@@ -3,7 +3,7 @@
     <v-img src="@/assets/login.jpg" class="img">
       <v-container>
         <v-row align="center" justify="center" class="login_wrapper">
-          <v-card color = "transparent" flat class="loginform my-12">
+          <v-card color="transparent" flat class="loginform my-12">
             <v-card-text class="justify-center">
               <v-form ref="form" lazy-validation class="form">
                 <span>Email</span>
@@ -36,7 +36,14 @@
               <v-btn depressed text color="#78c4d4" @click="register()">
                 Inscrever-se
               </v-btn>
-              <v-btn depressed dark color="#78c4d4" type="submit" class="rounded-lg" @click="login()">
+              <v-btn
+                depressed
+                dark
+                color="#78c4d4"
+                type="submit"
+                class="rounded-lg"
+                @click="login()"
+              >
                 Iniciar Sessão
               </v-btn>
             </v-card-actions>
@@ -48,6 +55,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "HomeLogin",
 
@@ -59,11 +67,34 @@ export default {
     register() {
       this.$router.push("/register/type");
     },
-    
-    login() {
-      this.$router.push("/consumer/page");
-    }
-  }
+
+    async login() {
+      if (this.$refs.form.validate()) {
+        try {
+          var res = await axios.post("http://localhost:9041/users/login", {
+            email: this.email,
+            password: this.password,
+          });
+          if (res.data.token != undefined) {
+            this.$store.commit("guardaTokenUtilizador", res.data.token);
+            this.$store.commit("guardaTipoUtilizador", res.data.type);
+            if (res.data.type == "2") {
+              this.$router.push("/consumer/page");
+            }
+          }
+        } catch (error) {
+          this.text = "Ocorreu um erro. Por favor tente mais tarde!";
+          this.color = "warning";
+          this.$snackbar.showMessage({
+            show: true,
+            color: this.color,
+            text: this.text,
+            timeout: 4000,
+          });
+        }
+      }
+    },
+  },
 };
 </script>
 
