@@ -153,7 +153,7 @@
                 dark
                 block
                 color="#78c4d4"
-                @click="confirm(visibility)"
+                @click="register()"
               >
                 Registar
               </v-btn>
@@ -196,6 +196,9 @@ export default {
         /*if (this.dados.type === '3'){
         
         } return price.priceS + this.dados.price;*/
+    },
+    register(){
+      this.$emit('clicked', this.visibility)
     }
 
   },

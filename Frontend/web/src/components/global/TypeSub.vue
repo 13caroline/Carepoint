@@ -47,26 +47,26 @@
                 <span class="price" v-else>{{ s.priceC }} €</span>
               </v-row>
             </v-card-text>
-
           </v-card>
         </v-col>
       </v-row>
 
       <v-row justify="center">
-        <visibility :dados="subscriptionType" @clicked="visibleType"/>
+        <visibility :dados="subscriptionType" @clicked="register" />
       </v-row>
     </v-item-group>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   components: { Visibility: () => import("@/components/dialogs/Visibility") },
   name: "Ads",
-  props: ["id"],
+  props: ["id", "dados"],
   data() {
     return {
-      subscriptionType: {subscription: 0, type: this.id, price: 0},
+      subscriptionType: { subscription: 0, type: this.id, price: 0 },
       styleObject: { border: "1px solid #78C4D4" },
       sub: [
         {
@@ -87,7 +87,7 @@ export default {
             },
           ],
           priceS: "4.99",
-          priceC: "7.99"
+          priceC: "7.99",
         },
         {
           id: 3,
@@ -107,7 +107,7 @@ export default {
             },
           ],
           priceS: "11.99",
-          priceC: "17.99"
+          priceC: "17.99",
         },
         {
           id: 6,
@@ -127,22 +127,28 @@ export default {
             },
           ],
           priceS: "19.99",
-          priceC: "29.99"
+          priceC: "29.99",
         },
       ],
       visibility: 0,
     };
   },
   methods: {
-    subscribe(s){
+    subscribe(s) {
       this.subscriptionType.subscription = s.id;
       if (this.id == 3) this.subscriptionType.price = s.priceS;
       else this.subscriptionType.price = s.priceC;
-      
     },
-    visibleType(n){
+    register: async function (n) {
       this.visibility = n;
-    }
+      try {
+        await axios.post("http://localhost:9040/subscription",{
+
+        })
+      } catch (e){
+        console.log(e)
+      }
+    },
   },
 };
 </script>
@@ -170,5 +176,4 @@ export default {
 .card:hover {
   background-color: #c0e4ec;
 }
-
 </style>
