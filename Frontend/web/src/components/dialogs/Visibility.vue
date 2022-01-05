@@ -41,7 +41,8 @@
                   :disabled="dados.subscription < v.sub"
                 >
                   <v-card-title class="ma-2 card font-weight-normal">
-                    <v-row justify="center"> {{ v.sub }} meses </v-row>
+                    <v-row v-if="v.sub==1" justify="center"> {{ v.sub }} mês </v-row>
+                    <v-row v-else justify="center"> {{ v.sub }} meses </v-row>
                   </v-card-title>
 
                   <v-card-text class="text-center">
@@ -109,7 +110,8 @@
             </v-col>
             <v-col class="pl-0 pb-0" cols="7">
               <span class="black--text">
-                <strong>{{ dados.subscription }} meses</strong> ({{
+                <strong v-if="dados.subscription==1">{{ dados.subscription }} mês</strong>
+                <strong v-else>{{ dados.subscription }} meses</strong> ({{
                   dados.price
                 }}€)
               </span>
@@ -124,7 +126,10 @@
                 <strong v-else>Sim</strong>
               </span>
               <br />
-              <span v-if="visibility !== 0"
+              <span v-if="visibility !== 0 && visibility==1"
+                >{{ visibility }} mês ({{ visibilityPrice }}€)</span
+              >
+              <span v-if="visibility !== 0 && visibility!=1"
                 >{{ visibility }} meses ({{ visibilityPrice }}€)</span
               >
             </v-col>
@@ -189,7 +194,7 @@ export default {
       { sub: 0, priceS: 0, priceC: 0 },
       { sub: 1, priceS: 4, priceC: 3.5 },
       { sub: 3, priceS: 6, priceC: 9.6 },
-      { sub: 6, priceS: 10, priceC: 16.5 },
+      { sub: 6, priceS: 9, priceC: 16.5 },
     ],
   }),
   methods: {

@@ -95,6 +95,7 @@
                   v-model="form.phoneNumber"
                   maxlength="9"
                   required
+                  :rules="[(v) => v.length>8 || 'Contacto inválido']"
                   v-on:keypress="isNumber($event)"
                 />
               </v-col>
@@ -124,6 +125,7 @@
                   required
                   dense
                   maxlength="9"
+                  :rules="[(v) => v.length>8 || 'NIPC inválido']"
                   v-model="form.nipc"
                   v-on:keypress="isNumber($event)"
                 ></v-text-field>

@@ -93,6 +93,7 @@
                   v-model="form.phoneNumber"
                   maxlength="9"
                   required
+                  :rules="[(v) => v.length>8 || 'Contacto inválido']"
                   v-on:keypress="isNumber($event)"
                 />
               </v-col>
