@@ -133,7 +133,7 @@ import moment from "moment";
 
 export default {
   name: "Ads",
-
+  props:["id"],
   data() {
     return {
       image:'',
@@ -173,7 +173,7 @@ export default {
   created: async function () {
     try {
       let response = await axios.get(
-        "http://localhost:9040/serviceProvider/?id=122",
+        "http://localhost:9040/serviceProvider/?id="+this.id,
         {
           //id: this.id,
         }

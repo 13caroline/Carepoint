@@ -16,7 +16,7 @@
             tile
             height="400"
             width="500"
-            to="/ad/info"
+            @click="infoSP(a.idUser)"
           >
             <v-card-text>
               <span class="activity d-flex justify-end pb-2"
@@ -81,6 +81,9 @@ export default {
   },
   processImage(img){
     return 'data:image/jpeg;base64,' + btoa(img);
+  },
+  infoSP(id){
+    this.$router.push("/ad/info/"+id)
   }
   },
 
@@ -94,7 +97,6 @@ export default {
         //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
       if (response) {
-        console.log(response)
          this.ads = response.data.ServiceProviders
         
    /*this.ads = response.data.ServiceProviders.map(an => {
