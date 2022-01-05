@@ -32,7 +32,7 @@
                 :key="index"
               >
                 <v-card
-                v-if="v.sub>0"
+                  v-if="v.sub > 0"
                   class="mt-4 rounded-xl overflow-auto prices"
                   outlined
                   tile
@@ -46,6 +46,7 @@
 
                   <v-card-text class="text-center">
                     <span v-if="dados.type === '3'"> +{{ v.priceS }} € </span>
+                    <span v-else> +{{ v.priceC }} € </span>
                   </v-card-text>
                 </v-card>
               </v-col>
@@ -98,6 +99,9 @@
               <span class="black--text" v-if="dados.type === '3'">
                 <strong>Prestador de Serviços Individual</strong>
               </span>
+              <span class="black--text" v-if="dados.type === '4'">
+                <strong>Prestador de Serviços Coletivo</strong>
+              </span>
             </v-col>
 
             <v-col class="pb-0" align="right" cols="5">
@@ -105,7 +109,9 @@
             </v-col>
             <v-col class="pl-0 pb-0" cols="7">
               <span class="black--text">
-                <strong>{{ dados.subscription }} meses</strong> ({{dados.price}} €)
+                <strong>{{ dados.subscription }} meses</strong> ({{
+                  dados.price
+                }}€)
               </span>
             </v-col>
 
@@ -118,19 +124,20 @@
                 <strong v-else>Sim</strong>
               </span>
               <br />
-              <span v-if="visibility !== 0">{{ visibility }} meses</span>
+              <span v-if="visibility !== 0"
+                >{{ visibility }} meses ({{ visibilityPrice }}€)</span
+              >
             </v-col>
-          </v-row>
 
-          <v-col class="pb-0" align="right" cols="5">
+            <v-col class="pb-0" align="right" cols="5">
               <span class="text-uppercase">Valor a pagar</span>
             </v-col>
             <v-col class="pl-0 pb-0" cols="7">
               <span class="black--text">
-                <strong>{{ totalPrice() }} €</strong>
+                <strong>{{ total }} €</strong>
               </span>
             </v-col>
-
+          </v-row>
         </v-card-text>
         <v-card-actions>
           <v-row class="mb-0">
@@ -142,7 +149,7 @@
                 dark
                 block
                 color="#78c4d4"
-                @click="dialog2=false"
+                @click="dialog2 = false"
               >
                 Cancelar
               </v-btn>
@@ -170,17 +177,19 @@
 export default {
   props: ["dados"],
   data: () => ({
-    price:0,
+    price: 0,
     dialog: false,
     dialog2: false,
     visibility: 0,
+    visibilityPrice: 0,
+    total: 0,
     styleObject: { border: "1px solid #78C4D4" },
     radios: 1,
     values: [
-      { sub: 0, priceS: 0, priceC: 0},
-      { sub: 1, priceS: 4, priceC: 11.49 },
-      { sub: 3, priceS: 6, priceC: 27.59 },
-      { sub: 6, priceS: 10, priceC: 46.49 },
+      { sub: 0, priceS: 0, priceC: 0 },
+      { sub: 1, priceS: 4, priceC: 3.5 },
+      { sub: 3, priceS: 6, priceC: 9.6 },
+      { sub: 6, priceS: 10, priceC: 16.5 },
     ],
   }),
   methods: {
@@ -188,25 +197,33 @@ export default {
       this.dialog = false;
       this.visibility = visible;
       this.dialog2 = true;
-      //this.$emit('clicked', visible)
     },
     subscribe(v) {
-      this.visibility=v.sub;
+      this.visibility = v.sub;
+      if (this.dados.type === "3") this.visibilityPrice = v.priceS;
+      else this.visibilityPrice = v.priceC;
+
+      this.total =
+        Math.round(
+          (parseFloat(this.dados.price) + this.visibilityPrice) * 100
+        ) / 100;
     },
-    totalPrice(){
+    /*totalPrice() {
       var priceVisibility = 0;
-      var row= this.values.filter(obj => {return obj.sub === this.visibility})
-      if(this.dados.type==='3') priceVisibility=Object.values(row[0])[1];
-      else priceVisibility=Object.values(row[0])[0];
-      return Math.round( (parseFloat(this.dados.price) + priceVisibility) * 100) / 100;
+      var row = this.values.filter((obj) => {
+        return obj.sub === this.visibility;
+      });
+      if (this.dados.type === "3") priceVisibility = Object.values(row[0])[1];
+      else priceVisibility = Object.values(row[0])[0];
+      return (
+        Math.round((parseFloat(this.dados.price) + priceVisibility) * 100) / 100
+      );
+    },*/
+
+    register() {
+      this.$emit("clicked", this.visibility);
     },
-
-    register(){
-      this.$emit('clicked', this.visibility)
-    }
-
   },
-
 };
 </script>
 
