@@ -32,6 +32,7 @@
                 :key="index"
               >
                 <v-card
+                v-if="v.sub>0"
                   class="mt-4 rounded-xl overflow-auto prices"
                   outlined
                   tile
@@ -169,12 +170,14 @@
 export default {
   props: ["dados"],
   data: () => ({
+    price:0,
     dialog: false,
     dialog2: false,
     visibility: 0,
     styleObject: { border: "1px solid #78C4D4" },
     radios: 1,
     values: [
+      { sub: 0, priceS: 0, priceC: 0},
       { sub: 1, priceS: 4, priceC: 11.49 },
       { sub: 3, priceS: 6, priceC: 27.59 },
       { sub: 6, priceS: 10, priceC: 46.49 },
@@ -188,20 +191,22 @@ export default {
       //this.$emit('clicked', visible)
     },
     subscribe(v) {
-      this.visibility = v.sub;
+      this.visibility=v.sub;
     },
     totalPrice(){
-        //let price = this.values.find(o => o.sub === this.visibility);
-
-        /*if (this.dados.type === '3'){
-        
-        } return price.priceS + this.dados.price;*/
+      var priceVisibility = 0;
+      var row= this.values.filter(obj => {return obj.sub === this.visibility})
+      if(this.dados.type==='3') priceVisibility=Object.values(row[0])[1];
+      else priceVisibility=Object.values(row[0])[0];
+      return Math.round( (parseFloat(this.dados.price) + priceVisibility) * 100) / 100;
     },
+
     register(){
       this.$emit('clicked', this.visibility)
     }
 
   },
+
 };
 </script>
 

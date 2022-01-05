@@ -13,8 +13,7 @@ BEGIN
 END &&  
 DELIMITER ;
 
--- file.image,
-
+-- Returns: returns all info about categories that belongs to a specific SP
 DELIMITER &&
 CREATE PROCEDURE get_sp_category_info (IN id INT)
 BEGIN
