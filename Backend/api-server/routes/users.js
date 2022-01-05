@@ -15,6 +15,13 @@ const auth = require('../authorization/auth');
 /****************************************************************************************
  *                                   GET
  ****************************************************************************************/
+router.get('/perfil', (req, res, next) => {
+    var token = req.body.token
+    var email = auth.getEmailFromJWT(token)
+    User.getPerfil(email)
+    .then((data) => {console.log(data); res.status(200).jsonp(data)})
+    .catch((err) => res.status(500).jsonp(err))
+})
 
 // List all users given the query param
 router.get('/', function(req, res, next) {
@@ -53,7 +60,6 @@ router.get('/email/:email', function(req, res, next) {
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });
-
 
 /****************************************************************************************
  *                                   POST

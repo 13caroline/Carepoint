@@ -59,7 +59,7 @@
 								},
 								{
 									"key": "email",
-									"value": "theTest37453@gmail.com2",
+									"value": "theTest3745ads3@gmail.com2",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1171,6 +1171,44 @@
 					"name": "User",
 					"item": [
 						{
+							"name": "Create a user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"new_user_id = pm.response.json().data.idUser;",
+											"pm.collectionVariables.set(\"new_user_id\", new_user_id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Cecilia Silva\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"gspzgwbuaukd@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 1,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 57\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api-server}}/users",
+									"host": [
+										"{{api-server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get list of users",
 							"event": [
 								{
@@ -1274,44 +1312,6 @@
 							"response": []
 						},
 						{
-							"name": "Create a user",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"new_user_id = pm.response.json().data.idUser;",
-											"pm.collectionVariables.set(\"new_user_id\", new_user_id);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"Cecilia Silva\",\n    \"password\": \"SAKBUQTX\",\n    \"email\": \"gspzgwbuaukd@gmail.com\",\n    \"phoneNumber\": \"+351 997105495\",\n    \"sex\": \"F\",\n    \"type\": 1,\n    \"createdAt\": \"2021-02-05T16:03:03.000Z\",\n    \"lastActivity\": \"2021-05-15T22:12:35.000Z\",\n    \"active\": false,\n    \"idLocation\": 57\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-server}}/users",
-									"host": [
-										"{{api-server}}"
-									],
-									"path": [
-										"users"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Update user",
 							"request": {
 								"method": "PUT",
@@ -1351,6 +1351,39 @@
 									"path": [
 										"users",
 										"{{new_user_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Profile (R)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1YWRzM0BnbWFpbC5jb20yIiwibGV2ZWwiOjIsImlhdCI6MTY0MTQxOTQzMiwiZXhwIjoxNjQxNDIzMDMyfQ.yTq-ieZRaIEidLz1M0FEt9JOcsCFVsz58hAmUfUm8ZU",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/perfil",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"perfil"
 									]
 								}
 							},
