@@ -71,7 +71,7 @@
                   dense
                   single-line
                   v-model="form.password2"
-                  :rules="passwordRules"
+                  :rules="[(form.password === form.password2) || 'Password must match']"
                   color="#78C4D4"
                   type="password"
                   required

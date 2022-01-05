@@ -1,7 +1,7 @@
 <template>
   <div>
     <app-bar-account />
-    <ad-info/>
+    <ad-info :id="$route.params.id"/>
     <Foot />
   </div>
 </template>
