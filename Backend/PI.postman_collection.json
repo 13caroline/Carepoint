@@ -59,7 +59,7 @@
 								},
 								{
 									"key": "email",
-									"value": "theTest3745@gmail.com",
+									"value": "theTest37453@gmail.com2",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -120,13 +120,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Jenkin",
+									"value": "boi2",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theTest32@gmail.com",
+									"value": "rami@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -162,13 +162,13 @@
 								},
 								{
 									"key": "description",
-									"value": "Such a big description",
+									"value": "Such a big description asdasdasdsfas",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "dateOfBirth",
-									"value": "2020-01-09 07:30:40",
+									"value": "2020-01-09",
 									"description": "Opcional",
 									"type": "text"
 								},
@@ -180,7 +180,7 @@
 								},
 								{
 									"key": "qualifications",
-									"value": "I am qualified to walk",
+									"value": "I am qualified to walk throughdasd",
 									"description": "Opcional",
 									"type": "text"
 								}
@@ -217,7 +217,7 @@
 								},
 								{
 									"key": "email",
-									"value": "theTest2@gmail.com",
+									"value": "theTest2@gmail.com24",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -894,39 +894,83 @@
 					"name": "Subscription",
 					"item": [
 						{
+							"name": "Add Subscription to SP (durante registo)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbWlAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MTQxNjc0MywiZXhwIjoxNjQxNDIwMzQzfQ.vjo5fltMnoFJfF53lUoqd5gCR-hezm2PgXqtFKZ27mw",
+											"type": "text"
+										},
+										{
+											"key": "subscription",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "visibility",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/subscription/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"subscription",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get list of subscriptions",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"subscription_id = pm.response.json()[0].idSubscription;",
-											"pm.collectionVariables.set(\"subscription_id\", subscription_id);",
+											"//ubscription_id = pm.response.json()[0].idSubscription;",
+											"//pm.collectionVariables.set(\"subscription_id\", subscription_id);",
 											"",
-											"subscription_type = pm.response.json()[0].type;",
-											"pm.collectionVariables.set(\"subscription_type\", subscription_type);",
+											"//subscription_type = pm.response.json()[0].type;",
+											"//pm.collectionVariables.set(\"subscription_type\", subscription_type);",
 											"",
-											"subscription_value = pm.response.json()[1].value;",
-											"pm.collectionVariables.set(\"subscription_value\", subscription_value);",
+											"//subscription_value = pm.response.json()[1].value;",
+											"//pm.collectionVariables.set(\"subscription_value\", subscription_value);",
 											"",
-											"subscription_duration = pm.response.json()[1].duration;",
-											"pm.collectionVariables.set(\"subscription_duration\", subscription_duration);"
+											"//subscription_duration = pm.response.json()[1].duration;",
+											"//pm.collectionVariables.set(\"subscription_duration\", subscription_duration);"
 										],
 										"type": "text/javascript"
 									}
 								}
 							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
-									"raw": "{{api-server}}/subscription",
-									"host": [
-										"{{api-server}}"
-									],
-									"path": [
-										"subscription"
-									]
+									"raw": ""
 								}
 							},
 							"response": []
@@ -1833,7 +1877,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9040/serviceProvider/?id=60",
+									"raw": "http://localhost:9040/serviceProvider/?id=122",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1846,7 +1890,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "60"
+											"value": "122"
 										}
 									]
 								}

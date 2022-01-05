@@ -3,13 +3,15 @@ const dbViewsPath = '../../../Database/';
 
 var Out = module.exports;
 
-Out.getServiceProviders = (category, location, experience, price, limit, offset) => {
-    return dbconfig.sequelize.query('CALL get_service_providers (:idC, :idL, :exp, :prc, :lm, :off)',
+Out.getServiceProviders = (category, location, experience, price, rating, sex, limit, offset) => {
+    return dbconfig.sequelize.query('CALL get_service_providers_v2 (:idC, :idL, :exp, :prc, :rt, :sex, :lm, :off)',
         {replacements: {
             idC: category,
             idL: location,
             exp: experience,
             prc: price,
+            rt: rating,
+            sex: sex,
             lm: limit,
             off: offset
         }})

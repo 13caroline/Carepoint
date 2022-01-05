@@ -1,6 +1,6 @@
 // Controller for the subscription model
 
-
+const dbconfig = require('../models/Config/Database_Info')
 const Subscription = require('../models/subscription')
 
 var Out = module.exports;
@@ -58,4 +58,20 @@ Out.update = (id, subscription) => {
 //Delete Subscription by id
 Out.remove = (id) => {
     return Subscription.destroy({ where: { 'idSubscription': id } });
+}
+
+Out.activateSubscriptionNormal = (idUser, normal) => {
+    return dbconfig.sequelize.query('CALL update_serviceProvider_endSub (:idSP, :tipo_sub)',
+        {replacements: {
+            idSP: idUser,
+            tipo_sub: normal,
+        }});
+}
+
+Out.activateSubscriptionVisibility = (idUser, visibility) => {
+    return dbconfig.sequelize.query('CALL update_serviceProvider_vip (:idSP, :tipo)',
+        {replacements: {
+            idSP: idUser,
+            tipo: visibility,
+        }});
 }
