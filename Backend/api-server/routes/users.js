@@ -15,7 +15,7 @@ const auth = require('../authorization/auth');
 /****************************************************************************************
  *                                   GET
  ****************************************************************************************/
-router.get('/perfil', (req, res, next) => {
+router.post('/perfil', (req, res, next) => {
     var token = req.body.token
     var email = auth.getEmailFromJWT(token)
     User.getPerfil(email)
