@@ -104,7 +104,7 @@
             </v-col>
             <v-col class="pl-0 pb-0" cols="7">
               <span class="black--text">
-                <strong>{{ dados.subscription }} meses</strong> ({{}})
+                <strong>{{ dados.subscription }} meses</strong> ({{dados.price}} €)
               </span>
             </v-col>
 
@@ -126,7 +126,7 @@
             </v-col>
             <v-col class="pl-0 pb-0" cols="7">
               <span class="black--text">
-                <strong>{{ price }} meses</strong>
+                <strong>{{ totalPrice() }} €</strong>
               </span>
             </v-col>
 
@@ -172,7 +172,6 @@ export default {
     dialog: false,
     dialog2: false,
     visibility: 0,
-    price: 0,
     styleObject: { border: "1px solid #78C4D4" },
     radios: 1,
     values: [
@@ -189,10 +188,16 @@ export default {
       //this.$emit('clicked', visible)
     },
     subscribe(v) {
-      console.log(v)
       this.visibility = v.sub;
-      
     },
+    totalPrice(){
+        //let price = this.values.find(o => o.sub === this.visibility);
+
+        /*if (this.dados.type === '3'){
+        
+        } return price.priceS + this.dados.price;*/
+    }
+
   },
 };
 </script>
