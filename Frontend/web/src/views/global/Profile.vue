@@ -53,7 +53,7 @@
                         <p class="infos">Nome</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">Nome de pessoa</p>
+                        <p class="respos">{{user.name}}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -63,7 +63,7 @@
                         <p class="infos">Localidade</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">Morada</p>
+                        <p class="respos">{{user.locationName}}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -73,7 +73,7 @@
                         <p class="infos">Sexo</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">Feminino</p>
+                        <p class="respos">{{user.sex}}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -122,7 +122,7 @@
                         <p class="infos">E-mail</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">email@email.com</p>
+                        <p class="respos">{{user.email}}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -157,7 +157,7 @@
                         <p class="infos mb-0">Contacto telefónico</p>
                       </v-col>
                       <v-col>
-                        <p class="respos mb-0">915293745</p>
+                        <p class="respos mb-0">{{user.phoneNumber}}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -174,9 +174,13 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
   data() {
-    return {};
+    return {
+      user: {},
+    };
   },
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
@@ -190,6 +194,29 @@ export default {
     },
     wannaBeSP(){
       this.$router.push('/consumer/become/service/provider')
+    }
+  },
+  created: async function () {
+    try {
+      console.log(store.getters.token)
+      let response = await axios.post(
+        "http://localhost:9040/users/perfil",
+        {
+          
+          "token": store.getters.token
+          
+        }
+        //{ headers: { Authorization: "Bearer " + store.getters.token } }
+      );
+      console.log(response.data)
+      this.user = response.data.perfil[0];
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
     }
   },
 };

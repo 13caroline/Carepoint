@@ -1,5 +1,6 @@
 USE PI;
 
+DROP PROCEDURE IF EXISTS get_consumer_profile;
 DROP PROCEDURE IF EXISTS get_reviews;
 DROP PROCEDURE IF EXISTS get_sp_category_info;
 DROP PROCEDURE IF EXISTS get_average_rating;
@@ -44,3 +45,13 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser WHERE id = user.idUser;
 END &&  
 DELIMITER ; 
+
+DELIMITER &&  
+CREATE PROCEDURE get_consumer_profile (IN em VARCHAR(90))
+BEGIN
+	SELECT user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY, file.image FROM user
+	INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
+END &&
+DELIMITER ;
+

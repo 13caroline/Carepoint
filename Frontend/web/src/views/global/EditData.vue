@@ -17,22 +17,22 @@
                         <v-text-field
                           outlined
                           dense
-                          v-model="email"
+                          v-model="user.email"
                         ></v-text-field>
                       </v-col>
                     </div>
-                    <div>
+                    <!--<div>
                       <v-col>
                         <span>Palavra-passe atual</span>
                         <v-text-field
                           type="password"
-                          placeholder="*****"
+                          
                           outlined
                           dense
-                          v-model="password"
+                          v-model="user.password"
                         ></v-text-field>
                       </v-col>
-                    </div>
+                    </div>-->
                     <div>
                       <v-row class="mx-auto">
                         <v-col cols="12" md="6">
@@ -76,7 +76,7 @@
                         <v-text-field
                           outlined
                           dense
-                          v-model="name"
+                          v-model="user.name"
                           color="#2596be"
                           :rules="textRules"
                         ></v-text-field>
@@ -90,7 +90,7 @@
                           dense
                           color="#2596be"
                           :rules="textRules"
-                          v-model="location"
+                          v-model="user.locationName"
                         ></v-text-field>
                       </v-col>
                    
@@ -100,7 +100,7 @@
                           outlined
                           color="#2596be"
                           :rules="textRules"
-                          :items="sex"
+                          :items="user.sex"
                           dense
                           v-model="sex"
                         ></v-select>
@@ -125,7 +125,7 @@
                         <v-text-field
                           outlined
                           dense
-                          v-model="contact"
+                          v-model="user.phoneNumber"
                           prefix="+351"
                           color="#2596be"
                           :rules="numberRules"
@@ -161,8 +161,11 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
   data: () => ({
+    user: {},
     utilizador: {},
     password: "",
     sex: ["Feminino", "Masculino", "Indefinido"],
@@ -196,6 +199,26 @@ export default {
     Cancel: () => import("@/components/dialogs/Cancel"),
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
+  },
+    created: async function () {
+    try {
+      console.log(store.getters.token)
+      let response = await axios.post(
+        "http://localhost:9040/users/perfil",
+        {
+          token: store.getters.token
+        }
+      );
+      console.log(response.data)
+      this.user = response.data.perfil[0];
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
   },
 };
 </script>

@@ -119,6 +119,13 @@ Out.updatePhoto = (userId, photo) => {
     }})
 }
 
+Out.getPerfil = (email) => {
+    return dbconfig.sequelize.query('CALL get_consumer_profile (:em)',
+    {replacements: {
+        em: email,
+    }})
+}
+
     //Delete user by email
 Out.remove = (id) => {
     return User.destroy({ where: { 'idUser': id } });

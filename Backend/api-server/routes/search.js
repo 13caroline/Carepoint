@@ -17,10 +17,12 @@ router.get('/', (req, res, next) => {
 
     var cat_id = (typeof req.query.category === 'undefined') ? null : req.query.category;
     var loc_id = (typeof req.query.location === 'undefined') ? null : req.query.location;
-    var experience = (typeof req.query.experience === 'undefined') ? null : req.query.experience;
+    var experience = (typeof req.query.experience === 'undefined') ? 0 : req.query.experience;
     var price = (typeof req.query.price === 'undefined') ? null : req.query.price;
+    var rating = (typeof req.query.rating === 'undefined') ? 0 : req.query.rating;
+    var sex = (typeof req.query.sex === 'undefined') ? null : req.query.sex;
 
-    search_controller.getServiceProviders(cat_id, loc_id, experience, price, limit, offset)
+    search_controller.getServiceProviders(cat_id, loc_id, experience, price, rating, sex, limit, offset)
     .then((sp) => {
         search_controller.getCompanies(loc_id, limit, offset)
         .then(cp => {
