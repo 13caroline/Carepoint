@@ -19,8 +19,8 @@ router.get('/perfil', (req, res, next) => {
     var token = req.body.token
     var email = auth.getEmailFromJWT(token)
     User.getPerfil(email)
-    .then((data) => {console.log(data); res.status(200).jsonp(data)})
-    .catch((err) => res.status(500).jsonp(err))
+    .then((data) => {console.log(data); res.status(200).jsonp({perfil: data})})
+    .catch((err) => res.status(500).jsonp({error: err}))
 })
 
 // List all users given the query param
