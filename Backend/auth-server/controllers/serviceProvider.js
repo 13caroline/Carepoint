@@ -10,6 +10,7 @@ Out.adicionarSP = (body, id) => {
         endSub: body.endSub,
         distance: body.distance,
         qualifications: body.qualifications,
-        idSubscription: 1
+        idSubscription: 1,
+        averageRating: 0
     })
 }
