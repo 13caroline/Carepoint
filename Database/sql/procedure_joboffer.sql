@@ -1,7 +1,8 @@
 USE PI;
 
 DROP PROCEDURE IF EXISTS get_joboffer;
-
+DROP VIEW IF EXISTS count_sps;
+DROP VIEW IF EXISTS count_sps_fakeish;
 
 -- Returns: joboffers
 DELIMITER &&  
@@ -29,5 +30,20 @@ BEGIN
     ORDER BY joboffer.idJobOffer DESC LIMIT limite OFFSET inicio;
 END &&  
 DELIMITER ;
+
+
+-- Returns: count sps that can see the joboffers
+CREATE VIEW count_sps AS 
+  SELECT COUNT(*) FROM pi.serviceprovider WHERE serviceprovider.idSubscription = 3 OR serviceprovider.idSubscription = 4 
+	OR serviceprovider.idSubscription = 6 OR serviceprovider.idSubscription = 7;
+    
+    
+-- Returns: count sps that can see the joboffers
+CREATE VIEW count_sps_fakeish AS 
+  SELECT COUNT(*) FROM pi.serviceprovider WHERE serviceprovider.idSubscription = 3 OR serviceprovider.idSubscription = 4 
+	OR serviceprovider.idSubscription = 6 OR serviceprovider.idSubscription = 7 OR DATE_SUB(serviceprovider.endSub,INTERVAL 3 MONTH) >= now();
+
+
+
 
 
