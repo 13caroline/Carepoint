@@ -57,7 +57,7 @@ const routes = [
     component: () => import('../views/global/EditData.vue')
   },
   {
-    path: '/ad/info',
+    path: '/ad/info/:id',
     name: 'Ad Info',
     component: () => import('../views/global/AdInfo.vue')
   },
