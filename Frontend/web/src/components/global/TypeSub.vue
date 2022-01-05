@@ -53,7 +53,7 @@
       </v-row>
 
       <v-row justify="center">
-        <visibility :dados="clicked"/>
+        <visibility :dados="subscriptionType" @clicked="visibleType"/>
       </v-row>
     </v-item-group>
   </v-container>
@@ -66,7 +66,7 @@ export default {
   props: ["id"],
   data() {
     return {
-      clicked: {subscription: 0, type: this.id},
+      subscriptionType: {subscription: 0, type: this.id },
       styleObject: { border: "1px solid #78C4D4" },
       sub: [
         {
@@ -130,15 +130,16 @@ export default {
           priceC: "29.99"
         },
       ],
+      visibility: 0,
     };
   },
   methods: {
-    save() {
-      this.$emit("regista", this);
-    },
     subscribe(id){
-      this.clicked.subscription = id;
+      this.subscriptionType.subscription = id;
     },
+    visibleType(n){
+      this.visibility = n;
+    }
   },
 };
 </script>

@@ -239,7 +239,7 @@
                 type="submit"
                 @click="next()"
                 :disabled="!valid"
-                >Registar</v-btn
+                >Próximo</v-btn
               >
             </v-col>
           </v-row>

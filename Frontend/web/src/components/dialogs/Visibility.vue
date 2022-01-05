@@ -10,7 +10,7 @@
           required
           v-bind="attrs"
           v-on="on"
-          :disabled="dados == 0"
+          :disabled="dados.subscription == 0"
         >
           Subscrever
         </v-btn>
@@ -23,29 +23,33 @@
           A visibilidade garante que os seus anúncios se encontrem sempre de
           entre os primeiros quando alguém pesquisar por serviços.
 
-          <v-radio-group
-            column
-            v-model="radios"
-            v-for="(v, index) in values"
-            :key="index"
-            class="small"
-          >
-            <v-radio
-              v-if="dados.subscription < v.sub"
-              :value="v.sub"
-              :label="`${v.sub} meses`"
-              color="#78C4D4"
-              disabled
-            ></v-radio>
-            <v-radio
-              v-else
-              :value="v.sub"
-              :label="`${v.sub} meses`"
-              color="#78C4D4"
-            ></v-radio>
-             <span v-if="dados.type === '3'"> {{v.priceS}} </span>
-          </v-radio-group>
-         
+          <v-item-group>
+            <v-row justify="center">
+              <v-col
+                cols="auto"
+                class="mx-auto mx-sm-0"
+                v-for="(v, index) in values"
+                :key="index"
+              >
+                <v-card
+                  class="mt-4 rounded-xl overflow-auto prices"
+                  outlined
+                  tile
+                  :style="styleObject"
+                  @click="subscribe(v)"
+                  :disabled="dados.subscription < v.sub"
+                >
+                  <v-card-title class="ma-2 card font-weight-normal">
+                    <v-row justify="center"> {{ v.sub }} meses </v-row>
+                  </v-card-title>
+
+                  <v-card-text class="text-center">
+                    <span v-if="dados.type === '3'"> +{{ v.priceS }} € </span>
+                  </v-card-text>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-item-group>
         </v-card-text>
         <v-card-actions>
           <v-row class="mb-0">
@@ -57,7 +61,7 @@
                 dark
                 block
                 color="#78c4d4"
-                @click="confirm()"
+                @click="confirm(0)"
               >
                 Não, obrigado
               </v-btn>
@@ -69,9 +73,89 @@
                 dark
                 block
                 color="#78c4d4"
-                @click="confirm()"
+                @click="confirm(visibility)"
               >
                 Quero visibilidade!
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="dialog2" width="100%" max-width="460">
+      <v-card>
+        <v-card-title class="justify-center cancel">
+          Confirmar subscrição
+        </v-card-title>
+        <v-card-text>
+          <v-row class="mt-2">
+            <v-col class="pb-0" align="right" cols="5">
+              <span class="text-uppercase">Utilizador</span>
+            </v-col>
+            <v-col class="pl-0 pb-0" cols="7">
+              <span class="black--text" v-if="dados.type === '3'">
+                <strong>Prestador de Serviços Individual</strong>
+              </span>
+            </v-col>
+
+            <v-col class="pb-0" align="right" cols="5">
+              <span class="text-uppercase">Tipo de subscrição</span>
+            </v-col>
+            <v-col class="pl-0 pb-0" cols="7">
+              <span class="black--text">
+                <strong>{{ dados.subscription }} meses</strong> ({{}})
+              </span>
+            </v-col>
+
+            <v-col class="pb-0" align="right" cols="5">
+              <span class="text-uppercase">Visibilidade</span>
+            </v-col>
+            <v-col class="pl-0 pb-0" cols="7">
+              <span class="black--text">
+                <strong v-if="visibility === 0">Não</strong>
+                <strong v-else>Sim</strong>
+              </span>
+              <br />
+              <span v-if="visibility !== 0">{{ visibility }} meses</span>
+            </v-col>
+          </v-row>
+
+          <v-col class="pb-0" align="right" cols="5">
+              <span class="text-uppercase">Valor a pagar</span>
+            </v-col>
+            <v-col class="pl-0 pb-0" cols="7">
+              <span class="black--text">
+                <strong>{{ price }} meses</strong>
+              </span>
+            </v-col>
+
+        </v-card-text>
+        <v-card-actions>
+          <v-row class="mb-0">
+            <v-col cols="12" md="6">
+              <v-btn
+                depressed
+                large
+                outlined
+                dark
+                block
+                color="#78c4d4"
+                @click="dialog2=false"
+              >
+                Cancelar
+              </v-btn>
+            </v-col>
+            <v-col cols="12" md="6">
+              <v-btn
+                depressed
+                large
+                dark
+                block
+                color="#78c4d4"
+                @click="confirm(visibility)"
+              >
+                Registar
               </v-btn>
             </v-col>
           </v-row>
@@ -86,17 +170,39 @@ export default {
   props: ["dados"],
   data: () => ({
     dialog: false,
+    dialog2: false,
+    visibility: 0,
+    price: 0,
+    styleObject: { border: "1px solid #78C4D4" },
     radios: 1,
     values: [
-        { sub: 1, priceS: 9.99, priceC: 11.49},
-        { sub: 3, priceS: 17.99, priceC: 27.59},
-        { sub: 6, priceS: 29.99, priceC: 46.49 }
+      { sub: 1, priceS: 4, priceC: 11.49 },
+      { sub: 3, priceS: 6, priceC: 27.59 },
+      { sub: 6, priceS: 10, priceC: 46.49 },
     ],
   }),
   methods: {
-    confirm() {
+    confirm(visible) {
       this.dialog = false;
+      this.visibility = visible;
+      this.dialog2 = true;
+      //this.$emit('clicked', visible)
+    },
+    subscribe(v) {
+      console.log(v)
+      this.visibility = v.sub;
+      
     },
   },
 };
 </script>
+
+<style scoped>
+.prices:hover {
+  background-color: #c0e4ec;
+}
+
+.card {
+  color: #78c4d4;
+}
+</style>
