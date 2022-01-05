@@ -71,7 +71,9 @@
                   dense
                   single-line
                   v-model="form.password2"
-                  :rules="[(form.password === form.password2) || 'Password must match']"
+                  :rules="[
+                    form.password === form.password2 || 'Password must match',
+                  ]"
                   color="#78C4D4"
                   type="password"
                   required
@@ -250,7 +252,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 export default {
   name: "SingleSPForm",
   data() {
@@ -306,10 +308,7 @@ export default {
     close() {
       this.$router.back();
     },
-    next() {
-      this.$router.push("/register/subscription/" + this.form.type);
-    },
-    registUser: async function () {
+    next: async function() {
       if (this.$refs.form.validate()) {
         try {
           await axios.post("http://localhost:9041/users/register", {
@@ -325,7 +324,7 @@ export default {
             distance: this.form.distance,
             qualifications: this.form.qualifications,
           });
-
+          this.$router.push("/register/subscription/" + this.form.type);
           this.$snackbar.showMessage({
             show: true,
             text: "Utilizador criado com sucesso.",
@@ -334,6 +333,7 @@ export default {
             timeout: 4000,
           });
         } catch (e) {
+          console.log(e);
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
@@ -350,6 +350,7 @@ export default {
         });
       }
     },
+
     isNumber(e) {
       let char = String.fromCharCode(e.keyCode);
       if (/^[0-9]+$/.test(char)) return true;

@@ -154,7 +154,7 @@
                 dark
                 block
                 color="#78c4d4"
-                @click="confirm(visibility)"
+                @click="register()"
               >
                 Registar
               </v-btn>
@@ -200,7 +200,10 @@ export default {
       else priceVisibility=Object.values(row[0])[0];
       return Math.round( (parseFloat(this.dados.price) + priceVisibility) * 100) / 100;
     },
-    
+
+    register(){
+      this.$emit('clicked', this.visibility)
+    }
 
   },
 
