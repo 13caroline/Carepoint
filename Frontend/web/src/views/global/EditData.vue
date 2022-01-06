@@ -33,12 +33,13 @@
                         ></v-text-field>
                       </v-col>
                     </div>-->
-                    <div>
+                    <!--<div>
                       <v-row class="mx-auto">
                         <v-col cols="12" md="6">
                           <span>Nova palavra-passe</span>
                           <v-text-field
                             type="password"
+                            :rules="passwordRules"
                             placeholder="*****"
                             outlined
                             dense
@@ -52,11 +53,12 @@
                             placeholder="*****"
                             outlined
                             dense
-                            v-model="password"
+                            :rules="[(this.password === this.npassword) || 'Password must match']"
+                            v-model="npassword"
                           ></v-text-field>
                         </v-col>
                       </v-row>
-                    </div>
+                    </div> -->
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -96,14 +98,13 @@
                    
                       <v-col cols="12" md="6">
                         <span>Sexo</span>
-                        <v-select
+                        <v-text-field
                           outlined
                           color="#2596be"
-                          :rules="textRules"
-                          :items="user.sex"
+                          disabled
                           dense
-                          v-model="sex"
-                        ></v-select>
+                          v-model="user.sex"
+                        ></v-text-field>
                       </v-col>
                     </v-row>
                   </v-list-item-content>
@@ -150,7 +151,7 @@
             color="#78c4d4"
             depressed
             class="rounded-lg white--text"
-            @click="editarDados()"
+            @click="confirm()"
             >Confirmar</v-btn
           >
         </v-col>
@@ -166,9 +167,6 @@ import store from "@/store/index.js";
 export default {
   data: () => ({
     user: {},
-    utilizador: {},
-    password: "",
-    sex: ["Feminino", "Masculino", "Indefinido"],
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;
@@ -184,6 +182,14 @@ export default {
         return pattern.test(v) || "Campo inválido. Insira 9 dígitos.";
       },
     ],
+    passwordRules: [
+        (v) => !!v || "Palavra-passe inválida",
+        (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",
+        (v) => /(?=.*\d)/.test(v) || "Deve ter um número",
+        (v) =>
+          (v && v.length >= 5) ||
+          "A palavra-passe deve ter pelo menos 5 caracteres",
+      ],
     dialogs: {},
     cancelar: {
       text: "a edição de dados",
@@ -194,6 +200,47 @@ export default {
     close() {
       this.$router.push("/consumer/profile");
     },
+
+    confirm: async function() {
+      if (this.$refs.form.validate()) {
+        console.log(this.user.email)
+        try {
+          let response = await axios.put("http://localhost:9040/users/update", {
+            token: store.getters.token,
+            name: this.user.name,
+            email: this.user.email,
+            type: (store.getters.tipo).toString(),
+            location: 1,
+            phoneNumber: this.user.phoneNumber,
+            idUser: this.user.idUser,
+          });
+          console.log(response)
+          this.$router.push("/consumer/profile");
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Utilizador criado com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
+        } catch (e) {
+          console.log(e);
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            timeout: 4000,
+          });
+        }
+      } else {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Por favor preencha todos os campos.",
+          timeout: 4000,
+        });
+      }
+    },
   },
   components: {
     Cancel: () => import("@/components/dialogs/Cancel"),
@@ -202,15 +249,16 @@ export default {
   },
     created: async function () {
     try {
-      console.log(store.getters.token)
       let response = await axios.post(
         "http://localhost:9040/users/perfil",
         {
           token: store.getters.token
         }
       );
-      console.log(response.data)
       this.user = response.data.perfil[0];
+      if(this.user.sex=="M")this.user.sex ="Masculino"
+      else if(this.user.sex=="F")this.user.sex ="Feminino"
+      else this.user.sex = "Indefinido"
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

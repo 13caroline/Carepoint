@@ -161,8 +161,8 @@ export default {
         try {
           await axios.post("http://localhost:9040/subscription/", {
             token: store.getters.token,
-            subscription: this.details.subscription,
-            visibility: this.details.visibility
+            subscription: this.details.subscription.toString(),
+            visibility: this.details.visibility.toString()
           });
           this.$snackbar.showMessage({
             show: true,
