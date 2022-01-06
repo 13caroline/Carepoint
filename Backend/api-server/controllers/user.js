@@ -126,6 +126,13 @@ Out.getPerfil = (email) => {
     }})
 }
 
+Out.getPerfilCP = (email) => {
+    return dbconfig.sequelize.query('CALL get_company_profile (:em)',
+    {replacements: {
+        em: email
+    }})
+}
+
     //Delete user by email
 Out.remove = (id) => {
     return User.destroy({ where: { 'idUser': id } });

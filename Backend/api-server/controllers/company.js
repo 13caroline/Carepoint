@@ -1,5 +1,6 @@
 // Controller for the company model
 
+const dbconfig = require('../models/Config/Database_Info');
 const Company = require('../models/company')
 
 var Out = module.exports;
@@ -45,6 +46,13 @@ Out.update = (id, company) => {
         where: { 'idCompany': id },
         returning: true,
     });
+}
+
+Out.getPerfilCompany = (email) => {
+    return dbconfig.sequelize.query('CALL get_company_profile (:em)',
+    {replacements: {
+        em: email
+    }})
 }
 
 //Delete Company by id

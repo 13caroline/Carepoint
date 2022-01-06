@@ -5,6 +5,7 @@ DROP PROCEDURE IF EXISTS get_reviews;
 DROP PROCEDURE IF EXISTS get_sp_category_info;
 DROP PROCEDURE IF EXISTS get_average_rating;
 DROP PROCEDURE IF EXISTS get_service_provider_profile;
+DROP PROCEDURE IF EXISTS get_service_provider_profile_v2;
 
 -- Returns: average rating or null if no reviews
 DELIMITER &&  
@@ -40,7 +41,8 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE get_service_provider_profile (IN id INT)  
 BEGIN  
-    SELECT user.name, user.email, user.phoneNumber, user.lastActivity,user.active, serviceprovider.description, file.image FROM user
+    SELECT user.name, user.email, user.phoneNumber, user.lastActivity,user.active, serviceprovider.description, location.name as locationName, location.cordsX, location.cordsY, file.image FROM user
+    INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
     INNER JOIN file ON user.idUser = file.idUser WHERE id = user.idUser;
 END &&  
@@ -55,3 +57,26 @@ BEGIN
 END &&
 DELIMITER ;
 
+-- Returns: returns information for a specific service provider
+DELIMITER &&  
+CREATE PROCEDURE get_service_provider_profile_v2 (IN em VARCHAR(90))  
+BEGIN  
+    SELECT user.idUser, user.name, user.email, user.phoneNumber, user.lastActivity,user.active, serviceprovider.description, location.name as locationName, location.cordsX, location.cordsY,
+		   serviceprovider.endSub, serviceprovider.endSubVip, file.image FROM user
+	INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
+    INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
+END &&  
+DELIMITER ;
+
+DELIMITER &&
+CREATE PROCEDURE get_company_profile (IN em VARCHAR(90))
+BEGIN
+	SELECT user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY,
+		   company.link, company.firm, company.nipc, company.endSub, company.endSubVip, add.description, file.image FROM user
+	INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN company ON user.idUser = company.idCompany
+    INNER JOIN pi.add ON add.idCompany = company.idCompany
+    INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
+END &&
+DELIMITER ;

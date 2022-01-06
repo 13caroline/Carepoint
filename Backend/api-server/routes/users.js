@@ -9,19 +9,15 @@ const upload = multer({ dest: 'uploads/', storage: storage })
 const Blob = require('node-blob');
 
 const User = require('../controllers/user');
+const ServiceProvider = require('../controllers/serviceProvider');
+const Company = require('../controllers/company');
 const auth = require('../authorization/auth');
+
 
 
 /****************************************************************************************
  *                                   GET
  ****************************************************************************************/
-router.post('/perfil', (req, res, next) => {
-    var token = req.body.token
-    var email = auth.getEmailFromJWT(token)
-    User.getPerfil(email)
-    .then((data) => {console.log(data); res.status(200).jsonp({perfil: data})})
-    .catch((err) => res.status(500).jsonp({error: err}))
-})
 
 // List all users given the query param
 router.get('/', function(req, res, next) {
@@ -65,6 +61,51 @@ router.get('/email/:email', function(req, res, next) {
  *                                   POST
  ****************************************************************************************/
 
+
+//Devolve o perfil do Utilizador, quer seja Consumer / Service Provider / Company
+router.post('/perfil', (req, res, next) => {
+    var token = req.body.token
+    var email = auth.getEmailFromJWT(token)
+    var type = auth.getTypeFromJWT(token)
+
+    switch (type) {
+        case 2:
+            User.getPerfil(email)
+            .then((data) => res.status(200).jsonp({perfil: data}))
+            .catch((err) => res.status(500).jsonp({error: err}))
+            break;
+
+        case 3:
+            ServiceProvider.getPerfilUser(email)
+            .then((perfil) => {
+                ServiceProvider.get_reviews(perfil[0].idUser)
+                .then((reviews) => {
+                    ServiceProvider.get_categories(perfil[0].idUser)
+                    .then((categories) => {
+                        res.status(200).jsonp({
+                            perfil: perfil,
+                            reviews: reviews,
+                            categories: categories
+                        })
+                    })
+                    .catch((err) => res.status(500).jsonp({error: err}))
+                })
+                .catch((err) => res.status(500).jsonp({error: err}))
+            })
+            .catch((err) => res.status(500).jsonp({error: err}))
+            break;
+        
+        case 4:
+            Company.getPerfilCompany(email)
+            .then((data) => res.status(200).jsonp({perfil: data}))
+            .catch((err) => res.status(500).jsonp({error: err}))        
+            break;
+
+        default:
+            res.status(200).jsonp({message: "Tipo indefinido ou Admin."})
+            break;
+    }
+})
 
 // Insert a new user
 router.post('/', function(req, res) {

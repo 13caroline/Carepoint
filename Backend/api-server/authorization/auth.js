@@ -20,6 +20,21 @@ Out.getEmailFromJWT = (token) => {
     return email;
 }
 
+//Obtem o type do JWT
+Out.getTypeFromJWT = (token) => {
+    type = null;
+
+    jwt.verify(token, 'Project_PI', (err, payload) => {
+        if(!err){
+            type = payload.level;
+        }else{
+            console.log(err);
+        }
+    })
+
+    return type;
+}
+
 //Verifica se token fornecido tem autorização de Admin.
 Out.checkAdminLevel = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err, payload) => {

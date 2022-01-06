@@ -37,6 +37,13 @@ Out.get_categories = (id) => {
     }})
 }
 
+Out.getPerfilUser = (email) => {
+    return dbconfig.sequelize.query('CALL get_service_provider_profile_v2 (:em)',
+    {replacements: {
+        em: email
+    }})
+}
+
 //Creates a new ServiceProvider
 Out.insert = (serviceProvider) => {
     return ServiceProvider.create({

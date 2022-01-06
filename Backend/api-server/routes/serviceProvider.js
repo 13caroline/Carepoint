@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const ServiceProvider = require('../controllers/serviceProvider')
+const ServiceProvider = require('../controllers/serviceProvider');
+const { route } = require('./users');
 
 
 /****************************************************************************************
@@ -48,7 +49,6 @@ router.get('/:id', function(req, res, next) {
 /****************************************************************************************
  *                                   POST
  ****************************************************************************************/
-
 
 // Insert a new ServiceProvider
 router.post('/', function(req, res) {

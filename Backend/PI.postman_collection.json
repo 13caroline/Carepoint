@@ -9,7 +9,7 @@
 			"name": "AUTH",
 			"item": [
 				{
-					"name": "Login",
+					"name": "Login  (R)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -44,7 +44,7 @@
 					"response": []
 				},
 				{
-					"name": "Register User",
+					"name": "Register User  (R)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -59,7 +59,7 @@
 								},
 								{
 									"key": "email",
-									"value": "theTest3745ads3@gmail.com2",
+									"value": "theTest3745ads3@gmail.com2sfd",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -111,7 +111,7 @@
 					"response": []
 				},
 				{
-					"name": "Register Service Provider",
+					"name": "Register Service Provider (R)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -120,13 +120,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "boi2",
+									"value": "The one and only",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "rami@gmail.com",
+									"value": "ramili@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -202,7 +202,7 @@
 					"response": []
 				},
 				{
-					"name": "Register Company",
+					"name": "Register Company (R)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -293,7 +293,7 @@
 					"response": []
 				},
 				{
-					"name": "Logout",
+					"name": "Logout  (R)",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -894,7 +894,7 @@
 					"name": "Subscription",
 					"item": [
 						{
-							"name": "Add Subscription to SP (durante registo)",
+							"name": "Add Subscription (durante registo) (R)",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -1358,18 +1358,15 @@
 						},
 						{
 							"name": "Get User Profile (R)",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1YWRzM0BnbWFpbC5jb20yIiwibGV2ZWwiOjIsImlhdCI6MTY0MTQxOTQzMiwiZXhwIjoxNjQxNDIzMDMyfQ.yTq-ieZRaIEidLz1M0FEt9JOcsCFVsz58hAmUfUm8ZU",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QyQGdtYWlsLmNvbTI0IiwibGV2ZWwiOjQsImlhdCI6MTY0MTQ4MzQ1MSwiZXhwIjoxNjQxNDg3MDUxfQ.3PnAqsxTIapQTlUYzJ4r83YE6nN_1bIy3nXSo56JkUY",
 											"type": "default"
 										}
 									]
@@ -1390,7 +1387,7 @@
 							"response": []
 						},
 						{
-							"name": "Update password",
+							"name": "Update password (R)",
 							"request": {
 								"method": "PUT",
 								"header": [],
@@ -1440,7 +1437,7 @@
 							"response": []
 						},
 						{
-							"name": "Update Image",
+							"name": "Update Image (R)",
 							"request": {
 								"method": "PUT",
 								"header": [],
@@ -1461,6 +1458,221 @@
 											"key": "image",
 											"type": "file",
 											"src": "/C:/Users/Thol/Pictures/nobuShcok.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/updatePhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"updatePhoto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Prestador individual (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "idUser",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "type",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "location",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "phoneNumber",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "quali",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "raio",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/updatePhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"updatePhoto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Consumer (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "idUser",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "type",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "location",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "phoneNumber",
+											"value": "",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/updatePhoto",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"updatePhoto"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Company (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "idUser",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "type",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "name",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "location",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "phoneNumber",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "link",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "firm",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "nipc",
+											"value": "",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "",
+											"type": "default"
 										}
 									]
 								},
@@ -1905,7 +2117,7 @@
 							"response": []
 						},
 						{
-							"name": "Service Provider Profile",
+							"name": "Service Provider Profile (R)",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -2428,7 +2640,7 @@
 					"name": "Search",
 					"item": [
 						{
-							"name": "Get All Service Providers & Companies",
+							"name": "Get All Service Providers & Companies (R)",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -2491,7 +2703,7 @@
 					"name": "JobOffer",
 					"item": [
 						{
-							"name": "New JobOffer",
+							"name": "New JobOffer (R)",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -2556,7 +2768,7 @@
 							"response": []
 						},
 						{
-							"name": "Get Job Offers",
+							"name": "Get Job Offers (R)",
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -2601,7 +2813,7 @@
 							"response": []
 						},
 						{
-							"name": "Complete Job Offer",
+							"name": "Complete Job Offer (R)",
 							"request": {
 								"method": "PUT",
 								"header": [],
