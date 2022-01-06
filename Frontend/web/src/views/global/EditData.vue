@@ -16,6 +16,7 @@
                         <span>E-mail</span>
                         <v-text-field
                           outlined
+                          disabled
                           dense
                           v-model="user.email"
                         ></v-text-field>
@@ -218,7 +219,7 @@ export default {
           this.$router.push("/consumer/profile");
           this.$snackbar.showMessage({
             show: true,
-            text: "Utilizador criado com sucesso.",
+            text: "Dados atualizados com sucesso.",
             color: "success",
             snackbar: true,
             timeout: 4000,
@@ -228,7 +229,7 @@ export default {
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
-            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
             timeout: 4000,
           });
         }
