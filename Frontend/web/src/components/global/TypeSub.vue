@@ -3,10 +3,10 @@
     <v-item-group>
       <v-row>
         <v-col
-          cols="auto"
+          cols="12"
           lg="4"
           md="4"
-          class="mx-auto mx-sm-0"
+          sm="4"
           v-for="s in sub"
           :key="s.type"
         >
@@ -17,9 +17,9 @@
               tile
               :style="styleObject"
               height="450"
-              width="300"
+              width="450"
             >
-              <v-card-title class="ma-5">
+              <v-card-title class="mb-5 mx-5">
                 <v-row justify="center">
                   {{ s.type }}
                 </v-row>
@@ -27,18 +27,17 @@
 
               <v-card-text>
                 <v-row
-                  justify="center"
                   class="mx-auto"
                   v-for="(p, index) in s.pros"
                   :key="index"
                 >
-                  <v-col cols="12" md="9" sm="7">
+                  <v-col cols="9" md="9" sm="9">
                     <span>
                       {{ p.title }}
                     </span>
                   </v-col>
 
-                  <v-col cols="12" md="3" sm="2">
+                  <v-col cols="3" md="3" sm="3">
                     <v-icon smal :color="p.color">
                       {{ `fas fa-${p.icon}` }}
                     </v-icon>

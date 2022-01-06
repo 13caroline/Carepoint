@@ -7,6 +7,7 @@
           cols="auto"
           lg="6"
           md="6"
+          sm="6"
           class="mx-auto mx-sm-0"
           v-for="(a, index) in ads"
           :key="index"

@@ -3,7 +3,7 @@
     <app-bar />
     <v-container class="d-flex flex-column">
       <v-row justify="center">
-        <v-col cols="12" lg="3">
+        <v-col cols="12" md="3" lg="3">
           <search />
         </v-col>
         <v-col lg="8" class="ml-auto mb-5">
