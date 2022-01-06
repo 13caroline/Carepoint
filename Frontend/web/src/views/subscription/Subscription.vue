@@ -14,7 +14,7 @@ export default {
   
   components: {
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
-    TypeSub: () => import("@/components/global/TypeSub"),
+    TypeSub: () => import("@/components/subscription/TypeSub"),
     Foot: () => import("@/components/global/Footer"),
   },
 };

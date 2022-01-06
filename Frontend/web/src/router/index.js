@@ -5,52 +5,58 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  //------------------------------------- Cliente -------------------------------------
+  
   {
     path: '/',
     name: 'Home',
     component: () => import(/* webpackChunkName: "about" */ '../views/HomePage.vue')
   },
+
+  //------------------------------------- REGISTER -------------------------------------
+
+  // User Type 
   {
     path: '/register/type',
     name: 'Type User',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/UserTypeView.vue')
   },
+
+  // Register Single Service Provider
   {
     path: '/register/provider/solo',
     name: 'Solo Service Provider Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/SingleSP.vue')
   },
+
+  // Register Collective Service Provider
   {
     path: '/register/provider/collective',
     name: 'Collective Service Provider Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/CollectiveSP.vue')
   },
+
+  // Register Consumer
   {
     path: '/register/consumer',
     name: 'Consumer',
     component: () => import(/* webpackChunkName: "about" */ '../views/register/Consumer.vue')
   },
+
+  // Register Subscription
   {
     path: '/register/subscription/:id',
     name: 'Subscription',
-    component: () => import(/* webpackChunkName: "about" */ '../views/register/Subscription.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/subscription/Subscription.vue')
   },
+
+  // Consumer data
   {
     path: '/consumer/profile',
     name: 'profile',
     component: () => import('../views/global/Profile.vue')
   },
-  {
-    path: '/consumer/page',
-    name: 'Consumer Profile',
-    component: () => import(/* webpackChunkName: "about" */'../views/profile/MainConsumer.vue')
-  },
-  {
-    path: '/consumer/post/ad',
-    name: 'Post Ad',
-    component: () => import('../views/global/PostAd.vue')
-  },
+
+ 
   {
     path: '/consumer/edit/profile',
     name: 'Edit Profile',
@@ -59,18 +65,40 @@ const routes = [
   {
     path: '/ad/info/:id',
     name: 'Ad Info',
-    component: () => import('../views/global/AdInfo.vue')
+    component: () => import('../views/ads/AdInfo.vue')
   },
+  
+
+
+  //------------------------------------- CONSUMER -------------------------------------
+
+  // Become a Service Provider
   {
     path: '/consumer/become/service/provider',
     name: 'Become Service Provider',
-    component: () => import('../views/global/BecomeSP.vue')
+    component: () => import('../views/consumer/BecomeSP.vue')
   },
+
+  // Consumer's page
+  {
+    path: '/consumer/page',
+    name: 'Consumer Profile',
+    component: () => import(/* webpackChunkName: "about" */'../views/consumer/ConsumerPage.vue')
+  },
+
+  // Consumer's advertisements
   {
     path: '/consumer/my/advirtisements',
     name: 'My advertisements',
-    component: () => import('../views/global/MyAdvertisements')
-  }
+    component: () => import('../views/consumer/MyAdvertisements')
+  },
+
+  // Post an ad
+  {
+    path: '/consumer/post/ad',
+    name: 'Post Ad',
+    component: () => import('../views/consumer/PostAd.vue')
+  },
 ]
 
 const router = new VueRouter({

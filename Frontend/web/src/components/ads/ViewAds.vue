@@ -1,6 +1,5 @@
 <template>
   <div id="page">
-    <app-bar />
     <v-container class="d-flex flex-column">
       <v-row justify="center">
         <v-col cols="12" md="2" lg="2">
@@ -12,8 +11,6 @@
         </v-col>
       </v-row>
     </v-container>
-    <top-button />
-    <Foot />
   </div>
 </template>
 
@@ -23,11 +20,8 @@ export default {
     return {};
   },
   components: {
-    AppBar: () => import("@/components/global/AppBarAccount"),
-    Ads: () => import("@/components/global/Ads"),
+    Ads: () => import("@/components/ads/Ads"),
     Search: () => import("@/components/global/Search"),
-    TopButton: () => import("@/components/global/TopButton"),
-    Foot: () => import("@/components/global/Footer"),
   },
 };
 </script>

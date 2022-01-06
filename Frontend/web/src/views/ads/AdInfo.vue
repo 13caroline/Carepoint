@@ -14,7 +14,7 @@ export default {
   
   components: {
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
-    AdInfo: () => import("@/components/global/AdInfo"),
+    AdInfo: () => import("@/components/ads/AdInfo"),
     Foot: () => import("@/components/global/Footer"),
   },
 };
