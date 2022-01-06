@@ -155,8 +155,30 @@ export default {
       this.dialog2 = true;
     },
 
-    register() {
-      this.$emit("clicked", this.details.visibility);
+    register: async function () {
+        try {
+          await axios.post("http://localhost:9040/subscription/", {
+            token: store.getters.token,
+            subscription: this.details.subscription,
+            visibility: this.details.visibility
+          });
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Utilizador criado com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
+        } catch (error) {
+          this.text = "Ocorreu um erro. Por favor tente mais tarde!";
+          this.color = "warning";
+          this.$snackbar.showMessage({
+            show: true,
+            color: this.color,
+            text: this.text,
+            timeout: 4000,
+          });
+        }
     },
   },
 };

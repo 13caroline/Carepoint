@@ -103,10 +103,6 @@ export default {
       if (this.dados.type === "3") this.info.visibilityPrice = v.priceS;
       else this.info.visibilityPrice = v.priceC;
     },
-
-    register() {
-      this.$emit("clicked", this.visibility);
-    },
   },
 };
 </script>

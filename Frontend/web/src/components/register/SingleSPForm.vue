@@ -326,17 +326,8 @@ export default {
             distance: this.form.distance,
             qualifications: this.form.qualifications,
           });
-          console.log(response.data)
           this.$router.push("/register/subscription/" + this.form.type);
-          this.$snackbar.showMessage({
-            show: true,
-            text: "Utilizador criado com sucesso.",
-            color: "success",
-            snackbar: true,
-            timeout: 4000,
-          });
         } catch (e) {
-          console.log(e);
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
