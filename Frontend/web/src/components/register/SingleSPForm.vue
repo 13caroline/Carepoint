@@ -311,9 +311,8 @@ export default {
     },
     next: async function() {
       if (this.$refs.form.validate()) {
-        console.log(this.date)
         try {
-          let response = await axios.post("http://localhost:9041/users/register", {
+          await axios.post("http://localhost:9041/users/register", {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,
