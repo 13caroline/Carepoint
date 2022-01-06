@@ -60,7 +60,7 @@ Out.remove = (id) => {
     return Subscription.destroy({ where: { 'idSubscription': id } });
 }
 
-Out.activateSubscriptionNormal = (idUser, normal) => {
+Out.activateSubscriptionNormal_SP = (idUser, normal) => {
     return dbconfig.sequelize.query('CALL update_serviceProvider_endSub (:idSP, :tipo_sub)',
         {replacements: {
             idSP: idUser,
@@ -68,8 +68,24 @@ Out.activateSubscriptionNormal = (idUser, normal) => {
         }});
 }
 
-Out.activateSubscriptionVisibility = (idUser, visibility) => {
+Out.activateSubscriptionVisibility_SP = (idUser, visibility) => {
     return dbconfig.sequelize.query('CALL update_serviceProvider_vip (:idSP, :tipo)',
+        {replacements: {
+            idSP: idUser,
+            tipo: visibility,
+        }});
+}
+
+Out.activateSubscriptionNormal_CP = (idUser, normal) => {
+    return dbconfig.sequelize.query('CALL update_company_endSub (:idSP, :tipo_sub)',
+        {replacements: {
+            idSP: idUser,
+            tipo_sub: normal,
+        }});
+}
+
+Out.activateSubscriptionVisibility_CP = (idUser, visibility) => {
+    return dbconfig.sequelize.query('CALL update_company_vip (:idSP, :tipo)',
         {replacements: {
             idSP: idUser,
             tipo: visibility,

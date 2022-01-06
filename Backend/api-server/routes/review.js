@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const Review = require('../controllers/review')
+const auth = require('../authorization/auth');
+const User = require('../controllers/user');
 
 
 /****************************************************************************************
@@ -28,13 +30,25 @@ router.get('/:id', function(req, res, next) {
  ****************************************************************************************/
 
 
-// Insert a new Review
-router.post('/', function(req, res) {
-    console.log(req.body)
-    Review.insert(req.body)
-        .then(data => { res.status(201).jsonp({ data: data }) })
-        .catch(e => res.status(500).jsonp({ error: e }))
-});
+// Create a new review
+router.post('/', auth.validToken, (req, res) => {
+
+    token = req.body.token;
+    email = auth.getEmailFromJWT(token);
+    receivingId = parseInt(req.body.receivingId)
+
+    User.consult(email)
+    .then((user) => {
+        if(user.idUser != receivingId){
+            Review.addNewReview(req.body.description, req.body.rating, user.idUser, receivingId)
+            .then((res) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
+            .catch((err) => res.status(500).jsonp({error: err}))
+        }else{
+            res.status(500).jsonp({error: "Cannot give a review to yourself!"})
+        }
+    })
+    .catch((err) => res.status(500).jsonp({error: err}))
+}); 
 
 
 /****************************************************************************************
