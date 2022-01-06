@@ -1,4 +1,4 @@
- -- CALL get_service_providers (NULL, NULL, 0, NULL, 0, 'M',15,0);
+  CALL get_service_providers_v2 (NULL, NULL, NULL, NULL, 6, NULL,10,0);
  -- get_service_providers (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)
 -- CALL get_companies(NULL,50,0);
 -- CALL get_average_rating(55);
@@ -19,3 +19,4 @@
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',3,'2022-03-18 10:27:16',17,52);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',4,'2022-03-18 10:27:16',17,52);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',7,'2022-03-18 10:27:16',17,55);
+CALL update_last_activity(2);
