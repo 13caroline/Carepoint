@@ -312,7 +312,7 @@ export default {
     next: async function() {
       if (this.$refs.form.validate()) {
         try {
-          await axios.post("http://localhost:9041/users/register", {
+          let res = await axios.post("http://localhost:9041/users/register", {
             name: this.form.name,
             email: this.form.email,
             password: this.form.password,
@@ -325,6 +325,9 @@ export default {
             distance: this.form.distance,
             qualifications: this.form.qualifications,
           });
+          if (res.data.token != undefined) {
+            this.$store.commit("guardaTokenUtilizador", res.data.token);
+          }
           this.$router.push("/register/subscription/" + this.form.type);
         } catch (e) {
           this.$snackbar.showMessage({

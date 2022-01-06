@@ -93,6 +93,16 @@
         </v-col>
       </v-row>
       <v-row justify="center">
+        <v-btn
+          dense
+          color="#78c4d4"
+          class="rounded-lg mr-4"
+          depressed
+          outlined 
+          @click="back()"
+        >
+          Retroceder
+        </v-btn>
         <visibility :dados="subscriptionType" @clicked="register" />
       </v-row>
     </v-item-group>
@@ -200,6 +210,9 @@ export default {
       this.subscriptionType.subscription = s.id;
       if (this.id == 3) this.subscriptionType.price = s.priceS;
       else this.subscriptionType.price = s.priceC;
+    },
+    back() {
+      this.$router.back();
     },
     register: async function (n) {
       this.visibility = n;
