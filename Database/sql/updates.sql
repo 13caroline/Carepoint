@@ -9,6 +9,7 @@ DROP PROCEDURE IF EXISTS update_company_endSub;
 DROP PROCEDURE IF EXISTS update_joboffer;
 DROP PROCEDURE IF EXISTS update_serviceProvider_vip;
 DROP PROCEDURE IF EXISTS update_company_vip;
+DROP PROCEDURE IF EXISTS update_last_activity;
 
 -- Update: consumer info
 DELIMITER &&  
@@ -373,3 +374,12 @@ END &&
 DELIMITER ;
 
 
+-- Update: last activity
+DELIMITER &&  
+CREATE PROCEDURE update_last_activity (IN in_idUser INT)  
+BEGIN  
+	
+	UPDATE pi.user SET user.lastActivity = now() WHERE user.idUser = in_idUser;
+        
+END &&  
+DELIMITER ;
