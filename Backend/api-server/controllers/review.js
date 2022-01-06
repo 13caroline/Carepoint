@@ -42,6 +42,16 @@ Out.update = (id, review) => {
     });
 }
 
+Out.addNewReview = (description, rating, give, receive) => {
+    return Review.create({
+        description: description,
+        rating: rating,
+        postDate: new Date(),
+        idGive: give,
+        idReceive: receive,
+    })
+}
+
 //Delete a Review by id
 Out.remove = (id) => {
     return Review.destroy({ where: { 'idReview': id } });

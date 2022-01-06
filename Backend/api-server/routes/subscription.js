@@ -5,7 +5,7 @@ const auth = require('../authorization/auth')
 const user_controller = require('../controllers/user')
 const Subscription_controller = require('../controllers/subscription')
 
-function getSubscriptionType(n) {
+function getSubscriptionType_SP(n) {
     var ret = 0;
 
     switch (n){
@@ -33,7 +33,7 @@ function getSubscriptionType(n) {
     return ret;
 }
 
-function getVisibilityType(n) {
+function getVisibilityType_SP(n) {
     var ret = 0;
 
     switch (n){
@@ -61,48 +61,62 @@ function getVisibilityType(n) {
     return ret;
 }
 
+function getSubscriptionType_CP(n) {
+    var ret = 0;
+
+    switch (n){
+        case '0':
+            ret = 1;
+            break;
+
+        case '1':
+            ret = 8;
+            break;
+            
+        case '3':
+            ret = 9;
+            break;
+            
+        case '6':
+            ret = 10;
+            break;
+            
+        default:
+            console.log("Entered default case on switch")
+            break;
+    }
+
+    return ret;
+}
+
+function getVisibilityType_CP(n) {
+    var ret = 0;
+
+    switch (n){
+        case '1':
+            ret = 1;
+            break;
+
+        case '3':
+            ret = 2;
+            break;
+            
+        case '6':
+            ret = 3;
+            break;
+            
+        default:
+            ret = 4;
+            console.log("Entered default case on switch")
+            break;
+    }
+
+    return ret;
+}
+
 /****************************************************************************************
  *                                   GET
  ****************************************************************************************/
-
-// Initial purchase of subscription
-router.get('/', (req, res, next) => {
-    
-    var token = req.body.token;
-    var normalSub = req.body.subscription;
-    var visiSub = req.body.visibility;
-
-    var email = auth.getEmailFromJWT(token);
-
-    if(normalSub===undefined || visiSub===undefined){
-        res.status(401).jsonp({error: "Campos da query vazios!"})
-    }else{
-        
-        var normal = getSubscriptionType(normalSub);
-        var visibility = getVisibilityType(visiSub);
-
-        user_controller.consult(email)
-        .then((user) => {
-
-            Subscription_controller.activateSubscriptionNormal(user.idUser, normal)
-            .then((dt) => {
-
-                if(visiSub != '0'){
-                    
-                    Subscription_controller.activateSubscriptionVisibility(user.idUser, visibility)
-                    .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
-                    .catch((err) => res.status(500).jsonp({error: err}))
-
-                }else{
-                    res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
-                }
-            })
-            .catch((err1) => res.status(500).jsonp({error: err1}))
-        })
-        .catch((erro) => res.status(500).jsonp({error: erro}))
-    }
-});
-
 
 // Consult a subscription given his email address
 router.get('/:id', function(req, res, next) {
@@ -118,12 +132,70 @@ router.get('/:id', function(req, res, next) {
  ****************************************************************************************/
 
 
-// Insert a new subscription
-router.post('/', function(req, res) {
-    Subscription_controller.insert(req.body)
-        .then(data => { res.status(201).jsonp({ data: data }) })
-        .catch(e => res.status(500).jsonp({ error: e }))
+// Initial purchase of subscription
+router.post('/', (req, res, next) => {
+    
+    var token = req.body.token;
+    var normalSub = req.body.subscription;
+    var visiSub = req.body.visibility;
+
+    var email = auth.getEmailFromJWT(token);
+    var type = auth.getTypeFromJWT(token);
+
+    if(normalSub===undefined || visiSub===undefined){
+        res.status(401).jsonp({error: "Campos da query vazios!"})
+    }else{
+        
+        if(type == 3){
+            var normal = getSubscriptionType_SP(normalSub);
+            var visibility = getVisibilityType_SP(visiSub);
+
+            user_controller.consult(email)
+            .then((user) => {
+
+                Subscription_controller.activateSubscriptionNormal_SP(user.idUser, normal)
+                .then((dt) => {
+
+                    if(visiSub != '0'){
+                    
+                        Subscription_controller.activateSubscriptionVisibility_SP(user.idUser, visibility)
+                        .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
+                        .catch((err) => res.status(500).jsonp({error: err}))
+
+                    }else{
+                        res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
+                    }
+                })
+                .catch((err1) => res.status(500).jsonp({error: err1}))
+            })
+            .catch((erro) => res.status(500).jsonp({error: erro}))
+        }else{
+            var normal = getSubscriptionType_CP(normalSub);
+            var visibility = getVisibilityType_CP(visiSub);
+
+            user_controller.consult(email)
+            .then((user) => {
+
+                Subscription_controller.activateSubscriptionNormal_CP(user.idUser, normal)
+                .then((dt) => {
+
+                    if(visiSub != '0'){
+                    
+                        Subscription_controller.activateSubscriptionVisibility_CP(user.idUser, visibility)
+                        .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
+                        .catch((err) => res.status(500).jsonp({error: err}))
+
+                    }else{
+                        res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
+                    }
+                })
+                .catch((err1) => res.status(500).jsonp({error: err1}))
+            })
+            .catch((erro) => res.status(500).jsonp({error: erro}))
+        }
+    }
 });
+
 
 
 /****************************************************************************************

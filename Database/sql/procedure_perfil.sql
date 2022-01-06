@@ -6,6 +6,7 @@ DROP PROCEDURE IF EXISTS get_sp_category_info;
 DROP PROCEDURE IF EXISTS get_average_rating;
 DROP PROCEDURE IF EXISTS get_service_provider_profile;
 DROP PROCEDURE IF EXISTS get_service_provider_profile_v2;
+DROP PROCEDURE IF EXISTS get_company_profile;
 
 -- Returns: average rating or null if no reviews
 DELIMITER &&  

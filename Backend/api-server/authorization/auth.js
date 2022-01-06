@@ -35,6 +35,16 @@ Out.getTypeFromJWT = (token) => {
     return type;
 }
 
+Out.validToken = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
+        if(!err){
+            next()
+        }else{
+            res.status(500).jsonp({ error: err })
+        }
+    })
+}
+
 //Verifica se token fornecido tem autorização de Admin.
 Out.checkAdminLevel = (req, res, next) => {
     jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
