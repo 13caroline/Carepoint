@@ -139,22 +139,25 @@ router.put('/:id', function(req, res, next) {
 */
 
 router.put('/update', auth.matchUsers, (req, res, next) => {
-    
+    console.log(req.body.type)
     switch (req.body.type){
         case '2':
             User.updateConsumer(req.body)
             .then((user) => res.status(201).jsonp(user))
             .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+            break;
         
         case '3':
             User.updateServiceProvider(req.body)
             .then((user) => res.status(201).jsonp(user))
             .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+            break;
 
         case '4':
             User.updateCompany(req.body)
             .then((user) => res.status(201).jsonp(user))
             .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+            break;
 
         default:
             break;
