@@ -52,7 +52,7 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE get_consumer_profile (IN em VARCHAR(90))
 BEGIN
-	SELECT user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY, file.image FROM user
+	SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
 END &&
