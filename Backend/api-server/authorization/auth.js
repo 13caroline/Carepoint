@@ -172,3 +172,20 @@ Out.matchUsers = (req, res, next) => {
         }
     })
 }
+
+Out.matchReview = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
+        if(!err){
+            user_controller.consult(payload.email)
+            .then((user) => {
+                if(user.idUser == req.body.idGive){
+                    next()
+                }else{
+                    res.status(401).jsonp("No permission.")
+                }
+            })
+        }else{
+            res.status(500).jsonp("Invalid JWT token.")
+        }
+    })
+}

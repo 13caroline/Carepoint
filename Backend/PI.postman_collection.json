@@ -53,25 +53,25 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Gore Magala",
+									"value": "Iroha Oshi",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theTest3745ads3@gmail.com2sfd",
+									"value": "theUserTestingEmail_3@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "6666",
+									"value": "123456789",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "sex",
-									"value": "M",
+									"value": "F",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -211,13 +211,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Jenkin",
+									"value": "Ganyu",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theTest2@gmail.com24",
+									"value": "void",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -259,7 +259,7 @@
 								},
 								{
 									"key": "firm",
-									"value": "idk",
+									"value": "non-existent",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -894,49 +894,6 @@
 					"name": "Subscription",
 					"item": [
 						{
-							"name": "Add Subscription (durante registo) (R)",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"body": {
-									"mode": "urlencoded",
-									"urlencoded": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbWlAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MTQxNjc0MywiZXhwIjoxNjQxNDIwMzQzfQ.vjo5fltMnoFJfF53lUoqd5gCR-hezm2PgXqtFKZ27mw",
-											"type": "text"
-										},
-										{
-											"key": "subscription",
-											"value": "3",
-											"type": "text"
-										},
-										{
-											"key": "visibility",
-											"value": "1",
-											"type": "text"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://localhost:9040/subscription/",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "9040",
-									"path": [
-										"subscription",
-										""
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Get list of subscriptions",
 							"event": [
 								{
@@ -1140,6 +1097,46 @@
 									"path": [
 										"subscription",
 										"{{new_subscription_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Subscription (durante registo) (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InZvaWQiLCJsZXZlbCI6NCwiaWF0IjoxNjQxNDkwMTE2LCJleHAiOjE2NDE0OTM3MTZ9.bF_-JyRdupLVdl5rISMHlxxFF-12SvGa7FK1dscObJk",
+											"type": "text"
+										},
+										{
+											"key": "subscription",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "visibility",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/subscription/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"subscription",
+										""
 									]
 								}
 							},
@@ -1366,7 +1363,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QyQGdtYWlsLmNvbTI0IiwibGV2ZWwiOjQsImlhdCI6MTY0MTQ4MzQ1MSwiZXhwIjoxNjQxNDg3MDUxfQ.3PnAqsxTIapQTlUYzJ4r83YE6nN_1bIy3nXSo56JkUY",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MTQ5NjMyMywiZXhwIjoxNjQxNDk5OTIzfQ.afpR2JqwvGFqcLh2wsaIwJKkQUkgYYn12w41IuPjHnk",
 											"type": "default"
 										}
 									]
@@ -1537,7 +1534,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/users/updatePhoto",
+									"raw": "http://localhost:9040/users/update",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1545,7 +1542,7 @@
 									"port": "9040",
 									"path": [
 										"users",
-										"updatePhoto"
+										"update"
 									]
 								}
 							},
@@ -1561,43 +1558,43 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMkBnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTAxMTgzLCJleHAiOjE2NDE1MDQ3ODN9.rhBO4QesURunq39nog03NkHTSHiIzyn-Do3YMaGVkAQ",
 											"type": "default"
 										},
 										{
 											"key": "idUser",
-											"value": "",
+											"value": "889",
 											"type": "default"
 										},
 										{
 											"key": "type",
-											"value": "",
+											"value": "2",
 											"type": "default"
 										},
 										{
 											"key": "name",
-											"value": "",
+											"value": "Kazama Iroha",
 											"type": "default"
 										},
 										{
 											"key": "email",
-											"value": "",
+											"value": "theUserTestingEmail_2@gmail.com",
 											"type": "default"
 										},
 										{
 											"key": "location",
-											"value": "",
+											"value": "1",
 											"type": "default"
 										},
 										{
 											"key": "phoneNumber",
-											"value": "",
+											"value": "910214632",
 											"type": "default"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/users/updatePhoto",
+									"raw": "http://localhost:9040/users/update",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1605,7 +1602,7 @@
 									"port": "9040",
 									"path": [
 										"users",
-										"updatePhoto"
+										"update"
 									]
 								}
 							},
@@ -1677,7 +1674,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/users/updatePhoto",
+									"raw": "http://localhost:9040/users/update",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -1685,7 +1682,7 @@
 									"port": "9040",
 									"path": [
 										"users",
-										"updatePhoto"
+										"update"
 									]
 								}
 							},
@@ -2531,45 +2528,6 @@
 							"response": []
 						},
 						{
-							"name": "Create a reveiw",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"new_review = pm.response.json().data.idReview;",
-											"pm.collectionVariables.set(\"new_review\", new_review);",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"description\": \"muito bom trabalho\",\n    \"rating\": 8,\n    \"postDate\": \"2023-09-08T01:58:50.000Z\",\n    \"idGive\": \"{{id_giver}}\",\n    \"idReceive\": \"{{id_receiver}}\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{api-server}}/review",
-									"host": [
-										"{{api-server}}"
-									],
-									"path": [
-										"review"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "Update a review",
 							"request": {
 								"method": "PUT",
@@ -2609,6 +2567,101 @@
 									"path": [
 										"review",
 										"{{new_review}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Review (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTYzNDQ3LCJleHAiOjE2NDE1NjcwNDd9._-Bfiwaa5_mvK4MB77DCsiaqXupjmKSyjjSG-FO5Xag",
+											"type": "default"
+										},
+										{
+											"key": "receivingId",
+											"value": "70",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "It really sucked, he trashed my lil'plant",
+											"type": "default"
+										},
+										{
+											"key": "rating",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/review/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"review",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create a new Review (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTYzNDQ3LCJleHAiOjE2NDE1NjcwNDd9._-Bfiwaa5_mvK4MB77DCsiaqXupjmKSyjjSG-FO5Xag",
+											"type": "text"
+										},
+										{
+											"key": "idReview",
+											"value": "202",
+											"type": "text"
+										},
+										{
+											"key": "idGive",
+											"value": "890",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "very good",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/review/edit",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"review",
+										"edit"
 									]
 								}
 							},

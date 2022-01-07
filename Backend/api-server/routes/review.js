@@ -55,6 +55,11 @@ router.post('/', auth.validToken, (req, res) => {
  *                                   PUT
  ****************************************************************************************/
 
+router.put('/edit', auth.matchReview, (req, res, next) => {
+    Review.update(req.body)
+    .then((dt) => res.status(200).jsonp({message: "Review editada com sucesso."}))
+    .catch((err) => res.status(500).jsonp({error: err}))
+})
 
 // Update a Review
 router.put('/:id', function(req, res, next) {

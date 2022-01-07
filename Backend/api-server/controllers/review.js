@@ -29,17 +29,11 @@ Out.insert = (review) => {
 }
 
 // Update a Review
-Out.update = (id, review) => {
-    return Review.update({
-        description: review.description,
-        rating: review.rating,
-        postDate: review.postDate,
-        idGive: review.idGive,
-        idReceive: review.idReceive,
-    }, {
-        where: { 'idReview': id },
-        returning: true,
-    });
+Out.update = (body) => {
+    return Review.update(
+        {description: body.description, rating: body.rating},
+        {where: { 'idReview' : body.idReview}}
+    )
 }
 
 Out.addNewReview = (description, rating, give, receive) => {
