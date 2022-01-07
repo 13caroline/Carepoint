@@ -10,6 +10,7 @@ DROP PROCEDURE IF EXISTS update_joboffer;
 DROP PROCEDURE IF EXISTS update_serviceProvider_vip;
 DROP PROCEDURE IF EXISTS update_company_vip;
 DROP PROCEDURE IF EXISTS update_last_activity;
+DROP PROCEDURE IF EXISTS update_averageRating;
 
 -- Update: consumer info
 DELIMITER &&  
@@ -380,6 +381,18 @@ CREATE PROCEDURE update_last_activity (IN in_idUser INT)
 BEGIN  
 	
 	UPDATE pi.user SET user.lastActivity = now() WHERE user.idUser = in_idUser;
+        
+END &&  
+DELIMITER ;
+
+
+-- Update: average rating (in case someone changes the review)
+DELIMITER &&  
+CREATE PROCEDURE update_averageRating (IN in_idUser INT)  
+BEGIN  
+
+	SET @new_avg = (SELECT AVG(rating) FROM review WHERE review.idReceive = in_idUser);
+	UPDATE pi.serviceprovider SET serviceprovider.averageRating = @new_avg WHERE serviceprovider.idSP = in_idUser;
         
 END &&  
 DELIMITER ;
