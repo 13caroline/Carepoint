@@ -150,6 +150,7 @@
                       v-model="date"
                       append-icon="fas fa-calendar-alt"
                       readonly
+                      color="#78c4d4"
                       dense
                       outlined
                       required

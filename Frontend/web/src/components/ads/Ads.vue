@@ -49,7 +49,7 @@
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. 
+                  laboris nisi ut aliquip ex ea commodo consequat.
                 </span>
               </v-row>
             </v-card-text>
@@ -61,45 +61,38 @@
 </template>
 
 <script>
-import axios from "axios"
-import moment from "moment"
+import axios from "axios";
+import moment from "moment";
 export default {
   name: "Ads",
 
   data() {
     return {
-      image:'',
+      image: "",
       styleObject: { border: "1px solid #78C4D4" },
-      ads: [
-        
-      ],
+      ads: [],
     };
   },
   methods: {
-    difDate(dateLA){
-      return moment(dateLA).locale('pt').fromNow()
-  },
-  processImage(img){
-    return 'data:image/jpeg;base64,' + btoa(img);
-  },
-  infoSP(id){
-    this.$router.push("/ad/info/"+id)
-  }
+    difDate(dateLA) {
+      return moment(dateLA).locale("pt").fromNow();
+    },
+    processImage(img) {
+      return "data:image/jpeg;base64," + btoa(img);
+    },
+    infoSP(id) {
+      this.$router.push("/ad/info/" + id);
+    },
   },
 
-    created: async function () {
+  created: async function () {
     try {
       let response = await axios.get(
-        "http://localhost:9040/search/?page=1",
-        {
-          //id: this.id,
-        },
-        //{ headers: { Authorization: "Bearer " + store.getters.token } }
-      );
+        "http://localhost:9040/search/?page=1");
       if (response) {
-         this.ads = response.data.ServiceProviders
-        
-   /*this.ads = response.data.ServiceProviders.map(an => {
+        this.ads = response.data.ServiceProviders;
+        console.log(response.data)
+        /*this.ads = response.data.ServiceProviders.map(an => {
       an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
          })*/
       }
@@ -111,7 +104,7 @@ export default {
         timeout: 4000,
       });
     }
-  }
+  },
 };
 </script>
 

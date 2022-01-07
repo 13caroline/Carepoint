@@ -83,12 +83,12 @@ const routes = [
   {
     path: '/consumer/page',
     name: 'Consumer Profile',
-    component: () => import(/* webpackChunkName: "about" */'../views/consumer/ConsumerPage.vue')
+    component: () => import(/* webpackChunkName: "about" */'../views/consumer/Homepage.vue')
   },
 
   // Consumer's advertisements
   {
-    path: '/consumer/my/advirtisements',
+    path: '/consumer/my/advertisements',
     name: 'My advertisements',
     component: () => import('../views/consumer/MyAdvertisements')
   },

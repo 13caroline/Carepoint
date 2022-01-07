@@ -1,7 +1,6 @@
 <template>
   <div id="page">
     <app-bar />
-    
     <view-ads />
     <top-button/>
     <Foot />

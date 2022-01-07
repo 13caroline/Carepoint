@@ -6,7 +6,6 @@
           <search />
         </v-col>
         <v-col cols = "12" md = "10" lg ="10" class="ml-auto mb-5">
-          <h3 class="mb-2"> X resultados encontrados </h3>
           <ads /> 
         </v-col>
       </v-row>
@@ -17,11 +16,13 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   components: {
     Ads: () => import("@/components/ads/Ads"),
     Search: () => import("@/components/global/Search"),
   },
+
 };
 </script>

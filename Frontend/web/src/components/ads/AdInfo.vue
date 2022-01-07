@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="w-100" align="start">
-      <v-col cols="auto">
+      <v-col cols="12" md="2">
         <div class="foto h-100 mt-5">
           <v-img
             :src="image"
@@ -19,50 +19,62 @@
             </template>-->
           </v-img>
         </div>
-        <p class="infos font-weight-bold mt-6">Contactos</p>
+
+        <div class="infos font-weight-bold mt-6">Contactos</div>
+        <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
+          Sem dados de contacto
+        </div>
         <div class="infos">{{ serviceProviderData.phoneNumber }}</div>
         <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" sm>
-        <v-card class="h-100 mt-2" flat>
-          <v-list-item>
-            <v-list-item-content>
-              <div>
-                <p class="infos font-weight-bold">{{ serviceProviderData.name }}</p>
-              </div>
-              <p class="infos font-weight-bold">Anos de experiência</p>
-              <div
-               v-for="(a, index) in serviceProvider.categories"
-              :key="index"
-              >
-              <span>{{a.name}} : {{a.experience}}</span>
-                
-              </div>
-              <div>
-                <p class="desc mt-3">
-                  {{serviceProviderData.description}}
-                </p>
-                <v-divider></v-divider>
-              </div>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+      <v-col cols="12" md="10" sm>
+        <div>
+          <p class="infos font-weight-bold headline">
+            {{ serviceProviderData.name }}
+          </p>
+        </div>
+        <p class="infos font-weight-bold mb-3">Anos de experiência</p>
+        <v-row>
+          <v-col
+            cols="12"
+            md="2"
+            v-for="(a, index) in serviceProvider.categories"
+            :key="index"
+          >
+            <v-tooltip top color="#78C4D4">
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon outlined color="#78C4D4" v-bind="attrs" v-on="on">
+                  <v-icon color="#78C4D4" small>{{ getIcon(a.name) }}</v-icon>
+                </v-btn>
+              </template>
+              <span>{{ a.name }}</span>
+            </v-tooltip>
+
+            <span class="font-weight-bold ml-2">{{ a.experience }} anos</span>
+          </v-col>
+        </v-row>
+        <div>
+          <p class="desc mt-3">
+            {{ serviceProviderData.description }}
+          </p>
+          <v-divider></v-divider>
+        </div>
       </v-col>
     </v-row>
 
-    <v-row class="w-100 ma-0">
-      <v-col cols="12" md="2" sm="3">
+    <v-row class="w-100" align="start">
+      <v-col cols="12" md="2">
         <span class="infos font-weight-bold">Classificação global</span>
         <div class="mt-4"><span class="classification">9.1</span> /10</div>
       </v-col>
 
-      <v-col cols="12" md="10" sm="9">
+      <v-col cols="12" md="10" sm>
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
             <v-chip
-              v-for="(c,index) in serviceProvider.categories"
+              v-for="(c, index) in serviceProvider.categories"
               :key="index"
               outlined
               color="#78C4D4"
@@ -75,12 +87,8 @@
       </v-col>
     </v-row>
 
-    <v-row class="w-100 ma-0">
-      <v-col cols="12" md="4" sm="4">
-        
-      </v-col>
-
-      <v-col cols="12" md="8" sm="8">
+    <v-row class="w-100" align="start">
+      <v-col cols="12" md="12" sm>
         <p class="infos font-weight-bold">Horário</p>
         <!-- <VueSchedule
           v-model="schedule"
@@ -91,36 +99,43 @@
       </v-col>
     </v-row>
 
-    <v-row
-      class="w-100 ma-0"
-      v-for="(a, index) in serviceProvider.reviews"
-      :key="index"
-    >
-      <v-card
-        class="card pa-5 rounded-xl overflow-auto mt-2"
-        outlined
-        tile
-        :style="styleObject"
-        width="100%"
-        to="/ad/info"
+    <v-row class="w-100" align="start">
+      <v-col cols="12" md="12" sm>
+        <span class="infos font-weight-bold">Comentários</span>
+      </v-col>
+
+      <div
+        class="w-100 ma-0"
+        v-for="(a, index) in serviceProvider.reviews"
+        :key="index"
       >
-      <v-row align="center">
-        <v-col cols="12" md="11" sm="11">
-          <div>
-            <span class="font-weight-bold">{{formatDate(a.postDate)}}</span>
-          </div>
-          <div justify="center" class="mx-auto">
-            <span class="infos ">
-              {{ a.description }}
-            </span>
-          </div>
-        </v-col>
-        <v-col cols="12" md="1" sm="1" >
-            <span class="classification">{{ a.rating }}</span> /10
-        
-        </v-col>
-        </v-row>
-      </v-card>
+        <v-card
+          class="card pa-5 rounded-xl overflow-auto mt-2"
+          outlined
+          tile
+          :style="styleObject"
+          width="100%"
+          to="/ad/info"
+        >
+          <v-row align="center">
+            <v-col cols="12" md="11" sm="11">
+              <div>
+                <span class="font-weight-bold">{{
+                  formatDate(a.postDate)
+                }}</span>
+              </div>
+              <div justify="center" class="mx-auto">
+                <span class="infos">
+                  {{ a.description }}
+                </span>
+              </div>
+            </v-col>
+            <v-col cols="12" md="1" sm="1">
+              <span class="classification">{{ a.rating }}</span> /10
+            </v-col>
+          </v-row>
+        </v-card>
+      </div>
     </v-row>
   </v-container>
 </template>
@@ -133,21 +148,19 @@ import moment from "moment";
 
 export default {
   name: "Ads",
-  props:["id"],
+  props: ["id"],
   data() {
     return {
-      image:'',
+      image: "",
       styleObject: { border: "1px solid #78c4d4" },
-      category: ["Companhia", "Compras", "Medicação", "Higiene"],
-      schedule: {
-        0: [],
-        1: [],
-        2: [],
-        3: [],
-        4: [],
-        5: [],
-        6: [],
-      },
+      category: [
+        { name: "Companhia", icon: "fas fa-user-friends" },
+        { name: "Compras", icon: "fas fa-shopping-cart" },
+        { name: "Medicação", icon: "fas fa-tablets" },
+        { name: "Higiene", icon: "fas fa-pump-medical" },
+        { name: "Passeios", icon: "fas fa-walking" },
+        { name: "Refeições", icon: "fas fa-utensils" },
+      ],
       serviceProviderData: {},
       serviceProvider: {
         reviews: [
@@ -163,7 +176,15 @@ export default {
   },
   methods: {
     formatDate(d) {
-      return moment(d,moment.ISO_8601).locale('pt').format("MMMM Do YYYY, h:mm:ss a");
+      return moment(d, moment.ISO_8601)
+        .locale("pt")
+        .format("MMMM Do YYYY, h:mm:ss a");
+    },
+    getIcon(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+      return Object.values(row[0])[1];
     },
   },
   components: {
@@ -173,16 +194,13 @@ export default {
   created: async function () {
     try {
       let response = await axios.get(
-        "http://localhost:9040/serviceProvider/?id="+this.id,
-        {
-          //id: this.id,
-        }
-        //{ headers: { Authorization: "Bearer " + store.getters.token } }
+        "http://localhost:9040/serviceProvider/?id=" + this.id
       );
-      console.log(response)
-      this.serviceProviderData = response.data.ServiceProvider[0],
-      this.serviceProvider = response.data;
-      this.image= 'data:image/jpeg;base64,' + btoa(this.serviceProviderData.image.data);
+      console.log(response.data);
+      (this.serviceProviderData = response.data.ServiceProvider[0]),
+        (this.serviceProvider = response.data);
+      this.image =
+        "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,
