@@ -198,7 +198,6 @@ export default {
   },
   created: async function () {
     try {
-      console.log(store.getters.token)
       let response = await axios.post(
         "http://localhost:9040/users/perfil",
         {
@@ -206,7 +205,6 @@ export default {
           "token": store.getters.token
           
         }
-        //{ headers: { Authorization: "Bearer " + store.getters.token } }
       );
       console.log(response.data)
       this.user = response.data.perfil[0];

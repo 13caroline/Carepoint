@@ -99,6 +99,13 @@ const routes = [
     name: 'Post Ad',
     component: () => import('../views/consumer/PostAd.vue')
   },
+
+  // Service Providers profile
+  {
+    path: '/service/provider/page',
+    name: 'SP Profile',
+    component: () => import('../views/serviceProviders/Profile.vue')
+  },
 ]
 
 const router = new VueRouter({

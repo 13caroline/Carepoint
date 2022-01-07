@@ -204,7 +204,6 @@ export default {
 
     confirm: async function() {
       if (this.$refs.form.validate()) {
-        console.log(this.user.email)
         try {
           let response = await axios.put("http://localhost:9040/users/update", {
             token: store.getters.token,
