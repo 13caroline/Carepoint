@@ -18,12 +18,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "theTest@gmail.com",
+									"value": "theUserTestingEmail_3@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "teste",
+									"value": "123456789",
 									"type": "text"
 								}
 							]
@@ -2582,12 +2582,12 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTYzNDQ3LCJleHAiOjE2NDE1NjcwNDd9._-Bfiwaa5_mvK4MB77DCsiaqXupjmKSyjjSG-FO5Xag",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTc3MDQxLCJleHAiOjE2NDE1ODA2NDF9.qcqZukAitpdmxIDpKtorW_-9uiWXi_hCSsID3f2Q3Jc",
 											"type": "default"
 										},
 										{
 											"key": "receivingId",
-											"value": "70",
+											"value": "82",
 											"type": "default"
 										},
 										{
@@ -2627,18 +2627,23 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTYzNDQ3LCJleHAiOjE2NDE1NjcwNDd9._-Bfiwaa5_mvK4MB77DCsiaqXupjmKSyjjSG-FO5Xag",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNTc3MDQxLCJleHAiOjE2NDE1ODA2NDF9.qcqZukAitpdmxIDpKtorW_-9uiWXi_hCSsID3f2Q3Jc",
 											"type": "text"
 										},
 										{
 											"key": "idReview",
-											"value": "202",
+											"value": "203",
 											"type": "text"
 										},
 										{
 											"key": "idGive",
 											"value": "890",
 											"type": "text"
+										},
+										{
+											"key": "idReceive",
+											"value": "82",
+											"type": "default"
 										},
 										{
 											"key": "description",

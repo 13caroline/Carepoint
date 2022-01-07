@@ -1,7 +1,7 @@
 // Controller for the review model
 
 const Review = require('../models/review')
-
+const dbconfig = require('../models/Config/Database_Info')
 
 var Out = module.exports;
 
@@ -44,6 +44,13 @@ Out.addNewReview = (description, rating, give, receive) => {
         idGive: give,
         idReceive: receive,
     })
+}
+
+Out.atualizarRating = (rev) => {
+    return dbconfig.sequelize.query('CALL update_averageRating (:id)',
+    {replacements: {
+        id: rev
+    }})
 }
 
 //Delete a Review by id
