@@ -37,13 +37,13 @@ Out.update = (body) => {
 }
 
 Out.addNewReview = (description, rating, give, receive) => {
-    return Review.create({
-        description: description,
-        rating: rating,
-        postDate: new Date(),
-        idGive: give,
-        idReceive: receive,
-    })
+    return dbconfig.sequelize.query('CALL createReview (:desc, :rt, :idG, :idR)',
+        {replacements: {
+            desc: description,
+            rt: rating,
+            idG: give,
+            idR: receive
+        }})
 }
 
 Out.atualizarRating = (rev) => {
