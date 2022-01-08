@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="w-100" align="start">
       <v-col cols="12" md="2">
-        <div class="foto h-100 mt-5">
+        <div class="foto h-100">
           <v-img
             :src="image"
             aspect-ratio="1"
@@ -19,13 +19,6 @@
             </template>-->
           </v-img>
         </div>
-
-        <div class="infos font-weight-bold mt-6">Contactos</div>
-        <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
-          Sem dados de contacto
-        </div>
-        <div class="infos">{{ serviceProviderData.phoneNumber }}</div>
-        <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
       <v-col cols="12" md="10" sm>
@@ -58,15 +51,19 @@
           <p class="desc mt-3">
             {{ serviceProviderData.description }}
           </p>
-          <v-divider></v-divider>
         </div>
+        <v-divider></v-divider>
       </v-col>
     </v-row>
 
     <v-row class="w-100" align="start">
       <v-col cols="12" md="2">
-        <span class="infos font-weight-bold">Classificação global</span>
-        <div class="mt-4"><span class="classification">9.1</span> /10</div>
+        <div class="infos font-weight-bold">Contactos</div>
+        <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
+          Sem dados de contacto
+        </div>
+        <div class="infos">{{ serviceProviderData.phoneNumber }}</div>
+        <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
       <v-col cols="12" md="10" sm>
@@ -88,21 +85,28 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="12" sm>
+      <v-col cols="12" md="2" sm>
+        <p class="infos font-weight-bold">Classificação global</p>
+        <div>
+          <v-icon color="#FFE082" small>fas fa-star</v-icon>
+          <span class="font-weight-bold ma-2">9.1</span>
+        </div>
+      </v-col>
+      <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <!-- <VueSchedule
-          v-model="schedule"
-          bg="white"
-            bgHover="gray"
-            bgActive="#c0e4ec"
-        />-->
+        <schedule/>
       </v-col>
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="12" sm>
+      <v-col cols="12" md="3" sm>
         <span class="infos font-weight-bold">Comentários</span>
       </v-col>
+
+      <v-col cols="12" md="9" sm class="d-flex justify-end">
+        <add-review :dados="id"/>
+      </v-col>
+    </v-row>
 
       <div
         class="w-100 ma-0"
@@ -110,12 +114,11 @@
         :key="index"
       >
         <v-card
-          class="card pa-5 rounded-xl overflow-auto mt-2"
+          class="pa-5 rounded-xl overflow-auto mt-2"
           outlined
           tile
           :style="styleObject"
           width="100%"
-          to="/ad/info"
         >
           <v-row align="center">
             <v-col cols="12" md="11" sm="11">
@@ -131,18 +134,25 @@
               </div>
             </v-col>
             <v-col cols="12" md="1" sm="1">
-              <span class="classification">{{ a.rating }}</span> /10
+              <div
+                class="
+                  pa-4
+                  classification
+                  rounded-circle
+                  d-inline-block
+                  font-weight-bold
+                "
+              >
+                <span>{{ a.rating }}</span>
+              </div>
             </v-col>
           </v-row>
         </v-card>
       </div>
-    </v-row>
   </v-container>
 </template>
 
 <script>
-import "vue-daily-scheduler/dist/vue-schedule.min.css";
-//import VueSchedule from "vue-daily-scheduler";
 import axios from "axios";
 import moment from "moment";
 
@@ -162,23 +172,14 @@ export default {
         { name: "Refeições", icon: "fas fa-utensils" },
       ],
       serviceProviderData: {},
-      serviceProvider: {
-        reviews: [
-          {
-            postDate: "12/12/2020",
-            description:
-              "Isto é uma review da pessoa. Muito agradavel, fez tudo o pedido e por um preço acessível, recomendo 100%",
-            rating: 9.5,
-          },
-        ],
-      },
+      serviceProvider: {},
     };
   },
   methods: {
     formatDate(d) {
       return moment(d, moment.ISO_8601)
         .locale("pt")
-        .format("MMMM Do YYYY, h:mm:ss a");
+        .format("DD MMMM YYYY, HH:MM:SS");
     },
     getIcon(c) {
       var row = this.category.filter((obj) => {
@@ -188,7 +189,8 @@ export default {
     },
   },
   components: {
-    // VueSchedule,
+    Schedule: () => import("@/components/ads/Schedule"),
+    AddReview: () => import("@/components/dialogs/AddReview")
   },
 
   created: async function () {
@@ -196,9 +198,9 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/?id=" + this.id
       );
-      console.log(response.data);
       (this.serviceProviderData = response.data.ServiceProvider[0]),
         (this.serviceProvider = response.data);
+        console.log(response.data)
       this.image =
         "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
     } catch (e) {
@@ -226,14 +228,10 @@ export default {
   width: 170px;
 }
 .classification {
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  padding: 10px;
   background: #fff;
   border: 1px solid #78c4d4;
   color: #000;
   text-align: center;
-  font: 20px Arial, sans-serif;
+  font: 18px Arial, sans-serif;
 }
 </style>

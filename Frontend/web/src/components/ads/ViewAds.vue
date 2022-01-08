@@ -9,6 +9,7 @@
           <ads /> 
         </v-col>
       </v-row>
+      <top-button/>
     </v-container>
   </div>
 </template>
@@ -22,6 +23,7 @@ export default {
   components: {
     Ads: () => import("@/components/ads/Ads"),
     Search: () => import("@/components/global/Search"),
+    TopButton: () => import("@/components/global/TopButton")
   },
 
 };
