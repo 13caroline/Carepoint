@@ -208,6 +208,9 @@ export default {
       );
       console.log(response.data)
       this.user = response.data.perfil[0];
+      if(this.user.sex=="M")this.user.sex ="Masculino"
+      else if(this.user.sex=="F")this.user.sex ="Feminino"
+      else this.user.sex = "Indefinido"
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,
