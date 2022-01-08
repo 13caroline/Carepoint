@@ -77,7 +77,7 @@ DELIMITER &&
 CREATE PROCEDURE get_company_profile (IN em VARCHAR(90))
 BEGIN
 	SELECT user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY,
-		   company.link, company.firm, company.nipc, company.endSub, company.endSubVip, pi.add.description, file.image FROM user
+		   company.link, company.firm, company.nipc, company.endSub, company.endSubVip, pi.add.description, subscription.type, subscription.duration, subscription.value, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN company ON user.idUser = company.idCompany
     INNER JOIN pi.add ON pi.add.idCompany = company.idCompany
