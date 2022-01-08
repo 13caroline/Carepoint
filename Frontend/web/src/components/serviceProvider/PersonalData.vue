@@ -1,0 +1,181 @@
+<template>
+  <v-container>
+      <v-card flat>
+        <v-row>
+          <v-col cols="auto" class="ml-auto">
+            <image-upload />
+            <v-btn
+              class="body-2 rounded-xl button"
+              small
+              color="#78C4D4"
+              outlined
+              dark
+              to="/consumer/edit/profile"
+            >
+              Editar dados
+              <v-icon small class="ml-2">fas fa-pen</v-icon>
+            </v-btn>
+
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="body-2 ma-2"
+                  small
+                  color="#78C4D4"
+                  v-bind="attrs"
+                  v-on="on"
+                  fab
+                  dark
+                  @click="wannaBeSP()"
+                >
+                  <v-icon small>fas fa-hand-holding-medical</v-icon>
+                </v-btn>
+              </template>
+              <span class="caption">Quero ser prestador</span>
+            </v-tooltip>
+          </v-col>
+        </v-row>
+
+        <h3 class="group font-weight-light text-uppercase">
+          Dados Pessoais
+        </h3>
+        <v-divider></v-divider>
+        <v-row class="w-100" align="start">
+          <v-col cols="12" sm>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Nome</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.name}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Localidade</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.locationName}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Sexo</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.sex}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+          <v-col cols="auto" order="first" order-sm="last">
+            <div class="foto h-100 mt-5">
+              <v-img
+                src="@/assets/userImgTest.jpg"
+                aspect-ratio="1"
+                class="grey lighten-2 mx-2 rounded"
+                cover
+              >
+                <template v-slot:placeholder>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-progress-circular
+                      indeterminate
+                      color="grey lighten-5"
+                    ></v-progress-circular>
+                  </v-row>
+                </template>
+              </v-img>
+            </div>
+          </v-col>
+        </v-row>
+
+        <h3 class="mt-6 group font-weight-light text-uppercase">
+          Dados de Acesso
+        </h3>
+        <v-divider></v-divider>
+
+        <v-row class="w-100" align="start">
+          <v-col>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">E-mail</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.email}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos mb-0">Palavra-passe</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos mb-0">*****</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
+
+        <h3 class="mt-6 group font-weight-light text-uppercase">
+          Dados de Contacto
+        </h3>
+        <v-divider></v-divider>
+        <v-row class="w-100" align="start">
+          <v-col>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos mb-0">Contacto telefónico</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos mb-0">{{user.phoneNumber}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card>
+    </v-container>
+</template>
+
+<script>
+  export default{
+    props: ["user"],
+    data(){
+      return{
+        
+      }
+    }
+  }
+
+</script>
