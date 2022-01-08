@@ -3,7 +3,7 @@
     <Bar />
     <v-container>
      
-      <v-tabs v-model="tab" color="#2596be" background-color="#fafafa">
+      <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa">
         <v-tab v-for="item in items" :key="item.tab">
           {{ item.tab }}
         </v-tab>
@@ -11,11 +11,11 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item>
-          <!--<Dados :animal="dados"></Dados>-->
+           <personalData :user="user" :categories="categories"></personalData>
         </v-tab-item>
 
         <v-tab-item>
-          <personalData :user="user"></personalData>
+         
         </v-tab-item>
 
         <v-tab-item>
@@ -45,13 +45,14 @@ export default {
     
   data() {
     return {
-      items: [{ tab: "Dados Pessoais" }, { tab: "Subscription" }, { tab: "item3" }],
+        tab: null,
+      items: [{ tab: "Dados de utilizador" }, { tab: "Subscription" }, { tab: "item3" }],
       user: {},
+      categories: {},
     };
   },
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
-    //ImageUpload: () => import("@/components/dialogs/ImageUpload"),
     Foot: () => import("@/components/global/Footer"),
     personalData: () => import("@/components/serviceProvider/PersonalData.vue")
   },
@@ -69,8 +70,10 @@ export default {
           token: store.getters.token,
         }
       );
+      console.log(store.getters.token)
       console.log(response.data);
       this.user = response.data.perfil[0];
+      this.categories = response.data.categories;
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

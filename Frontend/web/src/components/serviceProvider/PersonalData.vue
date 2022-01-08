@@ -16,23 +16,7 @@
               <v-icon small class="ml-2">fas fa-pen</v-icon>
             </v-btn>
 
-            <v-tooltip top>
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  class="body-2 ma-2"
-                  small
-                  color="#78C4D4"
-                  v-bind="attrs"
-                  v-on="on"
-                  fab
-                  dark
-                  @click="wannaBeSP()"
-                >
-                  <v-icon small>fas fa-hand-holding-medical</v-icon>
-                </v-btn>
-              </template>
-              <span class="caption">Quero ser prestador</span>
-            </v-tooltip>
+           
           </v-col>
         </v-row>
 
@@ -164,17 +148,67 @@
             </v-card>
           </v-col>
         </v-row>
+
+        <h3 class="mt-6 group font-weight-light text-uppercase">
+          Informações
+        </h3>
+        <v-divider></v-divider>
+
+        <v-row class="w-100" align="start">
+          <v-col>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Descrição</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.description}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Qualificações</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.description}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos mb-0">Categorias</p>
+                      </v-col>
+                      <v-col>
+                        <!--<p v-for="(c,index) in categories" :key="index" class="respos mb-0">nameC</p> -->
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-card>
     </v-container>
 </template>
 
 <script>
   export default{
-    props: ["user"],
+    props: ["user","categories"],
     data(){
       return{
-        
+
       }
+    },
+    components:{
+          ImageUpload: () => import("@/components/dialogs/ImageUpload"),
+
     }
   }
 
