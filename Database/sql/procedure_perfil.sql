@@ -42,7 +42,7 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE get_service_provider_profile (IN id INT)  
 BEGIN  
-    SELECT user.name, user.email, user.phoneNumber, user.sex, user.lastActivity, user.active, serviceprovider.description, 
+    SELECT user.name, user.email, user.phoneNumber, user.sex, user.lastActivity, user.active, serviceprovider.description, serviceprovider.averageRating, 
 		serviceprovider.dateOfBirth, serviceprovider.distance, serviceprovider.qualifications, location.name as locationName, location.cordsX, location.cordsY, file.image FROM user
     INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
@@ -65,7 +65,7 @@ DELIMITER &&
 CREATE PROCEDURE get_service_provider_profile_v2 (IN em VARCHAR(90))  
 BEGIN  
     SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.lastActivity,user.active, serviceprovider.description, serviceprovider.endSub, serviceprovider.endSubVip, 
-		serviceprovider.dateOfBirth, serviceprovider.distance, serviceprovider.qualifications, location.name as locationName, location.cordsX, location.cordsY, 
+		serviceprovider.averageRating, serviceprovider.dateOfBirth, serviceprovider.distance, serviceprovider.qualifications, location.name as locationName, location.cordsX, location.cordsY, 
         subscription.type as subType, subscription.duration as subDuration, subscription.value as subValue, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP
