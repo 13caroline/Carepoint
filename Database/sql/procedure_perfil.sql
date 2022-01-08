@@ -64,7 +64,7 @@ DELIMITER &&
 CREATE PROCEDURE get_service_provider_profile_v2 (IN em VARCHAR(90))  
 BEGIN  
     SELECT user.idUser, user.name, user.email, user.phoneNumber, user.lastActivity,user.active, serviceprovider.description, location.name as locationName, location.cordsX, location.cordsY,
-		   serviceprovider.endSub, serviceprovider.endSubVip, subscription.type, subscription.duration, subscription.value, file.image FROM user
+		   serviceprovider.endSub, serviceprovider.endSubVip, subscription.type as subType, subscription.duration as subDuration, subscription.value as subValue, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP
     INNER JOIN  subscription ON serviceprovider.idSubscription = subscription.idSubscription
@@ -77,7 +77,7 @@ DELIMITER &&
 CREATE PROCEDURE get_company_profile (IN em VARCHAR(90))
 BEGIN
 	SELECT user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY,
-		   company.link, company.firm, company.nipc, company.endSub, company.endSubVip, pi.add.description, subscription.type, subscription.duration, subscription.value, file.image FROM user
+		   company.link, company.firm, company.nipc, company.endSub, company.endSubVip, pi.add.description, subscription.type as subType, subscription.duration as subDuration, subscription.value as subValue, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN company ON user.idUser = company.idCompany
     INNER JOIN pi.add ON pi.add.idCompany = company.idCompany
