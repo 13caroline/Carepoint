@@ -1,842 +1,842 @@
-1,A dos Cunhados
-2,A dos Francos
-3,Aboim da NÛbrega
-4,Abrantes
-5,Abraveses
-6,Abrigada
-7,Ada˙fe
-8,¡gua de Pau
-9,¡gua de Pena
-10,¡gua Longa
-11,¡gua Retorta
-12,Aguada de Cima
-13,¡guas Santas
-14,AguÁadoura
-15,¡gueda
-16,Aguiar da Beira
-17,Albergaria-a-Velha
-18,Albufeira
-19,Alcabideche
-20,Alc·cer do Sal
-21,Alcains
-22,Alcanede
-23,Alcanena
-24,Alcanhıes
-25,Alcantarilha
-26,AlcobaÁa
-27,Alcochete
-28,Alcoentre
-29,Aldeia de Joanes
-30,Aldeia de Paio Pires
-31,Aldeia do Mato
-32,Aldeia Nova de S„o Bento
-33,Alenquer
-34,Alfai„o
-35,Alfarelos
-36,Alfeizer„o
-37,Alfena
-38,Alferrarede
-39,Alfragide
-40,AlgÈs
-41,Algoz
-42,Algueir„o
-43,Alhadas
-44,Alhandra
-45,Alhos Vedros
-46,AlijÛ
-47,Aljezur
-48,Aljubarrota
-49,Aljustrel
-50,Almada
-51,Almancil
-52,Almargem
-53,Almeirim
-54,AlmodÙvar
-55,Almograve
-56,Alpendurada
-57,AlpiarÁa
-58,Alter do Ch„o
-59,Altura
-60,Alvalade
-61,Alvito
-62,Alvor
-63,Alvorninha
-64,Amadora
-65,Amarante
-66,Ami„es de Baixo
-67,Amieira
-68,Amor
-69,Amora
-70,Amorim
-71,AnÁ„
-72,Angra do HeroÌsmo
-73,Ang˙stias
-74,Anta
-75,ApelaÁ„o
-76,Ap˙lia e F„o
-77,Ap˙lia
-78,Aradas
-79,Arazede
-80,Arco da Calheta
-81,Arco de S„o Jorge
-82,Arcos de Valdevez
-83,Arcos
-84,Arcozelo
-85,Areosa
-86,Arez
-87,Arganil
-88,Argivai
-89,Argoncilhe
-90,ArmaÁ„o de PÍra
-91,Arıes
-92,ArranhÛ
-93,Arrentela
-94,Arrifana
-95,Arrifes
-96,Arronches
-97,Arruda dos Vinhos
-98,¡rvore
-99,Assafarge
-100,Atalaia
-101,Atouguia da Baleia
-102,Avanca
-103,Aveiras de Cima
-104,Aveiro
-105,Aveleda
-106,Aver-o-Mar
-107,Aves
-108,Avintes
-109,AvÙ
-110,Azambuja
-111,Azeit„o
-112,Azenha
-113,Azenhas do Mar
-114,Azinhaga
-115,BaÁal
-116,Baguim do Monte
-117,Bai„o
-118,Balazar
-119,Baltar
-120,Bandeiras
-121,Bar„o de S„o Jo„o
-122,Barcarena
-123,Barcelos
-124,Barco
-125,Barqueiros
-126,Barreiro
-127,Barroca Grande
-128,Barrosas
-129,Batalha
-130,Beato AntÛnio
-131,Beduido
-132,Beiriz de Baixo
-133,Beja
-134,Belas
-135,Belazaima do Ch„o
-136,Belver
-137,Bemfica
-138,Benavente
-139,Benedita
-140,Benfica
-141,Bensafrim
-142,Beringel
-143,Biscoitos
-144,Boaventura
-145,Boavista dos Pinheiros
-146,Bobadela
-147,Boliqueime
-148,Bombarral
-149,Borba
-150,Boticas
-151,Bougado
-152,Braga
-153,BraganÁa
-154,Branca
-155,Britiande
-156,Brito
-157,Buarcos
-158,Bucelas
-159,Burgau
-160,Cabanas de Tavira
-161,Cabanas de Torres
-162,Cabanas de Viriato
-163,CabeÁa Gorda
-164,Cabeceiras de Basto
-165,Cabo da Praia
-166,Cabouco
-167,CacÈm
-168,Cacilhas
-169,Cadafais
-170,Cadaval
-171,Cais do Pico
-172,Caldas da Rainha
-173,Caldas das Taipas
-174,Caldas de Vizela
-175,Caldelas
-176,Calend·rio
-177,Calheta
-178,Calves
-179,Camacha
-180,C‚mara de Lobos
-181,Camarate
-182,Campan·rio
-183,Campelos
-184,Campo de Besteiros
-185,Campo Maior
-186,Campo
-187,Canas de Senhorim
-188,Candoso
-189,CaneÁas
-190,Canelas
-191,Canhas
-192,CaniÁal
-193,CaniÁo
-194,Canidelo
-195,Cantanhede
-196,Caparica
-197,Caranguejeira
-198,Carapinheira
-199,Carapito
-200,Carcavelos
-201,Carnaxide
-202,Carragosa
-203,Carrapateira
-204,Carrazeda de Anci„es
-205,Carregado
-206,Carregal do Sal
-207,Cartaxo
-208,Carvalhosa
-209,Carvoeiro
-210,Casais Robustos
-211,Cascais
-212,Castanheira de PÍra
-213,Castanheira do Ribatejo
-214,Castelo Branco
-215,Castelo de Vide
-216,Castelıes de Cepeda
-217,Castro Daire
-218,Castro de Avel„s
-219,Castro Marim
-220,Castro Verde
-221,Caxias
-222,Cedros
-223,Cela
-224,Cercal
-225,Charneca de Caparica
-226,Charneca
-227,Chav„o
-228,Chaves
-229,Coimbra
-230,Colares
-231,Comenda
-232,Comporta
-233,ConceiÁ„o
-234,Condeixa-a-Nova
-235,Const‚ncia
-236,Corroios
-237,CortegaÁa
-238,CortiÁada
-239,Coruche
-240,Costa de Caparica
-241,Covilh„
-242,Cristelo
-243,Cuba
-244,Cucuj„es
-245,Curral das Freiras
-246,Custoias
-247,Darque
-248,Donai
-249,Eirado
-250,Eixo
-251,Elvas
-252,Entroncamento
-253,Ericeira
-254,Ermesinde
-255,Ervedosa do Douro
-256,Esgueira
-257,Esmoriz
-258,Espargo
-259,Espiche
-260,Espinho
-261,Esporıes
-262,Esposende
-263,Estela
-264,EstÛi
-265,EstÙmbar
-266,Estoril
-267,Estreito da Calheta
-268,Estremoz
-269,…vora
-270,Fafe
-271,Faial
-272,Faj„ da Ovelha
-273,Faj„ de Baixo
-274,Faj„ Grande
-275,Famalic„o
-276,Famıes
-277,F‚nzeres
-278,Faria
-279,Faro do Alentejo
-280,Faro
-281,F·tima
-282,Favaios
-283,Fazenda de Santa Cruz
-284,Fazendas de Almeirim
-285,Feira
-286,Felgueiras
-287,Fenais da Ajuda
-288,Fenais da Luz
-289,Ferragudo
-290,Ferreira do Alentejo
-291,Ferreira
-292,Ferreiras
-293,Ferreiros
-294,Ferrel
-295,Feteira
-296,Fi„es
-297,Figueira da Foz
-298,Figueira do Guincho
-299,FigueirÛ
-300,Fontanelas
-301,Fonte Bastardo
-302,Fontelo
-303,Fontes
-304,Fornelos
-305,Foz do Arelho
-306,Foz do Douro
-307,Foz do Sousa
-308,Fradelos
-309,Fraz„o
-310,Freamunde
-311,Freixo de Espada ‡ Cinta
-312,Freixo de Num„o
-313,Friumes
-314,Frossos
-315,Funchal
-316,Fund„o
-317,Furnas
-318,Fuzeta
-319,Gafanha da EncarnaÁ„o
-320,Gafanha da NazarÈ
-321,G·fete
-322,Galegos
-323,Gandra
-324,Gavi„o
-325,Gemunde
-326,Gimonde
-327,Go„es
-328,Godim
-329,GÛis
-330,Goleg„
-331,Gondizalves
-332,Gondomar
-333,Gostei
-334,Gradiz
-335,Gr‚ndola
-336,GrijÛ
-337,Guarda
-338,Gueral
-339,Guia
-340,Guifıes
-341,Guimar„es
-342,Guisande
-343,Gulpilhares
-344,Horta
-345,Õlhavo
-346,Jardim do Mar
-347,Joane
-348,Jovim
-349,Lago
-350,Lagoa
-351,LagoaÁa
-352,Lagos
-353,Lajes das Flores
-354,Lajes
-355,Lalim
-356,Lamas
-357,Lamego
-358,Lamelas
-359,Lapa do Lobo
-360,Laranjeira
-361,Laranjeiro
-362,Lavos
-363,Lavra
-364,Lavradio
-365,LeÁa da Palmeira
-366,LeÁa do Bailio
-367,Leiria
-368,Linda-a-Velha
-369,Lisbon
-370,Lob„o
-371,Lomba
-372,Lordelo
-373,Loriga
-374,Lorv„o
-375,LoulÈ
-376,Loures
-377,LouriÁal
-378,Lourinh„
-379,Lourosa
-380,Lous„
-381,Lousada
-382,Lugar de Baixo
-383,Luso
-384,Lustosa
-385,Luz
-386,Macedo de Cavaleiros
-387,Maceira
-388,Machico
-389,Macieira de Cambra
-390,Macieira de Rates
-391,Madalena do Mar
-392,Madalena
-393,Mafra
-394,Maia
-395,Malveira
-396,Manadas
-397,Mangualde
-398,Manta Rota
-399,Manteigas
-400,Marco de Canavezes
-401,Margaride
-402,Marinha Grande
-403,Marinhais
-404,Marinhas
-405,Mariz
-406,Marmelete
-407,Martinchel
-408,Marv„o
-409,Massam·
-410,Matosinhos
-411,Meadela
-412,Mealhada
-413,Meca
-414,MÍda
-415,Meinedo
-416,Meixedo
-417,Melres
-418,Mem Martins
-419,Merelim
-420,MÈrtola
-421,Mes„o Frio
-422,Mesquitela
-423,Mexilhoeira Grande
-424,Milh„o
-425,Milharado
-426,MilheirÛs de Poiares
-427,MilheirÛs
-428,Minas de S„o Domingos
-429,Minde
-430,Mindelo
-431,Mira
-432,Miranda do Corvo
-433,Miranda do Douro
-434,Mirandela
-435,Mogadouro
-436,Moimenta da Beira
-437,Moita dos Ferreiros
-438,Moita
-439,Moitas Venda
-440,Mombeja
-441,MonÁ„o
-442,Moncarapacho
-443,Monchique
-444,Mondim da Beira
-445,Mondim de Basto
-446,Monforte
-447,Monsanto
-448,Montalvinho
-449,Montalvo
-450,Montargil
-451,Monte Estoril
-452,Monte Gordo
-453,Monte Real
-454,Monte Redondo
-455,Montemor-o-Novo
-456,Montemor-o-Velho
-457,Montijo
-458,Moreira de Conegos
-459,Moreira
-460,Moscavide e Portela
-461,MosteirÙ
-462,Mosteiros
-463,Moura
-464,Mozelos
-465,Murtosa
-466,Nadadouro
-467,NazarÈ
-468,Negreiros
-469,Negrelos
-470,Nelas
-471,Neves
-472,Nisa
-473,Nogueira da Regedoura
-474,Nogueira
-475,Norte Pequeno
-476,Nossa Senhora do Monte
-477,”bidos
-478,Odeceixe
-479,Odemira
-480,Odivelas
-481,Oeiras
-482,Oi„
-483,Oleiros
-484,Olh„o
-485,Olhos de ¡gua
-486,Olivais
-487,Olival do Basto
-488,Olival
-489,Oliveira de Azemeis
-490,Oliveira do Bairro
-491,Oliveira do Douro
-492,Oliveira do Hospital
-493,Oliveira do Mondego
-494,Oliveira
-495,Oliveirinha
-496,Ota
-497,OurÈm
-498,Ovar
-499,PaÁo de Arcos
-500,PaÁos de Brand„o
-501,PaÁos de Ferreira
-502,Paderne
-503,Paialvo
-504,Palmela
-505,Pampilhosa da Serra
-506,Pampilhosa do Bot„o
-507,Parada de Gonta
-508,Paradela
-509,Parchal
-510,PardilhÛ
-511,Parede
-512,Paredes
-513,Pataias
-514,Paul do Mar
-515,PedrÛg„o Grande
-516,Pedroso
-517,PedrouÁos
-518,Pego
-519,Penacova
-520,Penafiel
-521,Penedo Gordo
-522,Penedono
-523,Peniche
-524,PÍra Velha
-525,PÍra
-526,Perafita
-527,Pereiro da Palhacana
-528,Perelhal
-529,Pero Pinheiro
-530,Peroguarda
-531,Perozinho
-532,Peso da RÈgua
-533,Piedade
-534,Pinhal Novo
-535,Pinh„o
-536,Pinheiro Grande
-537,Pinheiro
-538,Poceir„o
-539,PoÁo do Canto
-540,Podence
-541,Poiares
-542,Pombal
-543,Pombalinho
-544,Ponta Delgada
-545,Ponta do Pargo
-546,Ponta do Sol
-547,Ponta GarÁa
-548,Ponte da Barca
-549,Ponte de Lima
-550,Ponte de SÙr
-551,Ponte
-552,PontÈvel
-553,Pontinha
-554,Porches
-555,Portalegre
-556,Portim„o
-557,Porto Covo
-558,Porto da Cruz
-559,Porto de MÛs
-560,Porto Judeu
-561,Porto Martins
-562,Porto Moniz
-563,Porto Salvo
-564,Porto
-565,PÛvoa da Raposeira
-566,PÛvoa de Lanhoso
-567,PÛvoa de Santa Iria
-568,PÛvoa de Santo Adri„o
-569,PÛvoa de Varzim
-570,PovoaÁ„o
-571,Prado
-572,Pragal
-573,Praia da Graciosa
-574,Praia da VitÛria
-575,Praia do Ribatejo
-576,Prazeres
-577,Prior Velho
-578,ProenÁa-a-Nova
-579,Quarteira
-580,Queijas
-581,Queluz
-582,Quinta do Anjo
-583,Quinta Do Conde
-584,Quintanilha
-585,Quintela
-586,Rabal
-587,Rabo de Peixe
-588,Ramada
-589,Real
-590,Rebordıes
-591,Rebordosa
-592,Recarei
-593,Redondo
-594,Refojos de Basto
-595,Reguengos de Monsaraz
-596,Relva
-597,Rendufe
-598,Resende
-599,Riachos
-600,Riba de Ave
-601,Ribeira Brava
-602,Ribeira Ch„
-603,Ribeira das Tainhas
-604,Ribeira Grande
-605,Ribeira Quente
-606,Ribeira Seca
-607,Ribeir„o
-608,Ribeirinha
-609,Rio de Loba
-610,Rio de Mouro
-611,Rio Maior
-612,Rio Mau
-613,Rio Me„o
-614,Rio Tinto
-615,Rochoso
-616,Ronfe
-617,Rosairinho
-618,Rosais
-619,Rosto de C„o
-620,Rua
-621,Rubi„is
-622,Sabrosa
-623,SacavÈm
-624,Sagres
-625,Salir de Matos
-626,Salir do Porto
-627,Salreu
-628,Salvada
-629,Salvaterra de Magos
-630,Samil
-631,Samora Correia
-632,Samouco
-633,Sande
-634,Sandim
-635,Sanfins
-636,Sangalhos
-637,Santa B·rbara de Nexe
-638,Santa B·rbara
-639,Santa Catarina da Serra
-640,Santa Clara de Louredo
-641,Santa Clara
-642,Santa Comba D„o
-643,Santa Cruz da Graciosa
-644,Santa Cruz das Flores
-645,Santa Cruz do Bispo
-646,Santa Cruz
-647,Santa Iria da AzÛia
-648,Santa Luzia
-649,Santa Margarida da Coutada
-650,Santa Ovaia
-651,Santa VitÛria
-652,Santana
-653,SantarÈm
-654,Santiago do CacÈm
-655,Santo AndrÈ
-656,Santo Ant„o do Tojal
-657,Santo Ant„o
-658,Santo AntÛnio da Charneca
-659,Santo AntÛnio dos Olivais
-660,Santo da Serra
-661,Santo Isidoro
-662,Santo Izidoro
-663,Santo Tirso
-664,Santos-o-Velho
-665,S„o Bartolomeu de Messines
-666,S„o Bartolomeu
-667,S„o Br·s de Alportel
-668,S„o Brissos
-669,S„o Domingos de Rana
-670,S„o FÈlix da Marinha
-671,S„o Jacinto
-672,S„o Jo„o da Madeira
-673,S„o Jo„o da Pesqueira
-674,S„o Jo„o da Talha
-675,S„o Jo„o das Lampas
-676,S„o Jo„o de Areias
-677,S„o Jo„o de Ver
-678,S„o Jo„o dos Montes
-679,S„o Jo„o
-680,S„o Jorge da Beira
-681,S„o Jorge
-682,S„o Luis
-683,S„o Mamede de Infesta
-684,S„o Marcos da Serra
-685,S„o Martinho do Porto
-686,S„o Martinho
-687,S„o Mateus
-688,S„o Matias
-689,S„o Miguel de Rio Torto
-690,S„o Miguel do Couto
-691,S„o Pedro da Cadeira
-692,S„o Pedro da Cova
-693,S„o Pedro de Alva
-694,S„o Pedro de Serracenos
-695,S„o Pedro do Sul
-696,S„o Rom„o do Coronado
-697,S„o Rom„o
-698,S„o Roque do Pico
-699,S„o Roque
-700,S„o Sebasti„o
-701,S„o Sim„o / PÈ da Serra
-702,S„o TeotÛnio
-703,S„o Vicente do Paul
-704,S„o Vicente
-705,Sardoal
-706,Sarilhos Pequenos
-707,S·t„o
-708,Sazes da Beira
-709,Seia
-710,Seixal
-711,Selho
-712,Semelhe
-713,Sendim
-714,Senhora da Hora
-715,Senhora da Luz
-716,Senhora do Ros·rio
-717,Sequeira
-718,Sequeiros
-719,Sermonde
-720,Sernancelhe
-721,Seroa
-722,Serpa
-723,Serra de El-Rei
-724,Serra do Bouro
-725,Sert„
-726,Serzedelo
-727,Serzedo
-728,Sesimbra
-729,Sete Cidades
-730,Set˙bal
-731,Silvalde
-732,Silveira
-733,Silves
-734,Sines
-735,Sintra
-736,Sobrado
-737,Sobral de Monte AgraÁo
-738,Sobralinho
-739,Sobreda
-740,Sobreira
-741,Soure
-742,Souto da Carpalhosa
-743,Souto de Aguiar
-744,Souto
-745,T·bua
-746,TabuaÁo
-747,Tamera
-748,Tancos
-749,Tarouca
-750,Tavarede
-751,Tavira
-752,Tebosa
-753,Teixoso
-754,Telıes
-755,Terrugem
-756,Tocha
-757,Tomar
-758,Tondela
-759,Torre de Moncorvo
-760,Torres Novas
-761,Torres Vedras
-762,Trafaria
-763,Tramagal
-764,Travanca
-765,Treixedo
-766,Trevıes
-767,Trigaches
-768,Trofa
-769,Tunes
-770,Turquel
-771,Unhais-o-Velho
-772,Unhos
-773,Urgeses
-774,Urzelina
-775,Vagos
-776,Vair„o
-777,Valadares
-778,Valado de Frades
-779,Valbom
-780,Vale da Amoreira
-781,Vale de Cambra
-782,Vale de Figueira
-783,Vale de SantarÈm
-784,V·lega
-785,Valenza
-786,Vales do Rio
-787,Valongo
-788,ValpaÁos
-789,Valverde
-790,V·rzea
-791,Velas
-792,Venda do Pinheiro
-793,Vendas Novas
-794,Ventosa
-795,Vestiaria
-796,Vialonga
-797,Viana do Castelo
-798,Vidais
-799,Vide
-800,Vidigueira
-801,Vieira de Leiria
-802,Vieira do Minho
-803,Vila Ch„ de Ourique
-804,Vila Ch„
-805,Vila Cova
-806,Vila de Rei
-807,Vila do Bispo
-808,Vila do Conde
-809,Vila do Corvo
-810,Vila do Porto
-811,Vila Franca de Xira
-812,Vila Franca do Campo
-813,Vila Frescainha
-814,Vila Me„
-815,Vila Nova da Barquinha
-816,Vila Nova da Telha
-817,Vila Nova De Cacela
-818,Vila Nova de Ceira
-819,Vila Nova de Famalic„o
-820,Vila Nova de Foz CÙa
-821,Vila Nova de Gaia
-822,Vila Nova de Milfontes
-823,Vila Nova de Paiva
-824,Vila Praia de ¬ncora
-825,Vila Real de Santo AntÛnio
-826,Vila Real
-827,Vila Seca
-828,Vila Velha de RÛd„o
-829,Vila Verde
-830,Vila ViÁosa
-831,VilaÁa
-832,Vilamoura
-833,Vilar de Andorinho
-834,Vilar de Figos
-835,Vilar do ParaÌso
-836,Vilarinho
-837,Vilela
-838,Vimeiro
-839,Vinhais
-840,Viseu
-841,Vizela
-842,Zambujeira do Mar
+{id: 1, name: "A dos Cunhados"},
+{id: 2, name: "A dos Francos"},
+{id: 3, name: "Aboim da N√≥brega"},
+{id: 4, name: "Abrantes"},
+{id: 5, name: "Abraveses"},
+{id: 6, name: "Abrigada"},
+{id: 7, name: "Ada√∫fe"},
+{id: 8, name: "√Ågua de Pau"},
+{id: 9, name: "√Ågua de Pena"},
+{id: 10, name: "√Ågua Longa"},
+{id: 11, name: "√Ågua Retorta"},
+{id: 12, name: "Aguada de Cima"},
+{id: 13, name: "√Åguas Santas"},
+{id: 14, name: "Agu√ßadoura"},
+{id: 15, name: "√Ågueda"},
+{id: 16, name: "Aguiar da Beira"},
+{id: 17, name: "Albergaria-a-Velha"},
+{id: 18, name: "Albufeira"},
+{id: 19, name: "Alcabideche"},
+{id: 20, name: "Alc√°cer do Sal"},
+{id: 21, name: "Alcains"},
+{id: 22, name: "Alcanede"},
+{id: 23, name: "Alcanena"},
+{id: 24, name: "Alcanh√µes"},
+{id: 25, name: "Alcantarilha"},
+{id: 26, name: "Alcoba√ßa"},
+{id: 27, name: "Alcochete"},
+{id: 28, name: "Alcoentre"},
+{id: 29, name: "Aldeia de Joanes"},
+{id: 30, name: "Aldeia de Paio Pires"},
+{id: 31, name: "Aldeia do Mato"},
+{id: 32, name: "Aldeia Nova de S√£o Bento"},
+{id: 33, name: "Alenquer"},
+{id: 34, name: "Alfai√£o"},
+{id: 35, name: "Alfarelos"},
+{id: 36, name: "Alfeizer√£o"},
+{id: 37, name: "Alfena"},
+{id: 38, name: "Alferrarede"},
+{id: 39, name: "Alfragide"},
+{id: 40, name: "Alg√©s"},
+{id: 41, name: "Algoz"},
+{id: 42, name: "Algueir√£o"},
+{id: 43, name: "Alhadas"},
+{id: 44, name: "Alhandra"},
+{id: 45, name: "Alhos Vedros"},
+{id: 46, name: "Alij√≥"},
+{id: 47, name: "Aljezur"},
+{id: 48, name: "Aljubarrota"},
+{id: 49, name: "Aljustrel"},
+{id: 50, name: "Almada"},
+{id: 51, name: "Almancil"},
+{id: 52, name: "Almargem"},
+{id: 53, name: "Almeirim"},
+{id: 54, name: "Almod√¥var"},
+{id: 55, name: "Almograve"},
+{id: 56, name: "Alpendurada"},
+{id: 57, name: "Alpiar√ßa"},
+{id: 58, name: "Alter do Ch√£o"},
+{id: 59, name: "Altura"},
+{id: 60, name: "Alvalade"},
+{id: 61, name: "Alvito"},
+{id: 62, name: "Alvor"},
+{id: 63, name: "Alvorninha"},
+{id: 64, name: "Amadora"},
+{id: 65, name: "Amarante"},
+{id: 66, name: "Ami√£es de Baixo"},
+{id: 67, name: "Amieira"},
+{id: 68, name: "Amor"},
+{id: 69, name: "Amora"},
+{id: 70, name: "Amorim"},
+{id: 71, name: "An√ß√£"},
+{id: 72, name: "Angra do Hero√≠smo"},
+{id: 73, name: "Ang√∫stias"},
+{id: 74, name: "Anta"},
+{id: 75, name: "Apela√ß√£o"},
+{id: 76, name: "Ap√∫lia e F√£o"},
+{id: 77, name: "Ap√∫lia"},
+{id: 78, name: "Aradas"},
+{id: 79, name: "Arazede"},
+{id: 80, name: "Arco da Calheta"},
+{id: 81, name: "Arco de S√£o Jorge"},
+{id: 82, name: "Arcos de Valdevez"},
+{id: 83, name: "Arcos"},
+{id: 84, name: "Arcozelo"},
+{id: 85, name: "Areosa"},
+{id: 86, name: "Arez"},
+{id: 87, name: "Arganil"},
+{id: 88, name: "Argivai"},
+{id: 89, name: "Argoncilhe"},
+{id: 90, name: "Arma√ß√£o de P√™ra"},
+{id: 91, name: "Ar√µes"},
+{id: 92, name: "Arranh√≥"},
+{id: 93, name: "Arrentela"},
+{id: 94, name: "Arrifana"},
+{id: 95, name: "Arrifes"},
+{id: 96, name: "Arronches"},
+{id: 97, name: "Arruda dos Vinhos"},
+{id: 98, name: "√Årvore"},
+{id: 99, name: "Assafarge"},
+{id: 100, name: "Atalaia"},
+{id: 101, name: "Atouguia da Baleia"},
+{id: 102, name: "Avanca"},
+{id: 103, name: "Aveiras de Cima"},
+{id: 104, name: "Aveiro"},
+{id: 105, name: "Aveleda"},
+{id: 106, name: "Aver-o-Mar"},
+{id: 107, name: "Aves"},
+{id: 108, name: "Avintes"},
+{id: 109, name: "Av√¥"},
+{id: 110, name: "Azambuja"},
+{id: 111, name: "Azeit√£o"},
+{id: 112, name: "Azenha"},
+{id: 113, name: "Azenhas do Mar"},
+{id: 114, name: "Azinhaga"},
+{id: 115, name: "Ba√ßal"},
+{id: 116, name: "Baguim do Monte"},
+{id: 117, name: "Bai√£o"},
+{id: 118, name: "Balazar"},
+{id: 119, name: "Baltar"},
+{id: 120, name: "Bandeiras"},
+{id: 121, name: "Bar√£o de S√£o Jo√£o"},
+{id: 122, name: "Barcarena"},
+{id: 123, name: "Barcelos"},
+{id: 124, name: "Barco"},
+{id: 125, name: "Barqueiros"},
+{id: 126, name: "Barreiro"},
+{id: 127, name: "Barroca Grande"},
+{id: 128, name: "Barrosas"},
+{id: 129, name: "Batalha"},
+{id: 130, name: "Beato Ant√≥nio"},
+{id: 131, name: "Beduido"},
+{id: 132, name: "Beiriz de Baixo"},
+{id: 133, name: "Beja"},
+{id: 134, name: "Belas"},
+{id: 135, name: "Belazaima do Ch√£o"},
+{id: 136, name: "Belver"},
+{id: 137, name: "Bemfica"},
+{id: 138, name: "Benavente"},
+{id: 139, name: "Benedita"},
+{id: 140, name: "Benfica"},
+{id: 141, name: "Bensafrim"},
+{id: 142, name: "Beringel"},
+{id: 143, name: "Biscoitos"},
+{id: 144, name: "Boaventura"},
+{id: 145, name: "Boavista dos Pinheiros"},
+{id: 146, name: "Bobadela"},
+{id: 147, name: "Boliqueime"},
+{id: 148, name: "Bombarral"},
+{id: 149, name: "Borba"},
+{id: 150, name: "Boticas"},
+{id: 151, name: "Bougado"},
+{id: 152, name: "Braga"},
+{id: 153, name: "Bragan√ßa"},
+{id: 154, name: "Branca"},
+{id: 155, name: "Britiande"},
+{id: 156, name: "Brito"},
+{id: 157, name: "Buarcos"},
+{id: 158, name: "Bucelas"},
+{id: 159, name: "Burgau"},
+{id: 160, name: "Cabanas de Tavira"},
+{id: 161, name: "Cabanas de Torres"},
+{id: 162, name: "Cabanas de Viriato"},
+{id: 163, name: "Cabe√ßa Gorda"},
+{id: 164, name: "Cabeceiras de Basto"},
+{id: 165, name: "Cabo da Praia"},
+{id: 166, name: "Cabouco"},
+{id: 167, name: "Cac√©m"},
+{id: 168, name: "Cacilhas"},
+{id: 169, name: "Cadafais"},
+{id: 170, name: "Cadaval"},
+{id: 171, name: "Cais do Pico"},
+{id: 172, name: "Caldas da Rainha"},
+{id: 173, name: "Caldas das Taipas"},
+{id: 174, name: "Caldas de Vizela"},
+{id: 175, name: "Caldelas"},
+{id: 176, name: "Calend√°rio"},
+{id: 177, name: "Calheta"},
+{id: 178, name: "Calves"},
+{id: 179, name: "Camacha"},
+{id: 180, name: "C√¢mara de Lobos"},
+{id: 181, name: "Camarate"},
+{id: 182, name: "Campan√°rio"},
+{id: 183, name: "Campelos"},
+{id: 184, name: "Campo de Besteiros"},
+{id: 185, name: "Campo Maior"},
+{id: 186, name: "Campo"},
+{id: 187, name: "Canas de Senhorim"},
+{id: 188, name: "Candoso"},
+{id: 189, name: "Cane√ßas"},
+{id: 190, name: "Canelas"},
+{id: 191, name: "Canhas"},
+{id: 192, name: "Cani√ßal"},
+{id: 193, name: "Cani√ßo"},
+{id: 194, name: "Canidelo"},
+{id: 195, name: "Cantanhede"},
+{id: 196, name: "Caparica"},
+{id: 197, name: "Caranguejeira"},
+{id: 198, name: "Carapinheira"},
+{id: 199, name: "Carapito"},
+{id: 200, name: "Carcavelos"},
+{id: 201, name: "Carnaxide"},
+{id: 202, name: "Carragosa"},
+{id: 203, name: "Carrapateira"},
+{id: 204, name: "Carrazeda de Anci√£es"},
+{id: 205, name: "Carregado"},
+{id: 206, name: "Carregal do Sal"},
+{id: 207, name: "Cartaxo"},
+{id: 208, name: "Carvalhosa"},
+{id: 209, name: "Carvoeiro"},
+{id: 210, name: "Casais Robustos"},
+{id: 211, name: "Cascais"},
+{id: 212, name: "Castanheira de P√™ra"},
+{id: 213, name: "Castanheira do Ribatejo"},
+{id: 214, name: "Castelo Branco"},
+{id: 215, name: "Castelo de Vide"},
+{id: 216, name: "Castel√µes de Cepeda"},
+{id: 217, name: "Castro Daire"},
+{id: 218, name: "Castro de Avel√£s"},
+{id: 219, name: "Castro Marim"},
+{id: 220, name: "Castro Verde"},
+{id: 221, name: "Caxias"},
+{id: 222, name: "Cedros"},
+{id: 223, name: "Cela"},
+{id: 224, name: "Cercal"},
+{id: 225, name: "Charneca de Caparica"},
+{id: 226, name: "Charneca"},
+{id: 227, name: "Chav√£o"},
+{id: 228, name: "Chaves"},
+{id: 229, name: "Coimbra"},
+{id: 230, name: "Colares"},
+{id: 231, name: "Comenda"},
+{id: 232, name: "Comporta"},
+{id: 233, name: "Concei√ß√£o"},
+{id: 234, name: "Condeixa-a-Nova"},
+{id: 235, name: "Const√¢ncia"},
+{id: 236, name: "Corroios"},
+{id: 237, name: "Cortega√ßa"},
+{id: 238, name: "Corti√ßada"},
+{id: 239, name: "Coruche"},
+{id: 240, name: "Costa de Caparica"},
+{id: 241, name: "Covilh√£"},
+{id: 242, name: "Cristelo"},
+{id: 243, name: "Cuba"},
+{id: 244, name: "Cucuj√£es"},
+{id: 245, name: "Curral das Freiras"},
+{id: 246, name: "Custoias"},
+{id: 247, name: "Darque"},
+{id: 248, name: "Donai"},
+{id: 249, name: "Eirado"},
+{id: 250, name: "Eixo"},
+{id: 251, name: "Elvas"},
+{id: 252, name: "Entroncamento"},
+{id: 253, name: "Ericeira"},
+{id: 254, name: "Ermesinde"},
+{id: 255, name: "Ervedosa do Douro"},
+{id: 256, name: "Esgueira"},
+{id: 257, name: "Esmoriz"},
+{id: 258, name: "Espargo"},
+{id: 259, name: "Espiche"},
+{id: 260, name: "Espinho"},
+{id: 261, name: "Espor√µes"},
+{id: 262, name: "Esposende"},
+{id: 263, name: "Estela"},
+{id: 264, name: "Est√≥i"},
+{id: 265, name: "Est√¥mbar"},
+{id: 266, name: "Estoril"},
+{id: 267, name: "Estreito da Calheta"},
+{id: 268, name: "Estremoz"},
+{id: 269, name: "√âvora"},
+{id: 270, name: "Fafe"},
+{id: 271, name: "Faial"},
+{id: 272, name: "Faj√£ da Ovelha"},
+{id: 273, name: "Faj√£ de Baixo"},
+{id: 274, name: "Faj√£ Grande"},
+{id: 275, name: "Famalic√£o"},
+{id: 276, name: "Fam√µes"},
+{id: 277, name: "F√¢nzeres"},
+{id: 278, name: "Faria"},
+{id: 279, name: "Faro do Alentejo"},
+{id: 280, name: "Faro"},
+{id: 281, name: "F√°tima"},
+{id: 282, name: "Favaios"},
+{id: 283, name: "Fazenda de Santa Cruz"},
+{id: 284, name: "Fazendas de Almeirim"},
+{id: 285, name: "Feira"},
+{id: 286, name: "Felgueiras"},
+{id: 287, name: "Fenais da Ajuda"},
+{id: 288, name: "Fenais da Luz"},
+{id: 289, name: "Ferragudo"},
+{id: 290, name: "Ferreira do Alentejo"},
+{id: 291, name: "Ferreira"},
+{id: 292, name: "Ferreiras"},
+{id: 293, name: "Ferreiros"},
+{id: 294, name: "Ferrel"},
+{id: 295, name: "Feteira"},
+{id: 296, name: "Fi√£es"},
+{id: 297, name: "Figueira da Foz"},
+{id: 298, name: "Figueira do Guincho"},
+{id: 299, name: "Figueir√≥"},
+{id: 300, name: "Fontanelas"},
+{id: 301, name: "Fonte Bastardo"},
+{id: 302, name: "Fontelo"},
+{id: 303, name: "Fontes"},
+{id: 304, name: "Fornelos"},
+{id: 305, name: "Foz do Arelho"},
+{id: 306, name: "Foz do Douro"},
+{id: 307, name: "Foz do Sousa"},
+{id: 308, name: "Fradelos"},
+{id: 309, name: "Fraz√£o"},
+{id: 310, name: "Freamunde"},
+{id: 311, name: "Freixo de Espada √† Cinta"},
+{id: 312, name: "Freixo de Num√£o"},
+{id: 313, name: "Friumes"},
+{id: 314, name: "Frossos"},
+{id: 315, name: "Funchal"},
+{id: 316, name: "Fund√£o"},
+{id: 317, name: "Furnas"},
+{id: 318, name: "Fuzeta"},
+{id: 319, name: "Gafanha da Encarna√ß√£o"},
+{id: 320, name: "Gafanha da Nazar√©"},
+{id: 321, name: "G√°fete"},
+{id: 322, name: "Galegos"},
+{id: 323, name: "Gandra"},
+{id: 324, name: "Gavi√£o"},
+{id: 325, name: "Gemunde"},
+{id: 326, name: "Gimonde"},
+{id: 327, name: "Go√£es"},
+{id: 328, name: "Godim"},
+{id: 329, name: "G√≥is"},
+{id: 330, name: "Goleg√£"},
+{id: 331, name: "Gondizalves"},
+{id: 332, name: "Gondomar"},
+{id: 333, name: "Gostei"},
+{id: 334, name: "Gradiz"},
+{id: 335, name: "Gr√¢ndola"},
+{id: 336, name: "Grij√≥"},
+{id: 337, name: "Guarda"},
+{id: 338, name: "Gueral"},
+{id: 339, name: "Guia"},
+{id: 340, name: "Guif√µes"},
+{id: 341, name: "Guimar√£es"},
+{id: 342, name: "Guisande"},
+{id: 343, name: "Gulpilhares"},
+{id: 344, name: "Horta"},
+{id: 345, name: "√çlhavo"},
+{id: 346, name: "Jardim do Mar"},
+{id: 347, name: "Joane"},
+{id: 348, name: "Jovim"},
+{id: 349, name: "Lago"},
+{id: 350, name: "Lagoa"},
+{id: 351, name: "Lagoa√ßa"},
+{id: 352, name: "Lagos"},
+{id: 353, name: "Lajes das Flores"},
+{id: 354, name: "Lajes"},
+{id: 355, name: "Lalim"},
+{id: 356, name: "Lamas"},
+{id: 357, name: "Lamego"},
+{id: 358, name: "Lamelas"},
+{id: 359, name: "Lapa do Lobo"},
+{id: 360, name: "Laranjeira"},
+{id: 361, name: "Laranjeiro"},
+{id: 362, name: "Lavos"},
+{id: 363, name: "Lavra"},
+{id: 364, name: "Lavradio"},
+{id: 365, name: "Le√ßa da Palmeira"},
+{id: 366, name: "Le√ßa do Bailio"},
+{id: 367, name: "Leiria"},
+{id: 368, name: "Linda-a-Velha"},
+{id: 369, name: "Lisbon"},
+{id: 370, name: "Lob√£o"},
+{id: 371, name: "Lomba"},
+{id: 372, name: "Lordelo"},
+{id: 373, name: "Loriga"},
+{id: 374, name: "Lorv√£o"},
+{id: 375, name: "Loul√©"},
+{id: 376, name: "Loures"},
+{id: 377, name: "Louri√ßal"},
+{id: 378, name: "Lourinh√£"},
+{id: 379, name: "Lourosa"},
+{id: 380, name: "Lous√£"},
+{id: 381, name: "Lousada"},
+{id: 382, name: "Lugar de Baixo"},
+{id: 383, name: "Luso"},
+{id: 384, name: "Lustosa"},
+{id: 385, name: "Luz"},
+{id: 386, name: "Macedo de Cavaleiros"},
+{id: 387, name: "Maceira"},
+{id: 388, name: "Machico"},
+{id: 389, name: "Macieira de Cambra"},
+{id: 390, name: "Macieira de Rates"},
+{id: 391, name: "Madalena do Mar"},
+{id: 392, name: "Madalena"},
+{id: 393, name: "Mafra"},
+{id: 394, name: "Maia"},
+{id: 395, name: "Malveira"},
+{id: 396, name: "Manadas"},
+{id: 397, name: "Mangualde"},
+{id: 398, name: "Manta Rota"},
+{id: 399, name: "Manteigas"},
+{id: 400, name: "Marco de Canavezes"},
+{id: 401, name: "Margaride"},
+{id: 402, name: "Marinha Grande"},
+{id: 403, name: "Marinhais"},
+{id: 404, name: "Marinhas"},
+{id: 405, name: "Mariz"},
+{id: 406, name: "Marmelete"},
+{id: 407, name: "Martinchel"},
+{id: 408, name: "Marv√£o"},
+{id: 409, name: "Massam√°"},
+{id: 410, name: "Matosinhos"},
+{id: 411, name: "Meadela"},
+{id: 412, name: "Mealhada"},
+{id: 413, name: "Meca"},
+{id: 414, name: "M√™da"},
+{id: 415, name: "Meinedo"},
+{id: 416, name: "Meixedo"},
+{id: 417, name: "Melres"},
+{id: 418, name: "Mem Martins"},
+{id: 419, name: "Merelim"},
+{id: 420, name: "M√©rtola"},
+{id: 421, name: "Mes√£o Frio"},
+{id: 422, name: "Mesquitela"},
+{id: 423, name: "Mexilhoeira Grande"},
+{id: 424, name: "Milh√£o"},
+{id: 425, name: "Milharado"},
+{id: 426, name: "Milheir√≥s de Poiares"},
+{id: 427, name: "Milheir√≥s"},
+{id: 428, name: "Minas de S√£o Domingos"},
+{id: 429, name: "Minde"},
+{id: 430, name: "Mindelo"},
+{id: 431, name: "Mira"},
+{id: 432, name: "Miranda do Corvo"},
+{id: 433, name: "Miranda do Douro"},
+{id: 434, name: "Mirandela"},
+{id: 435, name: "Mogadouro"},
+{id: 436, name: "Moimenta da Beira"},
+{id: 437, name: "Moita dos Ferreiros"},
+{id: 438, name: "Moita"},
+{id: 439, name: "Moitas Venda"},
+{id: 440, name: "Mombeja"},
+{id: 441, name: "Mon√ß√£o"},
+{id: 442, name: "Moncarapacho"},
+{id: 443, name: "Monchique"},
+{id: 444, name: "Mondim da Beira"},
+{id: 445, name: "Mondim de Basto"},
+{id: 446, name: "Monforte"},
+{id: 447, name: "Monsanto"},
+{id: 448, name: "Montalvinho"},
+{id: 449, name: "Montalvo"},
+{id: 450, name: "Montargil"},
+{id: 451, name: "Monte Estoril"},
+{id: 452, name: "Monte Gordo"},
+{id: 453, name: "Monte Real"},
+{id: 454, name: "Monte Redondo"},
+{id: 455, name: "Montemor-o-Novo"},
+{id: 456, name: "Montemor-o-Velho"},
+{id: 457, name: "Montijo"},
+{id: 458, name: "Moreira de Conegos"},
+{id: 459, name: "Moreira"},
+{id: 460, name: "Moscavide e Portela"},
+{id: 461, name: "Mosteir√¥"},
+{id: 462, name: "Mosteiros"},
+{id: 463, name: "Moura"},
+{id: 464, name: "Mozelos"},
+{id: 465, name: "Murtosa"},
+{id: 466, name: "Nadadouro"},
+{id: 467, name: "Nazar√©"},
+{id: 468, name: "Negreiros"},
+{id: 469, name: "Negrelos"},
+{id: 470, name: "Nelas"},
+{id: 471, name: "Neves"},
+{id: 472, name: "Nisa"},
+{id: 473, name: "Nogueira da Regedoura"},
+{id: 474, name: "Nogueira"},
+{id: 475, name: "Norte Pequeno"},
+{id: 476, name: "Nossa Senhora do Monte"},
+{id: 477, name: "√ìbidos"},
+{id: 478, name: "Odeceixe"},
+{id: 479, name: "Odemira"},
+{id: 480, name: "Odivelas"},
+{id: 481, name: "Oeiras"},
+{id: 482, name: "Oi√£"},
+{id: 483, name: "Oleiros"},
+{id: 484, name: "Olh√£o"},
+{id: 485, name: "Olhos de √Ågua"},
+{id: 486, name: "Olivais"},
+{id: 487, name: "Olival do Basto"},
+{id: 488, name: "Olival"},
+{id: 489, name: "Oliveira de Azemeis"},
+{id: 490, name: "Oliveira do Bairro"},
+{id: 491, name: "Oliveira do Douro"},
+{id: 492, name: "Oliveira do Hospital"},
+{id: 493, name: "Oliveira do Mondego"},
+{id: 494, name: "Oliveira"},
+{id: 495, name: "Oliveirinha"},
+{id: 496, name: "Ota"},
+{id: 497, name: "Our√©m"},
+{id: 498, name: "Ovar"},
+{id: 499, name: "Pa√ßo de Arcos"},
+{id: 500, name: "Pa√ßos de Brand√£o"},
+{id: 501, name: "Pa√ßos de Ferreira"},
+{id: 502, name: "Paderne"},
+{id: 503, name: "Paialvo"},
+{id: 504, name: "Palmela"},
+{id: 505, name: "Pampilhosa da Serra"},
+{id: 506, name: "Pampilhosa do Bot√£o"},
+{id: 507, name: "Parada de Gonta"},
+{id: 508, name: "Paradela"},
+{id: 509, name: "Parchal"},
+{id: 510, name: "Pardilh√≥"},
+{id: 511, name: "Parede"},
+{id: 512, name: "Paredes"},
+{id: 513, name: "Pataias"},
+{id: 514, name: "Paul do Mar"},
+{id: 515, name: "Pedr√≥g√£o Grande"},
+{id: 516, name: "Pedroso"},
+{id: 517, name: "Pedrou√ßos"},
+{id: 518, name: "Pego"},
+{id: 519, name: "Penacova"},
+{id: 520, name: "Penafiel"},
+{id: 521, name: "Penedo Gordo"},
+{id: 522, name: "Penedono"},
+{id: 523, name: "Peniche"},
+{id: 524, name: "P√™ra Velha"},
+{id: 525, name: "P√™ra"},
+{id: 526, name: "Perafita"},
+{id: 527, name: "Pereiro da Palhacana"},
+{id: 528, name: "Perelhal"},
+{id: 529, name: "Pero Pinheiro"},
+{id: 530, name: "Peroguarda"},
+{id: 531, name: "Perozinho"},
+{id: 532, name: "Peso da R√©gua"},
+{id: 533, name: "Piedade"},
+{id: 534, name: "Pinhal Novo"},
+{id: 535, name: "Pinh√£o"},
+{id: 536, name: "Pinheiro Grande"},
+{id: 537, name: "Pinheiro"},
+{id: 538, name: "Poceir√£o"},
+{id: 539, name: "Po√ßo do Canto"},
+{id: 540, name: "Podence"},
+{id: 541, name: "Poiares"},
+{id: 542, name: "Pombal"},
+{id: 543, name: "Pombalinho"},
+{id: 544, name: "Ponta Delgada"},
+{id: 545, name: "Ponta do Pargo"},
+{id: 546, name: "Ponta do Sol"},
+{id: 547, name: "Ponta Gar√ßa"},
+{id: 548, name: "Ponte da Barca"},
+{id: 549, name: "Ponte de Lima"},
+{id: 550, name: "Ponte de S√¥r"},
+{id: 551, name: "Ponte"},
+{id: 552, name: "Pont√©vel"},
+{id: 553, name: "Pontinha"},
+{id: 554, name: "Porches"},
+{id: 555, name: "Portalegre"},
+{id: 556, name: "Portim√£o"},
+{id: 557, name: "Porto Covo"},
+{id: 558, name: "Porto da Cruz"},
+{id: 559, name: "Porto de M√≥s"},
+{id: 560, name: "Porto Judeu"},
+{id: 561, name: "Porto Martins"},
+{id: 562, name: "Porto Moniz"},
+{id: 563, name: "Porto Salvo"},
+{id: 564, name: "Porto"},
+{id: 565, name: "P√≥voa da Raposeira"},
+{id: 566, name: "P√≥voa de Lanhoso"},
+{id: 567, name: "P√≥voa de Santa Iria"},
+{id: 568, name: "P√≥voa de Santo Adri√£o"},
+{id: 569, name: "P√≥voa de Varzim"},
+{id: 570, name: "Povoa√ß√£o"},
+{id: 571, name: "Prado"},
+{id: 572, name: "Pragal"},
+{id: 573, name: "Praia da Graciosa"},
+{id: 574, name: "Praia da Vit√≥ria"},
+{id: 575, name: "Praia do Ribatejo"},
+{id: 576, name: "Prazeres"},
+{id: 577, name: "Prior Velho"},
+{id: 578, name: "Proen√ßa-a-Nova"},
+{id: 579, name: "Quarteira"},
+{id: 580, name: "Queijas"},
+{id: 581, name: "Queluz"},
+{id: 582, name: "Quinta do Anjo"},
+{id: 583, name: "Quinta Do Conde"},
+{id: 584, name: "Quintanilha"},
+{id: 585, name: "Quintela"},
+{id: 586, name: "Rabal"},
+{id: 587, name: "Rabo de Peixe"},
+{id: 588, name: "Ramada"},
+{id: 589, name: "Real"},
+{id: 590, name: "Rebord√µes"},
+{id: 591, name: "Rebordosa"},
+{id: 592, name: "Recarei"},
+{id: 593, name: "Redondo"},
+{id: 594, name: "Refojos de Basto"},
+{id: 595, name: "Reguengos de Monsaraz"},
+{id: 596, name: "Relva"},
+{id: 597, name: "Rendufe"},
+{id: 598, name: "Resende"},
+{id: 599, name: "Riachos"},
+{id: 600, name: "Riba de Ave"},
+{id: 601, name: "Ribeira Brava"},
+{id: 602, name: "Ribeira Ch√£"},
+{id: 603, name: "Ribeira das Tainhas"},
+{id: 604, name: "Ribeira Grande"},
+{id: 605, name: "Ribeira Quente"},
+{id: 606, name: "Ribeira Seca"},
+{id: 607, name: "Ribeir√£o"},
+{id: 608, name: "Ribeirinha"},
+{id: 609, name: "Rio de Loba"},
+{id: 610, name: "Rio de Mouro"},
+{id: 611, name: "Rio Maior"},
+{id: 612, name: "Rio Mau"},
+{id: 613, name: "Rio Me√£o"},
+{id: 614, name: "Rio Tinto"},
+{id: 615, name: "Rochoso"},
+{id: 616, name: "Ronfe"},
+{id: 617, name: "Rosairinho"},
+{id: 618, name: "Rosais"},
+{id: 619, name: "Rosto de C√£o"},
+{id: 620, name: "Rua"},
+{id: 621, name: "Rubi√£is"},
+{id: 622, name: "Sabrosa"},
+{id: 623, name: "Sacav√©m"},
+{id: 624, name: "Sagres"},
+{id: 625, name: "Salir de Matos"},
+{id: 626, name: "Salir do Porto"},
+{id: 627, name: "Salreu"},
+{id: 628, name: "Salvada"},
+{id: 629, name: "Salvaterra de Magos"},
+{id: 630, name: "Samil"},
+{id: 631, name: "Samora Correia"},
+{id: 632, name: "Samouco"},
+{id: 633, name: "Sande"},
+{id: 634, name: "Sandim"},
+{id: 635, name: "Sanfins"},
+{id: 636, name: "Sangalhos"},
+{id: 637, name: "Santa B√°rbara de Nexe"},
+{id: 638, name: "Santa B√°rbara"},
+{id: 639, name: "Santa Catarina da Serra"},
+{id: 640, name: "Santa Clara de Louredo"},
+{id: 641, name: "Santa Clara"},
+{id: 642, name: "Santa Comba D√£o"},
+{id: 643, name: "Santa Cruz da Graciosa"},
+{id: 644, name: "Santa Cruz das Flores"},
+{id: 645, name: "Santa Cruz do Bispo"},
+{id: 646, name: "Santa Cruz"},
+{id: 647, name: "Santa Iria da Az√≥ia"},
+{id: 648, name: "Santa Luzia"},
+{id: 649, name: "Santa Margarida da Coutada"},
+{id: 650, name: "Santa Ovaia"},
+{id: 651, name: "Santa Vit√≥ria"},
+{id: 652, name: "Santana"},
+{id: 653, name: "Santar√©m"},
+{id: 654, name: "Santiago do Cac√©m"},
+{id: 655, name: "Santo Andr√©"},
+{id: 656, name: "Santo Ant√£o do Tojal"},
+{id: 657, name: "Santo Ant√£o"},
+{id: 658, name: "Santo Ant√≥nio da Charneca"},
+{id: 659, name: "Santo Ant√≥nio dos Olivais"},
+{id: 660, name: "Santo da Serra"},
+{id: 661, name: "Santo Isidoro"},
+{id: 662, name: "Santo Izidoro"},
+{id: 663, name: "Santo Tirso"},
+{id: 664, name: "Santos-o-Velho"},
+{id: 665, name: "S√£o Bartolomeu de Messines"},
+{id: 666, name: "S√£o Bartolomeu"},
+{id: 667, name: "S√£o Br√°s de Alportel"},
+{id: 668, name: "S√£o Brissos"},
+{id: 669, name: "S√£o Domingos de Rana"},
+{id: 670, name: "S√£o F√©lix da Marinha"},
+{id: 671, name: "S√£o Jacinto"},
+{id: 672, name: "S√£o Jo√£o da Madeira"},
+{id: 673, name: "S√£o Jo√£o da Pesqueira"},
+{id: 674, name: "S√£o Jo√£o da Talha"},
+{id: 675, name: "S√£o Jo√£o das Lampas"},
+{id: 676, name: "S√£o Jo√£o de Areias"},
+{id: 677, name: "S√£o Jo√£o de Ver"},
+{id: 678, name: "S√£o Jo√£o dos Montes"},
+{id: 679, name: "S√£o Jo√£o"},
+{id: 680, name: "S√£o Jorge da Beira"},
+{id: 681, name: "S√£o Jorge"},
+{id: 682, name: "S√£o Luis"},
+{id: 683, name: "S√£o Mamede de Infesta"},
+{id: 684, name: "S√£o Marcos da Serra"},
+{id: 685, name: "S√£o Martinho do Porto"},
+{id: 686, name: "S√£o Martinho"},
+{id: 687, name: "S√£o Mateus"},
+{id: 688, name: "S√£o Matias"},
+{id: 689, name: "S√£o Miguel de Rio Torto"},
+{id: 690, name: "S√£o Miguel do Couto"},
+{id: 691, name: "S√£o Pedro da Cadeira"},
+{id: 692, name: "S√£o Pedro da Cova"},
+{id: 693, name: "S√£o Pedro de Alva"},
+{id: 694, name: "S√£o Pedro de Serracenos"},
+{id: 695, name: "S√£o Pedro do Sul"},
+{id: 696, name: "S√£o Rom√£o do Coronado"},
+{id: 697, name: "S√£o Rom√£o"},
+{id: 698, name: "S√£o Roque do Pico"},
+{id: 699, name: "S√£o Roque"},
+{id: 700, name: "S√£o Sebasti√£o"},
+{id: 701, name: "S√£o Sim√£o / P√© da Serra"},
+{id: 702, name: "S√£o Teot√≥nio"},
+{id: 703, name: "S√£o Vicente do Paul"},
+{id: 704, name: "S√£o Vicente"},
+{id: 705, name: "Sardoal"},
+{id: 706, name: "Sarilhos Pequenos"},
+{id: 707, name: "S√°t√£o"},
+{id: 708, name: "Sazes da Beira"},
+{id: 709, name: "Seia"},
+{id: 710, name: "Seixal"},
+{id: 711, name: "Selho"},
+{id: 712, name: "Semelhe"},
+{id: 713, name: "Sendim"},
+{id: 714, name: "Senhora da Hora"},
+{id: 715, name: "Senhora da Luz"},
+{id: 716, name: "Senhora do Ros√°rio"},
+{id: 717, name: "Sequeira"},
+{id: 718, name: "Sequeiros"},
+{id: 719, name: "Sermonde"},
+{id: 720, name: "Sernancelhe"},
+{id: 721, name: "Seroa"},
+{id: 722, name: "Serpa"},
+{id: 723, name: "Serra de El-Rei"},
+{id: 724, name: "Serra do Bouro"},
+{id: 725, name: "Sert√£"},
+{id: 726, name: "Serzedelo"},
+{id: 727, name: "Serzedo"},
+{id: 728, name: "Sesimbra"},
+{id: 729, name: "Sete Cidades"},
+{id: 730, name: "Set√∫bal"},
+{id: 731, name: "Silvalde"},
+{id: 732, name: "Silveira"},
+{id: 733, name: "Silves"},
+{id: 734, name: "Sines"},
+{id: 735, name: "Sintra"},
+{id: 736, name: "Sobrado"},
+{id: 737, name: "Sobral de Monte Agra√ßo"},
+{id: 738, name: "Sobralinho"},
+{id: 739, name: "Sobreda"},
+{id: 740, name: "Sobreira"},
+{id: 741, name: "Soure"},
+{id: 742, name: "Souto da Carpalhosa"},
+{id: 743, name: "Souto de Aguiar"},
+{id: 744, name: "Souto"},
+{id: 745, name: "T√°bua"},
+{id: 746, name: "Tabua√ßo"},
+{id: 747, name: "Tamera"},
+{id: 748, name: "Tancos"},
+{id: 749, name: "Tarouca"},
+{id: 750, name: "Tavarede"},
+{id: 751, name: "Tavira"},
+{id: 752, name: "Tebosa"},
+{id: 753, name: "Teixoso"},
+{id: 754, name: "Tel√µes"},
+{id: 755, name: "Terrugem"},
+{id: 756, name: "Tocha"},
+{id: 757, name: "Tomar"},
+{id: 758, name: "Tondela"},
+{id: 759, name: "Torre de Moncorvo"},
+{id: 760, name: "Torres Novas"},
+{id: 761, name: "Torres Vedras"},
+{id: 762, name: "Trafaria"},
+{id: 763, name: "Tramagal"},
+{id: 764, name: "Travanca"},
+{id: 765, name: "Treixedo"},
+{id: 766, name: "Trev√µes"},
+{id: 767, name: "Trigaches"},
+{id: 768, name: "Trofa"},
+{id: 769, name: "Tunes"},
+{id: 770, name: "Turquel"},
+{id: 771, name: "Unhais-o-Velho"},
+{id: 772, name: "Unhos"},
+{id: 773, name: "Urgeses"},
+{id: 774, name: "Urzelina"},
+{id: 775, name: "Vagos"},
+{id: 776, name: "Vair√£o"},
+{id: 777, name: "Valadares"},
+{id: 778, name: "Valado de Frades"},
+{id: 779, name: "Valbom"},
+{id: 780, name: "Vale da Amoreira"},
+{id: 781, name: "Vale de Cambra"},
+{id: 782, name: "Vale de Figueira"},
+{id: 783, name: "Vale de Santar√©m"},
+{id: 784, name: "V√°lega"},
+{id: 785, name: "Valenza"},
+{id: 786, name: "Vales do Rio"},
+{id: 787, name: "Valongo"},
+{id: 788, name: "Valpa√ßos"},
+{id: 789, name: "Valverde"},
+{id: 790, name: "V√°rzea"},
+{id: 791, name: "Velas"},
+{id: 792, name: "Venda do Pinheiro"},
+{id: 793, name: "Vendas Novas"},
+{id: 794, name: "Ventosa"},
+{id: 795, name: "Vestiaria"},
+{id: 796, name: "Vialonga"},
+{id: 797, name: "Viana do Castelo"},
+{id: 798, name: "Vidais"},
+{id: 799, name: "Vide"},
+{id: 800, name: "Vidigueira"},
+{id: 801, name: "Vieira de Leiria"},
+{id: 802, name: "Vieira do Minho"},
+{id: 803, name: "Vila Ch√£ de Ourique"},
+{id: 804, name: "Vila Ch√£"},
+{id: 805, name: "Vila Cova"},
+{id: 806, name: "Vila de Rei"},
+{id: 807, name: "Vila do Bispo"},
+{id: 808, name: "Vila do Conde"},
+{id: 809, name: "Vila do Corvo"},
+{id: 810, name: "Vila do Porto"},
+{id: 811, name: "Vila Franca de Xira"},
+{id: 812, name: "Vila Franca do Campo"},
+{id: 813, name: "Vila Frescainha"},
+{id: 814, name: "Vila Me√£"},
+{id: 815, name: "Vila Nova da Barquinha"},
+{id: 816, name: "Vila Nova da Telha"},
+{id: 817, name: "Vila Nova De Cacela"},
+{id: 818, name: "Vila Nova de Ceira"},
+{id: 819, name: "Vila Nova de Famalic√£o"},
+{id: 820, name: "Vila Nova de Foz C√¥a"},
+{id: 821, name: "Vila Nova de Gaia"},
+{id: 822, name: "Vila Nova de Milfontes"},
+{id: 823, name: "Vila Nova de Paiva"},
+{id: 824, name: "Vila Praia de √Çncora"},
+{id: 825, name: "Vila Real de Santo Ant√≥nio"},
+{id: 826, name: "Vila Real"},
+{id: 827, name: "Vila Seca"},
+{id: 828, name: "Vila Velha de R√≥d√£o"},
+{id: 829, name: "Vila Verde"},
+{id: 830, name: "Vila Vi√ßosa"},
+{id: 831, name: "Vila√ßa"},
+{id: 832, name: "Vilamoura"},
+{id: 833, name: "Vilar de Andorinho"},
+{id: 834, name: "Vilar de Figos"},
+{id: 835, name: "Vilar do Para√≠so"},
+{id: 836, name: "Vilarinho"},
+{id: 837, name: "Vilela"},
+{id: 838, name: "Vimeiro"},
+{id: 839, name: "Vinhais"},
+{id: 840, name: "Viseu"},
+{id: 841, name: "Vizela"},
+{id: 842, name: "Zambujeira do Mar"}
