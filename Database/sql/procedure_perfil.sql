@@ -64,9 +64,10 @@ DELIMITER &&
 CREATE PROCEDURE get_service_provider_profile_v2 (IN em VARCHAR(90))  
 BEGIN  
     SELECT user.idUser, user.name, user.email, user.phoneNumber, user.lastActivity,user.active, serviceprovider.description, location.name as locationName, location.cordsX, location.cordsY,
-		   serviceprovider.endSub, serviceprovider.endSubVip, file.image FROM user
+		   serviceprovider.endSub, serviceprovider.endSubVip, subscription.type, subscription.duration, subscription.value, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
-    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
+    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP
+    INNER JOIN  subscription ON serviceprovider.idSubscription = subscription.idSubscription
     INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
 END &&  
 DELIMITER ;
@@ -80,6 +81,7 @@ BEGIN
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN company ON user.idUser = company.idCompany
     INNER JOIN pi.add ON pi.add.idCompany = company.idCompany
+    INNER JOIN  subscription ON company.idSubscription = subscription.idSubscription
     INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
 END &&
 DELIMITER ;
