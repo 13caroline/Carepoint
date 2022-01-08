@@ -21,5 +21,12 @@
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',7,'2022-03-18 10:27:16',17,55);
 -- CALL update_last_activity(2);
 
-UPDATE pi.review SET review.rating = 10 WHERE review.idReview = 75;
-CALL update_averageRating(51);
+-- UPDATE pi.review SET review.rating = 10 WHERE review.idReview = 75;
+-- CALL update_averageRating(51);
+
+-- category , location, experience, price, rating, sex, limite, offset
+-- CALL get_service_providers_v3 (4, 415, 10, 10.70, 9.0, 'M',10,0);
+
+-- CALL get_service_providers_v3 ('["1","5","3"]', NULL, NULL, NULL, NULL, NULL,10,0);
+USE PI;
+CALL get_service_providers_v3 ('["1","2"]', NULL, NULL, NULL, NULL, NULL,20,0);

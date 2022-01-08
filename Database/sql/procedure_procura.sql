@@ -3,6 +3,7 @@ USE PI;
 DROP PROCEDURE IF EXISTS get_service_providers;
 DROP PROCEDURE IF EXISTS get_companies;
 DROP PROCEDURE IF EXISTS get_service_providers_v2;
+DROP PROCEDURE IF EXISTS get_service_providers_v3;
 
 -- Returns: service providers
 DELIMITER &&  
@@ -111,6 +112,59 @@ BEGIN
                 ELSE 1
                 END
 	GROUP BY user.idUser
+    ORDER BY serviceprovider.endSubVip DESC LIMIT limite OFFSET inicio;
+END &&  
+DELIMITER ;
+
+
+-- Returns: service providers
+DELIMITER &&  
+CREATE PROCEDURE get_service_providers_v3 (IN categories JSON, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)  
+BEGIN  
+	
+    SET @category1 = IF (categories LIKE '%1%', '1',NULL);
+    SET @category2 = IF (categories LIKE '%2%', '2',NULL);
+    SET @category3 = IF (categories LIKE '%3%', '3',NULL);
+    SET @category4 = IF (categories LIKE '%4%', '4',NULL);
+    SET @category5 = IF (categories LIKE '%5%', '5',NULL);
+    SET @category6 = IF (categories LIKE '%6%', '6',NULL);
+    
+    SELECT @category1 ,@category2,@category3,@category4,@category5,@category6, 
+    user.idUser, user.name,user.lastActivity,user.active,user.sex,serviceprovider.description,location.name AS location, location.cordsX, location.cordsY,serviceprovider.endSubVip, serviceprovider.averageRating,category_has_serviceprovider.experience,category_has_serviceprovider.price ,file.image, category_has_serviceprovider.idCategory FROM user
+    INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN file ON user.idUser = file.idUser
+    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
+	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
+	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 
+		AND CASE WHEN id_location IS NOT NULL
+				THEN user.idLocation = id_location
+                ELSE 1
+                END 
+		AND CASE WHEN experience IS NOT NULL
+				THEN category_has_serviceprovider.experience >= experience
+                ELSE 1
+                END
+		AND CASE WHEN price IS NOT NULL
+				THEN (category_has_serviceprovider.price <= price OR category_has_serviceprovider.price IS NULL)
+                ELSE 1
+                END
+		AND CASE WHEN rating IS NOT NULL
+				THEN serviceprovider.averageRating >= rating
+                ELSE 1
+                END
+		AND CASE WHEN in_sex IS NOT NULL
+				THEN (user.sex = in_sex OR user.sex = 'I')
+                ELSE 1
+                END
+		AND (CASE WHEN @category1 IS NOT NULL AND category_has_serviceprovider.idCategory = 1 THEN 1
+                 WHEN @category1 IS NOT NULL AND category_has_serviceprovider.idCategory != 1 THEN 0
+				 ELSE 1
+                 END
+		OR CASE WHEN @category2 IS NOT NULL AND category_has_serviceprovider.idCategory = 2 THEN 1
+                 WHEN @category2 IS NOT NULL AND category_has_serviceprovider.idCategory != 2 THEN 0
+				 ELSE 1
+                 END )
+	-- GROUP BY user.idUser
     ORDER BY serviceprovider.endSubVip DESC LIMIT limite OFFSET inicio;
 END &&  
 DELIMITER ;
