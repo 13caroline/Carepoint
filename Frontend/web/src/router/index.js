@@ -106,6 +106,13 @@ const routes = [
     name: 'SP Profile',
     component: () => import('../views/serviceProviders/Profile.vue')
   },
+
+  // Service Provider - Update subscription
+  {
+  path: '/subscription/renew',
+  name: 'SP update subscription',
+  component: () => import('../views/subscription/RenewSubscription.vue')
+  }
 ]
 
 const router = new VueRouter({
