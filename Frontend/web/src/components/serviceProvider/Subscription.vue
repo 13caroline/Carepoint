@@ -42,7 +42,7 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos">Subscrição</p>
+                        <p class="infos">Última subscrição</p>
                       </v-col>
                       <v-col>
                         <p v-if="getDuration()==1" class="respos">1 mês</p>

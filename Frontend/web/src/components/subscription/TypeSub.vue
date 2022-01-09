@@ -103,7 +103,7 @@
         >
           Retroceder
         </v-btn>
-        <visibility :dados="subscriptionType" @clicked="register" />
+        <visibility :dados="subscriptionType" />
       </v-row>
     </v-item-group>
   </v-container>
@@ -207,8 +207,9 @@ export default {
   methods: {
     subscribe(s) {
       this.subscriptionType.subscription = s.id;
-      if (this.id == 3) this.subscriptionType.price = s.priceS;
-      else this.subscriptionType.price = s.priceC;
+      (this.id == 3) 
+      ? this.subscriptionType.price = s.priceS
+      : this.subscriptionType.price = s.priceC;
     },
     back() {
       this.$router.back();

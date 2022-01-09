@@ -54,7 +54,7 @@
                   </v-card-title>
 
                   <v-card-text class="text-center">
-                    <span v-if="dados.type === '3'"> +{{ v.priceS }} € </span>
+                    <span v-if="$store.state.tipo === '3'"> +{{ v.priceS }} € </span>
                     <span v-else> +{{ v.priceC }} € </span>
                   </v-card-text>
                 </v-card>
@@ -73,6 +73,7 @@
 </template>
 
 <script>
+import store from "@/store/index.js"
 export default {
   props: ["dados"],
   components: {
@@ -82,7 +83,6 @@ export default {
   data: () => ({
     info: {
       visibilityPrice: 0,
-      type: "",
       subscription: "",
       visibility: 0,
       price: 0,
@@ -98,12 +98,11 @@ export default {
   methods: {
     subscribe(v) {
       this.info.visibility = v.sub;
-      (this.dados.type === "3") 
+      (store.state.tipo == 3)
       ? this.info.visibilityPrice = v.priceS
       : this.info.visibilityPrice = v.priceC;
     },
     matchingData() {
-        this.info.type = this.dados.type;
         this.info.price = this.dados.price;
         this.info.subscription = this.dados.subscription;
     }
