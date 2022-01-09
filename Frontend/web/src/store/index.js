@@ -27,6 +27,9 @@ export default new Vuex.Store({
       color: "",
       timeout: "",
     },
+    subType: 0, 
+    subPrice: 0,
+    subSubscription: 0,
   },
   plugins: [createPersistedState()],
   getters: {
@@ -37,6 +40,9 @@ export default new Vuex.Store({
     token: state => state.token,
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status,
+    subType: state => state.subType,
+    subPrice: state => state.subPrice,
+    subSubscription: state => state.subSubscription,
   },
   mutations: {
     setDrawer: (state, payload) => (state.drawer = payload),
@@ -47,6 +53,15 @@ export default new Vuex.Store({
     guardaTipoUtilizador(state, tipo) {
       state.tipo = tipo;
     },
+    guardaSubType(state, type){
+      state.subType = type;
+    },
+    subPrice(state, price){
+      state.subPrice = price;
+    },
+    subSubscription(state, subscription){
+      state.subSubscription = subscription;
+    },
     limpaStore(state) {
       state.token = "";
       state.tipo = "";
@@ -55,6 +70,11 @@ export default new Vuex.Store({
       state.snackbar.text = payload.text;
       state.snackbar.color = payload.color;
       state.snackbar.timeout = payload.timeout;
+    },
+    limpaSubscription(state) {
+      state.subscription.type = 0;
+      state.subscription.price = 0;
+      state.subscription.subscription = 0;
     },
   },
   actions: {

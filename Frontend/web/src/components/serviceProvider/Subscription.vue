@@ -45,8 +45,8 @@
                         <p class="infos">Subscrição</p>
                       </v-col>
                       <v-col>
-                        <p v-if= "user.subDuration[6] == 1" class="respos">1 mês</p>
-                        <p v-else>{{user.subDuration[6]}} meses </p>
+                        <p v-if="getDuration()==1" class="respos">1 mês</p>
+                        <p v-else class="respos">{{getDuration()}} meses </p>
                       </v-col>
                     </v-row>
                   </div>
@@ -148,6 +148,11 @@ import moment from "moment"
     methods: {
         convertDate(d){
            return moment(d , moment.ISO_8601).format("DD-MM-YYYY")
+        },
+        getDuration(){
+          if(this.user.subDuration)
+            return this.user.subDuration[6];
+          return 0;
         }
     },
     components:{

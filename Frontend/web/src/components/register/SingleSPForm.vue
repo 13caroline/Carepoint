@@ -293,7 +293,7 @@ export default {
         type: "3",
         description: "",
         
-        distance: 0,
+        distance:'',
         qualifications: "",
       },
       items: [

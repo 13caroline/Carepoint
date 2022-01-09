@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog2" width="100%" max-width="460">
+  <v-dialog v-model="dialog2" width="100%"  max-width="460">
     <template v-slot:activator="{ on, attrs }">
       <v-col cols="12" md="6">
         <v-btn
@@ -22,9 +22,10 @@
           large
           v-bind="attrs"
           v-on="on"
-          dark
+          class="white--text"
           block
           color="#78c4d4"
+          :disabled="details.visibility == 0"
           @click="confirm(details.visibility)"
         >
           Quero visibilidade!
@@ -60,9 +61,11 @@
               <strong v-if="details.subscription == 1"
                 >{{ details.subscription }} mês</strong
               >
-              <strong v-else>{{ details.subscription }} meses</strong> ({{
-                details.price
-              }}€)
+              <strong
+                v-if="details.subsciption == 3 && details.subscription == 6"
+                >{{ details.subscription }} meses</strong
+              >
+              ({{ details.price }}€)
             </span>
           </v-col>
 
@@ -142,12 +145,7 @@ export default {
   methods: {
     confirm(visible) {
       this.total = 0;
-      //this.details.visibility = 0;
-      //console.log("visible " + visible)
-      //console.log("visibile price " + this.details.visibilityPrice)
-      //console.log(" price " + this.details.price)
-
-      if(visible == 0) this.details.visibilityPrice = 0;
+      if (visible == 0) this.details.visibilityPrice = 0;
 
       this.total =
         Math.round(
@@ -158,29 +156,29 @@ export default {
     },
 
     register: async function () {
-        try {
-          await axios.post("http://localhost:9040/subscription/", {
-            token: store.getters.token,
-            subscription: this.details.subscription.toString(),
-            visibility: this.details.visibility.toString()
-          });
-          this.$snackbar.showMessage({
-            show: true,
-            text: "Utilizador criado com sucesso.",
-            color: "success",
-            snackbar: true,
-            timeout: 4000,
-          });
-        } catch (error) {
-          this.text = "Ocorreu um erro. Por favor tente mais tarde!";
-          this.color = "warning";
-          this.$snackbar.showMessage({
-            show: true,
-            color: this.color,
-            text: this.text,
-            timeout: 4000,
-          });
-        }
+      try {
+        await axios.post("http://localhost:9040/subscription/", {
+          token: store.getters.token,
+          subscription: this.details.subscription.toString(),
+          visibility: this.details.visibility.toString(),
+        });
+        this.$snackbar.showMessage({
+          show: true,
+          text: "Utilizador criado com sucesso.",
+          color: "success",
+          snackbar: true,
+          timeout: 4000,
+        });
+      } catch (error) {
+        this.text = "Ocorreu um erro. Por favor tente mais tarde!";
+        this.color = "warning";
+        this.$snackbar.showMessage({
+          show: true,
+          color: this.color,
+          text: this.text,
+          timeout: 4000,
+        });
+      }
     },
   },
 };

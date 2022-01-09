@@ -263,7 +263,7 @@ export default {
     next: async function () {
       if (this.$refs.form.validate()) {
         try {
-          let response = await axios.post(
+           await axios.post(
             "http://localhost:9041/users/register",
             {
               name: this.form.name,
@@ -279,7 +279,6 @@ export default {
               nipc: this.form.nipc,
             }
           );
-          console.log(response.data);
           this.$router.push("/register/subscription/" + this.form.type);
           this.$snackbar.showMessage({
             show: true,

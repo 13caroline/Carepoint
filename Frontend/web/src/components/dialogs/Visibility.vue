@@ -11,6 +11,7 @@
           v-bind="attrs"
           v-on="on"
           :disabled="dados.subscription == 5"
+          @click="matchingData()"
         >
           Subscrever
         </v-btn>
@@ -97,13 +98,16 @@ export default {
   methods: {
     subscribe(v) {
       this.info.visibility = v.sub;
-      this.info.type = this.dados.type;
-      this.info.price = this.dados.price;
-      this.info.subscription = this.dados.subscription;
       if (this.dados.type === "3") this.info.visibilityPrice = v.priceS;
       else this.info.visibilityPrice = v.priceC;
     },
+    matchingData() {
+        this.info.type = this.dados.type;
+        this.info.price = this.dados.price;
+        this.info.subscription = this.dados.subscription;
+    }
   },
+
 };
 </script>
 
