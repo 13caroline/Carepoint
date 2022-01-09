@@ -1,3 +1,4 @@
+USE PI;
 --  CALL get_service_providers_v2 (NULL, NULL, NULL, NULL, 6, NULL,10,0);
  -- get_service_providers (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)
 -- CALL get_companies(NULL,50,0);
@@ -25,8 +26,8 @@
 -- CALL update_averageRating(51);
 
 -- category , location, experience, price, rating, sex, limite, offset
--- CALL get_service_providers_v3 (4, 415, 10, 10.70, 9.0, 'M',10,0);
+ CALL get_service_providers_v2 (NULL, NULL, NULL, NULL,NULL, NULL,10,0);
 
 -- CALL get_service_providers_v3 ('["1","5","3"]', NULL, NULL, NULL, NULL, NULL,10,0);
-USE PI;
-CALL get_service_providers_v3 ('["1","2"]', NULL, NULL, NULL, NULL, NULL,20,0);
+
+-- CALL get_service_providers_v3 ('["1","2"]', NULL, NULL, NULL, NULL, NULL,20,0);
