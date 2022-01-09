@@ -31,8 +31,7 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE get_reviews (IN id INT)  
 BEGIN  
-    SELECT description,rating,postDate, user.name, file.image FROM review
-    INNER JOIN file ON review.idGive = file.idUser
+    SELECT description,rating,postDate, user.name FROM review
     INNER JOIN user ON review.idGive = user.idUser WHERE id = review.idReceive;
 END &&  
 DELIMITER ;  
