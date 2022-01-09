@@ -9,7 +9,7 @@
               color="#78C4D4"
               outlined
               dark
-              to="/consumer/edit/profile"
+              to="/subscription/renew"
             >
               Renovar subscrição
               <v-icon small class="ml-2">fas fa-sync</v-icon>
@@ -93,27 +93,8 @@
                         <p class="infos">Visibilidade</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.email}}</p>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div>
-                    <v-row>
-                      <v-col>
-                        <p class="infos">Duração</p>
-                      </v-col>
-                      <v-col>
-                        <p class="respos">*****</p>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div>
-                    <v-row>
-                      <v-col>
-                        <p class="infos">Valor</p>
-                      </v-col>
-                      <v-col>
-                        <p class="respos">*****</p>
+                        <p v-if="user.endSubVip==null" class="respos">Não</p>
+                        <p class="respos" v-else> Sim </p>
                       </v-col>
                     </v-row>
                   </div>
@@ -123,7 +104,8 @@
                         <p class="infos mb-0">Data término</p>
                       </v-col>
                       <v-col>
-                        <p class="respos mb-0">*****</p>
+                        <p v-if="user.endSubVip==null" class="respos">Não aplicável</p>
+                        <p v-else class="respos mb-0">{{convertDate(this.user.endSubVip)}}</p>
                       </v-col>
                     </v-row>
                   </div>

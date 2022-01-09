@@ -98,8 +98,9 @@ export default {
   methods: {
     subscribe(v) {
       this.info.visibility = v.sub;
-      if (this.dados.type === "3") this.info.visibilityPrice = v.priceS;
-      else this.info.visibilityPrice = v.priceC;
+      (this.dados.type === "3") 
+      ? this.info.visibilityPrice = v.priceS
+      : this.info.visibilityPrice = v.priceC;
     },
     matchingData() {
         this.info.type = this.dados.type;
