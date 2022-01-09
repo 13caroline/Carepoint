@@ -212,9 +212,7 @@ export default {
   components: {
     Cancel: () => import("@/components/dialogs/Cancel"),
   },
-  
 
-  
   methods: {
     close() {
       this.$router.back();
@@ -223,7 +221,7 @@ export default {
     registUser: async function (){
       if(this.$refs.form.validate()){
         try{
-          await axios.post("http://localhost:9041/users/register", {
+          let res = await axios.post("http://localhost:9041/users/register", {
             name: this.form.name, 
             email: this.form.email, 
             password: this.form.password, 
@@ -232,11 +230,15 @@ export default {
             location: 1, 
             phoneNumber: this.form.phoneNumber,
           });
-
+          if (res.data.token != undefined) {
+            this.$store.commit("guardaTokenUtilizador", res.data.token);
+            this.$store.commit("guardaTipoUtilizador", this.form.type);
+          }
+          this.$router.push("/consumer/page")
           this.$snackbar.showMessage({
             show: true,
-            text: "Utilizador criado com sucesso.",
-            color: "success",
+            color: "#78c4d4",
+            text: "Bem-vindo ao Carepoint!",
             snackbar: true,
             timeout: 4000,
           });
