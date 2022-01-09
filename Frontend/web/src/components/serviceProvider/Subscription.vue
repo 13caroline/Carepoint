@@ -56,7 +56,7 @@
                         <p class="infos">Valor</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.subValue}}</p>
+                        <p class="respos">{{user.subValue}}€</p>
                       </v-col>
                     </v-row>
                   </div>

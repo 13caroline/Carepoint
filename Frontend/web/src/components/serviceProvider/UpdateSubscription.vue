@@ -77,7 +77,7 @@ export default {
   name: "Ads",
   data() {
     return {
-      subscriptionType: { subscription: 5, type: store.state.tipo, price: 0 },
+      subscriptionType: { subscription: 5, type: store.state.tipo, price: 0, updated: 1 },
       styleObject: { border: "1px solid #78C4D4" },
       sub: [
         {

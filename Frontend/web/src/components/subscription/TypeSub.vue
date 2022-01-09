@@ -117,7 +117,7 @@ export default {
   props: ["id", "dados"],
   data() {
     return {
-      subscriptionType: { subscription: 5, type: this.id, price: 0 },
+      subscriptionType: { subscription: 5, type: this.id, price: 0, updated: 0 },
       styleObject: { border: "1px solid #78C4D4" },
       exp :  {
           id: 0,

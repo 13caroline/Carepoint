@@ -86,6 +86,7 @@ export default {
       subscription: "",
       visibility: 0,
       price: 0,
+      updated: 0,
     },
     dialog: false,
     styleObject: { border: "1px solid #78C4D4" },
@@ -105,6 +106,7 @@ export default {
     matchingData() {
         this.info.price = this.dados.price;
         this.info.subscription = this.dados.subscription;
+        this.info.updated = this.dados.updated;
     }
   },
 

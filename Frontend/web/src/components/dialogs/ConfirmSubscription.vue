@@ -166,10 +166,12 @@ export default {
           ? this.$router.push("/service/provider/page")
           : this.$router.push("/service/provider/page"); // change to Collective SP
 
+        (this.details.updated === 0) ? this.text = "Bem-vindo ao Carepoint!" 
+        : this.text = "Subscrição renovada com sucesso!"
         this.$snackbar.showMessage({
           show: true,
           color: "#78c4d4",
-          text: "Bem-vindo ao Carepoint!",
+          text: this.text,
           snackbar: true,
           timeout: 4000,
         });
