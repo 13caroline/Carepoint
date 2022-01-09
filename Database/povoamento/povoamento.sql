@@ -1,6 +1,8 @@
 USE PI;
 
 SET SQL_SAFE_UPDATES = 0;
+DROP TRIGGER IF EXISTS default_pic;
+DROP TRIGGER IF EXISTS update_averageRating;
 DELETE FROM category_has_serviceprovider;
 DELETE FROM joboffer;
 DELETE FROM category;
