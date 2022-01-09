@@ -3,6 +3,8 @@ USE PI;
 SET SQL_SAFE_UPDATES = 0;
 DROP TRIGGER IF EXISTS default_pic;
 DROP TRIGGER IF EXISTS update_averageRating;
+DROP PROCEDURE IF EXISTS update_file_def;
+DROP PROCEDURE IF EXISTS update_first_avg;
 DELETE FROM category_has_serviceprovider;
 DELETE FROM joboffer;
 DELETE FROM category;
@@ -2683,3 +2685,138 @@ INSERT INTO category_has_serviceprovider(price,experience,workSchedule,idCategor
 INSERT INTO category_has_serviceprovider(price,experience,workSchedule,idCategory,idServiceProvider)VALUES(20.20,6,'{"2022-01-06 08:00:00" : 1,"2022-01-06 01:30:00" : 1,"2022-01-06 23:30:00" : 1,"2022-01-06 04:00:00" : 1,"2022-01-06 14:30:00" : 1,"2022-01-06 16:00:00" : 1,"2022-01-06 21:00:00" : 1,"2022-01-06 02:30:00" : 0,"2022-01-06 22:30:00" : 1,"2022-01-06 23:00:00" : 1,"2022-01-06 05:00:00" : 0,"2022-01-06 17:30:00" : 1,"2022-01-06 10:00:00" : 1,"2022-01-06 04:30:00" : 0,"2022-01-06 02:00:00" : 1,"2022-01-07 23:30:00" : 1,"2022-01-07 13:00:00" : 0,"2022-01-07 07:00:00" : 1,"2022-01-07 16:30:00" : 0,"2022-01-07 10:00:00" : 0,"2022-01-07 00:00:00" : 1,"2022-01-07 08:30:00" : 1,"2022-01-07 22:00:00" : 0,"2022-01-07 07:30:00" : 1,"2022-01-07 16:00:00" : 1,"2022-01-07 12:00:00" : 1,"2022-01-07 03:00:00" : 1,"2022-01-07 17:30:00" : 0,"2022-01-07 09:00:00" : 0,"2022-01-07 08:00:00" : 1,"2022-01-07 06:00:00" : 0,"2022-01-07 19:30:00" : 1,"2022-01-07 11:00:00" : 1,"2022-01-07 06:30:00" : 0,"2022-01-04 01:00:00" : 0,"2022-01-04 10:00:00" : 0,"2022-01-04 05:00:00" : 1,"2022-01-04 15:30:00" : 1,"2022-01-04 12:00:00" : 0,"2022-01-04 09:00:00" : 0,"2022-01-04 10:30:00" : 1,"2022-01-04 09:30:00" : 1,"2022-01-04 02:00:00" : 0,"2022-01-04 06:30:00" : 1,"2022-01-04 08:00:00" : 1,"2022-01-04 23:00:00" : 1,"2022-01-04 23:30:00" : 1,"2022-01-04 14:30:00" : 1,"2022-01-04 20:30:00" : 0,"2022-01-04 11:00:00" : 0,"2022-01-05 21:00:00" : 0,"2022-01-05 06:00:00" : 0,"2022-01-05 07:00:00" : 1,"2022-01-05 14:00:00" : 0,"2022-01-05 01:00:00" : 0,"2022-01-05 23:00:00" : 1,"2022-01-05 13:30:00" : 0,"2022-01-05 03:30:00" : 1,"2022-01-05 15:00:00" : 1,"2022-01-05 04:00:00" : 0,"2022-01-05 18:30:00" : 0,"2022-01-05 17:30:00" : 0,"2022-01-05 19:00:00" : 0,"2022-01-05 18:00:00" : 1,"2022-01-05 14:30:00" : 0,"2022-01-05 22:00:00" : 1,"2022-01-05 12:30:00" : 1,"2022-01-08 16:00:00" : 1,"2022-01-08 17:30:00" : 1,"2022-01-08 11:00:00" : 0,"2022-01-08 20:30:00" : 1,"2022-01-08 04:30:00" : 0,"2022-01-08 01:00:00" : 0,"2022-01-08 02:00:00" : 0,"2022-01-08 09:00:00" : 0,"2022-01-08 20:00:00" : 1,"2022-01-08 04:00:00" : 0,"2022-01-08 00:00:00" : 0,"2022-01-08 21:30:00" : 1,"2022-01-08 19:00:00" : 0,"2022-01-08 06:30:00" : 0,"2022-01-08 23:00:00" : 0,"2022-01-08 08:00:00" : 1,"2022-01-08 13:00:00" : 1,"2022-01-08 08:30:00" : 0,"2022-01-08 13:30:00" : 1,"2022-01-03 17:30:00" : 0,"2022-01-03 13:00:00" : 0,"2022-01-03 20:30:00" : 0,"2022-01-03 06:00:00" : 1,"2022-01-03 08:00:00" : 1,"2022-01-03 08:30:00" : 1,"2022-01-03 02:30:00" : 1,"2022-01-03 12:30:00" : 1,"2022-01-03 09:00:00" : 1,"2022-01-03 05:00:00" : 1,"2022-01-03 11:00:00" : 0,"2022-01-03 16:30:00" : 0,"2022-01-03 04:30:00" : 0,"2022-01-03 03:00:00" : 0,"2022-01-09 03:30:00" : 1,"2022-01-09 09:00:00" : 0,"2022-01-09 13:30:00" : 1,"2022-01-09 12:00:00" : 0,"2022-01-09 02:30:00" : 1,"2022-01-09 15:00:00" : 1,"2022-01-09 16:00:00" : 0,"2022-01-09 23:00:00" : 1,"2022-01-09 22:00:00" : 1,"2022-01-09 11:30:00" : 1,"2022-01-09 18:00:00" : 1,"2022-01-09 10:00:00" : 1,"2022-01-09 03:00:00" : 0,"2022-01-09 16:30:00" : 0,"2022-01-09 07:00:00" : 0,"2022-01-09 17:00:00" : 1,"2022-01-09 10:30:00" : 0,"2022-01-09 17:30:00" : 1,"2022-01-09 08:30:00" : 0}',2,148);
 INSERT INTO category_has_serviceprovider(price,experience,workSchedule,idCategory,idServiceProvider)VALUES(6.21,15,'{"2022-01-04 02:00:00" : 1,"2022-01-04 18:00:00" : 0,"2022-01-04 23:30:00" : 0,"2022-01-04 12:30:00" : 1,"2022-01-04 05:30:00" : 0,"2022-01-04 14:30:00" : 0,"2022-01-05 13:30:00" : 1,"2022-01-09 23:30:00" : 0,"2022-01-09 09:00:00" : 1,"2022-01-09 21:00:00" : 0,"2022-01-09 08:00:00" : 0,"2022-01-09 08:30:00" : 1,"2022-01-09 00:00:00" : 0,"2022-01-09 19:00:00" : 0,"2022-01-09 15:30:00" : 1,"2022-01-07 07:00:00" : 0,"2022-01-07 17:30:00" : 1,"2022-01-07 03:00:00" : 1,"2022-01-07 10:00:00" : 1,"2022-01-07 16:00:00" : 1,"2022-01-07 09:30:00" : 0,"2022-01-03 13:30:00" : 1,"2022-01-06 11:30:00" : 1,"2022-01-06 22:00:00" : 1,"2022-01-08 12:00:00" : 1,"2022-01-08 14:30:00" : 1,"2022-01-08 08:00:00" : 0,"2022-01-08 10:30:00" : 0,"2022-01-08 20:00:00" : 0,"2022-01-08 21:30:00" : 0,"2022-01-08 04:30:00" : 1,"2022-01-08 08:30:00" : 1,"2022-01-08 11:30:00" : 0}',2,149);
 INSERT INTO category_has_serviceprovider(price,experience,workSchedule,idCategory,idServiceProvider)VALUES(NULL,1,'{"2022-01-09 06:00:00" : 0,"2022-01-09 14:30:00" : 1,"2022-01-09 12:30:00" : 0,"2022-01-09 00:00:00" : 1,"2022-01-09 11:30:00" : 0,"2022-01-09 19:00:00" : 1,"2022-01-09 21:00:00" : 1,"2022-01-09 23:30:00" : 1,"2022-01-09 20:30:00" : 0,"2022-01-09 11:00:00" : 0,"2022-01-09 06:30:00" : 1,"2022-01-09 10:00:00" : 1,"2022-01-09 08:00:00" : 1,"2022-01-09 12:00:00" : 0,"2022-01-09 21:30:00" : 1,"2022-01-09 03:00:00" : 1,"2022-01-09 09:00:00" : 0,"2022-01-09 04:00:00" : 1,"2022-01-09 07:30:00" : 0,"2022-01-09 02:30:00" : 1,"2022-01-07 11:00:00" : 0,"2022-01-07 10:30:00" : 0,"2022-01-07 03:30:00" : 0,"2022-01-07 15:30:00" : 1,"2022-01-07 09:30:00" : 0,"2022-01-07 04:30:00" : 1,"2022-01-07 03:00:00" : 0,"2022-01-07 05:00:00" : 1,"2022-01-07 14:30:00" : 1,"2022-01-07 17:30:00" : 1,"2022-01-07 02:30:00" : 1,"2022-01-07 12:30:00" : 0,"2022-01-07 17:00:00" : 1,"2022-01-07 16:00:00" : 0,"2022-01-07 00:00:00" : 1,"2022-01-07 01:00:00" : 0,"2022-01-07 22:00:00" : 0,"2022-01-07 11:30:00" : 1,"2022-01-07 19:30:00" : 1,"2022-01-06 03:30:00" : 0,"2022-01-08 20:30:00" : 1,"2022-01-08 13:30:00" : 0,"2022-01-08 20:00:00" : 1,"2022-01-08 23:30:00" : 1,"2022-01-08 18:00:00" : 1,"2022-01-08 16:00:00" : 0,"2022-01-08 22:00:00" : 0,"2022-01-08 04:00:00" : 0,"2022-01-08 10:30:00" : 1,"2022-01-08 01:30:00" : 1,"2022-01-08 09:00:00" : 1,"2022-01-08 05:30:00" : 0}',6,150);
+
+-- Update: image
+DELIMITER &&  
+CREATE PROCEDURE update_file_def()  
+BEGIN  
+	SET SQL_SAFE_UPDATES = 0;
+	UPDATE pi.file SET file.image = x'89504e470d0a1a0a0000000d494844520000015c00000162040300000048487dc20000000f504c5445efedec58595bffffff898a8abebebd5e51117a00000b424944415478daeddd6b96ea28100060e4ba80d06401885980af0598d8fb5fd34d34adb6f2288a2a489f23bfc63933f1eb128a0a2189b0b766c4ad2dfde387fbe17eb81fee87fbe17eb81fee87bb888f42c8f9df2cfce387fbe132728dfd1918c62c9b7b951a791fc0b78f4be55ab1be5c8eead1f4f1741676995cf3fd2c7d329fc4f2b81eeb2cfe96f71c5f9d3b4a2e7b1569c7f3fc9f57e64abbbe2848d3377055ae1c23aba06d049baadc14ecd4c65157916bd77b95d84e15b91795de5a99c545d79db6db2b543bdb0ae539a2233c3a8429cc95a88e704f11a3b724579a5ee5b4290797e35ab35799ed5c90db656b951a8a710d8156a95d216e47a29dbdec5c43a4bd79b9b974daeb7863e6526aa7f1c6cced15691b78b9c4daebfcc6c6b5ff9422f7b27119b45341c9b502d9298eb6e32acff72cdcdb744ccfed79b463f7e5e06e15576b19b89de26b3b7a6ecfc81dbb2f31f71fa75669626ea7785b6328b95c39ecad7820e1327785a7c99884db29fed6182a2e7f57b8760722aefc57423b4e16245c698a04779c2c0c09b72fa3bd8eb6fc15c84e956a0d4579de17e32a99cf2d17dc69b46573f705b98013e308775b52abda5c6ed1e0ce73059a2bcb06f7115e1cd7140eee3dbc286ea1e9d7115e14b77c707fc28be116efb98ff0a2b815823b8717c1ad12dc39bc186e5f857b0d6f3a577675b4d7d320c40a64a5e04e8519a23c37b5b4ea80e1aeaa7135869b91c5f4716c2c4b665e2e3a8be9d3ed6002bfe1a14de76207da493e8e8106cb542e328be9f3fd88d773fe1e9fcb92b8b881a61fbb4be78479411e278d8b1b687a78d1a22f1c1e92b8c872e15d8b2d425b93c445c564e7d06247814ce1a26634edd2624f497606cec57dc320dc0d5536b7295cfc17b85a87fee361dc2e27b53b5a8f4dbdb015c82d6970717fbe8697e77bc29e8bee5c03946be8d2c2dc303fd71794bbc14f43be86ec0d206e4f3bd0b0d3ce00e31ae28186ed0d071817d5d1c25ad434a961dc9e382fa07b838470e9f3c2d456a8de00e06e19ba2eaef3b6102e260e4d4c8b9bd721dc3d7dd69d3a2fea9c22cec5974f612e260a4d9cbb61e2f63923d8cf459df68878431d5746572051675626ce45ad041c62e539ea14587371db1877c5c5458d091de3e6ac0a90cf13f79b417c5cdc1a341ff710e66ed9b8b8d59136cc5db171d72aa3f3fab8b805b8862dba73e7f57091974f1ac1c63d84b8c863f2f5dd69f7939fbb595c747588db2f8eab6480ab96c73df8b9d80b958c7df7ba98e3e162afa53126b2db44e15c81445eeee18daef296e7e80d0c0ddbaca65eb7373c17ea6a89d13df8b8e823b680cc80dee3f57b37c613173bd234408bef69ad8fbb62ecbaf8df4e7bb8f89106d10a9331d69cdc3d2b571073d17f3e8c8b1ec85f6e6ea716d977a7b1e6e26e39d32e3d77c5cbc56f517472f17b08b9b98393bbff535cfcae3ccdccfd72ad4076ccdc0d9eeb2acfb7cc5cf4487ede05f7e06e16cbd52e2efe708a99ab5cdc3dfe7082992bcb7373b6861f1c5cf5a7b8399ba12533f7eb9d9bb3317e8070333adb63c3e9fd683937493436aecdf9f5f43b77937138758cee16d17b5aee2a871b9d29f28eaedeb97dde01f9c6d9d3587ee2eef30e38b08db3a7a3d3710f3c67c1bf8ffeb4029979c086e73ced794dfab93ccf3d606b784af3a735694a6e3835ac727fbb576ef6ad7492313130700f8c89e1e7d2f083bbc9e57e3126869f4bc384dcd058db9273578a71ac651f5cbd72fbec23328eb4f9da252977e01b69efdcfc23367c23ed675b0325d73fd6b6f4dcfc23fa571bf247da5c34907207beaefbcaa5b829f8c0d775e71ac7501ed2d779296e3efffa5d9e531cd237511074ddfbe3bf08b99ece4bf22082863ebabeceab161a5d77e7253cf49d4bf2a00b77e75d7db88cdccddfe2121e9a96db16e3fefb535cf9c7a2bbe1e3760cd125c9360ded7eb7407419b9b4d1255a66f073499eafa37f97e7245cc612a71c572e953bb09daabd72499223e59d6afcd13d7b4e7e289ec8471fdd9d779d81c04b1edd5de87112d9de9638ba6713bc20dc2f8a7b94918bace6b21ceeefe74eb99b15c76570f53916da19bcbe9071d175c8e96c41d85b81f28d1d730d05f7789660ec7c7b3232c404dc9348b3ce21369810bfac40a6731f0fa14b6d98f74bbeac91a516a52d1a7bcbc3a95de265c134b1283de5606f69222dc0871cee2e579bfc2680176e520dbd3382a025795fb9fbd2dab4c26740735b4ba315728de7c24b2629a85ac297a2b9545d21adfbbe6ccc022fe368426dc24aa2794964aba4215a3abcfa95bba9115cf08ffac60516bc0d2d175aabb4afdc2e65848ad2c901c925ee0be031d318d41ec8869c0b0bd3dba64253212fc06babb72d9bb0dd2d03b91636fb23b9f4c1858d35f9c6edab8c34e0587be39a55252e28e15b14b765e04252837ee742feca2f21aaa486f69ddbd5c963a0d4d0bc734d953c06bb16e0e08a2a790c96c90eef5cc08fc2911840996c7070fb4adc2d38edfeea0cab2a790c74895ba0b80d87169078b571dc85bdad93760189d7795bb3a99276215ce74de3b6125702f2988bbbaf324b00a6b5c1c9ed97ca954eeea612b78f978f2eeeb6c61c0ce0b66e6e57871bad711acfd3de2a7157f102c7c98df57953873b78b87d8d0a27ce951eeea60e37f6b5be27156e17c96d7d5c5387bb8daf8f39b991b1d6d6e10edee740f68be40adf8315570be45ebba09bbb5d20b7f57345156e173fe37273c3b55c1dee10e0f66557fa21a7c232c05d2d2ebab764efe9bb5d8de802bed4c335e5971922dcdbe9ac871becbc55b843881b9c28b8b8eb789de2e3760b8b6e1be69a8571e795181f37d4796b648621cc0dd5ca156a869f12dbfb269a6e51e76a4df445918b5ac589be3827f43fef78c20b58e5f747f75fe1de10aa537eae5606b89d2a1b5e03b89e16e0066b5e59b4e7aa01f04ed6d03cdc527b83efd6d59057c8062b0e626ff84dc0ad81bcf1367c622a09fb6fe4c5de07487423ab0d905b5080a18ddd092441ef138eada29f68026c63972bc7491fc28d5e60d3f03b5102d8e815941d8c0bb9989d09b6027027c2007cb93464572df4c62434f63a87c2de850ddb0f79161635c080b7fdec0cf45dd8c09dddfa24126f4e996eaa82deb7067eb974c2dd6ba3d842bb718a75dedd04e326dd01a44fd36d6011f2f4837e27dd0f788073939ffd76fc1e3bb2754fd072fc6346ea3ef19032818bb997514f66f98c96d74b4cdf17cc5d96ad4de0e21f4f763c8d68713be0777a4c5f4e7ba0dc95ca6ac7e331ef00ca2671491e5991d19a342ec56df4396d48e3da7f55b5da2646d72ca12fc0b924cf68433799ca1535075b6b92b9b2e2601b443ab7de60d3c6cf75d5bbd78ff572d9f3e61b48797efbb8aa98c5105c532fb818aeedeb65310cb74e2e6b2c925b27bc12cdad11ded6a2b935c23b6470b795828be4123c011b57e822b95d9de062b9a5ebc8218f5bb88e6c6d26b76c78a5cce4160d6f63a2dc706559b430d32146a43cbf7f2c57f71e28b8c5cee1b525e1969a2b06226e572e895170cb543a928c6bca8c332a6e81caacb5845cfeee3050720df768db59522ef39a4e60510cc515acdd410f82982b38e7e29d21e7ca35635610e45cbe25492d45022352efb2af92e821f6bd29e5f9d3479eee7bb04c5c965a6767d9b876cd35f9f270ed857c987172a9678bbb96892b4c4f9a140c6f7485a4f40e46307329e37b36829f4b16dfeba3d2d9b954f1bd3dd8bd0097223f8ca34c94e2caecfc7bdf065c869bb9b4d34a2b8a72114fd77eb453ca1725ae407a3e6678af8f9e467e2f962b2cf22d07faf6dc98d2dcf1a7c1bcf6e2672b7871eef4f1921e5a23ea711303bcc37f110d3725459ca4adcf85824f32fb8b68b8d6467712eb9324f8221aaeb9bef62210e269ffb45810f7fa8f6b678caf7bbd33e6051eeefc69da0bbd9fe3bc3f1ebf27aac93e320bf7d1957fcdf7844766e18e276053137f86cbf8f18f71b1f56e9d8f1fee87fbe17eb81f6ed98fff014fd9f52fcdf770bf0000000049454e44ae426082'
+    ;
+	SET SQL_SAFE_UPDATES = 1;
+END &&  
+DELIMITER ;
+
+CALL update_file_def();
+
+-- Update: service provider info
+DELIMITER &&  
+CREATE PROCEDURE update_first_avg (IN idUser INT)  
+BEGIN  
+
+	SET @avg_rating = (SELECT AVG(rating) FROM review WHERE idUser = review.idReceive);
+    
+    SET foreign_key_checks = 0;
+	UPDATE  serviceprovider SET
+		 serviceprovider.averageRating= CASE
+					WHEN @avg_rating IS NOT NULL
+                    THEN @avg_rating
+                    ELSE serviceprovider.averageRating
+                    END
+		WHERE serviceprovider.idSP = idUser;
+        SET foreign_key_checks = 1;
+        
+        
+END &&  
+DELIMITER ;
+
+CALL update_first_avg(51);
+CALL update_first_avg(52);
+CALL update_first_avg(53);
+CALL update_first_avg(54);
+CALL update_first_avg(55);
+CALL update_first_avg(56);
+CALL update_first_avg(57);
+CALL update_first_avg(58);
+CALL update_first_avg(59);
+CALL update_first_avg(60);
+CALL update_first_avg(61);
+CALL update_first_avg(62);
+CALL update_first_avg(63);
+CALL update_first_avg(64);
+CALL update_first_avg(65);
+CALL update_first_avg(66);
+CALL update_first_avg(67);
+CALL update_first_avg(68);
+CALL update_first_avg(69);
+CALL update_first_avg(70);
+CALL update_first_avg(71);
+CALL update_first_avg(72);
+CALL update_first_avg(73);
+CALL update_first_avg(74);
+CALL update_first_avg(75);
+CALL update_first_avg(76);
+CALL update_first_avg(77);
+CALL update_first_avg(78);
+CALL update_first_avg(79);
+CALL update_first_avg(80);
+CALL update_first_avg(81);
+CALL update_first_avg(82);
+CALL update_first_avg(83);
+CALL update_first_avg(84);
+CALL update_first_avg(85);
+CALL update_first_avg(86);
+CALL update_first_avg(87);
+CALL update_first_avg(88);
+CALL update_first_avg(89);
+CALL update_first_avg(90);
+CALL update_first_avg(91);
+CALL update_first_avg(92);
+CALL update_first_avg(93);
+CALL update_first_avg(94);
+CALL update_first_avg(95);
+CALL update_first_avg(96);
+CALL update_first_avg(97);
+CALL update_first_avg(98);
+CALL update_first_avg(99);
+CALL update_first_avg(100);
+CALL update_first_avg(101);
+CALL update_first_avg(102);
+CALL update_first_avg(103);
+CALL update_first_avg(104);
+CALL update_first_avg(105);
+CALL update_first_avg(106);
+CALL update_first_avg(107);
+CALL update_first_avg(108);
+CALL update_first_avg(109);
+CALL update_first_avg(110);
+CALL update_first_avg(111);
+CALL update_first_avg(112);
+CALL update_first_avg(113);
+CALL update_first_avg(114);
+CALL update_first_avg(115);
+CALL update_first_avg(116);
+CALL update_first_avg(117);
+CALL update_first_avg(118);
+CALL update_first_avg(119);
+CALL update_first_avg(120);
+CALL update_first_avg(121);
+CALL update_first_avg(122);
+CALL update_first_avg(123);
+CALL update_first_avg(124);
+CALL update_first_avg(125);
+CALL update_first_avg(126);
+CALL update_first_avg(127);
+CALL update_first_avg(128);
+CALL update_first_avg(129);
+CALL update_first_avg(130);
+CALL update_first_avg(131);
+CALL update_first_avg(132);
+CALL update_first_avg(133);
+CALL update_first_avg(134);
+CALL update_first_avg(135);
+CALL update_first_avg(136);
+CALL update_first_avg(137);
+CALL update_first_avg(138);
+CALL update_first_avg(139);
+CALL update_first_avg(140);
+CALL update_first_avg(141);
+CALL update_first_avg(142);
+CALL update_first_avg(143);
+CALL update_first_avg(144);
+CALL update_first_avg(145);
+CALL update_first_avg(146);
+CALL update_first_avg(147);
+CALL update_first_avg(148);
+CALL update_first_avg(149);
+CALL update_first_avg(150);
