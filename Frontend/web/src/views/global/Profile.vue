@@ -38,9 +38,7 @@
           </v-col>
         </v-row>
 
-        <h3 class="group font-weight-light text-uppercase">
-          Dados Pessoais
-        </h3>
+        <h3 class="group font-weight-light text-uppercase">Dados Pessoais</h3>
         <v-divider></v-divider>
         <v-row class="w-100" align="start">
           <v-col cols="12" sm>
@@ -53,7 +51,7 @@
                         <p class="infos">Nome</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.name}}</p>
+                        <p class="respos">{{ user.name }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -63,7 +61,7 @@
                         <p class="infos">Localidade</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.locationName}}</p>
+                        <p class="respos">{{ user.locationName }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -73,7 +71,7 @@
                         <p class="infos">Sexo</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.sex}}</p>
+                        <p class="respos">{{ user.sex }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -122,7 +120,7 @@
                         <p class="infos">E-mail</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.email}}</p>
+                        <p class="respos">{{ user.email }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -157,7 +155,7 @@
                         <p class="infos mb-0">Contacto telefónico</p>
                       </v-col>
                       <v-col>
-                        <p class="respos mb-0">{{user.phoneNumber}}</p>
+                        <p class="respos mb-0">{{ user.phoneNumber }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -192,25 +190,19 @@ export default {
     onPick() {
       this.$refs.fileInput.click();
     },
-    wannaBeSP(){
-      this.$router.push('/consumer/become/service/provider')
-    }
+    wannaBeSP() {
+      this.$router.push("/consumer/become/service/provider");
+    },
   },
   created: async function () {
     try {
-      let response = await axios.post(
-        "http://localhost:9040/users/perfil",
-        {
-          
-          "token": store.getters.token
-          
-        }
-      );
-      console.log(response.data)
+      let response = await axios.post("http://localhost:9040/users/perfil", {
+        token: store.getters.token,
+      });
       this.user = response.data.perfil[0];
-      if(this.user.sex=="M")this.user.sex ="Masculino"
-      else if(this.user.sex=="F")this.user.sex ="Feminino"
-      else this.user.sex = "Indefinido"
+      if (this.user.sex == "M") this.user.sex = "Masculino";
+      else if (this.user.sex == "F") this.user.sex = "Feminino";
+      else this.user.sex = "Indefinido";
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

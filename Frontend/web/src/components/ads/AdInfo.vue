@@ -89,7 +89,9 @@
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
           <v-icon color="#FFE082" small>fas fa-star</v-icon>
-          <span class="font-weight-bold ma-2">{{serviceProviderData.averageRating}}</span>
+          <span class="font-weight-bold ma-2">{{
+            serviceProviderData.averageRating
+          }}</span>
         </div>
       </v-col>
       <v-col cols="12" md="10" sm>
@@ -100,7 +102,9 @@
 
     <v-row class="w-100" align="start">
       <v-col cols="12" md="3" sm>
-        <span class="infos font-weight-bold">Comentários</span>
+        <span class="infos font-weight-bold">Comentários</span> <span class="grey--text text--lighten-2 text-caption mr-2">
+        ({{ serviceProvider.reviews.length }})
+      </span>
       </v-col>
 
       <v-col cols="12" md="9" sm class="d-flex justify-end">
@@ -108,35 +112,36 @@
       </v-col>
     </v-row>
 
-    <v-row
-     
-    >
-    <v-col
-       class="w-100 ma-0"
-      v-for="(a, index) in serviceProvider.reviews"
-      :key="index"
-      cols = "12" md = "6"
-    >
-      <v-card
-        class="pa-5 rounded-xl overflow-auto mt-2"
-        outlined
-        tile
-        :style="styleObject"
-        width="100%"
+    <v-row>
+      <v-col
+        class="w-100 ma-0"
+        v-for="(a, index) in serviceProvider.reviews"
+        :key="index"
+        cols="12"
+        md="6"
       >
-        <v-row align="center">
-          <v-col cols="12" md="11" sm="11">
-            <div>
-              <span class="font-weight-bold">{{ formatDate(a.postDate) }}</span>
-            </div>
-            <div justify="center" class="mx-auto">
-              <span class="infos">
-                {{ a.description }}
-              </span>
-            </div>
-          </v-col>
-          <v-col cols="12" md="1" sm="1">
-            <!--<div
+        <v-card
+          class="pa-5 rounded-xl overflow-auto mt-2"
+          outlined
+          tile
+          :style="styleObject"
+          width="100%"
+        >
+          <v-row align="center">
+            <v-col cols="12" md="11" sm="11">
+              <div>
+                <span class="font-weight-bold">{{
+                  formatDate(a.postDate)
+                }}</span>
+              </div>
+              <div justify="center" class="mx-auto">
+                <span class="infos">
+                  {{ a.description }}
+                </span>
+              </div>
+            </v-col>
+            <v-col cols="12" md="1" sm="1">
+              <!--<div
                 class="
                   pa-4
                   classification
@@ -148,13 +153,15 @@
                 <span>{{ a.rating }}</span>
               </div>-->
 
-            <div class="font-weight-bold ratings">
-              <v-icon color="warning lighten-1" class="icon mb-1">fas fa-star</v-icon>
-              <span class="ml-1">{{ a.rating }}</span>
-            </div>
-          </v-col>
-        </v-row>
-      </v-card>
+              <div class="font-weight-bold ratings">
+                <v-icon color="warning lighten-1" class="icon mb-1"
+                  >fas fa-star</v-icon
+                >
+                <span class="ml-1">{{ a.rating }}</span>
+              </div>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
@@ -239,7 +246,4 @@ export default {
 .reviews {
   align-content: center;
 }
-
-
-
 </style>
