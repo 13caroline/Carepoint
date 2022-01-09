@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog2" width="100%"  max-width="460">
+  <v-dialog v-model="dialog2" width="100%" max-width="460">
     <template v-slot:activator="{ on, attrs }">
       <v-col cols="12" md="6">
         <v-btn
@@ -162,20 +162,23 @@ export default {
           subscription: this.details.subscription.toString(),
           visibility: this.details.visibility.toString(),
         });
+        store.state.tipo == 3
+          ? this.$router.push("/service/provider/page")
+          : this.$router.push("/service/provider/page"); // change to Collective SP
+
         this.$snackbar.showMessage({
           show: true,
-          text: "Utilizador criado com sucesso.",
-          color: "success",
+          color: "#78c4d4",
+          text: "Bem-vindo ao Carepoint!",
           snackbar: true,
           timeout: 4000,
         });
       } catch (error) {
-        this.text = "Ocorreu um erro. Por favor tente mais tarde!";
-        this.color = "warning";
         this.$snackbar.showMessage({
           show: true,
-          color: this.color,
-          text: this.text,
+          snackbar: true,
+          color: "warning",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
           timeout: 4000,
         });
       }

@@ -89,12 +89,12 @@
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
           <v-icon color="#FFE082" small>fas fa-star</v-icon>
-          <span class="font-weight-bold ma-2">9.1</span>
+          <span class="font-weight-bold ma-2">{{serviceProviderData.averageRating}}</span>
         </div>
       </v-col>
       <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <schedule/>
+        <schedule />
       </v-col>
     </v-row>
 
@@ -104,37 +104,39 @@
       </v-col>
 
       <v-col cols="12" md="9" sm class="d-flex justify-end">
-        <add-review :dados="id"/>
+        <add-review :dados="id" />
       </v-col>
     </v-row>
 
-      <div
-        class="w-100 ma-0"
-        v-for="(a, index) in serviceProvider.reviews"
-        :key="index"
+    <v-row
+     
+    >
+    <v-col
+       class="w-100 ma-0"
+      v-for="(a, index) in serviceProvider.reviews"
+      :key="index"
+      cols = "12" md = "6"
+    >
+      <v-card
+        class="pa-5 rounded-xl overflow-auto mt-2"
+        outlined
+        tile
+        :style="styleObject"
+        width="100%"
       >
-        <v-card
-          class="pa-5 rounded-xl overflow-auto mt-2"
-          outlined
-          tile
-          :style="styleObject"
-          width="100%"
-        >
-          <v-row align="center">
-            <v-col cols="12" md="11" sm="11">
-              <div>
-                <span class="font-weight-bold">{{
-                  formatDate(a.postDate)
-                }}</span>
-              </div>
-              <div justify="center" class="mx-auto">
-                <span class="infos">
-                  {{ a.description }}
-                </span>
-              </div>
-            </v-col>
-            <v-col cols="12" md="1" sm="1">
-              <div
+        <v-row align="center">
+          <v-col cols="12" md="11" sm="11">
+            <div>
+              <span class="font-weight-bold">{{ formatDate(a.postDate) }}</span>
+            </div>
+            <div justify="center" class="mx-auto">
+              <span class="infos">
+                {{ a.description }}
+              </span>
+            </div>
+          </v-col>
+          <v-col cols="12" md="1" sm="1">
+            <!--<div
                 class="
                   pa-4
                   classification
@@ -144,11 +146,17 @@
                 "
               >
                 <span>{{ a.rating }}</span>
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-      </div>
+              </div>-->
+
+            <div class="font-weight-bold ratings">
+              <v-icon color="warning lighten-1" class="icon mb-1">fas fa-star</v-icon>
+              <span class="ml-1">{{ a.rating }}</span>
+            </div>
+          </v-col>
+        </v-row>
+      </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -190,7 +198,7 @@ export default {
   },
   components: {
     Schedule: () => import("@/components/ads/Schedule"),
-    AddReview: () => import("@/components/dialogs/AddReview")
+    AddReview: () => import("@/components/dialogs/AddReview"),
   },
 
   created: async function () {
@@ -200,7 +208,7 @@ export default {
       );
       (this.serviceProviderData = response.data.ServiceProvider[0]),
         (this.serviceProvider = response.data);
-        console.log(response.data)
+      console.log(response.data);
       this.image =
         "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
     } catch (e) {
@@ -227,11 +235,11 @@ export default {
 .foto {
   width: 170px;
 }
-.classification {
-  background: #fff;
-  border: 1px solid #78c4d4;
-  color: #000;
-  text-align: center;
-  font: 18px Arial, sans-serif;
+
+.reviews {
+  align-content: center;
 }
+
+
+
 </style>
