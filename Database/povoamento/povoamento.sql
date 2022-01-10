@@ -24,23 +24,23 @@ SET @path = 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/';
 
 
 INSERT INTO Area(idArea,name)VALUES(1,'Apoio a idosos');
-INSERT INTO Category(idCategory,name,idArea)VALUES(1,'Compras',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(2,'Passeios',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(3,'Refeições',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(1,'Companhia',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(2,'Compras',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(3,'Higiene',1);
 INSERT INTO Category(idCategory,name,idArea)VALUES(4,'Medicação',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(5,'Higiene',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(6,'Companhia',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(5,'Passeios',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(6,'Refeições',1);
 
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(1,0,0,'1900-01-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(2,1,4.99,'1900-01-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(3,2,11.99,'1900-03-01 00:00:00');
-INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(4,3,19.99,'1900-06-01 00:00:00');
+INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(4,3,18.49,'1900-06-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(5,4,6.99,'1900-01-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(6,5,16.99,'1900-03-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(7,6,28.99,'1900-06-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(8,7,7.99,'1900-01-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(9,8,17.99,'1900-03-01 00:00:00');
-INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(10,9,29.99,'1900-06-01 00:00:00');
+INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(10,9,26.99,'1900-06-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(11,10,11.49,'1900-01-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(12,11,27.59,'1900-03-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(13,12,46.49,'1900-06-01 00:00:00');
