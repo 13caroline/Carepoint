@@ -13,7 +13,7 @@
               procura.
             </p>
           </v-card-subtitle>
-
+                <v-form ref="form" v-model="valid">
           <v-card-text>
             <div>
               <span>Descrição *</span>
@@ -48,12 +48,14 @@
                       dense
                       outlined
                       required
+                      color="#78c4d4"
                       v-bind="attrs"
                       v-on="on"
                     ></v-text-field>
                   </template>
                   <v-date-picker
                     v-model="date"
+                    color="#78c4d4"
                     @input="menu = false"
                     locale="pt PT"
                     :min="new Date().toISOString().substr(0, 10)"
@@ -80,11 +82,13 @@
                       outlined
                       required
                       v-bind="attrs"
+                      color="#78c4d4"
                       v-on="on"
                     ></v-text-field>
                   </template>
                   <v-date-picker
                     v-model="date2"
+                    color="#78c4d4"
                     @input="menu2 = false"
                     locale="pt PT"
                     :min="new Date().toISOString().substr(0, 10)"
@@ -98,7 +102,7 @@
                 <span>Área *</span>
                 <v-select
                   flat
-                  color="#2596be"
+                  color="#78c4d4"
                   dense
                   outlined
                   label="Apoio a Idosos"
@@ -111,7 +115,7 @@
                 <span>Categoria *</span>
                 <v-autocomplete
                   flat
-                  color="#2596be"
+                  color="#78c4d4"
                   dense
                   outlined
                   :rules="textRules"
@@ -129,7 +133,7 @@
                 <span>Localização *</span>
                 <v-text-field
                   flat
-                  color="#2596be"
+                  color="#78c4d4"
                   dense
                   outlined
                   :rules="textRules"
@@ -142,7 +146,7 @@
                 <span>Valor</span>
                 <v-text-field
                   flat
-                  color="#2596be"
+                  color="#78c4d4"
                   dense
                   outlined
                   v-model="price"
@@ -162,12 +166,15 @@
                   color="#78c4d4"
                   depressed
                   class="rounded-lg white--text"
-                  @click="publish()"
+                  @click="postAd()"
+                                  :disabled="!valid"
+
                   >Publicar Anúncio</v-btn
                 >
               </v-col>
             </v-row>
           </v-card-text>
+                </v-form>
         </v-col>
       </v-row>
     </v-container>
@@ -178,9 +185,13 @@
 
 
 <script>
+import axios from "axios"
+      import store from "@/store/index.js";
+
 export default {
   data() {
     return {
+      valid: false,
       menu: false,
       menu2: false,
       date: new Date().toISOString().substr(0, 10),
@@ -214,6 +225,42 @@ export default {
   methods: {
     close() {
       this.$router.push("/consumer/profile");
+
+    },
+
+    postAd: async function(){
+       if(this.$refs.form.validate()){
+    try {
+       await axios.post(
+        "http://localhost:9040/joboffer/new",
+        {
+          token: store.getters.token,
+          price: this.price,
+          description: this.description,
+          beginDate: this.date,
+          endDate: this.date2,
+          idUser: 207,
+          idCategory: 1,
+          idLocation: 1,
+        }
+      );
+       this.$router.push("/consumer/my/advertisements")
+          this.$snackbar.showMessage({
+            show: true,
+            color: "success",
+            text: "Anúncio publicado",
+            snackbar: true,
+            timeout: 4000,
+          });
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
+       }
     },
   },
 };
