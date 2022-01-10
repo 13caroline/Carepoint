@@ -19,9 +19,21 @@
             @click="infoSP(a.idUser)"
           >
             <v-card-text>
-              <span class="activity d-flex justify-end pb-2"
-                >última vez ativo {{ difDate(a.lastActivity) }}</span
-              >
+              <v-row>
+                <v-col cols="12" md="4" sm="2">
+                  <span class="activity d-flex justify-start pb-2"
+                    ><v-icon color="warning lighten-1" class="mb-1" small
+                      >fas fa-star</v-icon
+                    >
+                    {{ a.averageRating }} ({{ a.nr_reviews }})</span
+                  >
+                </v-col>
+                <v-col cols="12" md="8" sm="10">
+                  <span class="activity d-flex justify-end"
+                    >última vez ativo {{ difDate(a.lastActivity) }}</span
+                  >
+                </v-col>
+              </v-row>
               <v-row justify="center">
                 <v-col cols="auto">
                   <v-avatar class="profile" color="grey" size="100">
@@ -87,11 +99,10 @@ export default {
 
   created: async function () {
     try {
-      let response = await axios.get(
-        "http://localhost:9040/search/?page=1");
+      let response = await axios.get("http://localhost:9040/search/?page=1");
       if (response) {
         this.ads = response.data.ServiceProviders;
-        console.log(response.data)
+        console.log(response.data);
         /*this.ads = response.data.ServiceProviders.map(an => {
       an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
          })*/
@@ -130,5 +141,6 @@ export default {
 
 .activity {
   font-size: smaller;
+  text-align-last: right;
 }
 </style>

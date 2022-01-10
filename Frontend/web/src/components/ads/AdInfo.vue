@@ -102,9 +102,10 @@
 
     <v-row class="w-100" align="start">
       <v-col cols="12" md="3" sm>
-        <span class="infos font-weight-bold">Comentários</span> <span class="grey--text text--lighten-2 text-caption mr-2">
-        ({{ serviceProvider.reviews.length }})
-      </span>
+        <span class="infos font-weight-bold">Comentários</span>
+        <span class="grey--text text--lighten-2 text-caption mr-2">
+          ({{ reviews }})
+        </span>
       </v-col>
 
       <v-col cols="12" md="9" sm class="d-flex justify-end">
@@ -112,57 +113,90 @@
       </v-col>
     </v-row>
 
-    <v-row>
-      <v-col
-        class="w-100 ma-0"
-        v-for="(a, index) in serviceProvider.reviews"
-        :key="index"
-        cols="12"
-        md="6"
-      >
-        <v-card
-          class="pa-5 rounded-xl overflow-auto mt-2"
-          outlined
-          tile
-          :style="styleObject"
-          width="100%"
-        >
-          <v-row align="center">
-            <v-col cols="12" md="11" sm="11">
-              <div>
-                <span class="font-weight-bold">{{
-                  formatDate(a.postDate)
-                }}</span>
-              </div>
-              <div justify="center" class="mx-auto">
-                <span class="infos">
-                  {{ a.description }}
-                </span>
-              </div>
-            </v-col>
-            <v-col cols="12" md="1" sm="1">
-              <!--<div
-                class="
-                  pa-4
-                  classification
-                  rounded-circle
-                  d-inline-block
-                  font-weight-bold
-                "
-              >
-                <span>{{ a.rating }}</span>
-              </div>-->
+    <v-data-iterator
+      v-if="reviews"
+      :items="serviceProvider.reviews"
+      :items-per-page.sync="itemsPerPage"
+      :page.sync="page"
+      :sort-desc="sortDesc"
+      hide-default-footer
+      @page-count="pageCount == $event"
+      no-data-text="Não foram realizados comentários."
+      no-results-text="Não foram encontrados resultados."
+    >
+      <template v-slot:default="props">
+        <v-row >
+          <v-col
+            class="w-100 ma-0"
+            v-for="(a, index) in props.items"
+            :key="index"
+            cols="12"
+            md="6"
+          >
+            <v-card
+              class="pa-5 rounded-xl overflow-auto mt-2"
+              outlined
+              tile
+              :style="styleObject"
+              width="100%"
+              height="100%"
+            >
+              <v-row align="center">
+                <v-col cols="12" md="11" sm="11">
+                  <div>
+                    <span class="font-weight-bold">{{
+                      formatDate(a.postDate)
+                    }}</span>
+                  </div>
+                  <div justify="center" class="mx-auto">
+                    <span class="infos">
+                      {{ a.description }}
+                    </span>
+                  </div>
+                </v-col>
+                <v-col cols="12" md="1" sm="1">
+                  <div class="font-weight-bold ratings">
+                    <v-icon color="warning lighten-1" class="icon mb-1"
+                      >fas fa-star</v-icon
+                    >
+                    <span class="ml-1">{{ a.rating }}</span>
+                  </div>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+      </template>
+    </v-data-iterator>
+    <small v-else> <em> prestador sem comentários realizados </em></small>
 
-              <div class="font-weight-bold ratings">
-                <v-icon color="warning lighten-1" class="icon mb-1"
-                  >fas fa-star</v-icon
-                >
-                <span class="ml-1">{{ a.rating }}</span>
-              </div>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
+    <v-row class="mt-4" align="center" justify="center" v-if="reviews">
+      <v-btn
+        fab
+        dark
+        small
+        depressed
+        color="#78C4D4"
+        class="mr-1"
+        @click="formerPage"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        depressed
+        color="#78C4D4"
+        class="ml-1"
+        @click="nextPage"
+      >
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+    </v-row>
+
+    <v-row class="mt-5" align="center" justify="center" v-if="reviews">
+      <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
     </v-row>
   </v-container>
 </template>
@@ -177,6 +211,11 @@ export default {
   data() {
     return {
       image: "",
+      sortDesc: false,
+      pageCount: 0,
+      page: 1,
+      itemsPerPage: 6,
+      reviews: 0,
       styleObject: { border: "1px solid #78c4d4" },
       category: [
         { name: "Companhia", icon: "fas fa-user-friends" },
@@ -202,12 +241,25 @@ export default {
       });
       return Object.values(row[0])[1];
     },
+    nextPage() {
+      if (this.page + 1 <= this.numberOfPages) this.page += 1;
+    },
+    formerPage() {
+      if (this.page - 1 >= 1) this.page -= 1;
+    },
+    updateItemsPerPage(number) {
+      this.itemsPerPage = number;
+    },
   },
   components: {
     Schedule: () => import("@/components/ads/Schedule"),
     AddReview: () => import("@/components/dialogs/AddReview"),
   },
-
+  computed: {
+    numberOfPages() {
+      return Math.ceil(this.reviews / this.itemsPerPage);
+    },
+  },
   created: async function () {
     try {
       let response = await axios.get(
@@ -215,6 +267,7 @@ export default {
       );
       (this.serviceProviderData = response.data.ServiceProvider[0]),
         (this.serviceProvider = response.data);
+      this.reviews = response.data.reviews.length;
       console.log(response.data);
       this.image =
         "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
