@@ -21,6 +21,13 @@ Out.newJob = ((body, id_user) => {
     })
 })
 
+Out.getOwnJobs = (email) => {
+    return dbconfig.sequelize.query('CALL get_consumers_joboffers (:em)',
+        {replacements: {
+            em: email
+        }})
+}
+
 Out.get_JobOffers = (cat_id, id_loc, price, limit, offset) => {
     return dbconfig.sequelize.query('CALL get_joboffer (:idC, :idL, :prc, :lm, :off)',
         {replacements: {

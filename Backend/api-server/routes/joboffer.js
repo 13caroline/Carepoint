@@ -25,6 +25,13 @@ router.get('/', (req, res, next) => {
     .catch((err) => res.status(500).jsonp("Error obtaining Jobs: " + err));
 })
 
+router.get('/own', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    jobOffer_controller.getOwnJobs(email)
+    .then((jobs) => res.status(200).jsonp(jobs))
+    .catch((err) => res.status(500).jsonp(err))
+})
+
 router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
     
     email = auth.getEmailFromJWT(req.body.token)
