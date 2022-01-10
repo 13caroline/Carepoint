@@ -1,9 +1,20 @@
 USE PI;
 
+DROP PROCEDURE IF EXISTS get_consumers_joboffers;
 DROP PROCEDURE IF EXISTS get_service_providers;
 DROP PROCEDURE IF EXISTS get_companies;
 DROP PROCEDURE IF EXISTS get_service_providers_v2;
 DROP PROCEDURE IF EXISTS get_service_providers_v3;
+
+-- Returns: get all job offers for given consumer
+DELIMITER &&  
+CREATE PROCEDURE get_consumers_joboffers (IN in_consumer INT)  
+BEGIN  
+
+    SELECT * FROM joboffer WHERE joboffer.idUser = in_consumer ORDER BY joboffer.postDate DESC;
+    
+END &&  
+DELIMITER ;
 
 -- Returns: service providers
 DELIMITER &&  

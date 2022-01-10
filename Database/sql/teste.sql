@@ -26,8 +26,8 @@ USE PI;
 -- CALL update_averageRating(51);
 
 -- category , location, experience, price, rating, sex, limite, offset
- CALL get_service_providers_v2 (NULL, NULL, NULL, NULL,NULL, NULL,40,0);
+ -- CALL get_service_providers_v2 (NULL, NULL, NULL, NULL,NULL, NULL,40,0);
 -- '["1","5","3"]'
- CALL get_service_providers_v3 (NULL, NULL, NULL, NULL, NULL, NULL,40,0);
-
+--  CALL get_service_providers_v3 (NULL, NULL, NULL, NULL, NULL, NULL,40,0);
+CALL get_consumers_joboffers(2);
 -- CALL get_service_providers_v3 ('["1","2"]', NULL, NULL, NULL, NULL, NULL,20,0);
