@@ -24,12 +24,12 @@ SET @path = 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/';
 
 
 INSERT INTO Area(idArea,name)VALUES(1,'Apoio a idosos');
-INSERT INTO Category(idCategory,name,idArea)VALUES(1,'Compras',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(2,'Passeios',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(3,'Refeições',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(1,'Companhia',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(2,'Compras',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(3,'Higiene',1);
 INSERT INTO Category(idCategory,name,idArea)VALUES(4,'Medicação',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(5,'Higiene',1);
-INSERT INTO Category(idCategory,name,idArea)VALUES(6,'Companhia',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(5,'Passeios',1);
+INSERT INTO Category(idCategory,name,idArea)VALUES(6,'Refeições',1);
 
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(1,0,0,'1900-01-01 00:00:00');
 INSERT INTO Subscription(idSubscription,type,value,duration)VALUES(2,1,4.99,'1900-01-01 00:00:00');
