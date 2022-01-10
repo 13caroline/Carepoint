@@ -3,6 +3,21 @@
     <Bar />
     <v-container>
       <v-row>
+          <v-col cols="auto" class="ml-auto">
+            <v-btn
+              class="body-2 rounded-xl button"
+              small
+              color="#78C4D4"
+              outlined
+              dark
+              to="/consumer/post/ad"
+            >
+              Publicar anúncio
+              <v-icon small class="ml-2">fas fa-plus</v-icon>
+            </v-btn>
+          </v-col>
+      </v-row>
+      <v-row>
         <v-col
           cols="auto"
           lg="6"
