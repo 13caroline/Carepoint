@@ -11,7 +11,12 @@ DELIMITER &&
 CREATE PROCEDURE get_consumers_joboffers (IN in_consumer INT)  
 BEGIN  
 
-    SELECT * FROM joboffer WHERE joboffer.idUser = in_consumer ORDER BY joboffer.postDate DESC;
+    SELECT joboffer.idJobOffer, joboffer.description, joboffer.beginDate, joboffer.postDate, joboffer.price, joboffer.done, joboffer.endDate,
+		joboffer.idUser, category.name, location.name FROM joboffer 
+	INNER JOIN category ON joboffer.idCategory = category.idCategory
+    INNER JOIN location ON joboffer.idLocation = location.idLocation 
+    WHERE joboffer.idUser = in_consumer 
+    ORDER BY joboffer.postDate DESC;
     
 END &&  
 DELIMITER ;
