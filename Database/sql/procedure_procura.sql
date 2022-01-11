@@ -12,7 +12,7 @@ CREATE PROCEDURE get_consumers_joboffers (IN in_email VARCHAR(90))
 BEGIN  
 
     SELECT joboffer.idJobOffer, joboffer.description, joboffer.beginDate, joboffer.postDate, joboffer.price, joboffer.done, joboffer.endDate,
-		joboffer.idUser, category.name, location.name FROM user 
+		joboffer.idUser, category.name as categoryName, location.name as locationName FROM user 
 	INNER JOIN joboffer ON user.idUser = joboffer.idUser
 	INNER JOIN category ON joboffer.idCategory = category.idCategory
     INNER JOIN location ON joboffer.idLocation = location.idLocation 

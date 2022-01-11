@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
     var page = req.query.page;
     if(page === undefined){page = 1;}
 
-    var limit = 10; // possível alterar depois
+    var limit = 9; // possível alterar depois
     var offset = (page * limit) - limit
 
     var cat_id = (typeof req.query.category === 'undefined') ? null : req.query.category;
