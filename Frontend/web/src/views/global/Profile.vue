@@ -195,7 +195,8 @@ export default {
     },
   },
   created: async function () {
-    try {
+
+try {
       let response = await axios.post("http://localhost:9040/users/perfil", {
         token: store.getters.token,
       });

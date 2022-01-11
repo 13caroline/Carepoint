@@ -239,7 +239,6 @@ export default {
           description: this.description,
           beginDate: this.date,
           endDate: this.date2,
-          idUser: 207,
           idCategory: 1,
           idLocation: 1,
         }

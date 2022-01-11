@@ -3,19 +3,19 @@
     <Bar />
     <v-container>
       <v-row>
-          <v-col cols="auto" class="ml-auto">
-            <v-btn
-              class="body-2 rounded-xl button"
-              small
-              color="#78C4D4"
-              outlined
-              dark
-              to="/consumer/post/ad"
-            >
-              Publicar anúncio
-              <v-icon small class="ml-2">fas fa-plus</v-icon>
-            </v-btn>
-          </v-col>
+        <v-col cols="auto" class="ml-auto">
+          <v-btn
+            class="body-2 rounded-xl button"
+            small
+            color="#78C4D4"
+            outlined
+            dark
+            to="/consumer/post/ad"
+          >
+            Publicar anúncio
+            <v-icon small class="ml-2">fas fa-plus</v-icon>
+          </v-btn>
+        </v-col>
       </v-row>
       <v-row>
         <v-col
@@ -43,10 +43,10 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong> {{ a.category }} </strong>
+                    <strong> Catcat </strong>
                   </span>
                   <br />
-                  <span> {{ a.area }} </span>
+                  <span> Apoio a idosos </span>
                 </v-col>
 
                 <v-col class="pb-0" align="right" cols="5">
@@ -54,7 +54,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong>{{ a.location }}</strong>
+                    <strong>{{ a.locationName }}</strong>
                   </span>
                 </v-col>
 
@@ -63,7 +63,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong>{{ a.value }} €/hora</strong>
+                    <strong>{{ a.price }} €/hora</strong>
                   </span>
                 </v-col>
 
@@ -71,8 +71,8 @@
                   <span class="text-uppercase">estado</span>
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
-                  <v-chip :color="estado(a.state)" small>
-                    {{ a.state }}
+                  <v-chip :color="estado(a.done)" small>
+                    {{ getState(a.done) }}
                   </v-chip>
                 </v-col>
               </v-row>
@@ -82,9 +82,11 @@
 
               <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="#66BB6A" dark v-bind="attrs" v-on="on">
-                    mdi-calendar-check
-                  </v-icon>
+                  <v-btn icon @click="conclude(a.idJobOffer)" :disabled="a.done==1">
+                    <v-icon color="#66BB6A" dark v-bind="attrs" v-on="on">
+                      mdi-calendar-check
+                    </v-icon>
+                  </v-btn>
                 </template>
                 <span>Concluir</span>
               </v-tooltip>
@@ -118,78 +120,13 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
   data() {
     return {
       show: false,
-      ads: [
-        {
-          beginDate: "12/03/2021",
-          endDate: "13/03/2021",
-          location: "Porto",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          value: 30,
-          area: "Apoio a idosos",
-          category: "Higiene",
-          state: "Não Ativo",
-        },
-        {
-          beginDate: "12/03/2021",
-          endDate: "13/03/2021",
-          location: "Porto",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          value: 30,
-          area: "Apoio a idosos",
-          category: "Higiene",
-          state: "Não Ativo",
-        },
-        {
-          beginDate: "12/03/2021",
-          endDate: "13/03/2021",
-          location: "Porto",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          value: 30,
-          area: "Apoio a idosos",
-          category: "Higiene",
-          state: "Não Ativo",
-        },
-        {
-          beginDate: "12/03/2021",
-          endDate: "13/03/2021",
-          location: "Porto",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          value: 30,
-          area: "Apoio a idosos",
-          category: "Higiene",
-          state: "Ativo",
-        },
-        {
-          beginDate: "12/03/2021",
-          endDate: "13/03/2021",
-          location: "Porto",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          value: 30,
-          area: "Apoio a idosos",
-          category: "Higiene",
-          state: "Ativo ",
-        },
-        {
-          beginDate: "12/03/2021",
-          endDate: "13/03/2021",
-          location: "Porto",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit, consequat.",
-          value: 30,
-          area: "Apoio a idosos",
-          category: "Higiene",
-          state: "Ativo",
-        },
-      ],
+      ads: [],
     };
   },
   components: {
@@ -198,10 +135,54 @@ export default {
   },
 
   methods: {
+     getState(done){
+       if(done==1) return "Não ativo"
+       else return "Ativo"
+     },
     estado(item) {
-      if (item == "Ativo") return "#C5E1A5";
+      if (item == 0 ) return "#C5E1A5";
       else return "#EF9A9A";
     },
+    update: async function () {
+      this.ads = [];
+      try {
+        let response = await axios.post("http://localhost:9040/joboffer/own", {
+          token: store.getters.token,
+        });
+        console.log(response.data);
+        this.ads = response.data;
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+    conclude: async function (id) {
+      try {
+        await axios.put(
+          "http://localhost:9040/joboffer/conclude",
+          {
+            token: store.getters.token,
+            id_job_offer: id,
+          }
+         
+        );
+         this.update();
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+  },
+  created: async function () {
+    this.update();
   },
 };
 </script>
