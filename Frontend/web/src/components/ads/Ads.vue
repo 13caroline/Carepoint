@@ -1,75 +1,119 @@
 <template>
-  <v-item-group>
-    <v-row>
-      <v-col
-        cols="auto"
-        lg="4"
-        md="4"
-        class="mx-auto mx-sm-0"
-        v-for="(a, index) in ads"
-        :key="index"
-      >
-        <div class="user">
-          <v-card
-            class="card rounded-xl overflow-auto"
-            color="#c0e4ec"
-            tile
-            height="400"
-            width="500"
-            @click="infoSP(a.idUser)"
+  <v-container>
+    <v-data-iterator
+      v-if="ads.length"
+      :items="ads"
+      :items-per-page.sync="itemsPerPage"
+      :page.sync="page"
+      :sort-desc="sortDesc"
+      hide-default-footer
+      @page-count="pageCount == $event"
+      no-data-text="Não existem anúncios publicados."
+      no-results-text="Não foram encontrados resultados."
+    >
+      <template v-slot:default="props">
+        <v-row>
+          <v-col
+            cols="auto"
+            lg="4"
+            md="4"
+            class="mx-auto mx-sm-0"
+            v-for="(a, index) in props.items"
+            :key="index"
           >
-            <v-card-text>
-              <v-row>
-                <v-col cols="12" md="4" sm="2">
-                  <span class="activity d-flex justify-start pb-2"
-                    ><v-icon color="warning lighten-1" class="mb-1" small
-                      >fas fa-star</v-icon
-                    >
-                    {{ a.averageRating }} ({{ a.nr_reviews }})</span
-                  >
-                </v-col>
-                <v-col cols="12" md="8" sm="10">
-                  <span class="activity d-flex justify-end"
-                    >última vez ativo {{ difDate(a.lastActivity) }}</span
-                  >
-                </v-col>
-              </v-row>
-              <v-row justify="center">
-                <v-col cols="auto">
-                  <v-avatar class="profile" color="grey" size="100">
-                    <v-img :src="processImage(a.image.data)"></v-img>
-                  </v-avatar>
-                </v-col>
-              </v-row>
+            <div class="user">
+              <v-card
+                class="card rounded-xl overflow-auto"
+                color="#c0e4ec"
+                tile
+                height="400"
+                width="500"
+                @click="infoSP(a.idUser)"
+              >
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="4" sm="2">
+                      <span class="activity d-flex justify-start pb-2"
+                        ><v-icon color="warning lighten-1" class="mb-1" small
+                          >fas fa-star</v-icon
+                        >
+                        {{ a.averageRating }} ({{ a.nr_reviews }})</span
+                      >
+                    </v-col>
+                    <v-col cols="12" md="8" sm="10">
+                      <span class="activity d-flex justify-end"
+                        >última vez ativo {{ difDate(a.lastActivity) }}</span
+                      >
+                    </v-col>
+                  </v-row>
+                  <v-row justify="center">
+                    <v-col cols="auto">
+                      <v-avatar class="profile" color="grey" size="100">
+                        <v-img :src="processImage(a.image.data)"></v-img>
+                      </v-avatar>
+                    </v-col>
+                  </v-row>
 
-              <v-row justify="center" class="mx-auto">
-                <span class="indication font-weight-bold">
-                  {{ a.name }}
-                </span>
-              </v-row>
+                  <v-row justify="center" class="mx-auto">
+                    <span class="indication font-weight-bold">
+                      {{ a.name }}
+                    </span>
+                  </v-row>
 
-              <v-row justify="center" class="mx-auto">
-                <span class="indication">
-                  {{ a.location }}
-                </span>
-              </v-row>
+                  <v-row justify="center" class="mx-auto">
+                    <span class="indication">
+                      {{ a.location }}
+                    </span>
+                  </v-row>
 
-              <v-divider class="mx-4 mt-5"></v-divider>
+                  <v-divider class="mx-4 mt-5"></v-divider>
 
-              <v-row justify="center" class="mx-auto">
-                <span class="description">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </span>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </div>
-      </v-col>
+                  <v-row justify="center" class="mx-auto">
+                    <span class="description">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    </span>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </div>
+          </v-col>
+        </v-row>
+      </template>
+    </v-data-iterator>
+    <small v-else> <em> não existem anúncios publicados </em></small>
+
+    <v-row class="mt-4" align="center" justify="center" v-if="ads.length">
+      <v-btn
+        fab
+        dark
+        small
+        depressed
+        color="#78C4D4"
+        class="mr-1"
+        @click="formerPage"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        small
+        depressed
+        color="#78C4D4"
+        class="ml-1"
+        @click="nextPage"
+      >
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
     </v-row>
-  </v-item-group>
+
+    <v-row class="mt-5" align="center" justify="center" v-if="ads.length">
+      <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -83,6 +127,10 @@ export default {
       image: "",
       styleObject: { border: "1px solid #78C4D4" },
       ads: [],
+      sortDesc: false,
+      pageCount: 0,
+      page: 1,
+      itemsPerPage: 9,
     };
   },
   methods: {
@@ -95,6 +143,17 @@ export default {
     infoSP(id) {
       this.$router.push("/ad/info/" + id);
     },
+    nextPage() {
+      if (this.page + 1 <= this.numberOfPages) this.page += 1;
+    },
+    formerPage() {
+      if (this.page - 1 >= 1) this.page -= 1;
+    },
+  },
+  computed: {
+    numberOfPages() {
+      return Math.ceil(this.ads.length / this.itemsPerPage);
+    },
   },
 
   created: async function () {
@@ -102,7 +161,7 @@ export default {
       let response = await axios.get("http://localhost:9040/search/?page=1");
       if (response) {
         this.ads = response.data.ServiceProviders;
-        console.log(response.data);
+        console.log(this.ads);
         /*this.ads = response.data.ServiceProviders.map(an => {
       an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
          })*/
