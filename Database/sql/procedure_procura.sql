@@ -5,6 +5,9 @@ DROP PROCEDURE IF EXISTS get_service_providers;
 DROP PROCEDURE IF EXISTS get_companies;
 DROP PROCEDURE IF EXISTS get_service_providers_v2;
 DROP PROCEDURE IF EXISTS get_service_providers_v3;
+DROP PROCEDURE IF EXISTS get_service_providers_v2_count;
+DROP PROCEDURE IF EXISTS get_companies_count;
+
 
 -- Returns: get all job offers for given consumer
 DELIMITER &&  
@@ -92,6 +95,25 @@ BEGIN
 END &&  
 DELIMITER ;
 
+-- Returns: count companies
+DELIMITER &&  
+CREATE PROCEDURE get_companies_count (IN id INT)  
+BEGIN  
+	
+    SELECT COUNT(*) AS number_companies FROM (
+    SELECT user.idUser FROM user
+    INNER JOIN company ON user.idUser = company.idCompany 
+    INNER JOIN PI.add ON user.idUser = PI.add.idCompany
+    INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN file ON user.idUser = file.idUser WHERE user.type = 4 AND company.idSubscription != 1 
+		AND CASE WHEN id IS NOT NULL
+					THEN user.idLocation = id
+				ELSE 1
+                END
+    ) AS aux_companies;
+END &&  
+DELIMITER ;
+
 
 -- Returns: service providers
 DELIMITER &&  
@@ -134,6 +156,47 @@ BEGIN
 END &&  
 DELIMITER ;
 
+
+-- Returns: count service providers
+DELIMITER &&  
+CREATE PROCEDURE get_service_providers_v2_count (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1))  
+BEGIN  
+
+    SELECT COUNT(*) AS number_sps FROM (SELECT user.idUser FROM user
+    INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN file ON user.idUser = file.idUser
+    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
+	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
+	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 
+		AND CASE WHEN id_category IS NOT NULL
+				THEN category_has_serviceprovider.idCategory = id_category
+                ELSE 1
+                END
+		AND CASE WHEN id_location IS NOT NULL
+				THEN user.idLocation = id_location
+                ELSE 1
+                END 
+		AND CASE WHEN experience IS NOT NULL
+				THEN category_has_serviceprovider.experience >= experience
+                ELSE 1
+                END
+		AND CASE WHEN price IS NOT NULL
+				THEN (category_has_serviceprovider.price <= price OR category_has_serviceprovider.price IS NULL)
+                ELSE 1
+                END
+		AND CASE WHEN rating IS NOT NULL
+				THEN serviceprovider.averageRating >= rating
+                ELSE 1
+                END
+		AND CASE WHEN in_sex IS NOT NULL
+				THEN (user.sex = in_sex OR user.sex = 'I')
+                ELSE 1
+                END
+	GROUP BY user.idUser) AS aux;
+    
+
+END &&  
+DELIMITER ;
 
 -- Returns: service providers
 DELIMITER &&  
