@@ -8,11 +8,13 @@ const Category = require('../controllers/category')
  *                                   GET
  ****************************************************************************************/
 
-// List all Categorys given the query param
+// List all Categories given the query param
 router.get('/', function(req, res, next) {
     Category.list()
-        .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+    .then((data) => {
+        res.status(200).jsonp(data[0])
+    })
+    .catch(e => res.status(500).jsonp({ error: e }))
 });
 
 

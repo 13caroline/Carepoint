@@ -1,7 +1,8 @@
 // Controller for the category model
 
 
-const Category = require('../models/category')
+const Category = require('../models/category');
+const dbconfig = require('../models/Config/Database_Info');
 
 var Out = module.exports;
 
@@ -17,7 +18,7 @@ Out.consult_id = (id) => {
 
 //GET all Categories
 Out.list = () => {
-    return Category.findAll();
+    return dbconfig.sequelize.query('SELECT * FROM pi.get_categories');
 }
 
 //Creates a new Category
