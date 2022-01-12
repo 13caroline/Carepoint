@@ -30,6 +30,7 @@ USE PI;
   CALL get_service_providers_v2_count (NULL, NULL, NULL, NULL,NULL, NULL);
   CALL get_service_providers_v2_count (NULL, 159, NULL, NULL,NULL, NULL);
   CALL get_companies_count(713);
+  CALL get_max_values();
 -- '["1","5","3"]'
 --  CALL get_service_providers_v3 (NULL, NULL, NULL, NULL, NULL, NULL,40,0);
 -- CALL get_consumers_joboffers("exvqvb@hotmail.com");

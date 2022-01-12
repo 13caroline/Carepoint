@@ -1,8 +1,6 @@
 USE PI;
 
-DROP VIEW IF EXISTS max_price;
-DROP VIEW IF EXISTS max_distance;
-DROP VIEW IF EXISTS max_average_rating;
+DROP PROCEDURE IF EXISTS get_max_values;
 DROP VIEW IF EXISTS get_locations;
 DROP VIEW IF EXISTS get_categories;
 DROP PROCEDURE IF EXISTS get_consumers_joboffers;
@@ -13,22 +11,23 @@ DROP PROCEDURE IF EXISTS get_service_providers_v3;
 DROP PROCEDURE IF EXISTS get_service_providers_v2_count;
 DROP PROCEDURE IF EXISTS get_companies_count;
 
+-- Returns: get max values
+DELIMITER &&  
+CREATE PROCEDURE get_max_values ()  
+BEGIN  
 
--- Returns: max price
-CREATE VIEW max_price 
-AS  
-    SELECT MAX(category_has_serviceprovider.price) FROM serviceprovider
-    INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider;
+	SET @price = (SELECT MAX(category_has_serviceprovider.price) FROM serviceprovider
+		INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider);
+        
+	SET @distance = (SELECT MAX(serviceprovider.distance) FROM serviceprovider);
     
--- Returns: max distance
-CREATE VIEW max_distance 
-AS  
-    SELECT MAX(serviceprovider.distance) FROM serviceprovider;
- 
- -- Returns: max average rating
-CREATE VIEW max_average_rating
-AS  
-    SELECT MAX(serviceprovider.averageRating) FROM serviceprovider;
+    SET @rating = (SELECT MAX(serviceprovider.averageRating) FROM serviceprovider);
+    
+    SELECT @price, @distance, @rating;
+    
+END &&  
+DELIMITER ;
+
     
 -- Returns: get all locations
 CREATE VIEW get_locations 
