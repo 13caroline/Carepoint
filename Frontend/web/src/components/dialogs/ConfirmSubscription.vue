@@ -164,7 +164,7 @@ export default {
         });
         store.state.tipo == 3
           ? this.$router.push("/service/provider/page")
-          : this.$router.push("/service/provider/page"); // change to Collective SP
+          : this.$router.push("/company/page");
 
         (this.details.updated === 0) ? this.text = "Bem-vindo ao Carepoint!" 
         : this.text = "Subscrição renovada com sucesso!"

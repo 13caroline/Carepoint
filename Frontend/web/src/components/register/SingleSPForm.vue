@@ -292,7 +292,6 @@ export default {
         sex: "",
         type: "3",
         description: "",
-        
         distance:'',
         qualifications: "",
       },
