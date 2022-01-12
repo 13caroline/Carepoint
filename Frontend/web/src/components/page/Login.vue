@@ -86,6 +86,9 @@ export default {
             if(res.data.type == "3") {
               this.$router.push("/service/provider/page")
             }
+            if(res.data.type == "4") {
+              this.$router.push("/company/page")
+            }
           }
         } catch (error) {
           this.text = "Ocorreu um erro. Por favor tente mais tarde!";
