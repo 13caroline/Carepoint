@@ -21,7 +21,16 @@ router.get('/', (req, res, next) => {
     var price = (typeof req.query.price === 'undefined') ? null : req.query.price;
 
     jobOffer_controller.get_JobOffers(cat_id,loc_id,price,limit,offset)
-    .then(jobs => {res.status(200).jsonp({jobs});})
+    .then((jobs) => {
+        jobOffer_controller.get_JobOffers_Count(cat_id,loc_id,price)
+        .then((count) => {
+            res.status(200).jsonp({
+                JobOffers: jobs,
+                Total: count
+            });
+        })
+        .catch((err) => res.status(500).jsonp("Error obtaining Jobs: " + err));
+    })
     .catch((err) => res.status(500).jsonp("Error obtaining Jobs: " + err));
 })
 

@@ -39,6 +39,15 @@ Out.get_JobOffers = (cat_id, id_loc, price, limit, offset) => {
         }})
 }
 
+Out.get_JobOffers_Count = (cat_id, id_loc, price) => {
+    return dbconfig.sequelize.query('CALL get_joboffer_count (:idC, :idL, :prc)',
+        {replacements: {
+            idC: cat_id,
+            idL: id_loc,
+            prc: price
+        }})
+}
+
 Out.concludeJob = (job_id) => {
     return jobOffer_model.update(
         {done: 1},

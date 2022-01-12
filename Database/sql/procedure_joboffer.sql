@@ -1,6 +1,7 @@
 USE PI;
 
 DROP PROCEDURE IF EXISTS get_joboffer;
+DROP PROCEDURE IF EXISTS get_joboffer_count;
 DROP VIEW IF EXISTS count_sps;
 DROP VIEW IF EXISTS count_sps_fakeish;
 
@@ -31,6 +32,32 @@ BEGIN
 END &&  
 DELIMITER ;
 
+DELIMITER &&  
+CREATE PROCEDURE get_joboffer_count (IN id_category INT,IN id_location INT, IN price DOUBLE)  
+BEGIN  
+	SELECT COUNT(*) AS number_offers FROM (
+    SELECT joboffer.idJobOffer FROM joboffer
+    INNER JOIN user ON joboffer.idUser = user.idUser
+    INNER JOIN location ON joboffer.idLocation = location.idLocation 
+    WHERE joboffer.done != 1 AND CASE WHEN id_category IS NOT NULL AND id_location IS NOT NULL AND price IS NOT NULL 
+					THEN joboffer.idLocation = id_location AND joboffer.idCategory = id_category AND (joboffer.price <= price OR joboffer.price IS NULL)
+				WHEN id_category IS NOT NULL AND id_location IS NOT NULL AND price IS NULL 
+					THEN joboffer.idLocation = id_location AND joboffer.idCategory = id_category
+				WHEN id_category IS NOT NULL AND id_location IS NULL AND price IS NOT NULL 
+					THEN joboffer.idCategory = id_category AND (joboffer.price <= price OR joboffer.price IS NULL)
+				WHEN id_category IS NULL AND id_location IS NOT NULL AND price IS NOT NULL 
+					THEN joboffer.idLocation = id_location AND (joboffer.price <= price OR joboffer.price IS NULL)
+				WHEN id_category IS NOT NULL AND id_location IS NULL AND price IS NULL 
+					THEN joboffer.idCategory = id_category 
+				WHEN id_category IS NULL AND id_location IS NOT NULL AND price IS NULL 
+					THEN joboffer.idLocation = id_location
+				WHEN id_category IS NULL AND id_location IS NULL AND price IS NOT NULL 
+					THEN (joboffer.price <= price OR joboffer.price IS NULL)
+				ELSE 1
+                END
+    ) AS aux_offers;
+END &&  
+DELIMITER ;
 
 -- Returns: count sps that can see the joboffers
 CREATE VIEW count_sps AS 

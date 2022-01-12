@@ -25,3 +25,22 @@ Out.getCompanies = (location, limit, offset) => {
             off: offset
         }})
 }
+
+Out.getSPSum = (category, location, experience, price, rating, sex) => {
+    return dbconfig.sequelize.query('CALL get_service_providers_v2_count (:idC, :idL, :exp, :prc, :rt, :sex)',
+        {replacements: {
+            idC: category,
+            idL: location,
+            exp: experience,
+            prc: price,
+            rt: rating,
+            sex: sex
+        }})
+}
+
+Out.getCPSum = (location) => {
+    return dbconfig.sequelize.query('CALL get_companies_count (:idL)',
+        {replacements: {
+            idL: location
+        }})
+}

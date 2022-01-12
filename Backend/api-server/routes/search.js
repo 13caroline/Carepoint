@@ -25,16 +25,25 @@ router.get('/', (req, res, next) => {
     search_controller.getServiceProviders(cat_id, loc_id, experience, price, rating, sex, limit, offset)
     .then((sp) => {
         search_controller.getCompanies(loc_id, limit, offset)
-        .then(cp => {
-            res.status(200).jsonp({
-                ServiceProviders: sp,
-                Companies: cp
-            });
+        .then((cp) => {
+            search_controller.getSPSum(cat_id, loc_id, experience, price, rating, sex)
+            .then((spCount) => {
+                search_controller.getCPSum(loc_id)
+                .then((cpCount) => {
+                    res.status(200).jsonp({
+                        ServiceProviders: sp,
+                        Companies: cp,
+                        ServiceProviders_Sum: spCount,
+                        Companies_Sum: cpCount
+                    });
+                })
+                .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
+            })
+            .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
         })
         .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
     })
     .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
-
 })
 
 module.exports = router;
