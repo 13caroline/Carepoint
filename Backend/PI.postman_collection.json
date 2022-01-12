@@ -2759,6 +2759,26 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get Max Values (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/search/max",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"search",
+										"max"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
