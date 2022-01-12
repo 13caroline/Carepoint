@@ -10,7 +10,7 @@
             color="#78C4D4"
             outlined
             dark
-            to="/consumer/post/ad"
+            to="/post/ad"
           >
             Publicar anúncio
             <v-icon small class="ml-2">fas fa-plus</v-icon>

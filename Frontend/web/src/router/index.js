@@ -88,14 +88,14 @@ const routes = [
 
   // Consumer's advertisements
   {
-    path: '/consumer/my/advertisements',
+    path: '/my/advertisements',
     name: 'My advertisements',
     component: () => import('../views/consumer/MyAdvertisements')
   },
 
   // Post an ad
   {
-    path: '/consumer/post/ad',
+    path: '/post/ad',
     name: 'Post Ad',
     component: () => import('../views/consumer/PostAd.vue')
   },
@@ -112,6 +112,13 @@ const routes = [
   path: '/subscription/renew',
   name: 'SP update subscription',
   component: () => import('../views/subscription/RenewSubscription.vue')
+  },
+
+  // Company profile
+  {
+  path: '/company/page',
+  name: 'Company Page',
+  component: () => import('../views/company/Profile.vue')
   }
 ]
 

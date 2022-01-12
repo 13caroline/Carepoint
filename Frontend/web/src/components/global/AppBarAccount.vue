@@ -27,11 +27,39 @@
               </v-img>
             </template>
             <v-list>
-              <v-list-item v-for="(item, index) in items" :key="index">
+              <v-list-item>
                 <v-list-item-title
                   class="menuOpcao"
-                  @click="processClick(item)"
-                  >{{ item.title }}</v-list-item-title
+                  @click="processClick('Anúncios')"
+                  >Anúncios</v-list-item-title
+                >
+              </v-list-item>
+               <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick('Meus anúncios')"
+                  >Meus anúncios</v-list-item-title
+                >
+              </v-list-item>
+               <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick('Perfil')"
+                  >Perfil</v-list-item-title
+                >
+              </v-list-item>
+               <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick('Publicar anúncio')"
+                  >Publicar anúncio</v-list-item-title
+                >
+              </v-list-item>
+               <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="logout()"
+                  >Terminar sessão</v-list-item-title
                 >
               </v-list-item>
             </v-list>
@@ -67,12 +95,14 @@ export default {
       console.log("Vai para página inicial");
     },
     processClick(itemAtual) {
-      switch (itemAtual.title) {
+      switch (itemAtual) {
         case "Perfil":
+          if(store.getters.tipo==2)
           this.$router.push("/consumer/profile");
+          else if(store.getters.tipo==3) this.$router.push("/service/provider/page");
           break;
         case "Publicar anúncio":
-          this.$router.push("/consumer/post/ad");
+          this.$router.push("/post/ad");
           break;
         case "Anúncios":
           this.$router.push("/consumer/page");
