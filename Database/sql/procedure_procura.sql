@@ -23,7 +23,7 @@ BEGIN
     
     SET @rating = (SELECT MAX(serviceprovider.averageRating) FROM serviceprovider);
     
-    SELECT @price, @distance, @rating;
+    SELECT @price as price, @distance as distance, @rating as rating;
     
 END &&  
 DELIMITER ;

@@ -70,10 +70,7 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                      ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                      {{a.description}}
                     </span>
                   </v-row>
                 </v-card-text>
@@ -131,6 +128,7 @@ export default {
       pageCount: 0,
       page: 1,
       itemsPerPage: 9,
+      total: 0,
     };
   },
   methods: {
@@ -145,35 +143,40 @@ export default {
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
+      this.getData();
     },
     formerPage() {
       if (this.page - 1 >= 1) this.page -= 1;
+      this.getData();
+    },
+    getData: async function () {
+      try {
+        let response = await axios.get("http://localhost:9040/search/?page=" + this.page);
+        if (response) {
+          this.ads = response.data.ServiceProviders;
+          this.total = response.data.ServiceProviders_Sum[0].number_sps;
+          /*this.ads = response.data.ServiceProviders.map(an => {
+      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
+         })*/
+        }
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
     },
   },
   computed: {
     numberOfPages() {
-      return Math.ceil(this.ads.length / this.itemsPerPage);
+      return Math.ceil(this.total / this.itemsPerPage);
     },
   },
 
   created: async function () {
-    try {
-      let response = await axios.get("http://localhost:9040/search/?page=1");
-      if (response) {
-        this.ads = response.data.ServiceProviders;
-        console.log(this.ads);
-        /*this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
-         })*/
-      }
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.getData();
   },
 };
 </script>

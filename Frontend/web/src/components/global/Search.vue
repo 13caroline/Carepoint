@@ -18,10 +18,10 @@
         <v-slider
           v-model="price"
           inverse-label
-          label="200€"
+          :label="`${fields.price} €`"
           color="#78C4D4"
           thumb-label
-          max="200"
+          :max="fields.price"
           min="0"
         ></v-slider>
       </div>
@@ -30,10 +30,10 @@
         <v-slider
           v-model="distance"
           inverse-label
-          label="12km"
+          :label="`${fields.distance}km`"
           color="#78C4D4"
           thumb-label
-          max="12"
+          :max="fields.distance"
           min="0"
         ></v-slider>
       </div>
@@ -45,8 +45,24 @@
           class="rounded-xl"
           dense
           color="#78C4D4"
-          :items="categories"
+          :items="cat"
+          item-value="idCategory"
+          item-text="name"
           v-model="category"
+        ></v-select>
+      </div>
+      <div>
+        <span>Localização</span>
+        <v-select
+          outlined
+          flat
+          class="rounded-xl"
+          dense
+          color="#78C4D4"
+          :items="loc"
+          item-value="idLocation"
+          item-text="name"
+          v-model="location"
         ></v-select>
       </div>
       <div>
@@ -54,18 +70,28 @@
         <v-slider
           v-model="rating"
           inverse-label
-          label="10"
+          :label="`${fields.rating}`"
           color="#78C4D4"
           thumb-label
-          max="10"
+          :max="fields.rating"
           min="0"
         ></v-slider>
       </div>
       <div>
         <span>Sexo</span>
         <v-radio-group v-model="row" row class="radio">
-          <v-radio label="Feminino" value="feminino" color="#78C4D4"></v-radio>
-          <v-radio label="Masculino" value="masculino" color="#78C4D4"></v-radio>
+          <v-radio
+            label="Feminino"
+            value="feminino"
+            color="#78C4D4"
+            class="ml-0"
+          ></v-radio>
+          <v-radio
+            label="Masculino"
+            value="masculino"
+            color="#78C4D4 "
+            class="ml-0"
+          ></v-radio>
         </v-radio-group>
       </div>
       <v-card-actions>
@@ -79,19 +105,58 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "Search",
 
   data() {
     return {
+      fields: {
+        price: 0,
+        distance: 0,
+        rating: 0,
+      },
       categories: ["Companhia", "Compras", "Higiene", "Medicação", "Refeições"],
       category: "",
       distance: "",
       price: "",
       search: "",
-      rating:0,
-      row:null,
+      rating: 0,
+      location: "",
+      row: null,
+      loc: [],
+      cat: [],
     };
+  },
+  created: async function () {
+    try {
+      let response = await axios.get("http://localhost:9040/search/max");
+      if (response) {
+        this.fields.rating = response.data[0].rating;
+        this.fields.price = response.data[0].price;
+        this.fields.distance = response.data[0].distance;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let response2 = await axios.get("http://localhost:9040/location");
+      if (response2) {
+        this.loc = response2.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let response3 = await axios.get("http://localhost:9040/category");
+      if (response3) {
+        this.cat = response3.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>

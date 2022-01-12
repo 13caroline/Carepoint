@@ -46,4 +46,10 @@ router.get('/', (req, res, next) => {
     .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
 })
 
+router.get('/max', (req, res) => {
+    search_controller.getMaxValues()
+    .then(data => res.status(200).jsonp(data))
+    .catch((err) => res.status(500).jsonp({error: err}));
+})
+
 module.exports = router;

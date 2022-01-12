@@ -224,7 +224,7 @@ export default {
 
   methods: {
     close() {
-      this.$router.push("/consumer/profile");
+      (store.getters.tipo==2)?this.$router.push("/consumer/profile"):this.$router.push("/service/provider/page");
 
     },
 
@@ -243,7 +243,7 @@ export default {
           idLocation: 1,
         }
       );
-       this.$router.push("/consumer/my/advertisements")
+       this.$router.push("/my/advertisements")
           this.$snackbar.showMessage({
             show: true,
             color: "success",

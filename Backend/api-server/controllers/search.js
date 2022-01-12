@@ -3,6 +3,10 @@ const dbViewsPath = '../../../Database/';
 
 var Out = module.exports;
 
+Out.getMaxValues = () => {
+    return dbconfig.sequelize.query('CALL pi.get_max_values()');
+}
+
 Out.getServiceProviders = (category, location, experience, price, rating, sex, limit, offset) => {
     return dbconfig.sequelize.query('CALL get_service_providers_v2 (:idC, :idL, :exp, :prc, :rt, :sex, :lm, :off)',
         {replacements: {

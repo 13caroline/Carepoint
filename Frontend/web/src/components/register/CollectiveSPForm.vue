@@ -72,7 +72,8 @@
                   single-line
                   v-model="form.password2"
                   :rules="[
-                    form.password === form.password2 || 'Password must match',
+                    form.password === form.password2 ||
+                      'As palavra-passes devem corresponder.',
                   ]"
                   color="#78C4D4"
                   type="password"
@@ -95,7 +96,7 @@
                   v-model="form.phoneNumber"
                   maxlength="9"
                   required
-                  :rules="[(v) => v.length>8 || 'Contacto inválido']"
+                  :rules="[(v) => v.length > 8 || 'Contacto inválido']"
                   v-on:keypress="isNumber($event)"
                 />
               </v-col>
@@ -125,7 +126,7 @@
                   required
                   dense
                   maxlength="9"
-                  :rules="[(v) => v.length>8 || 'NIPC inválido']"
+                  :rules="[(v) => v.length > 8 || 'NIPC inválido']"
                   v-model="form.nipc"
                   v-on:keypress="isNumber($event)"
                 ></v-text-field>
@@ -200,7 +201,7 @@
                 required
                 :disabled="!valid"
                 @click="next()"
-                >Registar</v-btn
+                >Próximo</v-btn
               >
             </v-col>
           </v-row>
@@ -263,32 +264,25 @@ export default {
     next: async function () {
       if (this.$refs.form.validate()) {
         try {
-           await axios.post(
-            "http://localhost:9041/users/register",
-            {
-              name: this.form.name,
-              email: this.form.email,
-              password: this.form.password,
-              sex: this.form.sex,
-              type: this.form.type,
-              location: 1,
-              phoneNumber: this.form.phoneNumber,
-              description: this.form.description,
-              link: this.form.link,
-              firm: this.form.firm,
-              nipc: this.form.nipc,
-            }
-          );
-          this.$router.push("/register/subscription/" + this.form.type);
-          this.$snackbar.showMessage({
-            show: true,
-            text: "Utilizador criado com sucesso.",
-            color: "success",
-            snackbar: true,
-            timeout: 4000,
+          let res = await axios.post("http://localhost:9041/users/register", {
+            name: this.form.name,
+            email: this.form.email,
+            password: this.form.password,
+            sex: this.form.sex,
+            type: this.form.type,
+            location: 1,
+            phoneNumber: this.form.phoneNumber,
+            description: this.form.description,
+            link: this.form.link,
+            firm: this.form.firm,
+            nipc: this.form.nipc,
           });
+          if (res.data.token != undefined) {
+            this.$store.commit("guardaTokenUtilizador", res.data.token);
+            this.$store.commit("guardaTipoUtilizador", this.form.type);
+          }
+          this.$router.push("/register/subscription/" + this.form.type);
         } catch (e) {
-          console.log(e);
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
