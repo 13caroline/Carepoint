@@ -11,8 +11,8 @@ const Location = require('../controllers/location')
 // List all Locations
 router.get('/', function(req, res, next) {
     Location.list()
-        .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+    .then(data => res.status(200).jsonp(data[0]))
+    .catch(e => res.status(500).jsonp({ error: e }))
 });
 
 

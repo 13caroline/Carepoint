@@ -560,17 +560,13 @@
 					"name": "Location",
 					"item": [
 						{
-							"name": "Get list of locations",
+							"name": "Get list of locations (R)",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"location_id = pm.response.json()[0].idLocation;",
-											"pm.collectionVariables.set(\"location_id\", location_id);",
-											"",
-											"location_name = pm.response.json()[0].name;",
-											"pm.collectionVariables.set(\"location_name\", location_name);"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -580,10 +576,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api-server}}/location",
+									"raw": "http://localhost:9040/location",
+									"protocol": "http",
 									"host": [
-										"{{api-server}}"
+										"localhost"
 									],
+									"port": "9040",
 									"path": [
 										"location"
 									]
@@ -710,6 +708,15 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": null
+							},
+							"response": []
 						}
 					]
 				},
@@ -717,17 +724,13 @@
 					"name": "Category",
 					"item": [
 						{
-							"name": "Get list of categories",
+							"name": "Get list of categories (R)",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"exec": [
-											"category_id = pm.response.json()[0].idCategory;",
-											"pm.collectionVariables.set(\"category_id\", category_id);",
-											"",
-											"category_name = pm.response.json()[0].name;",
-											"pm.collectionVariables.set(\"category_name\", category_name);"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -737,10 +740,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{api-server}}/category",
+									"raw": "http://localhost:9040/category",
+									"protocol": "http",
 									"host": [
-										"{{api-server}}"
+										"localhost"
 									],
+									"port": "9040",
 									"path": [
 										"category"
 									]
@@ -2582,12 +2587,12 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxNzM0ODIwLCJleHAiOjE2NDE3Mzg0MjB9.7caQEunkdTZpoajllIGFQXAEKuGqlF2hbkdnTwt2qH0",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQxOTk5MDMyLCJleHAiOjE2NDIwMDI2MzJ9.NLRxfFW6s3wGXaiOKuyNMLQKFzI-o4Vv71ekgdljWOY",
 											"type": "default"
 										},
 										{
 											"key": "receivingId",
-											"value": "82",
+											"value": "85",
 											"type": "default"
 										},
 										{

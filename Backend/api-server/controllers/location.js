@@ -1,17 +1,8 @@
-/*var express = require('express')
-var assert = require('assert');
-var bodyParser = require('body-parser');
-
-const Location = require("../../location/api/location");
-const dbconfig = require("../../../config/Database_Info");
-const auth = require("../../shared/auth")
-*/
-
-
 // Controller for the location model
 
 
 const Location = require('../models/location')
+const dbconfig = require('../models/Config/Database_Info');
 
 var Out = module.exports;
 
@@ -27,7 +18,7 @@ Out.consult_id = (id) => {
 
 //GET all Location
 Out.list = () => {
-    return Location.findAll();
+    return dbconfig.sequelize.query('SELECT * FROM pi.get_locations');
 }
 
 //Creates a new Location
