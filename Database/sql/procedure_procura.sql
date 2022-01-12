@@ -1,5 +1,7 @@
 USE PI;
 
+DROP VIEW IF EXISTS get_locations;
+DROP VIEW IF EXISTS get_categories;
 DROP PROCEDURE IF EXISTS get_consumers_joboffers;
 DROP PROCEDURE IF EXISTS get_service_providers;
 DROP PROCEDURE IF EXISTS get_companies;
@@ -7,6 +9,16 @@ DROP PROCEDURE IF EXISTS get_service_providers_v2;
 DROP PROCEDURE IF EXISTS get_service_providers_v3;
 DROP PROCEDURE IF EXISTS get_service_providers_v2_count;
 DROP PROCEDURE IF EXISTS get_companies_count;
+
+-- Returns: get all locations
+CREATE VIEW get_locations 
+AS  
+    SELECT location.idLocation, location.name FROM location;
+    
+-- Returns: get all categories
+CREATE VIEW get_categories
+AS  
+    SELECT category.idCategory, category.name FROM category;
 
 
 -- Returns: get all job offers for given consumer
