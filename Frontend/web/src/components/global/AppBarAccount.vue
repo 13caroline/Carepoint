@@ -2,8 +2,9 @@
   <div>
     <v-app-bar flat color="#FFFFFF" height="180">
       <v-row justify="center" class="w-100">
-        <v-col cols="7" md="4" offset-md="4">
+        <v-col cols="7" md="4" sm="4" offset-md="4" offset-sm="3">
           <v-img
+            id="logo_"
             class="logo"
             @click="goToMainPage()"
             src="@/assets/logo.png"
@@ -119,5 +120,11 @@ export default {
 
 .menuOpcao:hover {
   font-weight: bold;
+}
+
+#logo_ {
+  position:relative;
+  top: 0px; 
+  left: 70px;
 }
 </style>

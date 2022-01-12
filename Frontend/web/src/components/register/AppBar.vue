@@ -2,23 +2,24 @@
   <div>
     <v-container>
       <v-app-bar flat color="#FFFFFF" height="120">
-        <v-row justify="center" class="w-100">
-          <v-col cols="9" md="6" offset-md="4" offset="0">
-            <v-img src="@/assets/logo.png" max-height="270" max-width="270">
+        <v-row no-gutters class="w-100">
+          <v-col cols="9" md="6" sm="6" offset-md="4" offset-sm="3" offset="0">
+            <v-img id="logo" src="@/assets/logo.png" max-height="270" max-width="270">
             </v-img>
           </v-col>
-          <v-col cols="3" md="2">
+          <v-col cols="2" md="2" sm="2">
             <v-btn
+              id="iniciar"
               outlined
               color="#78C4D4"
               depressed
-              class="rounded-xl hidden-xs-only  mt-5 mr-sm-1"
+              class="rounded-xl hidden-xs-only  ml-10"
               @click="login()"
             >
               Iniciar Sessão
             </v-btn>
 
-            <v-menu bottom left>
+            <v-menu id="menu" bottom left>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   text
@@ -77,3 +78,19 @@ export default {
   },
 };
 </script>
+<style scoped>
+#logo {
+  position: relative;
+  top: 0px; 
+  left: 50px;
+  
+}
+#iniciar {
+  position: relative;
+  top: 20px; 
+  left: -15px;
+}
+#menu {
+  justify-self: start;
+}
+</style> 
