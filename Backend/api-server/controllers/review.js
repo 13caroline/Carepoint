@@ -15,6 +15,17 @@ Out.list = () => {
     return Review.findAll();
 }
 
+Out.reviewExists = (user_id, receiver_id) => {
+    return Review.count({where: {idGive:user_id, idReceive:receiver_id}})
+            .then(count => {
+                console.log(count)
+                if (count != 0) {
+                    return false;
+                }
+                return true;
+            });
+}
+
 //Creates a new Review
 Out.insert = (review) => {
     return Review.create({

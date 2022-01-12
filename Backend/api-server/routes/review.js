@@ -40,8 +40,17 @@ router.post('/', auth.validToken, (req, res) => {
     User.consult(email)
     .then((user) => {
         if(user.idUser != receivingId){
-            Review.addNewReview(req.body.description, req.body.rating, user.idUser, receivingId)
-            .then((res) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
+            Review.reviewExists(user.idUser, receivingId)
+            .then((value) => {
+                console.log(value)
+                if( value ){
+                    Review.addNewReview(req.body.description, req.body.rating, user.idUser, receivingId)
+                    .then((res) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
+                    .catch((err) => res.status(500).jsonp({error: err}))
+                }else{
+                    res.status(500).jsonp({error: "Já existe review com este par de ID's"})
+                }
+            })
             .catch((err) => res.status(500).jsonp({error: err}))
         }else{
             res.status(500).jsonp({error: "Cannot give a review to yourself!"})
