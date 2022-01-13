@@ -39,7 +39,7 @@
       </div>
       <div>
         <span>Categoria</span>
-        <v-select
+        <v-autocomplete
           outlined
           flat
           class="rounded-xl"
@@ -49,11 +49,11 @@
           item-value="idCategory"
           item-text="name"
           v-model="category"
-        ></v-select>
+        />
       </div>
       <div>
         <span>Localização</span>
-        <v-select
+        <v-autocomplete
           outlined
           flat
           class="rounded-xl"
@@ -63,7 +63,7 @@
           item-value="idLocation"
           item-text="name"
           v-model="location"
-        ></v-select>
+        />
       </div>
       <div>
         <span>Classificação </span>
