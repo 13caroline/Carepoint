@@ -88,7 +88,7 @@
       <v-col cols="12" md="2" sm>
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
-          <v-icon color="#FFE082" small>fas fa-star</v-icon>
+          <v-icon color="#FFE082" class="mb-1" small>fas fa-star</v-icon>
           <span class="font-weight-bold ma-2">{{
             serviceProviderData.averageRating
           }}</span>
@@ -142,7 +142,7 @@
               height="100%"
             >
               <v-row align="center">
-                <v-col cols="12" md="11" sm="11">
+                <v-col cols="12" md="10" sm="10" xs="8">
                   <div>
                     <span class="font-weight-bold">{{
                       formatDate(a.postDate)
@@ -154,9 +154,9 @@
                     </span>
                   </div>
                 </v-col>
-                <v-col cols="12" md="1" sm="1">
+                <v-col cols="12" md="2" sm="2" xs="4">
                   <div class="font-weight-bold ratings">
-                    <v-icon color="warning lighten-1" class="icon mb-1"
+                    <v-icon color="#FFE082" class="icon mb-1"
                       >fas fa-star</v-icon
                     >
                     <span class="ml-1">{{ a.rating }}</span>
@@ -174,7 +174,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="mr-1"
@@ -185,7 +185,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="ml-1"
@@ -286,6 +286,8 @@ export default {
 <style scoped>
 .infos {
   color: #797878;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .desc {
   color: #c4c4c4;
