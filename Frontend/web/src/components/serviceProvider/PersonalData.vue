@@ -19,7 +19,7 @@
            
           </v-col>
         </v-row>
-
+        <div v-if="$store.state.tipo != '4'">
         <h3 class="group font-weight-light text-uppercase">
           Dados Pessoais
         </h3>
@@ -50,7 +50,7 @@
                     </v-row>
                   </div>
                   <div>
-                    <v-row>
+                    <v-row >
                       <v-col>
                         <p class="infos">Sexo</p>
                       </v-col>
@@ -63,6 +63,7 @@
               </v-list-item>
             </v-card>
           </v-col>
+          
           <v-col cols="auto" order="first" order-sm="last">
             <div class="foto h-100 mt-5">
               <v-img
@@ -87,6 +88,88 @@
             </div>
           </v-col>
         </v-row>
+        </div>
+
+        <div v-else>
+          <h3 class="group font-weight-light text-uppercase">
+          Dados da empresa
+        </h3>
+        <v-divider></v-divider>
+        <v-row class="w-100" align="start">
+          <v-col cols="12" sm>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Nome</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.name}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">URL</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.link}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row >
+                      <v-col>
+                        <p class="infos">Firma</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.firm}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row >
+                      <v-col>
+                        <p class="infos">NIPC</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.nipc}}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+          
+          <v-col cols="auto" order="first" order-sm="last">
+            <div class="foto h-100 mt-5">
+              <v-img
+                src="@/assets/userImgTest.jpg"
+                aspect-ratio="1"
+                class="grey lighten-2 mx-2 rounded"
+                cover
+              >
+                <template v-slot:placeholder>
+                  <v-row
+                    class="fill-height ma-0"
+                    align="center"
+                    justify="center"
+                  >
+                    <v-progress-circular
+                      indeterminate
+                      color="grey lighten-5"
+                    ></v-progress-circular>
+                  </v-row>
+                </template>
+              </v-img>
+            </div>
+          </v-col>
+        </v-row>
+        </div>
 
         <h3 class="mt-6 group font-weight-light text-uppercase">
           Dados de Acesso

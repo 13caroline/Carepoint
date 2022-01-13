@@ -81,7 +81,7 @@ const routes = [
 
   // Consumer's page
   {
-    path: '/consumer/page',
+    path: '/page',
     name: 'Consumer Profile',
     component: () => import(/* webpackChunkName: "about" */'../views/consumer/Homepage.vue')
   },
