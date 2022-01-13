@@ -164,14 +164,15 @@ router.put('/update', auth.matchUsers, (req, res, next) => {
     }
 })
 
-router.put('/updatePassword', auth.matchUsers, (req, res, next) => {
-    User.consult_id(req.body.idUser)
+router.put('/updatePassword', auth.validToken, (req, res, next) => {
+    var email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
     .then((user) => {
         if(bcrypt.compareSync(req.body.repeatPassword1, user.password)){
             if(bcrypt.compareSync(req.body.repeatPassword2, user.password)){
                 bcrypt.hash(req.body.newPassword, 10)
                 .then((cryptPass) => {
-                    User.updatePassword(req.body.idUser, cryptPass)
+                    User.updatePassword(email, cryptPass)
                     .then((user) => res.status(201).jsonp(user))
                     .catch((err) => res.status(500).jsonp("Error updating user: " + err))
                 })
@@ -186,9 +187,14 @@ router.put('/updatePassword', auth.matchUsers, (req, res, next) => {
 })
 
 //auth.matchUsers,
-router.put('/updatePhoto', upload.single('image'), (req, res, next) => {
-    User.updatePhoto(req.body.idUser, [req.file.buffer])
-    .then((user) => res.status(201).jsonp(user))
+router.put('/updatePhoto', upload.single('image'), auth.validToken,(req, res, next) => {
+    var email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((usr) => {
+        User.updatePhoto(usr.idUser, [req.file.buffer])
+        .then((user) => res.status(201).jsonp(user))
+        .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+    })
     .catch((err) => res.status(500).jsonp("Error updating user: " + err))
 })
 

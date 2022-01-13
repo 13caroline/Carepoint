@@ -104,10 +104,10 @@ Out.updateCompany = (body) => {
         }})
 }
 
-Out.updatePassword = (userId, pass) => {
+Out.updatePassword = (email, pass) => {
     return User.update(
         {password: pass},
-        {where: { 'idUser' : userId}}
+        {where: { 'email' : email}}
     )
 }
 
