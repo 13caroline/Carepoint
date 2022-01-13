@@ -70,7 +70,8 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      {{a.description}}
+                      <v-clamp autoresize :max-lines="4">{{a.description}}</v-clamp>
+                      
                     </span>
                   </v-row>
                 </v-card-text>
@@ -116,6 +117,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
+import VClamp from 'vue-clamp'
 export default {
   name: "Ads",
 
@@ -130,6 +132,9 @@ export default {
       itemsPerPage: 9,
       total: 0,
     };
+  },
+  components: {
+    VClamp
   },
   methods: {
     difDate(dateLA) {
