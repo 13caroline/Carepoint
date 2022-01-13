@@ -44,7 +44,12 @@
               <span>{{ a.name }}</span>
             </v-tooltip>
 
-            <span class="font-weight-bold ml-2">{{ a.experience }} anos</span>
+            <span class="font-weight-bold ml-2" v-if="a.experience == 0">
+              {{ noExp }}
+            </span>
+            <span class="font-weight-bold ml-2" v-else>
+              {{ a.experience }} anos
+            </span>
           </v-col>
         </v-row>
         <div>
@@ -96,7 +101,7 @@
       </v-col>
       <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <schedule />
+        <schedule :dados="serviceProvider.categories"/>
       </v-col>
     </v-row>
 
@@ -125,7 +130,7 @@
       no-results-text="Não foram encontrados resultados."
     >
       <template v-slot:default="props">
-        <v-row >
+        <v-row>
           <v-col
             class="w-100 ma-0"
             v-for="(a, index) in props.items"
@@ -210,6 +215,7 @@ export default {
   props: ["id"],
   data() {
     return {
+      noExp: "<1 ano",
       image: "",
       sortDesc: false,
       pageCount: 0,
@@ -265,10 +271,9 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/?id=" + this.id
       );
-      (this.serviceProviderData = response.data.ServiceProvider[0]),
-        (this.serviceProvider = response.data);
+      (this.serviceProviderData = response.data.ServiceProvider[0]);
+      (this.serviceProvider = response.data);
       this.reviews = response.data.reviews.length;
-      console.log(response.data);
       this.image =
         "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
     } catch (e) {
