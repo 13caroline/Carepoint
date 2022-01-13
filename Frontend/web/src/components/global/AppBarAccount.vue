@@ -112,7 +112,7 @@ export default {
           this.$router.push("/");
           break;
         case "Meus anúncios":
-          this.$router.push("/consumer/my/advertisements");
+          this.$router.push("/my/advertisements");
       }
     },
     goToMainPage() {
