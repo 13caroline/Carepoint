@@ -71,7 +71,10 @@
                   dense
                   single-line
                   v-model="form.password2"
-                  :rules="[(form.password === form.password2) || 'As palavra-passes devem corresponder.']"
+                  :rules="[
+                    form.password === form.password2 ||
+                      'As palavra-passes devem corresponder.',
+                  ]"
                   color="#78C4D4"
                   type="password"
                   required
@@ -93,7 +96,7 @@
                   v-model="form.phoneNumber"
                   maxlength="9"
                   required
-                  :rules="[(v) => v.length>8 || 'Contacto inválido']"
+                  :rules="[(v) => v.length > 8 || 'Contacto inválido']"
                   v-on:keypress="isNumber($event)"
                 />
               </v-col>
@@ -116,15 +119,17 @@
 
               <v-col class="py-0" cols="12" md="4">
                 <span>Localização *</span>
-                <v-text-field
+                <v-autocomplete
                   outlined
                   flat
                   dense
-                  single-line
                   color="#78C4D4"
                   name="location"
                   v-model="form.location"
                   :rules="textRules"
+                  :items="loc"
+                  item-value="idLocation"
+                  item-text="name"
                   required
                 />
               </v-col>
@@ -166,7 +171,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "SingleSPForm",
   data() {
@@ -203,10 +208,10 @@ export default {
         type: "2",
       },
       items: [
-        {name: "Feminino", value: "F"},
-        {name: "Masculino", value: "M"},
-        {name: "Indefinido", value: "I"}
-      ] 
+        { name: "Feminino", value: "F" },
+        { name: "Masculino", value: "M" },
+        { name: "Indefinido", value: "I" },
+      ],
     };
   },
   components: {
@@ -218,23 +223,23 @@ export default {
       this.$router.back();
     },
 
-    registUser: async function (){
-      if(this.$refs.form.validate()){
-        try{
+    registUser: async function () {
+      if (this.$refs.form.validate()) {
+        try {
           let res = await axios.post("http://localhost:9041/users/register", {
-            name: this.form.name, 
-            email: this.form.email, 
-            password: this.form.password, 
+            name: this.form.name,
+            email: this.form.email,
+            password: this.form.password,
             sex: this.form.sex,
-            type: this.form.type, 
-            location: 1, 
+            type: this.form.type,
+            location: this.form.location,
             phoneNumber: this.form.phoneNumber,
           });
           if (res.data.token != undefined) {
             this.$store.commit("guardaTokenUtilizador", res.data.token);
             this.$store.commit("guardaTipoUtilizador", this.form.type);
           }
-          this.$router.push("/consumer/page")
+          this.$router.push("/consumer/page");
           this.$snackbar.showMessage({
             show: true,
             color: "#78c4d4",
@@ -242,8 +247,7 @@ export default {
             snackbar: true,
             timeout: 4000,
           });
-
-        } catch(e){
+        } catch (e) {
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
@@ -251,8 +255,7 @@ export default {
             timeout: 4000,
           });
         }
-      }
-      else { 
+      } else {
         this.$snackbar.showMessage({
           show: true,
           color: "error",
@@ -266,6 +269,16 @@ export default {
       if (/^[0-9]+$/.test(char)) return true;
       else e.preventDefault();
     },
+  },
+  created: async function () {
+    try {
+      let response = await axios.get("http://localhost:9040/location");
+      if (response) {
+        this.loc = response.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>

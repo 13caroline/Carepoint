@@ -133,15 +133,18 @@
               </v-col>
               <v-col class="py-0" cols="12" md="9" sm="8">
                 <span>Localização *</span>
-                <v-text-field
+                <v-autocomplete
                   outlined
                   flat
                   dense
                   color="#78C4D4"
                   required
+                  :items="loc"
+                  item-value="idLocation"
+                  item-text="name"
                   :rules="textRules"
                   v-model="form.location"
-                ></v-text-field>
+                />
               </v-col>
             </v-row>
 
@@ -220,6 +223,7 @@ export default {
       termos: false,
       dialogs: {},
       valid: false,
+      loc: [],
       cancelar: { title: "o seu registo", text: "o seu registo" },
       emailRules: [
         (value) => !!value || "Campo inválido",
@@ -270,7 +274,7 @@ export default {
             password: this.form.password,
             sex: this.form.sex,
             type: this.form.type,
-            location: 1,
+            location: this.form.location,
             phoneNumber: this.form.phoneNumber,
             description: this.form.description,
             link: this.form.link,
@@ -305,6 +309,17 @@ export default {
       if (/^[0-9]+$/.test(char)) return true;
       else e.preventDefault();
     },
+  },
+
+  created: async function () {
+    try {
+      let response = await axios.get("http://localhost:9040/location");
+      if (response) {
+        this.loc = response.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>
