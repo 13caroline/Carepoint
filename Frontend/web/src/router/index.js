@@ -58,7 +58,7 @@ const routes = [
 
  
   {
-    path: '/consumer/edit/profile',
+    path: '/edit/profile',
     name: 'Edit Profile',
     component: () => import('../views/global/EditData.vue')
   },

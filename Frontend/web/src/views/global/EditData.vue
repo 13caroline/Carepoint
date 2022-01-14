@@ -66,7 +66,9 @@
             </v-col>
           </v-row>
 
-          <h3 class="mt-6 group font-weight-light text-uppercase">Dados Pessoais</h3>
+          <h3 class="mt-6 group font-weight-light text-uppercase">
+            Dados Pessoais
+          </h3>
           <v-divider></v-divider>
           <v-row class="w-100" align="start">
             <v-col>
@@ -86,7 +88,7 @@
                       </v-col>
                     </div>
                     <v-row class="mx-auto">
-                      <v-col cols="12" md="6">
+                      <v-col>
                         <span>Localização</span>
                         <v-text-field
                           outlined
@@ -96,8 +98,22 @@
                           v-model="user.locationName"
                         ></v-text-field>
                       </v-col>
-                   
-                      <v-col cols="12" md="6">
+
+                      <v-col v-if="$store.state.tipo == '3'"> 
+                        <span>Raio de atividade</span>
+                        <v-text-field
+                          outlined
+                          dense
+                          color="#2596be"
+                          v-model="user.distance"
+                          suffix="km"
+                  type="number"
+                  required
+                  v-on:keypress="isNumber($event)"
+                        ></v-text-field>
+                      </v-col>
+
+                      <v-col>
                         <span>Sexo</span>
                         <v-text-field
                           outlined
@@ -114,7 +130,9 @@
             </v-col>
           </v-row>
 
-          <h3 class="mt-6 group font-weight-light text-uppercase">Dados de Contacto</h3>
+          <h3 class="mt-6 group font-weight-light text-uppercase">
+            Dados de Contacto
+          </h3>
           <v-divider></v-divider>
           <v-row class="w-100" align="start">
             <v-col>
@@ -140,10 +158,61 @@
               </v-card>
             </v-col>
           </v-row>
+          <div v-if="$store.state.tipo == '3'">
+            <h3 class="mt-6 group font-weight-light text-uppercase">
+              Informações
+            </h3>
+            <v-divider></v-divider>
+            <v-row class="w-100" align="start">
+              <v-col>
+                <v-card class="h-100 mt-5" outlined>
+                  <v-list-item>
+                    <v-list-item-content>
+                      <div>
+                        <v-col>
+                          <span>Descrição</span>
+                          <v-text-field
+                            outlined
+                            dense
+                            v-model="user.description"
+                            color="#2596be"
+                          ></v-text-field>
+                        </v-col>
+                      </div>
+                      <div>
+                        <v-col>
+                          <span>Qualificações</span>
+                          <v-text-field
+                            outlined
+                            dense
+                            color="#2596be"
+                            :rules="textRules"
+                            v-model="user.qualifications"
+                          ></v-text-field>
+                        </v-col>
+                      </div>
+                      <div>
+                        <v-col>
+                          <span>Categorias</span>
+                          <v-text-field
+                            outlined
+                            dense
+                            color="#2596be"
+                            :rules="textRules"
+                            v-model="user.qualifications"
+                          ></v-text-field>
+                        </v-col>
+                      </div>
+                    </v-list-item-content>
+                  </v-list-item>
+                </v-card>
+              </v-col>
+            </v-row>
+          </div>
         </v-form>
       </v-card>
       <v-row align="end" justify="end" class="w-100">
-        <v-col cols="auto" >
+        <v-col cols="auto">
           <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
         </v-col>
         <v-col cols="auto pl-0">
@@ -184,13 +253,13 @@ export default {
       },
     ],
     passwordRules: [
-        (v) => !!v || "Palavra-passe inválida",
-        (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",
-        (v) => /(?=.*\d)/.test(v) || "Deve ter um número",
-        (v) =>
-          (v && v.length >= 5) ||
-          "A palavra-passe deve ter pelo menos 5 caracteres",
-      ],
+      (v) => !!v || "Palavra-passe inválida",
+      (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",
+      (v) => /(?=.*\d)/.test(v) || "Deve ter um número",
+      (v) =>
+        (v && v.length >= 5) ||
+        "A palavra-passe deve ter pelo menos 5 caracteres",
+    ],
     dialogs: {},
     cancelar: {
       text: "a edição de dados",
@@ -201,21 +270,45 @@ export default {
     close() {
       this.$router.push("/consumer/profile");
     },
+     isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
+    },
 
-    confirm: async function() {
+    confirm: async function () {
       if (this.$refs.form.validate()) {
         try {
+          if(store.getters.tipo=='2'){
           let response = await axios.put("http://localhost:9040/users/update", {
             token: store.getters.token,
             name: this.user.name,
             email: this.user.email,
-            type: (store.getters.tipo).toString(),
+            type: store.getters.tipo.toString(),
             location: 1,
             phoneNumber: this.user.phoneNumber,
             idUser: this.user.idUser,
           });
-          console.log(response)
+          console.log(response);
           this.$router.push("/consumer/profile");
+          }
+          else if (store.getters.tipo=='3'){
+            let response = await axios.put("http://localhost:9040/users/update", {
+            token: store.getters.token,
+            name: this.user.name,
+            email: this.user.email,
+            type: store.getters.tipo.toString(),
+            location: 1,
+            phoneNumber: this.user.phoneNumber,
+            idUser: this.user.idUser,
+            distance: this.user.distance,
+            description: this.user.description,
+            qualifications: this.user.qualifications,
+
+          });
+          console.log(response);
+          this.$router.push("/service/provider/page");
+          }
           this.$snackbar.showMessage({
             show: true,
             text: "Dados atualizados com sucesso.",
@@ -247,18 +340,16 @@ export default {
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
   },
-    created: async function () {
+  created: async function () {
     try {
-      let response = await axios.post(
-        "http://localhost:9040/users/perfil",
-        {
-          token: store.getters.token
-        }
-      );
+      let response = await axios.post("http://localhost:9040/users/perfil", {
+        token: store.getters.token,
+      });
       this.user = response.data.perfil[0];
-      if(this.user.sex=="M")this.user.sex ="Masculino"
-      else if(this.user.sex=="F")this.user.sex ="Feminino"
-      else this.user.sex = "Indefinido"
+      console.log(response.data);
+      if (this.user.sex == "M") this.user.sex = "Masculino";
+      else if (this.user.sex == "F") this.user.sex = "Feminino";
+      else this.user.sex = "Indefinido";
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

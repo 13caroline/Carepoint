@@ -12,7 +12,7 @@
               color="#78C4D4"
               outlined
               dark
-              to="/consumer/edit/profile"
+              to="/edit/profile"
             >
               Editar dados
               <v-icon small class="ml-2">fas fa-pen</v-icon>
