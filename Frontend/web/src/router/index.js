@@ -119,7 +119,12 @@ const routes = [
   path: '/company/page',
   name: 'Company Page',
   component: () => import('../views/company/Profile.vue')
-  }
+  },
+{
+  path: '/service/provider/ads',
+  name: 'Service Provider Ads page',
+  component: () => import('../views/serviceProviders/Anuncios.vue')
+}
 ]
 
 const router = new VueRouter({

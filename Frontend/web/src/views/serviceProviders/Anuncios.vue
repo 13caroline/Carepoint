@@ -2,7 +2,6 @@
   <div>
     <Bar />
     <v-container>
-     
       <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa">
         <v-tab v-for="item in items" :key="item.tab">
           {{ item.tab }}
@@ -11,27 +10,17 @@
 
       <v-tabs-items v-model="tab">
         <v-tab-item>
-           <personalData :user="user" :categories="categories"></personalData>
+           <spAds :user="user" :tipo="tab"></spAds>
         </v-tab-item>
 
         <v-tab-item>
-           <subscriptionData :user="user"></subscriptionData>
+           <spAds :user="user" :tipo="tab"></spAds>
         </v-tab-item>
 
-        <v-tab-item>
-          <!--<Consultas :animal="dados"></Consultas>-->
-          <p> cenx  as3 </p>
-        </v-tab-item>
+         <v-tab-item>
+           <compAds :user="user"></compAds>
+        </v-tab-item> 
 
-        <v-tab-item>
-          <!--<Cirurgia :animal="dados"></Cirurgia>-->
-          <p> cenas4 </p>
-        </v-tab-item>
-
-        <v-tab-item>
-          <!--<Historico :animal="dados"></Historico> -->
-          <p> cenas5 </p>
-        </v-tab-item>
       </v-tabs-items>
     </v-container>
     <Foot />
@@ -47,7 +36,7 @@ export default {
   data() {
     return {
       tab: null,
-      items: [{ tab: "Dados de utilizador" }, { tab: "Subscription" }, { tab: "Horários" }],
+      items: [{ tab: "Prestadores Individuais" }, { tab: "Prestadores Coletivos" }, { tab: "Ofertas de trabalho" }],
       user: {},
       categories: {},
     };
@@ -55,8 +44,7 @@ export default {
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
-    personalData: () => import("@/components/serviceProvider/PersonalData.vue"),
-    subscriptionData: () => import("@/components/serviceProvider/Subscription.vue")
+    spAds: () => import("@/components/ads/ViewAds.vue"),
   },
 
   methods: {
@@ -72,13 +60,10 @@ export default {
           token: store.getters.token,
         }
       );
-      console.log(store.getters.token)
-      console.log(response.data);
-
       
       this.user = response.data.perfil[0];
-      console.log("SUB:  " + this.user.subDuration[6])//(moment(this.user.subDuration, moment.ISO_8601).format("M")));
-      this.categories = response.data.categories;
+
+    this.categories = response.data.categories;
       if(this.user.sex=="M")this.user.sex ="Masculino"
       else if(this.user.sex=="F")this.user.sex ="Feminino"
       else this.user.sex = "Indefinido"
