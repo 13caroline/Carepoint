@@ -258,6 +258,7 @@ export default {
       }
     },
     created: async function () {
+      console.log("Entra")
       try {
         let response = await axios.get("http://localhost:9040/location");
         if (response) {

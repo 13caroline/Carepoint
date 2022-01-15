@@ -34,7 +34,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong> {{ a.beginDate }} - {{ a.endDate }} </strong>
+                    <strong> {{ a.beginDate }} até {{ a.endDate }} </strong>
                   </span>
                 </v-col>
 
