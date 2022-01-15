@@ -66,7 +66,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong> Catcat </strong>
+                    <strong> {{a.category_name}}  </strong>
                   </span>
                   <br />
                   <span> Apoio a idosos </span>
@@ -77,7 +77,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong>{{ a.locationName }}</strong>
+                    <strong>{{ a.location }}</strong>
                   </span>
                 </v-col>
 
@@ -90,14 +90,7 @@
                   </span>
                 </v-col>
 
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">estado</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <v-chip :color="estado(a.done)" small>
-                    {{ getState(a.done) }}
-                  </v-chip>
-                </v-col>
+
               </v-row>
 
 
