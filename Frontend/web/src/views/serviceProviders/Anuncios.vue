@@ -18,7 +18,7 @@
         </v-tab-item>
 
          <v-tab-item>
-           <compAds :user="user"></compAds>
+           <jobOffers :user="user"></jobOffers>
         </v-tab-item> 
 
       </v-tabs-items>
@@ -45,6 +45,7 @@ export default {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
     spAds: () => import("@/components/ads/ViewAds.vue"),
+    jobOffers: () => import("@/components/ads/JobOffers.vue")
   },
 
   methods: {
