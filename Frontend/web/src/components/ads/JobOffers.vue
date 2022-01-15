@@ -28,82 +28,87 @@
                 tile
                 height="400"
                 width="500"
-                @click="infoSP(a.idUser)"
               >
                 <v-card-text>
                   <v-row>
                     <v-col cols="12" md="4" sm="2">
-                      <span class="activity d-flex justify-start pb-2" >
-                      {{convertDate(a.postDate)}}
-                      </span
-                      >
+                      <span class="activity d-flex justify-start pb-2">
+                        {{ convertDate(a.postDate) }}
+                      </span>
                     </v-col>
                     <v-col cols="12" md="8" sm="10">
+                      <span class="user d-flex justify-end">{{ a.name }}</span>
                       <span class="activity d-flex justify-end"
-                        >última vez ativo {{ difDate(a.lastActivity) }}</span
+                        >(última vez ativo {{ difDate(a.lastActivity) }})</span
                       >
                     </v-col>
                   </v-row>
 
                   <v-row justify="center" class="mx-auto">
-                    <span class="indication font-weight-bold">
-                      {{ a.name }}
+                    <span
+                      class="
+                        text-uppercase
+                        font-weight-bold
+                        loc
+                        mb-2
+                        mt-4
+                        black--text
+                      "
+                    >
+                      {{ a.location }}
                     </span>
                   </v-row>
 
-                  <v-row>
-                <v-col class="pb-0" align="right" cols="">
-                  <span class="text-uppercase">Data</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong> {{ a.beginDate }} até {{ a.endDate }} </strong>
-                  </span>
-                </v-col>
+                  <v-row justify="center" class="mx-auto">
+                    <span class="font-weight-bold mr-2">
+                      {{ a.beginDate }}</span
+                    >
+                    <span class="activity"> até</span>
+                    <span class="font-weight-bold ml-2">
+                      {{ a.beginDate }}
+                    </span>
+                  </v-row>
 
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Categoria</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong> {{a.category_name}}  </strong>
-                  </span>
-                  <br />
-                  <span> Apoio a idosos </span>
-                </v-col>
+                  <v-row justify="center" class="mx-auto">
+                    <span v-if="a.price">
+                      <strong>{{ a.price }} €/hora</strong>
+                    </span>
+                    <span v-else> <strong>Preço negociável </strong></span>
+                  </v-row>
 
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Localização</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong>{{ a.location }}</strong>
-                  </span>
-                </v-col>
+                  <v-row justify="center" class="mx-auto">
+                 
+                      <v-chip class="mt-4" :color="estado(a.category_name)">
+                        <span class="mr-1">
+                          <strong> {{ a.category_name }} </strong>
+                        </span>
 
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Valor</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong>{{ a.price }} €/hora</strong>
-                  </span>
-                </v-col>
+                        <v-icon small>{{ getIcon(a.category_name) }}</v-icon>
 
-
-              </v-row>
-
-
-
-                  <v-divider class="mx-4 mt-5"></v-divider>
+                        <span class="chipLabel ml-1"> Apoio a idosos </span>
+                      </v-chip>
+                   
+                  </v-row>
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{a.description}}</v-clamp>
-                      
+                      <v-clamp autoresize :max-lines="4">{{
+                        a.description
+                      }}</v-clamp>
                     </span>
                   </v-row>
                 </v-card-text>
+                <v-card-actions class="justify-center">
+                  <div class="contact">
+                  <v-btn
+                    outlined 
+                    small
+                    
+                  >
+                    Entrar em Contacto
+                  </v-btn>
+                  </div>
+                </v-card-actions>
               </v-card>
             </div>
           </v-col>
@@ -116,7 +121,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="mr-1"
@@ -127,7 +132,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="ml-1"
@@ -146,7 +151,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import VClamp from 'vue-clamp'
+import VClamp from "vue-clamp";
 export default {
   name: "Ads",
 
@@ -160,12 +165,32 @@ export default {
       page: 1,
       itemsPerPage: 9,
       total: 0,
+      category: [
+        { name: "Companhia", icon: "fas fa-user-friends", color: "#FFFFFF" },
+        { name: "Compras", icon: "fas fa-shopping-cart", color: "#B0BEC5" },
+        { name: "Medicação", icon: "fas fa-tablets", color: "#FFCCBC" },
+        { name: "Higiene", icon: "fas fa-pump-medical", color: "#FFECB3" },
+        { name: "Passeios", icon: "fas fa-walking", color: "#DCEDC8" },
+        { name: "Refeições", icon: "fas fa-utensils", color: "#D7CCC8" },
+      ],
     };
   },
   components: {
-    VClamp
+    VClamp,
   },
   methods: {
+    getIcon(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+      return Object.values(row[0])[1];
+    },
+    estado(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+      return Object.values(row[0])[2];
+    },
     difDate(dateLA) {
       return moment(dateLA).locale("pt").fromNow();
     },
@@ -183,14 +208,16 @@ export default {
       if (this.page - 1 >= 1) this.page -= 1;
       this.getData();
     },
-    convertDate(d){
-           return moment(d , moment.ISO_8601).format("DD-MM-YYYY")
-        },
+    convertDate(d) {
+      return moment(d, moment.ISO_8601).format("DD-MM-YYYY");
+    },
     getData: async function () {
       try {
-        let response = await axios.get("http://localhost:9040/joboffer/?page=" + this.page);
+        let response = await axios.get(
+          "http://localhost:9040/joboffer/?page=" + this.page
+        );
         if (response) {
-            console.log(response.data)
+          console.log(response.data);
           this.ads = response.data.JobOffers;
           this.total = response.data.Total[0].number_offers;
           /*this.ads = response.data.ServiceProviders.map(an => {
@@ -224,12 +251,12 @@ export default {
   width: 100%;
 }
 
-.round {
-  border-radius: 100%;
+.loc {
+  font-size: 17px;
 }
 
-.indication {
-  text-align: center;
+.round {
+  border-radius: 100%;
 }
 
 .description {
@@ -239,8 +266,22 @@ export default {
   margin-top: 2em;
 }
 
-.activity {
+.contact {
+  position: absolute;
+  bottom: 15px;
+}
+
+.user {
   font-size: smaller;
+  text-align-last: right;
+}
+
+.chipLabel {
+  font-size: smaller;
+}
+
+.activity {
+  font-size: x-small;
   text-align-last: right;
 }
 </style>

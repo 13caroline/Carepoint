@@ -87,7 +87,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="mr-1"
@@ -98,7 +98,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="ml-1"

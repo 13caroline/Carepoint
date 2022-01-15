@@ -43,7 +43,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong> Catcat </strong>
+                    <strong> {{a.categoryName}} </strong>
                   </span>
                   <br />
                   <span> Apoio a idosos </span>

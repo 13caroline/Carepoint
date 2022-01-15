@@ -9,8 +9,11 @@
           <div v-if="tipo == 0">
             <ads />
           </div>
-          <div v-else>
+          <div v-else-if="tipo == 1">
             <compAds />
+          </div>
+          <div v-else>
+            <job-offers/>
           </div>
         </v-col>
       </v-row>
@@ -29,6 +32,7 @@ export default {
   components: {
     compAds: () => import("@/components/ads/AdsCompany"),
     Ads: () => import("@/components/ads/Ads"),
+    JobOffers: () => import("@/components/ads/JobOffers"),
     Search: () => import("@/components/global/Search"),
     TopButton: () => import("@/components/global/TopButton"),
   },
