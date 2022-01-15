@@ -120,10 +120,17 @@ const routes = [
   name: 'Company Page',
   component: () => import('../views/company/Profile.vue')
   },
+
 {
   path: '/service/provider/ads',
   name: 'Service Provider Ads page',
   component: () => import('../views/serviceProviders/Anuncios.vue')
+},
+
+{
+  path: '/company/edit/profile',
+  name: 'Company Edit Data',
+  component: () => import('../components/Company/EditData.vue')
 }
 ]
 
