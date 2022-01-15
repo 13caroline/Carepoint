@@ -22,16 +22,6 @@
           <!--<Consultas :animal="dados"></Consultas>-->
           <p> cenx  as3 </p>
         </v-tab-item>
-
-        <v-tab-item>
-          <!--<Cirurgia :animal="dados"></Cirurgia>-->
-          <p> cenas4 </p>
-        </v-tab-item>
-
-        <v-tab-item>
-          <!--<Historico :animal="dados"></Historico> -->
-          <p> cenas5 </p>
-        </v-tab-item>
       </v-tabs-items>
     </v-container>
     <Foot />

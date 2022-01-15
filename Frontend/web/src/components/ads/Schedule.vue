@@ -1,33 +1,26 @@
 <template>
-  <v-row>
-    <v-col>
+<div>
+  <div>
       <v-sheet height="64">
-        <v-toolbar flat>
+
           <v-spacer></v-spacer>
-          <v-menu bottom right>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
-                <span>{{ cat[type] }}</span>
-                <v-icon right> mdi-menu-down </v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-toolbar>
+          <v-select
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Categoria"
+            outlined
+            dense
+            color="#78C4D4"
+            :items="dados"
+            item-text="name"
+            item-value="id"
+            hide-details
+            @change="categorySchedule"
+          ></v-select>
+
       </v-sheet>
+  </div>
+  <div>
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
@@ -42,8 +35,8 @@
           <template v-slot:day-label-header="{}">-</template>
         </v-calendar>
       </v-sheet>
-    </v-col>
-  </v-row>
+    </div>
+</div>
 </template>
 
 <script>
@@ -51,6 +44,7 @@ import moment from "moment";
 export default {
   props: ["dados"],
   data: () => ({
+    search: "",
     today: "2022-01-03",
     events: [],
     start: null,
@@ -68,13 +62,11 @@ export default {
     getEventColor(event) {
       return event.occupied == 0 ? "#78C4D4" : "#BDBDBD";
     },
-  },
-  created() {
-      for (var j = 0; j < this.dados.length; j++) {
-        this.cat.push(this.dados[j].name);
-      }
+    categorySchedule(value) {
+      this.events = [];
+      var found = this.dados.find((e) => e.name === value);
 
-      let schedule = this.dados[0].workSchedule;
+      let schedule = found.workSchedule;
       for (var i = 0; i < schedule.length; i++) {
         let state = schedule[i].occupied == 0 ? "Livre" : "Preenchido";
 
@@ -85,7 +77,22 @@ export default {
           name: state,
         });
       }
-    
+    },
+  },
+  created() {
+    for (var j = 0; j < this.dados.length; j++) {
+      let schedule = this.dados[j].workSchedule;
+      for (var i = 0; i < schedule.length; i++) {
+        let state = schedule[i].occupied == 0 ? "Livre" : "Preenchido";
+
+        this.events.push({
+          start: schedule[i].date,
+          occupied: schedule[i].occupied,
+          end: moment(schedule[i].date).add(30, "m").format("YYYY-MM-DD HH:mm"),
+          name: state,
+        });
+      }
+    }
   },
 };
 </script>

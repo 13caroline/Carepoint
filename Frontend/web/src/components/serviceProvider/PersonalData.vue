@@ -278,6 +278,9 @@
                         <p class="infos mb-0">Categorias</p>
                       </v-col>
                       <v-col>
+                        <span v-for="(c, index) in categories" :key="index"> {{c.nameC}}
+                          <span v-if="index != categories.length - 1">| </span>
+                        </span> 
                         <!--<p v-for="(c,index) in categories" :key="index" class="respos mb-0">nameC</p> -->
                       </v-col>
                     </v-row>
