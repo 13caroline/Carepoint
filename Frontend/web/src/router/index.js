@@ -48,14 +48,6 @@ const routes = [
     name: 'Subscription',
     component: () => import(/* webpackChunkName: "about" */ '../views/subscription/Subscription.vue')
   },
-
-  // Consumer data
-  {
-    path: '/consumer/profile',
-    name: 'profile',
-    component: () => import('../views/global/Profile.vue')
-  },
-
  
   {
     path: '/edit/profile',
@@ -69,8 +61,14 @@ const routes = [
   },
   
 
-
   //------------------------------------- CONSUMER -------------------------------------
+
+   // Consumer data
+   {
+    path: '/consumer/profile',
+    name: 'profile',
+    component: () => import('../views/consumer/Profile.vue')
+  },
 
   // Become a Service Provider
   {
@@ -82,23 +80,25 @@ const routes = [
   // Consumer's page
   {
     path: '/page',
-    name: 'Consumer Profile',
+    name: 'Consumer Main Page',
     component: () => import(/* webpackChunkName: "about" */'../views/consumer/Homepage.vue')
   },
 
   // Consumer's advertisements
   {
     path: '/my/advertisements',
-    name: 'My advertisements',
+    name: 'Consumer Advertisements',
     component: () => import('../views/consumer/MyAdvertisements')
   },
 
   // Post an ad
   {
     path: '/post/ad',
-    name: 'Post Ad',
+    name: 'Consumer Post Ad',
     component: () => import('../views/consumer/PostAd.vue')
   },
+
+  //------------------------------------- SERVICE PROVIDER -------------------------------------
 
   // Service Providers profile
   {
@@ -114,6 +114,14 @@ const routes = [
   component: () => import('../views/subscription/RenewSubscription.vue')
   },
 
+  {
+    path: '/service/provider/ads',
+    name: 'Service Provider Ads page',
+    component: () => import('../views/serviceProviders/Anuncios.vue')
+  },
+
+  //------------------------------------- COMPANY -------------------------------------
+
   // Company profile
   {
   path: '/company/page',
@@ -121,17 +129,11 @@ const routes = [
   component: () => import('../views/company/Profile.vue')
   },
 
-{
-  path: '/service/provider/ads',
-  name: 'Service Provider Ads page',
-  component: () => import('../views/serviceProviders/Anuncios.vue')
-},
-
-{
-  path: '/company/edit/profile',
-  name: 'Company Edit Data',
-  component: () => import('../components/Company/EditData.vue')
-}
+  {
+    path: '/company/edit/profile',
+    name: 'Company Edit Data',
+    component: () => import('../components/Company/EditData.vue')
+  }
 ]
 
 const router = new VueRouter({

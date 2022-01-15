@@ -68,10 +68,10 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos">Sexo</p>
+                        <p class="infos mb-0">Sexo</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{ user.sex }}</p>
+                        <p class="respos mb-0">{{ user.sex }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -195,8 +195,7 @@ export default {
     },
   },
   created: async function () {
-
-try {
+    try {
       let response = await axios.post("http://localhost:9040/users/perfil", {
         token: store.getters.token,
       });

@@ -1,26 +1,24 @@
 <template>
-<div>
   <div>
+    <div>
       <v-sheet height="64">
-
-          <v-spacer></v-spacer>
-          <v-select
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Categoria"
-            outlined
-            dense
-            color="#78C4D4"
-            :items="dados"
-            item-text="name"
-            item-value="id"
-            hide-details
-            @change="categorySchedule"
-          ></v-select>
-
+        <v-spacer></v-spacer>
+        <v-select
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Categoria"
+          outlined
+          dense
+          color="#78C4D4"
+          :items="dados"
+          item-text="name"
+          item-value="id"
+          hide-details
+          @change="categorySchedule"
+        ></v-select>
       </v-sheet>
-  </div>
-  <div>
+    </div>
+    <div>
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
@@ -36,7 +34,7 @@
         </v-calendar>
       </v-sheet>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -54,6 +52,7 @@ export default {
     weekday: [1, 2, 3, 4, 5, 6, 0],
     type: "",
     cat: [],
+    schedules: {}
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -79,6 +78,7 @@ export default {
       }
     },
   },
+  
   created() {
     for (var j = 0; j < this.dados.length; j++) {
       let schedule = this.dados[j].workSchedule;
@@ -94,6 +94,7 @@ export default {
       }
     }
   },
+  
 };
 </script>
 
