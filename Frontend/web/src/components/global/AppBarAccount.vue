@@ -99,7 +99,8 @@ export default {
         case "Perfil":
           if(store.getters.tipo==2)
           this.$router.push("/consumer/profile");
-          else  this.$router.push("/service/provider/page");
+          else  if(store.getters.tipo==3) this.$router.push("/service/provider/page");
+          else this.$router.push("/company/page")
           break;
         case "Publicar anúncio":
           this.$router.push("/post/ad");

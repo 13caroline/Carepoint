@@ -118,8 +118,8 @@ DELIMITER ;
 
 -- Update: company info
 DELIMITER &&  
-CREATE PROCEDURE update_company (IN idUser INT, IN in_name VARCHAR(100), IN in_email VARCHAR(90), IN in_location INT, IN in_phoneNumber VARCHAR(45), 
-	IN in_link VARCHAR(1000), IN in_firm VARCHAR(100), IN in_nipc INT)  
+CREATE PROCEDURE update_company (IN idUser INT, IN in_name VARCHAR(100), IN in_email VARCHAR(90),IN in_phoneNumber VARCHAR(45), IN in_location INT, 
+	IN in_link VARCHAR(1000), IN in_firm VARCHAR(100), IN in_nipc INT, IN in_description VARCHAR(2000))  
 BEGIN  
     SET foreign_key_checks = 0;
 	UPDATE pi.user INNER JOIN company ON user.idUser = company.idCompany SET
@@ -163,6 +163,16 @@ BEGIN
 		WHERE user.idUser = idUser AND user.type = 4;
         SET foreign_key_checks = 1;
         
+        SET foreign_key_checks = 0;
+        
+	UPDATE pi.user INNER JOIN pi.add ON user.idUser = pi.add.idCompany SET
+		pi.add.description= CASE 
+					WHEN in_description IS NOT NULL 
+                    THEN in_description
+                    ELSE pi.add.description
+                    END
+		WHERE user.idUser = idUser AND user.type = 4;
+        SET foreign_key_checks = 1;
 END &&  
 DELIMITER ;
 

@@ -45,7 +45,7 @@ router.post('/', auth.validToken, (req, res) => {
                 console.log(value)
                 if( value ){
                     Review.addNewReview(req.body.description, req.body.rating, user.idUser, receivingId)
-                    .then((res) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
+                    .then((dt) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
                     .catch((err) => res.status(500).jsonp({error: err}))
                 }else{
                     res.status(500).jsonp({error: "Já existe review com este par de ID's"})
