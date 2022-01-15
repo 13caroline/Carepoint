@@ -260,17 +260,21 @@ export default {
     created: async function () {
       console.log("Entra")
       try {
+        console.log("ola")
         let response = await axios.get("http://localhost:9040/location");
         if (response) {
           this.loc = response.data;
+          console.log(this.loc)
         }
       } catch (e) {
         console.log(e);
       }
 
       try {
+        console.log("bye")
         let response2 = await axios.get("http://localhost:9040/category");
         if (response2) {
+          console.log(response2.data)
           this.cat = response2.data;
         }
       } catch (e) {

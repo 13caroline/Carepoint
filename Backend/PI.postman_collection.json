@@ -53,13 +53,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Iroha Oshi",
+									"value": "Iroha Kazama",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_3@gmail.com",
+									"value": "theUserTestingEmail_11@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1688,6 +1688,61 @@
 									"path": [
 										"users",
 										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upgrade to Service Provider (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MjI2OTA2OSwiZXhwIjoxNjQyMjcyNjY5fQ.exQBuGarlrS6DVh5Hq9h_p3ukcqhcResM6Mac50DjQw",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "we null",
+											"type": "text"
+										},
+										{
+											"key": "dateOfBirth",
+											"value": "2020-01-09",
+											"type": "text"
+										},
+										{
+											"key": "distance",
+											"value": "14578",
+											"type": "text"
+										},
+										{
+											"key": "qualifications",
+											"value": "sleep, forgetfullness",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/upgrade",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"upgrade"
 									]
 								}
 							},

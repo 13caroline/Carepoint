@@ -101,7 +101,7 @@
       </v-col>
       <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <schedule :dados="serviceProvider.categories"/>
+        <schedule v-if="serviceProvider" :dados="serviceProvider.categories"/>
       </v-col>
     </v-row>
 

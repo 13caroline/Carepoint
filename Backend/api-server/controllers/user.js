@@ -137,3 +137,10 @@ Out.getPerfilCP = (email) => {
 Out.remove = (id) => {
     return User.destroy({ where: { 'idUser': id } });
 }
+
+Out.changeType = (email) => {
+    return User.update(
+        {type: 3},
+        {where: { 'email' : email}}
+    )
+}
