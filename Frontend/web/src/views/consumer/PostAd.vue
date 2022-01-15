@@ -123,7 +123,6 @@
                     item-value="idCategory"
                     item-text="name"
                     v-model="category"
-                    multiple
                     small-chips
                     required
                   ></v-autocomplete>
@@ -229,6 +228,7 @@ export default {
 
     postAd: async function () {
       if (this.$refs.form.validate()) {
+        console.log(this.category)
         try {
           await axios.post("http://localhost:9040/joboffer/new", {
             token: store.getters.token,
@@ -257,29 +257,25 @@ export default {
         }
       }
     },
-    created: async function () {
-      try {
-        console.log("ola")
-        let response = await axios.get("http://localhost:9040/location");
-        if (response) {
-          this.loc = response.data;
-          console.log(this.loc)
-        }
-      } catch (e) {
-        console.log(e);
+  },
+  created: async function () {
+    try {
+      let response = await axios.get("http://localhost:9040/location");
+      if (response) {
+        this.loc = response.data;
       }
+    } catch (e) {
+      console.log(e);
+    }
 
-      try {
-        console.log("bye")
-        let response2 = await axios.get("http://localhost:9040/category");
-        if (response2) {
-          console.log(response2.data)
-          this.cat = response2.data;
-        }
-      } catch (e) {
-        console.log(e);
+    try {
+      let response2 = await axios.get("http://localhost:9040/category");
+      if (response2) {
+        this.cat = response2.data;
       }
-    },
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>

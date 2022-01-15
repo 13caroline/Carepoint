@@ -149,7 +149,6 @@ export default {
         let response = await axios.post("http://localhost:9040/joboffer/own", {
           token: store.getters.token,
         });
-        console.log(response.data);
         this.ads = response.data;
       } catch (e) {
         this.$snackbar.showMessage({

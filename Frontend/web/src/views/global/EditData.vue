@@ -52,13 +52,20 @@
                     <v-row class="mx-auto">
                       <v-col>
                         <span>Localização</span>
-                        <v-text-field
+                        <v-autocomplete
                           outlined
+                          flat
                           dense
-                          color="#2596be"
-                          :rules="textRules"
                           v-model="user.locationName"
-                        ></v-text-field>
+                          single-line
+                          :items="loc"
+                          item-value="idLocation"
+                          item-text="name"
+                          :rules="[(v) => !!v || 'Localização obrigatória']"
+                          color="#78C4D4"
+                          name="location"
+                          required
+                        />
                       </v-col>
 
                       <v-col v-if="$store.state.tipo == '3'">
@@ -199,6 +206,7 @@ import store from "@/store/index.js";
 export default {
   data: () => ({
     user: {},
+    loc: [],
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;
@@ -242,22 +250,21 @@ export default {
       if (this.$refs.form.validate()) {
         try {
           if (store.getters.tipo == "2") {
-            let response = await axios.put(
+            await axios.put(
               "http://localhost:9040/users/update",
               {
                 token: store.getters.token,
                 name: this.user.name,
                 email: this.user.email,
                 type: store.getters.tipo.toString(),
-                location: 1,
+                location: this.user.locationName,
                 phoneNumber: this.user.phoneNumber,
                 idUser: this.user.idUser,
               }
             );
-            console.log(response);
             this.$router.push("/consumer/profile");
           } else if (store.getters.tipo == "3") {
-            let response = await axios.put(
+            await axios.put(
               "http://localhost:9040/users/update",
               {
                 token: store.getters.token,
@@ -272,7 +279,6 @@ export default {
                 qualifications: this.user.qualifications,
               }
             );
-            console.log(response);
             this.$router.push("/service/provider/page");
           }
           this.$snackbar.showMessage({
@@ -312,10 +318,15 @@ export default {
         token: store.getters.token,
       });
       this.user = response.data.perfil[0];
-      console.log(response.data);
+
       if (this.user.sex == "M") this.user.sex = "Masculino";
       else if (this.user.sex == "F") this.user.sex = "Feminino";
       else this.user.sex = "Indefinido";
+
+      let response2 = await axios.get("http://localhost:9040/location");
+      if (response2) {
+        this.loc = response2.data;
+      }
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,
