@@ -10,7 +10,7 @@
               color="#78C4D4"
               outlined
               dark
-              to="/consumer/edit/profile"
+              to="/edit/profile"
             >
               Editar dados
               <v-icon small class="ml-2">fas fa-pen</v-icon>
@@ -245,6 +245,16 @@
                   <div>
                     <v-row>
                       <v-col>
+                        <p class="infos">Raio de atividade</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{user.distance}} km</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
                         <p class="infos">Descrição</p>
                       </v-col>
                       <v-col>
@@ -258,7 +268,7 @@
                         <p class="infos">Qualificações</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{user.description}}</p>
+                        <p class="respos">{{user.qualifications}}</p>
                       </v-col>
                     </v-row>
                   </div>

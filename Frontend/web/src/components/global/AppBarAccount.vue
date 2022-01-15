@@ -105,7 +105,8 @@ export default {
           this.$router.push("/post/ad");
           break;
         case "Anúncios":
-          this.$router.push("/page");
+           if(store.getters.tipo==2) this.$router.push("/page");
+           else if(store.getters.tipo==3) this.$router.push("/service/provider/ads")
           break;
         case "Terminar Sessão":
           this.logout();

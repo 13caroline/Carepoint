@@ -1,7 +1,7 @@
 # CarePoint 
 
 <p align="center">
-  <img src="https://github.com/RicardoJSFerreira/PI/blob/main/Frontend/web/src/assets/logo.png" height="150" width="200" >
+  <img src="https://github.com/RicardoJSFerreira/PI/blob/main/Frontend/web/src/assets/logo.png" height="150" width="350" >
 </p>
 
 Within the curricular unit of **IT Project**, the development of a startup was proposed, in order to understand and learn the process of starting a business, from the creation of an idea and carrying out the value proposition, to its development and application.

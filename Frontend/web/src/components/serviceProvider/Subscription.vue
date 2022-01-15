@@ -20,7 +20,7 @@
               color="#78C4D4"
               outlined
               dark
-              to="/consumer/edit/profile"
+              to="/edit/profile"
             >
               Cancelar subscrição
               <v-icon small class="ml-2">fas fa-times</v-icon>
