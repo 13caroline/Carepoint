@@ -1995,6 +1995,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get company info (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/company/specific/?id=151",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"company",
+										"specific",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "151"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
