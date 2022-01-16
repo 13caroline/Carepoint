@@ -225,7 +225,7 @@ router.put('/updatePassword', auth.validToken, (req, res, next) => {
 })
 
 //auth.matchUsers,
-router.put('/updatePhoto', upload.single('image'), auth.validToken,(req, res, next) => {
+router.put('/updatePhoto', upload.single('image'), auth.validToken, (req, res) => {
     var email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((usr) => {
