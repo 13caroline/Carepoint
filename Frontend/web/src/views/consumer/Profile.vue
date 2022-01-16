@@ -5,7 +5,7 @@
       <v-card flat>
         <v-row>
           <v-col cols="auto" class="ml-auto">
-            <image-upload :id="user.idUser"/>
+            <image-upload :id="user.idUser" @clicked="uploaded()" />
             <v-btn
               class="body-2 rounded-xl button"
               small
@@ -194,27 +194,36 @@ export default {
       this.$router.push("/consumer/become/service/provider");
     },
     processImage(img) {
-      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      );
+    },
+    uploaded() {
+      this.atualiza();
+    },
+    atualiza: async function () {
+      try {
+        let response = await axios.post("http://localhost:9040/users/perfil", {
+          token: store.getters.token,
+        });
+        this.user = response.data.perfil[0];
+
+        if (this.user.sex == "M") this.user.sex = "Masculino";
+        else if (this.user.sex == "F") this.user.sex = "Feminino";
+        else this.user.sex = "Indefinido";
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
     },
   },
   created: async function () {
-    try {
-      let response = await axios.post("http://localhost:9040/users/perfil", {
-        token: store.getters.token,
-      });
-      this.user = response.data.perfil[0];
-
-    if (this.user.sex == "M") this.user.sex = "Masculino";
-      else if (this.user.sex == "F") this.user.sex = "Feminino";
-      else this.user.sex = "Indefinido";
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.atualiza();
   },
 };
 </script>

@@ -34,12 +34,12 @@
               @change="onFileChange"
             />-->
             <input
-                type="file"
-                id="file"
-                ref="file"
-                v-on:change="handleFileUpload()"
-                :rules="rules"
-              />
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+              :rules="rules"
+            />
           </div>
           <div>
             <span>Preview</span>
@@ -63,7 +63,7 @@
                 required
                 type="submit"
                 @click="upload()"
-                :disabled="!file"
+                :disabled="!valid"
                 >Confirmar</v-btn
               >
             </v-col>
@@ -75,21 +75,26 @@
 </template>
 
 <script>
-import axios from "axios"; 
-import store from "@/store/index.js"
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
   props: ["id"],
   name: "upload-image",
   data() {
     return {
       dialog: false,
+      valid: false, 
       image: null,
-      file: "", 
+      file: "",
       imageUrl: "",
-      cancelar: { title: "a alteração da sua fotografia", text: "a alteração da sua fotografia" },
+      cancelar: {
+        title: "a alteração da sua fotografia",
+        text: "a alteração da sua fotografia",
+      },
       rules: [
-      files => !files || !files.some(file => file.size > 102400) || 'Avatar size should be less than 100 KB!'
-    ],
+        (file) =>
+          !file || (file.size > 102400) || "Avatar size should be less than 100 KB!",
+      ],
     };
   },
   components: {
@@ -104,51 +109,57 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    onFileChange(file) {
-      if (!file) {
-        return;
-      }
-      this.createImage(file);
-    },
     close() {
-        this.imageUrl = "";
-        this.image = null;
-        this.dialog = false;
+      this.imageUrl = "";
+      this.image = null;
+      this.dialog = false;
     },
-     handleFileUpload() {
+    handleFileUpload() {
       this.file = this.$refs.file.files[0];
-      this.url = URL.createObjectURL(this.file);
+
+      if (this.file.size < 102400){
+        this.url = URL.createObjectURL(this.file);
+        this.createImage(this.file);
+        this.valid = true; 
+      }
+      else{
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "A fotografia ultrapassa o limite de tamanho!",
+          timeout: 4000,
+        });
+      }
     },
     upload: async function () {
       let formData = new FormData();
-      
 
-      formData.append("idUser", this.id);
-      formData.append("image", this.file); 
+      formData.append("token", store.getters.token);
+      formData.append("image", this.file);
 
-        try {
-          let response = await axios.put("http://localhost:9040/users/updatePhoto", {
-            formData, 
-            token: store.getters.token
-          });
-          console.log(response);
-          this.dialog = false; 
-
-          this.$snackbar.showMessage({
-            show: true,
-            text: "Imagem atualizada com sucesso.",
-            color: "success",
-            snackbar: true,
-            timeout: 4000,
-          });
-        } catch (e) {
-          console.log(e);
-          this.$snackbar.showMessage({
-            show: true,
-            color: "warning",
-            text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
-            timeout: 4000,
-          });
+      try {
+        await axios.put(
+          "http://localhost:9040/users/updatePhoto",
+          formData,
+          {}
+        );
+        this.dialog = false;
+        this.$emit("clicked", "uploaded");
+        this.$snackbar.showMessage({
+          show: true,
+          text: "Imagem atualizada com sucesso.",
+          color: "success",
+          snackbar: true,
+          timeout: 4000,
+        });
+      } catch (e) {
+        console.log(e);
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
+          timeout: 4000,
+        });
       }
     },
   },

@@ -17,103 +17,156 @@
           </v-btn>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col
-          cols="auto"
-          lg="6"
-          md="6"
-          class="mx-auto mx-sm-0"
-          v-for="(a, index) in ads"
-          :key="index"
-        >
-          <v-card class="h-100 mt-5" outlined>
-            <v-card-text>
-              <v-row>
-                <v-col class="pb-0" align="right" cols="">
-                  <span class="text-uppercase">Data</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong> {{ a.beginDate }} até {{ a.endDate }} </strong>
-                  </span>
-                </v-col>
-
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Categoria</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong> {{a.categoryName}} </strong>
-                  </span>
-                  <br />
-                  <span> Apoio a idosos </span>
-                </v-col>
-
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Localização</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong>{{ a.locationName }}</strong>
-                  </span>
-                </v-col>
-
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Valor</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <span class="black--text">
-                    <strong>{{ a.price }} €/hora</strong>
-                  </span>
-                </v-col>
-
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">estado</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <v-chip :color="estado(a.done)" small>
-                    {{ getState(a.done) }}
-                  </v-chip>
-                </v-col>
-              </v-row>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-
-              <v-tooltip top>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn icon @click="conclude(a.idJobOffer)" :disabled="a.done==1">
-                    <v-icon color="#66BB6A" dark v-bind="attrs" v-on="on">
-                      mdi-calendar-check
-                    </v-icon>
-                  </v-btn>
-                </template>
-                <span>Concluir</span>
-              </v-tooltip>
-
-              <v-tooltip top>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" icon @click="show = !show">
-                    <v-icon>{{
-                      show ? "mdi-chevron-up" : "mdi-chevron-down"
-                    }}</v-icon>
-                  </v-btn>
-                </template>
-                <span>Ver descrição</span>
-              </v-tooltip>
-            </v-card-actions>
-            <v-expand-transition>
-              <div v-show="show">
-                <v-divider></v-divider>
-
+      <v-data-iterator
+        v-if="ads.length"
+        :items="ads"
+        :items-per-page.sync="itemsPerPage"
+        :page.sync="page"
+        :sort-desc="sortDesc"
+        hide-default-footer
+        @page-count="pageCount == $event"
+        no-data-text="Não existem anúncios publicados."
+        no-results-text="Não foram encontrados resultados."
+      >
+        <template v-slot:default="props">
+          <v-row>
+            <v-col
+              cols="auto"
+              lg="6"
+              md="6"
+              class="mx-auto mx-sm-0"
+              v-for="(a, index) in props.items"
+              :key="index"
+            >
+              <v-card class="h-100 mt-5" outlined>
                 <v-card-text>
-                  {{ a.description }}
+                  <v-row>
+                    <v-col class="pb-0" align="right" cols="">
+                      <span class="text-uppercase">Data</span>
+                    </v-col>
+                    <v-col class="pl-0 pb-0" cols="7">
+                      <span class="black--text">
+                        <strong> {{ a.beginDate }} até {{ a.endDate }} </strong>
+                      </span>
+                    </v-col>
+
+                    <v-col class="pb-0" align="right" cols="5">
+                      <span class="text-uppercase">Categoria</span>
+                    </v-col>
+                    <v-col class="pl-0 pb-0" cols="7">
+                      <span class="black--text">
+                        <strong> {{ a.categoryName }} </strong>
+                      </span>
+                      <br />
+                      <span> Apoio a idosos </span>
+                    </v-col>
+
+                    <v-col class="pb-0" align="right" cols="5">
+                      <span class="text-uppercase">Localização</span>
+                    </v-col>
+                    <v-col class="pl-0 pb-0" cols="7">
+                      <span class="black--text">
+                        <strong>{{ a.locationName }}</strong>
+                      </span>
+                    </v-col>
+
+                    <v-col class="pb-0" align="right" cols="5">
+                      <span class="text-uppercase">Valor</span>
+                    </v-col>
+                    <v-col class="pl-0 pb-0" cols="7">
+                      <span class="black--text">
+                        <strong>{{ a.price }} €/hora</strong>
+                      </span>
+                    </v-col>
+
+                    <v-col class="pb-0" align="right" cols="5">
+                      <span class="text-uppercase">estado</span>
+                    </v-col>
+                    <v-col class="pl-0 pb-0" cols="7">
+                      <v-chip :color="estado(a.done)" small>
+                        {{ getState(a.done) }}
+                      </v-chip>
+                    </v-col>
+                  </v-row>
                 </v-card-text>
-              </div>
-            </v-expand-transition>
-          </v-card>
-        </v-col>
-      </v-row>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        icon
+                        @click="conclude(a.idJobOffer)"
+                        :disabled="a.done == 1"
+                      >
+                        <v-icon color="#66BB6A" dark v-bind="attrs" v-on="on">
+                          mdi-calendar-check
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Concluir</span>
+                  </v-tooltip>
+
+                  <v-tooltip top>
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn
+                        v-bind="attrs"
+                        v-on="on"
+                        icon
+                        @click="show = !show"
+                      >
+                        <v-icon>{{
+                          show ? "mdi-chevron-up" : "mdi-chevron-down"
+                        }}</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Ver descrição</span>
+                  </v-tooltip>
+                </v-card-actions>
+                <v-expand-transition>
+                  <div v-show="show">
+                    <v-divider></v-divider>
+
+                    <v-card-text>
+                      {{ a.description }}
+                    </v-card-text>
+                  </div>
+                </v-expand-transition>
+              </v-card>
+            </v-col>
+          </v-row>
+        </template>
+      </v-data-iterator>
+      <small v-else> <em> não existem anúncios publicados </em></small>
+
+    <v-row class="mt-4" align="center" justify="center" v-if="ads.length">
+      <v-btn
+        fab
+        dark
+        x-small
+        depressed
+        color="#78C4D4"
+        class="mr-1"
+        @click="formerPage"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn
+        fab
+        dark
+        x-small
+        depressed
+        color="#78C4D4"
+        class="ml-1"
+        @click="nextPage"
+      >
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+    </v-row>
+
+    <v-row class="mt-5" align="center" justify="center" v-if="ads.length">
+      <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
+    </v-row>
     </v-container>
     <Foot />
   </div>
@@ -127,6 +180,10 @@ export default {
     return {
       show: false,
       ads: [],
+      pageCount: 0,
+      page: 1,
+      itemsPerPage: 9,
+      total: 0,
     };
   },
   components: {
@@ -135,13 +192,21 @@ export default {
   },
 
   methods: {
-     getState(done){
-       if(done==1) return "Não ativo"
-       else return "Ativo"
-     },
+    getState(done) {
+      if (done == 1) return "Não ativo";
+      else return "Ativo";
+    },
     estado(item) {
-      if (item == 0 ) return "#C5E1A5";
+      if (item == 0) return "#C5E1A5";
       else return "#EF9A9A";
+    },
+    nextPage() {
+      if (this.page + 1 <= this.numberOfPages) this.page += 1;
+      this.getData();
+    },
+    formerPage() {
+      if (this.page - 1 >= 1) this.page -= 1;
+      this.getData();
     },
     update: async function () {
       this.ads = [];
@@ -150,6 +215,7 @@ export default {
           token: store.getters.token,
         });
         this.ads = response.data;
+        this.total = this.ads.length;
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -161,15 +227,12 @@ export default {
     },
     conclude: async function (id) {
       try {
-        await axios.put(
-          "http://localhost:9040/joboffer/conclude",
-          {
-            token: store.getters.token,
-            id_job_offer: id,
-          }
-         
-        );
-         this.update();
+        await axios.put("http://localhost:9040/joboffer/conclude", {
+          token: store.getters.token,
+          id_job_offer: id,
+        });
+        this.update();
+        
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -182,6 +245,11 @@ export default {
   },
   created: async function () {
     this.update();
+  },
+  computed: {
+    numberOfPages() {
+      return Math.ceil(this.total / this.itemsPerPage);
+    },
   },
 };
 </script>
