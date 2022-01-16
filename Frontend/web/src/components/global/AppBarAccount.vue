@@ -34,7 +34,7 @@
                   >Anúncios</v-list-item-title
                 >
               </v-list-item>
-               <v-list-item>
+               <v-list-item v-if="$store.state.tipo != '4'">
                 <v-list-item-title
                   class="menuOpcao"
                   @click="processClick('Meus anúncios')"
@@ -48,7 +48,7 @@
                   >Perfil</v-list-item-title
                 >
               </v-list-item>
-               <v-list-item>
+               <v-list-item v-if="$store.state.tipo != '4'">
                 <v-list-item-title
                   class="menuOpcao"
                   @click="processClick('Publicar anúncio')"
@@ -99,24 +99,26 @@ export default {
         case "Perfil":
           if(store.getters.tipo==2)
           this.$router.push("/consumer/profile");
-          else if(store.getters.tipo==3) this.$router.push("/service/provider/page");
+          else  if(store.getters.tipo==3) this.$router.push("/service/provider/page");
+          else this.$router.push("/company/page")
           break;
         case "Publicar anúncio":
           this.$router.push("/post/ad");
           break;
         case "Anúncios":
-          this.$router.push("/consumer/page");
+           if(store.getters.tipo==2) this.$router.push("/page");
+           else if(store.getters.tipo==3) this.$router.push("/service/provider/ads")
           break;
         case "Terminar Sessão":
           this.logout();
           this.$router.push("/");
           break;
         case "Meus anúncios":
-          this.$router.push("/consumer/my/advertisements");
+          this.$router.push("/my/advertisements");
       }
     },
     goToMainPage() {
-      this.$router.push("/consumer/page");
+      this.$router.push("/page");
     },
     logout: async function () {
       try {

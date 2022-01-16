@@ -10,7 +10,7 @@
             </h3>
           </v-row>
           <v-row class="w-100">
-            <p class="body-2 pb-5">Por favor preencha o seguinte formulário</p>
+            <p class="body-2 pb-5">Por favor preencha o seguinte formulário.</p>
           </v-row>
 
           <v-form ref="form" v-model="valid">
@@ -32,7 +32,7 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="description"
+                  v-model="form.description"
                 ></v-textarea>
               </v-col>
             </v-row>
@@ -78,15 +78,18 @@
             <v-row>
               <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Localização *</span>
-                <v-text-field
+                <v-autocomplete
                   outlined
                   flat
                   dense
+                  v-model="user.locationName"
                   single-line
-                  color="#78C4D4"
-                  name="localization"
-                  v-model="localization"
+                  :items="loc"
+                  item-value="idLocation"
+                  item-text="name"
                   :rules="textRules"
+                  color="#78C4D4"
+                  name="location"
                   required
                 />
               </v-col>
@@ -96,7 +99,7 @@
                   outlined
                   flat
                   dense
-                  v-model="radius"
+                  v-model="form.radius"
                   single-line
                   color="#78C4D4"
                   name="raius"
@@ -119,11 +122,36 @@
                   color="#78C4D4"
                   required
                   :rules="textRules"
-                  v-model="qualification"
+                  v-model="form.qualification"
                 ></v-textarea>
               </v-col>
             </v-row>
 
+            <h3 class="mt-6 group font-weight-light text-uppercase">
+              Dados Contacto
+            </h3>
+            <v-row>
+              <v-divider class="mt-4 mb-4 divider"></v-divider>
+            </v-row>
+            <v-row>
+              <v-col class="py-0">
+                <span>Contacto Telefónico *</span>
+                <v-text-field
+                  prefix="+351"
+                  outlined
+                  flat
+                  dense
+                  single-line
+                  color="#78C4D4"
+                  name="contact"
+                  v-model="user.phoneNumber"
+                  maxlength="9"
+                  :rules="numberRules"
+                  required
+                  v-on:keypress="isNumber($event)"
+                />
+              </v-col>
+            </v-row>
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
@@ -161,6 +189,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
   name: "BecomeSP",
   data() {
@@ -168,16 +198,24 @@ export default {
       menu: false,
       termos: false,
       dialogs: {},
+      cancelar: { title: "o seu registo", text: "o seu registo" },
       valid: false,
       date: new Date().toISOString().substr(0, 10),
-      cancelar: { title: "o seu registo", text: "o seu registo" },
       textRules: [(v) => !!v || "Campo inválido"],
-      name: "",
-      contact: "",
-      localization: "",
-      radius: 0,
-      qualification: "",
-      description: "",
+      numberRules: [
+        (v) => {
+          const pattern = /^[0-9]{9}$/;
+          return pattern.test(v) || "Campo inválido. Insira 9 dígitos.";
+        },
+      ],
+      form: {
+        location: "",
+        radius: "",
+        qualification: "",
+        description: "",
+      },
+      loc: [],
+      user: {},
     };
   },
   components: {
@@ -192,6 +230,29 @@ export default {
     goToSub() {
       this.$router.push("/register/subscription");
     },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
+    },
+  },
+  created: async function () {
+    try {
+      let response = await axios.post("http://localhost:9040/users/perfil", {
+        token: store.getters.token,
+      });
+  
+      this.user = response.data.perfil[0];
+      console.log(this.user)
+
+
+      let response2 = await axios.get("http://localhost:9040/location");
+      if (response2) {
+        this.loc = response2.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>

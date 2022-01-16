@@ -44,7 +44,12 @@
               <span>{{ a.name }}</span>
             </v-tooltip>
 
-            <span class="font-weight-bold ml-2">{{ a.experience }} anos</span>
+            <span class="font-weight-bold ml-2" v-if="a.experience == 0">
+              {{ noExp }}
+            </span>
+            <span class="font-weight-bold ml-2" v-else>
+              {{ a.experience }} anos
+            </span>
           </v-col>
         </v-row><!-- descricao da ad do prestador
         <div>
@@ -100,7 +105,7 @@
       <v-col cols="12" md="2" sm>
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
-          <v-icon color="#FFE082" small>fas fa-star</v-icon>
+          <v-icon color="#FFE082" class="mb-1" small>fas fa-star</v-icon>
           <span class="font-weight-bold ma-2">{{
             serviceProviderData.averageRating
           }}</span>
@@ -108,7 +113,7 @@
       </v-col>
       <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <schedule />
+        <schedule v-if="serviceProvider" :dados="serviceProvider.categories"/>
       </v-col>
     </v-row>
 
@@ -137,7 +142,7 @@
       no-results-text="Não foram encontrados resultados."
     >
       <template v-slot:default="props">
-        <v-row >
+        <v-row>
           <v-col
             class="w-100 ma-0"
             v-for="(a, index) in props.items"
@@ -154,7 +159,7 @@
               height="100%"
             >
               <v-row align="center">
-                <v-col cols="12" md="11" sm="11">
+                <v-col cols="12" md="10" sm="10" xs="8">
                   <div>
                     <span class="font-weight-bold">{{
                       formatDate(a.postDate)
@@ -166,9 +171,9 @@
                     </span>
                   </div>
                 </v-col>
-                <v-col cols="12" md="1" sm="1">
+                <v-col cols="12" md="2" sm="2" xs="4">
                   <div class="font-weight-bold ratings">
-                    <v-icon color="warning lighten-1" class="icon mb-1"
+                    <v-icon color="#FFE082" class="icon mb-1"
                       >fas fa-star</v-icon
                     >
                     <span class="ml-1">{{ a.rating }}</span>
@@ -186,7 +191,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="mr-1"
@@ -197,7 +202,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="ml-1"
@@ -222,6 +227,7 @@ export default {
   props: ["id"],
   data() {
     return {
+      noExp: "<1 ano",
       image: "",
       sortDesc: false,
       pageCount: 0,
@@ -277,10 +283,9 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/?id=" + this.id
       );
-      (this.serviceProviderData = response.data.ServiceProvider[0]),
-        (this.serviceProvider = response.data);
+      (this.serviceProviderData = response.data.ServiceProvider[0]);
+      (this.serviceProvider = response.data);
       this.reviews = response.data.reviews.length;
-      console.log(response.data);
       this.image =
         "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
     } catch (e) {
@@ -298,6 +303,8 @@ export default {
 <style scoped>
 .infos {
   color: #797878;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .desc {
   color: #c4c4c4;

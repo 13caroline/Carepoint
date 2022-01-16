@@ -22,6 +22,44 @@
                         ></v-text-field>
                       </v-col>
                     </div>
+                    <!--<div>
+                      <v-col>
+                        <span>Palavra-passe atual</span>
+                        <v-text-field
+                          type="password"
+                          
+                          outlined
+                          dense
+                          v-model="user.password"
+                        ></v-text-field>
+                      </v-col>
+                    </div>-->
+                    <!--<div>
+                      <v-row class="mx-auto">
+                        <v-col cols="12" md="6">
+                          <span>Nova palavra-passe</span>
+                          <v-text-field
+                            type="password"
+                            :rules="passwordRules"
+                            placeholder="*****"
+                            outlined
+                            dense
+                            v-model="password"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <span>Repetir nova palavra-passe</span>
+                          <v-text-field
+                            type="password"
+                            placeholder="*****"
+                            outlined
+                            dense
+                            :rules="[(this.password === this.npassword) || 'Password must match']"
+                            v-model="npassword"
+                          ></v-text-field>
+                        </v-col>
+                      </v-row>
+                    </div> -->
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -29,7 +67,7 @@
           </v-row>
 
           <h3 class="mt-6 group font-weight-light text-uppercase">
-            Dados Pessoais
+            Dados da empresa
           </h3>
           <v-divider></v-divider>
           <v-row class="w-100" align="start">
@@ -45,51 +83,56 @@
                           dense
                           v-model="user.name"
                           color="#2596be"
-                          :rules="textRules"
                         ></v-text-field>
                       </v-col>
                     </div>
                     <v-row class="mx-auto">
                       <v-col>
-                        <span>Localização</span>
-                        <v-autocomplete
-                          outlined
-                          flat
-                          dense
-                          v-model="user.locationName"
-                          single-line
-                          :items="loc"
-                          item-value="idLocation"
-                          item-text="name"
-                          :rules="[(v) => !!v || 'Localização obrigatória']"
-                          color="#78C4D4"
-                          name="location"
-                          required
-                        />
-                      </v-col>
-
-                      <v-col v-if="$store.state.tipo == '3'">
-                        <span>Raio de atividade</span>
+                        <span>URL</span>
                         <v-text-field
                           outlined
                           dense
                           color="#2596be"
-                          v-model="user.distance"
-                          suffix="km"
-                          type="number"
-                          required
+                          :rules="textRules"
+                          v-model="user.link"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                    <v-row class="mx-auto">
+                      <v-col>
+                        <span>Firma</span>
+                        <v-text-field
+                          outlined
+                          dense
+                          color="#2596be"
+                          :rules="textRules"
+                          v-model="user.firm"
+                        ></v-text-field>
+                      </v-col>
+                    </v-row>
+                    <v-row class="mx-auto">
+                      <v-col>
+                        <span>NIPC</span>
+                        <v-text-field
+                          outlined
+                          maxlength="9"
+                          dense
+                          :rules="numberRules"
+                          color="#2596be"
+                          v-model="user.nipc"
                           v-on:keypress="isNumber($event)"
                         ></v-text-field>
                       </v-col>
-
+                    </v-row>
+                    <v-row class="mx-auto">
                       <v-col>
-                        <span>Sexo</span>
+                        <span>Localização</span>
                         <v-text-field
                           outlined
-                          color="#2596be"
-                          disabled
                           dense
-                          v-model="user.sex"
+                          color="#2596be"
+                          :rules="textRules"
+                          v-model="user.locationName"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -127,7 +170,7 @@
               </v-card>
             </v-col>
           </v-row>
-          <div v-if="$store.state.tipo == '3'">
+          <div >
             <h3 class="mt-6 group font-weight-light text-uppercase">
               Informações
             </h3>
@@ -148,30 +191,8 @@
                           ></v-text-field>
                         </v-col>
                       </div>
-                      <div>
-                        <v-col>
-                          <span>Qualificações</span>
-                          <v-text-field
-                            outlined
-                            dense
-                            color="#2596be"
-                            :rules="textRules"
-                            v-model="user.qualifications"
-                          ></v-text-field>
-                        </v-col>
-                      </div>
-                      <div>
-                        <v-col>
-                          <span>Categorias</span>
-                          <v-text-field
-                            outlined
-                            dense
-                            color="#2596be"
-                            :rules="textRules"
-                            v-model="user.qualifications"
-                          ></v-text-field>
-                        </v-col>
-                      </div>
+                      
+                     
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
@@ -206,7 +227,6 @@ import store from "@/store/index.js";
 export default {
   data: () => ({
     user: {},
-    loc: [],
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;
@@ -249,38 +269,22 @@ export default {
     confirm: async function () {
       if (this.$refs.form.validate()) {
         try {
-          if (store.getters.tipo == "2") {
-            await axios.put(
-              "http://localhost:9040/users/update",
-              {
-                token: store.getters.token,
-                name: this.user.name,
-                email: this.user.email,
-                type: store.getters.tipo.toString(),
-                location: this.user.locationName,
-                phoneNumber: this.user.phoneNumber,
-                idUser: this.user.idUser,
-              }
-            );
-            this.$router.push("/consumer/profile");
-          } else if (store.getters.tipo == "3") {
-            await axios.put(
-              "http://localhost:9040/users/update",
-              {
-                token: store.getters.token,
-                name: this.user.name,
-                email: this.user.email,
-                type: store.getters.tipo.toString(),
-                location: 1,
-                phoneNumber: this.user.phoneNumber,
-                idUser: this.user.idUser,
-                distance: this.user.distance,
-                description: this.user.description,
-                qualifications: this.user.qualifications,
-              }
-            );
-            this.$router.push("/service/provider/page");
-          }
+          let response = await axios.put("http://localhost:9040/users/update", {
+            token: store.getters.token,
+            name: this.user.name,
+            email: this.user.email,
+            type: store.getters.tipo.toString(),
+            location: 1,
+            phoneNumber: this.user.phoneNumber,
+            idUser: this.user.idUser,
+            description: this.user.description,
+            link: this.user.link,
+            firm: this.user.firm,
+            nipc: this.user.nipc,
+          });
+          console.log(response);
+          this.$router.push("/service/provider/page");
+
           this.$snackbar.showMessage({
             show: true,
             text: "Dados atualizados com sucesso.",
@@ -318,15 +322,10 @@ export default {
         token: store.getters.token,
       });
       this.user = response.data.perfil[0];
-
+      console.log(response.data);
       if (this.user.sex == "M") this.user.sex = "Masculino";
       else if (this.user.sex == "F") this.user.sex = "Feminino";
       else this.user.sex = "Indefinido";
-
-      let response2 = await axios.get("http://localhost:9040/location");
-      if (response2) {
-        this.loc = response2.data;
-      }
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

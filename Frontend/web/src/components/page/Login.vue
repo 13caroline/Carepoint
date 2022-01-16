@@ -81,7 +81,7 @@ export default {
             this.$store.commit("guardaTokenUtilizador", res.data.token);
             this.$store.commit("guardaTipoUtilizador", res.data.type);
             if (res.data.type == "2") {
-              this.$router.push("/consumer/page");
+              this.$router.push("/page");
             }
             if(res.data.type == "3") {
               this.$router.push("/service/provider/page")

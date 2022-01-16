@@ -34,7 +34,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong> {{ a.beginDate }} - {{ a.endDate }} </strong>
+                    <strong> {{ a.beginDate }} até {{ a.endDate }} </strong>
                   </span>
                 </v-col>
 
@@ -43,7 +43,7 @@
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong> Catcat </strong>
+                    <strong> {{a.categoryName}} </strong>
                   </span>
                   <br />
                   <span> Apoio a idosos </span>
@@ -149,7 +149,6 @@ export default {
         let response = await axios.post("http://localhost:9040/joboffer/own", {
           token: store.getters.token,
         });
-        console.log(response.data);
         this.ads = response.data;
       } catch (e) {
         this.$snackbar.showMessage({

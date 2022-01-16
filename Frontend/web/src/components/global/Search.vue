@@ -39,7 +39,7 @@
       </div>
       <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Categoria</span>
-        <v-select
+        <v-autocomplete
           outlined
           flat
           class="rounded-xl"
@@ -49,11 +49,11 @@
           item-value="idCategory"
           item-text="name"
           v-model="category"
-        ></v-select>
+        />
       </div>
       <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Localização</span>
-        <v-select
+        <v-autocomplete
           outlined
           flat
           class="rounded-xl"
@@ -63,7 +63,7 @@
           item-value="idLocation"
           item-text="name"
           v-model="location"
-        ></v-select>
+        />
       </div>
       <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Classificação </span>

@@ -104,10 +104,10 @@ Out.updateCompany = (body) => {
         }})
 }
 
-Out.updatePassword = (userId, pass) => {
+Out.updatePassword = (email, pass) => {
     return User.update(
         {password: pass},
-        {where: { 'idUser' : userId}}
+        {where: { 'email' : email}}
     )
 }
 
@@ -136,4 +136,11 @@ Out.getPerfilCP = (email) => {
     //Delete user by email
 Out.remove = (id) => {
     return User.destroy({ where: { 'idUser': id } });
+}
+
+Out.changeType = (email) => {
+    return User.update(
+        {type: 3},
+        {where: { 'email' : email}}
+    )
 }

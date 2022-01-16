@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-data-iterator
-      v-if="ads.length"
+      
       :items="ads"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
@@ -14,39 +14,23 @@
       <template v-slot:default="props">
         <v-row>
           <v-col
-            cols="12"
+            cols="auto"
             lg="4"
             md="4"
-            class="mx-auto mx-sm-0 mx-md-0"
+            class="mx-auto mx-sm-0"
             v-for="(a, index) in props.items"
             :key="index"
           >
             <div class="user">
               <v-card
-                id="advertise123"
                 class="card rounded-xl overflow-auto"
                 color="#c0e4ec"
                 tile
-                height="400"
-                width="550"
+                height="300"
+                width="500"
                 @click="infoSP(a.idUser)"
               >
                 <v-card-text>
-                  <v-row>
-                    <v-col md="5" sm="2" cols="5">
-                      <span class="activity d-flex justify-start pb-2"
-                        ><v-icon color="warning lighten-1" class="mb-1" small
-                          >fas fa-star</v-icon
-                        >
-                        {{ a.averageRating }} ({{ a.nr_reviews }})</span
-                      >
-                    </v-col>
-                    <v-col md="7" sm="10" >
-                      <span class="activity d-flex justify-end"
-                        >última vez ativo {{ difDate(a.lastActivity) }}</span
-                      >
-                    </v-col>
-                  </v-row>
                   <v-row justify="center">
                     <v-col cols="auto">
                       <v-avatar class="profile" color="grey" size="100">
@@ -82,9 +66,9 @@
         </v-row>
       </template>
     </v-data-iterator>
-    <small v-else> <em> não existem anúncios publicados </em></small>
+    <!--<small v-else> <em> não existem anúncios publicados </em></small>-->
 
-    <v-row class="mt-4" align="center" justify="center" v-if="ads.length">
+    <v-row class="mt-4" align="center" justify="center" >
       <v-btn
         fab
         dark
@@ -109,7 +93,7 @@
       </v-btn>
     </v-row>
 
-    <v-row class="mt-5" align="center" justify="center" v-if="ads.length">
+    <v-row class="mt-5" align="center" justify="center" >
       <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
     </v-row>
   </v-container>
@@ -158,9 +142,11 @@ export default {
     getData: async function () {
       try {
         let response = await axios.get("http://localhost:9040/search/?page=" + this.page);
+        
         if (response) {
-          this.ads = response.data.ServiceProviders;
-          this.total = response.data.ServiceProviders_Sum[0].number_sps;
+          console.log(response.data)
+          this.ads = response.data.Companies;
+          this.total = response.data.Companies_Sum[0].number_companies;
           /*this.ads = response.data.ServiceProviders.map(an => {
       an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
          })*/
@@ -211,10 +197,4 @@ export default {
   font-size: smaller;
   text-align-last: right;
 }
-
-#advertise123::-webkit-scrollbar{
-  display: none;
-}
 </style>
-
-<!-- advertise123 css is to hide the scrollbar on the ads-->

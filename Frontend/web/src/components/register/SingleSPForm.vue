@@ -72,7 +72,8 @@
                   single-line
                   v-model="form.password2"
                   :rules="[
-                    form.password === form.password2 || 'As palavra-passes devem corresponder.',
+                    form.password === form.password2 ||
+                      'As palavra-passes devem corresponder.',
                   ]"
                   color="#78C4D4"
                   type="password"
@@ -94,7 +95,7 @@
                   name="contact"
                   v-model="form.phoneNumber"
                   maxlength="9"
-                  :rules="[(v) => v.length>8 || 'Contacto inválido']"
+                  :rules="[(v) => v.length > 8 || 'Contacto inválido']"
                   required
                   v-on:keypress="isNumber($event)"
                 />
@@ -120,12 +121,15 @@
             <v-row>
               <v-col class="py-0">
                 <span>Localização *</span>
-                <v-text-field
+                <v-autocomplete
                   outlined
                   flat
                   dense
                   v-model="form.location"
                   single-line
+                  :items="loc"
+                  item-value="idLocation"
+                  item-text="name"
                   :rules="textRules"
                   color="#78C4D4"
                   name="location"
@@ -254,12 +258,13 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   name: "SingleSPForm",
   data() {
     return {
       menu: false,
+      loc: [],
       termos: false,
       dialogs: {},
       valid: false,
@@ -292,7 +297,7 @@ export default {
         sex: "",
         type: "3",
         description: "",
-        distance:'',
+        distance: "",
         qualifications: "",
       },
       items: [
@@ -309,7 +314,7 @@ export default {
     close() {
       this.$router.back();
     },
-    next: async function() {
+    next: async function () {
       if (this.$refs.form.validate()) {
         try {
           let res = await axios.post("http://localhost:9041/users/register", {
@@ -318,7 +323,7 @@ export default {
             password: this.form.password,
             sex: this.form.sex,
             type: this.form.type,
-            location: 1,
+            location: this.form.location,
             phoneNumber: this.form.phoneNumber,
             description: this.form.description,
             dateOfBirth: this.date,
@@ -353,6 +358,17 @@ export default {
       if (/^[0-9]+$/.test(char)) return true;
       else e.preventDefault();
     },
+  },
+
+  created: async function () {
+    try {
+      let response = await axios.get("http://localhost:9040/location");
+      if (response) {
+        this.loc = response.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>

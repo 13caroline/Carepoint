@@ -48,17 +48,9 @@ const routes = [
     name: 'Subscription',
     component: () => import(/* webpackChunkName: "about" */ '../views/subscription/Subscription.vue')
   },
-
-  // Consumer data
-  {
-    path: '/consumer/profile',
-    name: 'profile',
-    component: () => import('../views/global/Profile.vue')
-  },
-
  
   {
-    path: '/consumer/edit/profile',
+    path: '/edit/profile',
     name: 'Edit Profile',
     component: () => import('../views/global/EditData.vue')
   },
@@ -69,8 +61,14 @@ const routes = [
   },
   
 
-
   //------------------------------------- CONSUMER -------------------------------------
+
+   // Consumer data
+   {
+    path: '/consumer/profile',
+    name: 'profile',
+    component: () => import('../views/consumer/Profile.vue')
+  },
 
   // Become a Service Provider
   {
@@ -81,24 +79,26 @@ const routes = [
 
   // Consumer's page
   {
-    path: '/consumer/page',
-    name: 'Consumer Profile',
+    path: '/page',
+    name: 'Consumer Main Page',
     component: () => import(/* webpackChunkName: "about" */'../views/consumer/Homepage.vue')
   },
 
   // Consumer's advertisements
   {
     path: '/my/advertisements',
-    name: 'My advertisements',
+    name: 'Consumer Advertisements',
     component: () => import('../views/consumer/MyAdvertisements')
   },
 
   // Post an ad
   {
     path: '/post/ad',
-    name: 'Post Ad',
+    name: 'Consumer Post Ad',
     component: () => import('../views/consumer/PostAd.vue')
   },
+
+  //------------------------------------- SERVICE PROVIDER -------------------------------------
 
   // Service Providers profile
   {
@@ -114,11 +114,25 @@ const routes = [
   component: () => import('../views/subscription/RenewSubscription.vue')
   },
 
+  {
+    path: '/service/provider/ads',
+    name: 'Service Provider Ads page',
+    component: () => import('../views/serviceProviders/Anuncios.vue')
+  },
+
+  //------------------------------------- COMPANY -------------------------------------
+
   // Company profile
   {
   path: '/company/page',
   name: 'Company Page',
   component: () => import('../views/company/Profile.vue')
+  },
+
+  {
+    path: '/company/edit/profile',
+    name: 'Company Edit Data',
+    component: () => import('../components/Company/EditData.vue')
   }
 ]
 
