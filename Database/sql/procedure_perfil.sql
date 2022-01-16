@@ -3,6 +3,8 @@ USE PI;
 DROP PROCEDURE IF EXISTS get_consumer_profile;
 DROP PROCEDURE IF EXISTS get_reviews;
 DROP PROCEDURE IF EXISTS get_sp_category_info;
+DROP PROCEDURE IF EXISTS get_sp_only_category_info;
+DROP PROCEDURE IF EXISTS get_sp_horarios;
 DROP PROCEDURE IF EXISTS get_average_rating;
 DROP PROCEDURE IF EXISTS get_service_provider_profile;
 DROP PROCEDURE IF EXISTS get_service_provider_profile_v2;
@@ -23,6 +25,26 @@ CREATE PROCEDURE get_sp_category_info (IN id INT)
 BEGIN
 	SELECT category.name, category_has_serviceprovider.experience, category_has_serviceprovider.workSchedule, 
 		category_has_serviceprovider.price FROM user
+	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
+    INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
+END &&
+DELIMITER ;
+
+-- Returns: returns all info about categories that belongs to a specific SP
+DELIMITER &&
+CREATE PROCEDURE get_sp_only_category_info (IN id INT)
+BEGIN
+	SELECT category.name, category_has_serviceprovider.experience, category_has_serviceprovider.price FROM user
+	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
+    INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
+END &&
+DELIMITER ;
+
+-- Returns: returns all info about categories that belongs to a specific SP
+DELIMITER &&
+CREATE PROCEDURE get_sp_horarios (IN id INT)
+BEGIN
+	SELECT category.name, category_has_serviceprovider.workSchedule FROM user
 	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
     INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
 END &&

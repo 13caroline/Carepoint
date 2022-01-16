@@ -13,7 +13,7 @@ const { route } = require('./users');
  router.get('/horarios', (req, res) => {
     var iden = req.query.id;
 
-    ServiceProvider.get_categories(iden)
+    ServiceProvider.get_horarios(iden)
     .then((categories) => res.status(200).jsonp({categories: categories}))
     .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
  })
@@ -27,7 +27,7 @@ router.get('/', (req, res, next) => {
     .then((profile) => {
         ServiceProvider.get_reviews(iden)
         .then((reviews) => {
-            ServiceProvider.get_categories(iden)
+            ServiceProvider.get_only_categories(iden)
             .then((categories) => {
                 res.status(200).jsonp({
                     ServiceProvider: profile,
