@@ -9,7 +9,7 @@ const Company = require('../controllers/company')
  ****************************************************************************************/
 
 router.get('/specific', (req, res) => {
-    Company.getPerfilCompany_2(req.body.id)
+    Company.getPerfilCompany_2(req.query.id)
     .then((data) => res.status(200).jsonp(data))
     .catch(e => res.status(500).jsonp({ error: e }))
 })
