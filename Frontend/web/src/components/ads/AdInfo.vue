@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-row class="w-100" align="start">
-      <v-col cols="5" md="2">
+      <v-col cols="4" md="2">
         <div class="foto h-100">
           <v-img
             :src="image"
             aspect-ratio="1"
-            class="grey lighten-2 mx-2 rounded"
+            class="grey lighten-2 mx-4 rounded"
             cover
           >
             <!--<template v-slot:placeholder>
@@ -21,7 +21,7 @@
         </div>
       </v-col>
 
-      <v-col cols="7" md="10">
+      <v-col cols="6" md="6" sm="6" class="ml-13 ml-md-16 ml-sm-0">
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -62,7 +62,7 @@
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <p class="infos font-weight-bold mb-3">Descrição</p>
         <div>
           <p class="desc mt-3">
@@ -74,7 +74,7 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2">
+      <v-col cols="12" sm="3" md="2">
         <div class="infos font-weight-bold">Contactos</div>
         <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
           Sem dados de contacto
@@ -83,7 +83,7 @@
         <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" md="10" sm>
+      <v-col cols="12" sm="9" md="9" class="ml-md-5">
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
@@ -102,7 +102,7 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2" sm>
+      <v-col cols="12" sm="2" md="2">
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
           <v-icon color="#FFE082" class="mb-1" small>fas fa-star</v-icon>
