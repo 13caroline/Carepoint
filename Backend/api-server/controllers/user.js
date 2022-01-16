@@ -144,3 +144,10 @@ Out.changeType = (email) => {
         {where: { 'email' : email}}
     )
 }
+
+Out.getImage = (email) => {
+    return dbconfig.sequelize.query('CALL get_user_image (:em)',
+    {replacements:{
+        em: email
+    }})
+}

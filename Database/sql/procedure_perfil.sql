@@ -7,6 +7,7 @@ DROP PROCEDURE IF EXISTS get_average_rating;
 DROP PROCEDURE IF EXISTS get_service_provider_profile;
 DROP PROCEDURE IF EXISTS get_service_provider_profile_v2;
 DROP PROCEDURE IF EXISTS get_company_profile;
+DROP PROCEDURE IF EXISTS get_user_image;
 
 -- Returns: average rating or null if no reviews
 DELIMITER &&  
@@ -83,6 +84,14 @@ BEGIN
     INNER JOIN company ON user.idUser = company.idCompany
     INNER JOIN pi.add ON pi.add.idCompany = company.idCompany
     INNER JOIN  subscription ON company.idSubscription = subscription.idSubscription
+    INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
+END &&
+DELIMITER ;
+
+DELIMITER &&
+CREATE PROCEDURE get_user_image (IN em VARCHAR(90))
+BEGIN
+	SELECT file.image FROM user
     INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
 END &&
 DELIMITER ;
