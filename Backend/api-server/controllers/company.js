@@ -55,6 +55,13 @@ Out.getPerfilCompany = (email) => {
     }})
 }
 
+Out.getPerfilCompany_2 = (idC) => {
+    return dbconfig.sequelize.query('CALL get_company_profile_2 (:id)',
+    {replacements: {
+        id: idC
+    }})
+}
+
 //Delete Company by id
 Out.remove = (id) => {
     return Company.destroy({ where: { 'idCompany': id } });

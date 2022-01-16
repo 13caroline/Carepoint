@@ -8,6 +8,12 @@ const Company = require('../controllers/company')
  *                                   GET
  ****************************************************************************************/
 
+router.get('/specific', (req, res) => {
+    Company.getPerfilCompany_2(req.body.id)
+    .then((data) => res.status(200).jsonp(data))
+    .catch(e => res.status(500).jsonp({ error: e }))
+})
+
 // List all Companies given the query param
 router.get('/', function(req, res, next) {
     Company.list()

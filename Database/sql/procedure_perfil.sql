@@ -10,6 +10,7 @@ DROP PROCEDURE IF EXISTS get_service_provider_profile;
 DROP PROCEDURE IF EXISTS get_service_provider_profile_v2;
 DROP PROCEDURE IF EXISTS get_company_profile;
 DROP PROCEDURE IF EXISTS get_user_image;
+DROP PROCEDURE IF EXISTS get_company_profile_2;
 
 -- Returns: average rating or null if no reviews
 DELIMITER &&  
@@ -107,6 +108,19 @@ BEGIN
     INNER JOIN pi.add ON pi.add.idCompany = company.idCompany
     INNER JOIN  subscription ON company.idSubscription = subscription.idSubscription
     INNER JOIN file ON user.idUser = file.idUser WHERE em = user.email;
+END &&
+DELIMITER ;
+
+-- Returns: returns information for a specific company
+DELIMITER &&
+CREATE PROCEDURE get_company_profile_2 (IN id INT)
+BEGIN
+	SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY,
+		   company.link, company.firm, company.nipc, pi.add.description, file.image FROM user
+	INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN company ON user.idUser = company.idCompany
+    INNER JOIN pi.add ON pi.add.idCompany = company.idCompany
+    INNER JOIN file ON user.idUser = file.idUser WHERE id = user.idUser;
 END &&
 DELIMITER ;
 
