@@ -212,6 +212,7 @@ export default {
         { name: "Masculino", value: "M" },
         { name: "Indefinido", value: "I" },
       ],
+      loc: [],
     };
   },
   components: {

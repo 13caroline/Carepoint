@@ -10,7 +10,7 @@
           outlined
           dense
           color="#78C4D4"
-          :items="dados"
+          :items="received"
           item-text="name"
           item-value="id"
           hide-details
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from "axios"
 import moment from "moment";
 export default {
   props: ["dados"],
@@ -52,7 +53,8 @@ export default {
     weekday: [1, 2, 3, 4, 5, 6, 0],
     type: "",
     cat: [],
-    schedules: {}
+    schedules: {},
+    received: []
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -63,7 +65,7 @@ export default {
     },
     categorySchedule(value) {
       this.events = [];
-      var found = this.dados.find((e) => e.name === value);
+      var found = this.received.find((e) => e.name === value);
 
       let schedule = found.workSchedule;
       for (var i = 0; i < schedule.length; i++) {
@@ -79,9 +81,15 @@ export default {
     },
   },
   
-  created() {
-    for (var j = 0; j < this.dados.length; j++) {
-      let schedule = this.dados[j].workSchedule;
+  created: async function () {
+    try {
+      let response = await axios.get(
+        "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
+      );
+   
+    this.received = response.data.categories;
+    for (var j = 0; j < this.received.length; j++) {
+      let schedule = this.received[j].workSchedule;
       for (var i = 0; i < schedule.length; i++) {
         let state = schedule[i].occupied == 0 ? "Livre" : "Preenchido";
 
@@ -92,6 +100,15 @@ export default {
           name: state,
         });
       }
+    }
+
+     } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
     }
   },
   

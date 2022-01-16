@@ -18,7 +18,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_3@gmail.com",
+									"value": "theUserTestingEmail_11@gmail.com",
 									"type": "text"
 								},
 								{
@@ -1448,18 +1448,13 @@
 									"formdata": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDAyNzIyNTIsImV4cCI6MTY0MDI3NTg1Mn0.kbT6relitMz48nq8E4huWotl_ZZut_FdLMYEnfjLw50",
-											"type": "text"
-										},
-										{
-											"key": "idUser",
-											"value": "202",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MjMzOTQ1NCwiZXhwIjoxNjQyMzQzMDU0fQ.LU9vniKR8zCEXl4nNQwdX34FyA6_t8uAZbMBEqKqtuo",
 											"type": "text"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/C:/Users/Thol/Pictures/nobuShcok.png"
+											"src": "/C:/Users/Thol/Pictures/1420458246520.jpg"
 										}
 									]
 								},
@@ -1743,6 +1738,36 @@
 									"path": [
 										"users",
 										"upgrade"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Image (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQyMzM2MTQ5LCJleHAiOjE2NDIzMzk3NDl9.22er2ZQ10ttxx1hJNV3sG5_ALyleGZzPP_e6x6HeJOQ",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/image",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"image"
 									]
 								}
 							},
@@ -2187,6 +2212,33 @@
 									"port": "9040",
 									"path": [
 										"serviceProvider",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "62"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service Provider Horários (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/horarios/?id=62",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"horarios",
 										""
 									],
 									"query": [

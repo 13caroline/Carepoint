@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="50%">
+  <v-dialog v-model="dialog" width="auto">
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         class="body-2 mr-2 rounded-xl button"

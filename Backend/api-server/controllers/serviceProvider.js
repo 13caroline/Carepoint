@@ -30,6 +30,20 @@ Out.get_reviews = (id) => {
     }})
 }
 
+Out.get_only_categories = (id) => {
+    return dbconfig.sequelize.query('CALL get_sp_only_category_info (:id)',
+    {replacements: {
+        id: id
+    }})
+}
+
+Out.get_horarios = (id) => {
+    return dbconfig.sequelize.query('CALL get_sp_horarios (:id)',
+    {replacements: {
+        id: id
+    }})
+}
+
 Out.get_categories = (id) => {
     return dbconfig.sequelize.query('CALL get_sp_category_info (:id)',
     {replacements: {

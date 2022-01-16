@@ -1,27 +1,27 @@
 <template>
   <v-container>
     <v-row class="w-100" align="start">
-      <v-col cols="5" md="2">
+      <v-col cols="4" md="2">
         <div class="foto h-100">
           <v-img
-            :src="image"
+            :src="processImage(serviceProviderData.image)"
             aspect-ratio="1"
-            class="grey lighten-2 mx-2 rounded"
+            class="grey lighten-2 mx-4 rounded"
             cover
           >
-            <!--<template v-slot:placeholder>
+            <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
                   indeterminate
                   color="grey lighten-5"
                 ></v-progress-circular>
               </v-row>
-            </template>-->
+            </template>
           </v-img>
         </div>
       </v-col>
 
-      <v-col cols="7" md="10">
+      <v-col cols="6" md="6" sm="6" class="ml-13 ml-md-16 ml-sm-0">
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -51,30 +51,23 @@
               {{ a.experience }} anos
             </span>
           </v-col>
-        </v-row><!-- descricao da ad do prestador
-        <div>
-          <p class="desc mt-3">
-            {{ serviceProviderData.description }}
-          </p>
-        </div>
-        <v-divider></v-divider>-->
-      </v-col> 
+        </v-row>
+      </v-col>
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col cols="12">
         <p class="infos font-weight-bold mb-3">Descrição</p>
         <div>
           <p class="desc mt-3">
             {{ serviceProviderData.description }}
           </p>
         </div>
-
       </v-col>
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2">
+      <v-col cols="12" sm="3" md="2">
         <div class="infos font-weight-bold">Contactos</div>
         <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
           Sem dados de contacto
@@ -83,7 +76,7 @@
         <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" md="10" sm>
+      <v-col cols="12" sm="9" md="9" class="ml-md-5">
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
@@ -102,7 +95,7 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2" sm>
+      <v-col cols="12" sm="2" md="2">
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
           <v-icon color="#FFE082" class="mb-1" small>fas fa-star</v-icon>
@@ -113,7 +106,7 @@
       </v-col>
       <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <schedule v-if="serviceProvider" :dados="serviceProvider.categories"/>
+        <schedule :dados="id" />
       </v-col>
     </v-row>
 
@@ -228,7 +221,6 @@ export default {
   data() {
     return {
       noExp: "<1 ano",
-      image: "",
       sortDesc: false,
       pageCount: 0,
       page: 1,
@@ -268,6 +260,12 @@ export default {
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
+    processImage(img) {
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      );
+    },
   },
   components: {
     Schedule: () => import("@/components/ads/Schedule"),
@@ -283,11 +281,9 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/?id=" + this.id
       );
-      (this.serviceProviderData = response.data.ServiceProvider[0]);
-      (this.serviceProvider = response.data);
+      this.serviceProviderData = response.data.ServiceProvider[0];
+      this.serviceProvider = response.data;
       this.reviews = response.data.reviews.length;
-      this.image =
-        "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
     } catch (e) {
       this.$snackbar.showMessage({
         show: true,

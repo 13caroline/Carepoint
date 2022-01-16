@@ -140,6 +140,13 @@ router.post('/upgrade', auth.matchPasswords, (req,res) => {
     }
 })
 
+router.post('/image', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.getImage(email)
+    .then((image) => res.status(200).jsonp(image))
+    .catch((err) => res.status(500).jsonp({error: err}))
+})
+
 // Insert a new user
 router.post('/', function(req, res) {
 
@@ -218,7 +225,7 @@ router.put('/updatePassword', auth.validToken, (req, res, next) => {
 })
 
 //auth.matchUsers,
-router.put('/updatePhoto', upload.single('image'), auth.validToken,(req, res, next) => {
+router.put('/updatePhoto', upload.single('image'), auth.validToken, (req, res) => {
     var email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((usr) => {

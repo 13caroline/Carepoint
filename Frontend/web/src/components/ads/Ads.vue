@@ -50,7 +50,7 @@
                   <v-row justify="center">
                     <v-col cols="auto">
                       <v-avatar class="profile" color="grey" size="100">
-                        <v-img :src="processImage(a.image.data)"></v-img>
+                        <v-img :src="processImage(a.image)"></v-img>
                       </v-avatar>
                     </v-col>
                   </v-row>
@@ -143,7 +143,7 @@ export default {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
     },
     infoSP(id) {
       this.$router.push("/ad/info/" + id);
