@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2">
+      <v-col cols="5" md="2">
         <div class="foto h-100">
           <v-img
             :src="image"
@@ -21,7 +21,7 @@
         </div>
       </v-col>
 
-      <v-col cols="12" md="10" sm>
+      <v-col cols="7" md="10">
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -46,13 +46,25 @@
 
             <span class="font-weight-bold ml-2">{{ a.experience }} anos</span>
           </v-col>
-        </v-row>
+        </v-row><!-- descricao da ad do prestador
         <div>
           <p class="desc mt-3">
             {{ serviceProviderData.description }}
           </p>
         </div>
-        <v-divider></v-divider>
+        <v-divider></v-divider>-->
+      </v-col> 
+    </v-row>
+
+    <v-row>
+      <v-col>
+        <p class="infos font-weight-bold mb-3">Descrição</p>
+        <div>
+          <p class="desc mt-3">
+            {{ serviceProviderData.description }}
+          </p>
+        </div>
+
       </v-col>
     </v-row>
 

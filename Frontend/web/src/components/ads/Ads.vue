@@ -14,25 +14,26 @@
       <template v-slot:default="props">
         <v-row>
           <v-col
-            cols="auto"
+            cols="12"
             lg="4"
             md="4"
-            class="mx-auto mx-sm-0"
+            class="mx-auto mx-sm-0 mx-md-0"
             v-for="(a, index) in props.items"
             :key="index"
           >
             <div class="user">
               <v-card
+                id="advertise123"
                 class="card rounded-xl overflow-auto"
                 color="#c0e4ec"
                 tile
                 height="400"
-                width="500"
+                width="550"
                 @click="infoSP(a.idUser)"
               >
                 <v-card-text>
                   <v-row>
-                    <v-col cols="12" md="4" sm="2">
+                    <v-col md="5" sm="2" cols="5">
                       <span class="activity d-flex justify-start pb-2"
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
@@ -40,7 +41,7 @@
                         {{ a.averageRating }} ({{ a.nr_reviews }})</span
                       >
                     </v-col>
-                    <v-col cols="12" md="8" sm="10">
+                    <v-col md="7" sm="10" >
                       <span class="activity d-flex justify-end"
                         >última vez ativo {{ difDate(a.lastActivity) }}</span
                       >
@@ -205,4 +206,10 @@ export default {
   font-size: smaller;
   text-align-last: right;
 }
+
+#advertise123::-webkit-scrollbar{
+  display: none;
+}
 </style>
+
+<!-- advertise123 css is to hide the scrollbar on the ads-->
