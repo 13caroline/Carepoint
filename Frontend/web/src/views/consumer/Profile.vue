@@ -5,7 +5,7 @@
       <v-card flat>
         <v-row>
           <v-col cols="auto" class="ml-auto">
-            <image-upload />
+            <image-upload :id="user.idUser"/>
             <v-btn
               class="body-2 rounded-xl button"
               small
@@ -82,7 +82,7 @@
           <v-col cols="auto" order="first" order-sm="last">
             <div class="foto h-100 mt-5">
               <v-img
-                src="@/assets/userImgTest.jpg"
+                :src="processImage(user.image)"
                 aspect-ratio="1"
                 class="grey lighten-2 mx-2 rounded"
                 cover
@@ -193,6 +193,9 @@ export default {
     wannaBeSP() {
       this.$router.push("/consumer/become/service/provider");
     },
+    processImage(img) {
+      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+    },
   },
   created: async function () {
     try {
@@ -200,7 +203,8 @@ export default {
         token: store.getters.token,
       });
       this.user = response.data.perfil[0];
-      if (this.user.sex == "M") this.user.sex = "Masculino";
+
+    if (this.user.sex == "M") this.user.sex = "Masculino";
       else if (this.user.sex == "F") this.user.sex = "Feminino";
       else this.user.sex = "Indefinido";
     } catch (e) {

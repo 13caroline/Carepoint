@@ -41,7 +41,7 @@
                         {{ a.averageRating }} ({{ a.nr_reviews }})</span
                       >
                     </v-col>
-                    <v-col md="7" sm="10" >
+                    <v-col md="7" sm="10">
                       <span class="activity d-flex justify-end"
                         >última vez ativo {{ difDate(a.lastActivity) }}</span
                       >
@@ -71,8 +71,9 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{a.description}}</v-clamp>
-                      
+                      <v-clamp autoresize :max-lines="4">{{
+                        a.description
+                      }}</v-clamp>
                     </span>
                   </v-row>
                 </v-card-text>
@@ -118,7 +119,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import VClamp from 'vue-clamp'
+import VClamp from "vue-clamp";
 export default {
   name: "Ads",
 
@@ -135,14 +136,14 @@ export default {
     };
   },
   components: {
-    VClamp
+    VClamp,
   },
   methods: {
     difDate(dateLA) {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      return "data:image/jpeg;base64," + btoa(img);
+      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
     },
     infoSP(id) {
       this.$router.push("/ad/info/" + id);
@@ -157,13 +158,19 @@ export default {
     },
     getData: async function () {
       try {
-        let response = await axios.get("http://localhost:9040/search/?page=" + this.page);
+        let response = await axios.get(
+          "http://localhost:9040/search/?page=" + this.page
+        );
         if (response) {
           this.ads = response.data.ServiceProviders;
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
-          /*this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
-         })*/
+          /*this.ads = response.data.ServiceProviders.map((an) => {
+            an.image = an.image
+              ? "data:image/png;base64," +
+                btoa(String.fromCharCode.apply(null, new Uint8Array(an.image)))
+              : require("@/assets/userTest.png");
+          });*/
+          console.log(this.ads)
         }
       } catch (e) {
         this.$snackbar.showMessage({
@@ -212,7 +219,7 @@ export default {
   text-align-last: right;
 }
 
-#advertise123::-webkit-scrollbar{
+#advertise123::-webkit-scrollbar {
   display: none;
 }
 </style>

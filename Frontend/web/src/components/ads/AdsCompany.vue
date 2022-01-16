@@ -126,7 +126,7 @@ export default {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      return "data:image/jpeg;base64," + btoa(img);
+      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
     },
     infoSP(id) {
       this.$router.push("/ad/info/" + id);

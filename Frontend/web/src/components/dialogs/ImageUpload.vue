@@ -21,17 +21,25 @@
         <v-card-text>
           <div class="ma-auto">
             <span>Carregar fotografia</span>
-            <v-file-input
+            <!--<v-file-input
               append-icon="fas fa-camera"
               v-model="image"
               type="file"
               class="input"
               color="#78C4D4"
               prepend-icon=""
+              :rules="rules"
               outlined
               dense
               @change="onFileChange"
-            />
+            />-->
+            <input
+                type="file"
+                id="file"
+                ref="file"
+                v-on:change="handleFileUpload()"
+                :rules="rules"
+              />
           </div>
           <div>
             <span>Preview</span>
@@ -54,7 +62,8 @@
                 class="rounded-lg white--text"
                 required
                 type="submit"
-                :disabled="!image"
+                @click="upload()"
+                :disabled="!file"
                 >Confirmar</v-btn
               >
             </v-col>
@@ -66,15 +75,21 @@
 </template>
 
 <script>
+import axios from "axios"; 
+import store from "@/store/index.js"
 export default {
+  props: ["id"],
   name: "upload-image",
   data() {
     return {
       dialog: false,
       image: null,
+      file: "", 
       imageUrl: "",
-        cancelar: { title: "a alteração da sua fotografia", text: "a alteração da sua fotografia" },
-
+      cancelar: { title: "a alteração da sua fotografia", text: "a alteração da sua fotografia" },
+      rules: [
+      files => !files || !files.some(file => file.size > 102400) || 'Avatar size should be less than 100 KB!'
+    ],
     };
   },
   components: {
@@ -99,6 +114,42 @@ export default {
         this.imageUrl = "";
         this.image = null;
         this.dialog = false;
+    },
+     handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+      this.url = URL.createObjectURL(this.file);
+    },
+    upload: async function () {
+      let formData = new FormData();
+      
+
+      formData.append("idUser", this.id);
+      formData.append("image", this.file); 
+
+        try {
+          let response = await axios.put("http://localhost:9040/users/updatePhoto", {
+            formData, 
+            token: store.getters.token
+          });
+          console.log(response);
+          this.dialog = false; 
+
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Imagem atualizada com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
+        } catch (e) {
+          console.log(e);
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
+            timeout: 4000,
+          });
+      }
     },
   },
 };

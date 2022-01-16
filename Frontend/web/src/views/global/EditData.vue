@@ -245,7 +245,9 @@ export default {
       if (/^[0-9]+$/.test(char)) return true;
       else e.preventDefault();
     },
-
+    processImage(img) {
+      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+    },
     confirm: async function () {
       if (this.$refs.form.validate()) {
         try {
