@@ -9,6 +9,15 @@ const { route } = require('./users');
  *                                   GET
  ****************************************************************************************/
 
+//Obter os horários de um serviceProvider especifico com o ID
+ router.get('/horarios', (req, res) => {
+    var iden = req.query.id;
+
+    ServiceProvider.get_categories(iden)
+    .then((categories) => res.status(200).jsonp({categories: categories}))
+    .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+ })
+
 // List a Service Provider given it's id
 router.get('/', (req, res, next) => {
     

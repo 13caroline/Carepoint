@@ -2223,6 +2223,33 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Service Provider Horários (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/horarios/?id=62",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"horarios",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "62"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
