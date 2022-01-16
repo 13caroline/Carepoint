@@ -33,7 +33,7 @@
               >
                 <v-card-text>
                   <v-row>
-                    <v-col md="5" sm="2" cols="5">
+                    <v-col cols="5" md="5" sm="2" >
                       <span class="activity d-flex justify-start pb-2"
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
@@ -41,7 +41,7 @@
                         {{ a.averageRating }} ({{ a.nr_reviews }})</span
                       >
                     </v-col>
-                    <v-col md="7" sm="10">
+                    <v-col md="7" sm="10" class="text-right">
                       <span class="activity d-flex justify-end"
                         >última vez ativo {{ difDate(a.lastActivity) }}</span
                       >
