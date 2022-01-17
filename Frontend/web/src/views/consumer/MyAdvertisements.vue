@@ -115,8 +115,14 @@
                         @click="conclude(a.idJobOffer)"
                         :disabled="a.done == 1"
                       >
-                        <v-icon color="#66BB6A" dark v-bind="attrs" v-on="on">
-                          mdi-calendar-check
+                        <v-icon
+                          color="#66BB6A"
+                          dark
+                          v-bind="attrs"
+                          small
+                          v-on="on"
+                        >
+                          far fa-check-circle
                         </v-icon>
                       </v-btn>
                     </template>
@@ -221,93 +227,92 @@
               </span>
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="12" md="6">
-              <span>Data de início *</span>
-              <v-menu
-                v-model="menu"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
+          <v-form ref="form" v-model="valid">
+            <v-row>
+              <v-col >
+                <span>Data de início *</span>
+                <v-menu
+                  v-model="menu"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="dateBegin"
+                      append-icon="fas fa-calendar-alt"
+                      readonly
+                      dense
+                      outlined
+                      required
+                      color="#78c4d4"
+                      v-bind="attrs"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
                     v-model="dateBegin"
-                    append-icon="fas fa-calendar-alt"
-                    readonly
-                    dense
-                    outlined
-                    required
                     color="#78c4d4"
-                    v-bind="attrs"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="dateBegin"
-                  color="#78c4d4"
-                  @input="menu = false"
-                  locale="pt PT"
-                  :min="new Date().toISOString().substr(0, 10)"
-                ></v-date-picker>
-              </v-menu>
-            </v-col>
-
-            <v-col cols="12" md="6">
-              <span>Data de término *</span>
-              <v-menu
-                v-model="menu2"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                transition="scale-transition"
-                offset-y
-                min-width="auto"
-              >
-                <template v-slot:activator="{ on, attrs }">
-                  <v-text-field
+                    @input="menu = false"
+                    locale="pt PT"
+                    :min="new Date().toISOString().substr(0, 10)"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col >
+                <span>Data de término *</span>
+                <v-menu
+                  v-model="menu2"
+                  :close-on-content-click="false"
+                  :nudge-right="40"
+                  transition="scale-transition"
+                  offset-y
+                  min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                      v-model="dateEnd"
+                      append-icon="fas fa-calendar-alt"
+                      readonly
+                      dense
+                      outlined
+                      required
+                      v-bind="attrs"
+                      color="#78c4d4"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
                     v-model="dateEnd"
-                    append-icon="fas fa-calendar-alt"
-                    readonly
-                    dense
-                    outlined
-                    required
-                    v-bind="attrs"
                     color="#78c4d4"
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                  v-model="dateEnd"
-                  color="#78c4d4"
-                  @input="menu2 = false"
-                  locale="pt PT"
-                  :min="new Date().toISOString().substr(0, 10)"
-                ></v-date-picker>
-              </v-menu>
-            </v-col>
-          </v-row>
-           <v-tooltip top>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                        icon
-                        @click="postAd()"
-                        
-                      >
-                        <v-icon color="#66BB6A" dark v-bind="attrs" v-on="on">
-                          mdi-calendar-check
-                        </v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Publicar anúncio</span>
-                  </v-tooltip>
+                    @input="menu2 = false"
+                    locale="pt PT"
+                    :min="new Date().toISOString().substr(0, 10)"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
+            </v-row>
+          </v-form>
         </v-card-text>
 
         <v-divider></v-divider>
 
         <v-card-actions>
           <v-spacer></v-spacer>
+<Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
+          <v-btn
+            dense
+            color="#78c4d4"
+            depressed
+            class="rounded-lg white--text ml-2"
+            @click="postAd()"
+            :disabled="!valid"
+            >Publicar Anúncio</v-btn
+          >
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -325,6 +330,7 @@ export default {
       dateEnd: "",
       menu: false,
       menu2: false,
+      valid: false,
       dialog: false,
       dialogData: {},
       show: false,
@@ -333,11 +339,17 @@ export default {
       page: 1,
       itemsPerPage: 9,
       total: 0,
+       cancelar: {
+        text: "a publicação de um anúncio",
+        title: "publicação de um anúncio",
+      },
     };
   },
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
+    Cancel: () => import("@/components/dialogs/Cancel"),
+
   },
 
   methods: {
@@ -360,6 +372,9 @@ export default {
     openDialog(a) {
       this.dialog = true;
       this.dialogData = a;
+    },
+    close(){
+      this.dialog=false;
     },
     update: async function () {
       this.ads = [];
@@ -395,8 +410,8 @@ export default {
       }
     },
     postAd: async function () {
-     // if (this.$refs.form.validate()) {
-        console.log(this.dialogData)
+      if (this.$refs.form.validate()) {
+        console.log(this.dialogData);
         try {
           await axios.post("http://localhost:9040/joboffer/new", {
             token: store.getters.token,
@@ -404,10 +419,10 @@ export default {
             description: "DescTeste",
             beginDate: this.dateBegin,
             endDate: this.dateEnd,
-            idCategory: this.dialogData.categoryName,
-            idLocation: this.dialogData.locationName,
+            idCategory: this.dialogData.idCategory,
+            idLocation: this.dialogData.idLocation,
           });
-          this.$router.push("/my/advertisements");
+          this.dialog=false;
           this.$snackbar.showMessage({
             show: true,
             color: "success",
@@ -415,6 +430,7 @@ export default {
             snackbar: true,
             timeout: 4000,
           });
+          this.update();
         } catch (e) {
           this.$snackbar.showMessage({
             show: true,
@@ -423,7 +439,7 @@ export default {
             timeout: 4000,
           });
         }
-     // }
+      }
     },
   },
   created: async function () {
