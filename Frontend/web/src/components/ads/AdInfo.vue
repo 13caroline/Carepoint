@@ -31,7 +31,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="4"
+            md="3"
             v-for="(a, index) in serviceProvider.categories"
             :key="index"
           >

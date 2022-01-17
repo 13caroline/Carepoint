@@ -133,7 +133,13 @@ const routes = [
     path: '/company/edit/profile',
     name: 'Company Edit Data',
     component: () => import('../components/Company/EditData.vue')
-  }
+  },
+
+  {
+    path: '/company/ad/info/:id',
+    name: 'Ad Info Company',
+    component: () => import('../views/ads/AdInfoCompany.vue')
+  },
 ]
 
 const router = new VueRouter({

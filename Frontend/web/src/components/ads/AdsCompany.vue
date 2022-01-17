@@ -129,7 +129,7 @@ export default {
       return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
     },
     infoSP(id) {
-      this.$router.push("/ad/info/" + id);
+      this.$router.push("/company/ad/info/" + id);
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
