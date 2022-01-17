@@ -171,7 +171,6 @@ export default {
                 btoa(String.fromCharCode.apply(null, new Uint8Array(an.image)))
               : require("@/assets/userTest.png");
           });*/
-          console.log(this.ads)
         }
       } catch (e) {
         this.$snackbar.showMessage({

@@ -20,7 +20,7 @@
                 v-bind="attrs"
                 v-on="on"
                 class="userImg ml-auto"
-                src="@/assets/userImgTest.jpg"
+                :src="processImage()"
                 max-height="70"
                 max-width="70"
               >
@@ -34,31 +34,29 @@
                   >Anúncios</v-list-item-title
                 >
               </v-list-item>
-               <v-list-item v-if="$store.state.tipo != '4'">
+              <v-list-item v-if="$store.state.tipo != '4'">
                 <v-list-item-title
                   class="menuOpcao"
                   @click="processClick('Meus anúncios')"
                   >Meus anúncios</v-list-item-title
                 >
               </v-list-item>
-               <v-list-item>
+              <v-list-item>
                 <v-list-item-title
                   class="menuOpcao"
                   @click="processClick('Perfil')"
                   >Perfil</v-list-item-title
                 >
               </v-list-item>
-               <v-list-item v-if="$store.state.tipo != '4'">
+              <v-list-item v-if="$store.state.tipo != '4'">
                 <v-list-item-title
                   class="menuOpcao"
                   @click="processClick('Publicar anúncio')"
                   >Publicar anúncio</v-list-item-title
                 >
               </v-list-item>
-               <v-list-item>
-                <v-list-item-title
-                  class="menuOpcao"
-                  @click="logout()"
+              <v-list-item>
+                <v-list-item-title class="menuOpcao" @click="logout()"
                   >Terminar sessão</v-list-item-title
                 >
               </v-list-item>
@@ -85,6 +83,7 @@ export default {
         { title: "Terminar Sessão" },
       ],
       cardOptions: false,
+      image: null,
     };
   },
   methods: {
@@ -97,17 +96,18 @@ export default {
     processClick(itemAtual) {
       switch (itemAtual) {
         case "Perfil":
-          if(store.getters.tipo==2)
-          this.$router.push("/consumer/profile");
-          else  if(store.getters.tipo==3) this.$router.push("/service/provider/page");
-          else this.$router.push("/company/page")
+          if (store.getters.tipo == 2) this.$router.push("/consumer/profile");
+          else if (store.getters.tipo == 3)
+            this.$router.push("/service/provider/page");
+          else this.$router.push("/company/page");
           break;
         case "Publicar anúncio":
           this.$router.push("/post/ad");
           break;
         case "Anúncios":
-           if(store.getters.tipo==2) this.$router.push("/page");
-           else if(store.getters.tipo==3) this.$router.push("/service/provider/ads")
+          if (store.getters.tipo == 2) this.$router.push("/page");
+          else if (store.getters.tipo == 3)
+            this.$router.push("/service/provider/ads");
           break;
         case "Terminar Sessão":
           this.logout();
@@ -132,6 +132,27 @@ export default {
         this.$router.push("/");
       }
     },
+    processImage () {
+      return (
+        "data:image/png;base64," +
+        btoa(
+          String.fromCharCode.apply(
+            null,
+            new Uint8Array(this.image)
+          )
+        )
+      );
+    },
+  },
+  created: async function () {
+    try {
+      let response = await axios.post("http://localhost:9040/users/image", {
+        token: store.getters.token,
+      });
+      this.image = response.data[0].image.data;      
+    } catch (e) {
+      console.log(e);
+    }
   },
 };
 </script>
@@ -155,8 +176,8 @@ export default {
 }
 
 #logo_ {
-  position:relative;
-  top: 0px; 
+  position: relative;
+  top: 0px;
   left: 70px;
 }
 </style>
