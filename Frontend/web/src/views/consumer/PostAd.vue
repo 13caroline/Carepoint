@@ -159,6 +159,12 @@
                 </v-col>
               </v-row>
 
+              <v-row align="end" justify="end">
+                <v-col cols="auto">
+                  <span> Valor a pagar: <strong> 1.99€ </strong> </span>
+                </v-col>
+              </v-row>
+
               <span class="ma-0 caption">* Campos obrigatórios</span>
               <v-row align="end" justify="end" class="w-100">
                 <v-col cols="auto">
@@ -222,13 +228,12 @@ export default {
   methods: {
     close() {
       store.getters.tipo == 2
-        ? this.$router.push("/consumer/profile")
+        ? this.$router.push("/my/advertisements")
         : this.$router.push("/service/provider/page");
     },
 
     postAd: async function () {
       if (this.$refs.form.validate()) {
-        console.log(this.category)
         try {
           await axios.post("http://localhost:9040/joboffer/new", {
             token: store.getters.token,

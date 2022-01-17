@@ -95,7 +95,7 @@
                     <template v-slot:activator="{ on, attrs }">
                       <v-btn icon @click="openDialog(a)">
                         <v-icon
-                          color="#B2DFDB"
+                          color="#80CBC4"
                           dark
                           v-bind="attrs"
                           small
@@ -116,13 +116,13 @@
                         :disabled="a.done == 1"
                       >
                         <v-icon
-                          color="#66BB6A"
+                          color="#AED581"
                           dark
                           v-bind="attrs"
                           small
                           v-on="on"
                         >
-                          far fa-check-circle
+                          fas fa-check
                         </v-icon>
                       </v-btn>
                     </template>
@@ -189,47 +189,46 @@
       <v-row class="mt-5" align="center" justify="center" v-if="ads.length">
         <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
       </v-row>
-    </v-container>
-    <v-dialog v-model="dialog" width="500">
-      <v-card>
-        <v-card-title class="text-h5 grey lighten-2 mb-3">
-          Repetir anúncio de trabalho
-        </v-card-title>
+      <v-dialog v-model="dialog" width="100%" max-width="500" persistent>
+        <v-card class="rounded-lg">
+          <v-card-title class="font-weight-bold pt-6">
+            Repetir anúncio de trabalho
+          </v-card-title>
 
-        <v-card-text>
-          <v-row>
-            <v-col class="pb-0" align="right" cols="5">
-              <span class="text-uppercase">Categoria</span>
-            </v-col>
-            <v-col class="pl-0 pb-0" cols="7">
-              <span class="black--text">
-                <strong> {{ dialogData.categoryName }} </strong>
-              </span>
-              <br />
-              <span> Apoio a idosos </span>
-            </v-col>
+          <v-card-text class="my-2">
+            <v-form ref="form" v-model="valid">
+              <v-row>
+                <v-col class="pb-0" align="right" cols="5">
+                  <span class="text-uppercase">Categoria</span>
+                </v-col>
+                <v-col class="pl-0 pb-0" cols="7">
+                  <span class="black--text">
+                    <strong> {{ dialogData.categoryName }} </strong>
+                  </span>
+                  <br />
+                  <span> Apoio a idosos </span>
+                </v-col>
 
-            <v-col class="pb-0" align="right" cols="5">
-              <span class="text-uppercase">Localização</span>
-            </v-col>
-            <v-col class="pl-0 pb-0" cols="7">
-              <span class="black--text">
-                <strong>{{ dialogData.locationName }}</strong>
-              </span>
-            </v-col>
+                <v-col class="pb-0" align="right" cols="5">
+                  <span class="text-uppercase">Localização</span>
+                </v-col>
+                <v-col class="pl-0 pb-0" cols="7">
+                  <span class="black--text">
+                    <strong>{{ dialogData.locationName }}</strong>
+                  </span>
+                </v-col>
 
-            <v-col class="pb-0" align="right" cols="5">
-              <span class="text-uppercase">Valor</span>
-            </v-col>
-            <v-col class="pl-0 pb-0" cols="7">
-              <span class="black--text">
-                <strong>{{ dialogData.price }} €/hora</strong>
-              </span>
-            </v-col>
-          </v-row>
-          <v-form ref="form" v-model="valid">
-            <v-row>
-              <v-col >
+                <v-col align="right" cols="5">
+                  <span class="text-uppercase">Valor</span>
+                </v-col>
+                <v-col class="pl-0" cols="7">
+                  <span class="black--text">
+                    <strong>{{ dialogData.price }} €/hora</strong>
+                  </span>
+                </v-col>
+              </v-row>
+
+              <div class="mt-2">
                 <span>Data de início *</span>
                 <v-menu
                   v-model="menu"
@@ -260,10 +259,8 @@
                     :min="new Date().toISOString().substr(0, 10)"
                   ></v-date-picker>
                 </v-menu>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col >
+              </div>
+              <div>
                 <span>Data de término *</span>
                 <v-menu
                   v-model="menu2"
@@ -294,28 +291,38 @@
                     :min="new Date().toISOString().substr(0, 10)"
                   ></v-date-picker>
                 </v-menu>
+              </div>
+              <v-row align="end" justify="end">
+                <v-col cols="auto">
+                  <span> Valor a pagar: <strong> 1.99€ </strong> </span>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-card-text>
+
+          <v-divider></v-divider>
+
+          <v-card-actions>
+            <v-row align="end" justify="end">
+              <v-col cols="auto">
+                <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
+              </v-col>
+              <v-col cols="auto" class="pl-0">
+                <v-btn
+                  dense
+                  color="#78c4d4"
+                  depressed
+                  class="rounded-lg white--text"
+                  @click="postAd()"
+                  :disabled="!valid"
+                  >Publicar Anúncio</v-btn
+                >
               </v-col>
             </v-row>
-          </v-form>
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-<Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
-          <v-btn
-            dense
-            color="#78c4d4"
-            depressed
-            class="rounded-lg white--text ml-2"
-            @click="postAd()"
-            :disabled="!valid"
-            >Publicar Anúncio</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-container>
     <Foot />
   </div>
 </template>
@@ -339,7 +346,7 @@ export default {
       page: 1,
       itemsPerPage: 9,
       total: 0,
-       cancelar: {
+      cancelar: {
         text: "a publicação de um anúncio",
         title: "publicação de um anúncio",
       },
@@ -349,7 +356,6 @@ export default {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
     Cancel: () => import("@/components/dialogs/Cancel"),
-
   },
 
   methods: {
@@ -373,8 +379,8 @@ export default {
       this.dialog = true;
       this.dialogData = a;
     },
-    close(){
-      this.dialog=false;
+    close() {
+      this.dialog = false;
     },
     update: async function () {
       this.ads = [];
@@ -422,7 +428,7 @@ export default {
             idCategory: this.dialogData.idCategory,
             idLocation: this.dialogData.idLocation,
           });
-          this.dialog=false;
+          this.dialog = false;
           this.$snackbar.showMessage({
             show: true,
             color: "success",
