@@ -17,7 +17,8 @@
             cols="12"
             lg="4"
             md="4"
-            class="mx-auto mx-sm-0 mx-md-0"
+            sm="6"
+            class="ml-4 ml-sm-0 mx-md-0"
             v-for="(a, index) in props.items"
             :key="index"
           >
@@ -28,12 +29,12 @@
                 color="#c0e4ec"
                 tile
                 height="400"
-                width="550"
+                width="300"
                 @click="infoSP(a.idUser)"
               >
                 <v-card-text>
                   <v-row>
-                    <v-col cols="5" md="5" sm="2" >
+                    <v-col cols="5" md="5" sm="4" >
                       <span class="activity d-flex justify-start pb-2"
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
@@ -41,7 +42,7 @@
                         {{ a.averageRating }} ({{ a.nr_reviews }})</span
                       >
                     </v-col>
-                    <v-col md="7" sm="10" class="text-right">
+                    <v-col md="7" sm="8" class="text-right">
                       <span class="activity d-flex justify-end"
                         >última vez ativo {{ difDate(a.lastActivity) }}</span
                       >
