@@ -88,6 +88,7 @@
                     </v-col>
                   </v-row>
                 </v-card-text>
+                <v-divider class="mt-3"></v-divider>
                 <v-card-actions>
                   <v-spacer></v-spacer>
 
