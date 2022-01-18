@@ -120,11 +120,12 @@
 
 <script>
 import moment from "moment"
+import axios from "axios";
+import store from "@/store/index.js";
   export default{
-    props: ["user"],
     data(){
       return{
-          
+          user: {}
       }
     },
     methods: {
@@ -137,9 +138,26 @@ import moment from "moment"
           return 0;
         }
     },
-    components:{
-
+    created: async function () {
+    try {
+      let response = await axios.post(
+        "http://localhost:9040/users/perfil",
+        {
+          token: store.getters.token,
+        }
+      );
+       console.log(response.data)
+      this.user = response.data.perfil[0];
+    
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
     }
+  },
   }
 
 </script>

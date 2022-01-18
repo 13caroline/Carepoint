@@ -3,7 +3,7 @@
     <v-card flat>
       <v-row>
         <v-col cols="auto" class="ml-auto">
-          <image-upload />
+          <image-upload :id="user.idUser" @clicked="uploaded()" />
           <v-btn
             class="body-2 rounded-xl button"
             small
@@ -48,10 +48,10 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos">Sexo</p>
+                        <p class="infos mb-0">Sexo</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{ user.sex }}</p>
+                        <p class="respos mb-0">{{ user.sex }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -63,7 +63,7 @@
           <v-col cols="auto" order="first" order-sm="last">
             <div class="foto h-100 mt-5">
               <v-img
-                src="@/assets/userImgTest.jpg"
+                :src="processImage(user.image)"
                 aspect-ratio="1"
                 class="grey lighten-2 mx-2 rounded"
                 cover
@@ -134,7 +134,7 @@
                       </v-col>
                     </v-row>
                   </div>
-                   <div>
+                  <div>
                     <v-row>
                       <v-col>
                         <p class="infos">Localidade</p>
@@ -152,7 +152,7 @@
           <v-col cols="auto" order="first" order-sm="last">
             <div class="foto h-100 mt-5">
               <v-img
-                src="@/assets/userImgTest.jpg"
+                :src="processImage(user.image)"
                 aspect-ratio="1"
                 class="grey lighten-2 mx-2 rounded"
                 cover
@@ -281,9 +281,10 @@
                         <p class="infos mb-0">Categorias</p>
                       </v-col>
                       <v-col>
-                        <span v-for="(c, index) in categories" :key="index"> {{c.nameC}}
+                        <span v-for="(c, index) in categories" :key="index">
+                          {{ c.nameC }}
                           <span v-if="index != categories.length - 1">| </span>
-                        </span> 
+                        </span>
                         <!--<p v-for="(c,index) in categories" :key="index" class="respos mb-0">nameC</p> -->
                       </v-col>
                     </v-row>
@@ -295,51 +296,85 @@
         </v-row>
       </div>
       <div v-if="$store.state.tipo == '4'">
-
         <h3 class="mt-6 group font-weight-light text-uppercase">Informações</h3>
         <v-divider></v-divider>
 
         <v-row class="w-100" align="start">
-        <v-col>
-          <v-card class="h-100 mt-5" outlined>
-            <v-list-item>
-              <v-list-item-content>
-                <div>
-                  <v-row>
-                    <v-col>
-                      <p class="infos">Descrição</p>
-                    </v-col>
-                    <v-col>
-                      <p class="respos">{{ user.description }}</p>
-                    </v-col>
-                  </v-row>
-                </div>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-        </v-col>
-      </v-row>
-
+          <v-col>
+            <v-card class="h-100 mt-5" outlined>
+              <v-list-item>
+                <v-list-item-content>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos">Descrição</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos">{{ user.description }}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                </v-list-item-content>
+              </v-list-item>
+            </v-card>
+          </v-col>
+        </v-row>
       </div>
     </v-card>
   </v-container>
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
-  props: ["user", "categories"],
   data() {
-    return {};
+    return {
+      user: {},
+      categories: [],
+    };
   },
   components: {
     ImageUpload: () => import("@/components/dialogs/ImageUpload"),
   },
-  methods:{
-    redirect(){
-      if(this.$store.getters.tipo=='3')this.$router.push("/edit/profile")
-      else this.$router.push("/company/edit/profile")
-    }
-  }
+  methods: {
+    redirect() {
+      if (this.$store.getters.tipo == "3") this.$router.push("/edit/profile");
+      else this.$router.push("/company/edit/profile");
+    },
+    processImage(img) {
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      );
+    },
+    uploaded() {
+      this.atualiza();
+    },
+    atualiza: async function () {
+      try {
+        let response = await axios.post("http://localhost:9040/users/perfil", {
+          token: store.getters.token,
+        });
+        this.user = response.data.perfil[0];
+        this.categories = response.data.categories;
+
+        if (this.user.sex == "M") this.user.sex = "Masculino";
+        else if (this.user.sex == "F") this.user.sex = "Feminino";
+        else this.user.sex = "Indefinido";
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+  },
+  created: async function () {
+    this.atualiza();
+  },
 };
 </script>
 

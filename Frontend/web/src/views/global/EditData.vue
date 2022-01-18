@@ -155,7 +155,7 @@
                             outlined
                             dense
                             color="#2596be"
-                            :rules="textRules"
+                            :rules="[(v) => !!v || 'Campo inválido']"
                             v-model="user.qualifications"
                           ></v-text-field>
                         </v-col>
@@ -167,7 +167,7 @@
                             outlined
                             dense
                             color="#2596be"
-                            :rules="textRules"
+                            :rules="[(v) => !!v || 'Campo inválido']"
                             v-model="user.qualifications"
                           ></v-text-field>
                         </v-col>
