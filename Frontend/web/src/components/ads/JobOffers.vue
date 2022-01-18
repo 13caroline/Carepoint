@@ -65,7 +65,7 @@
                     >
                     <span class="activity"> até</span>
                     <span class="font-weight-bold ml-2">
-                      {{ a.beginDate }}
+                      {{ a.endDate }}
                     </span>
                   </v-row>
 
@@ -78,12 +78,12 @@
 
                   <v-row justify="center" class="mx-auto">
                  
-                      <v-chip class="mt-4" :color="estado(a.category_name)">
+                      <v-chip class="mt-4" :color="estado(a.category)">
                         <span class="mr-1">
-                          <strong> {{ a.category_name }} </strong>
+                          <strong> {{ a.category}} </strong>
                         </span>
 
-                        <v-icon small>{{ getIcon(a.category_name) }}</v-icon>
+                        <v-icon small>{{ getIcon(a.category) }}</v-icon>
 
                         <span class="chipLabel ml-1"> Apoio a idosos </span>
                       </v-chip>
