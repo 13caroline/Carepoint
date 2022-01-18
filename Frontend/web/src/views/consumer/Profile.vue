@@ -84,6 +84,7 @@
               <v-img
                 :src="processImage(user.image)"
                 aspect-ratio="1"
+                :width="115"                
                 class="grey lighten-2 mx-2 rounded"
                 cover
               >

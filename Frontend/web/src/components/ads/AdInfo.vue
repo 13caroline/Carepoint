@@ -152,7 +152,7 @@
               height="100%"
             >
               <v-row align="center">
-                <v-col cols="12" md="10" sm="10" xs="8">
+                <v-col cols="8" md="10" sm="10">
                   <div>
                     <span class="font-weight-bold">{{
                       formatDate(a.postDate)
@@ -164,8 +164,8 @@
                     </span>
                   </div>
                 </v-col>
-                <v-col cols="12" md="2" sm="2" xs="4">
-                  <div class="font-weight-bold ratings">
+                <v-col cols="3" md="2" sm="2">
+                  <div class="font-weight-bold ratings ml-4 ml-md-0 vertical-center">
                     <v-icon color="#FFE082" class="icon mb-1"
                       >fas fa-star</v-icon
                     >
@@ -313,5 +313,13 @@ export default {
 
 .reviews {
   align-content: center;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 </style>
