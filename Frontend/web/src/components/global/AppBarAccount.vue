@@ -55,6 +55,12 @@
                   >Publicar anúncio</v-list-item-title
                 >
               </v-list-item>
+               <v-list-item v-if="$store.state.tipo != '4'">
+                <v-list-item-title 
+                class="menuOpcao" @click="processClick('Mensagens')"
+                  >Mensagens</v-list-item-title
+                >
+               </v-list-item>
               <v-list-item>
                 <v-list-item-title class="menuOpcao" @click="logout()"
                   >Terminar sessão</v-list-item-title
@@ -115,6 +121,9 @@ export default {
           break;
         case "Meus anúncios":
           this.$router.push("/my/advertisements");
+          break;
+        case "Mensagens":
+          this.$router.push("/messages")
       }
     },
     goToMainPage() {

@@ -140,6 +140,12 @@ const routes = [
     name: 'Ad Info Company',
     component: () => import('../views/ads/AdInfoCompany.vue')
   },
+
+  {
+    path: '/messages',
+    name: 'Messages',
+    component: () => import('../views/global/Messages.vue')
+  }
 ]
 
 const router = new VueRouter({
