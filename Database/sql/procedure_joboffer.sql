@@ -5,7 +5,18 @@ DROP PROCEDURE IF EXISTS get_joboffer_count;
 DROP VIEW IF EXISTS count_sps;
 DROP VIEW IF EXISTS count_sps_fakeish;
 
--- Returns: joboffers
+-- =============================================
+-- Description: Get a limited amount of job offers
+-- Type: Procedure
+-- Parameters:
+--   @id_category - category to be searched
+--   @id_location - location to be searched
+--   @price - price limit
+--   @limite - number of job offers to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: Job offers that meet the conditions, ordered by the primary key 
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_joboffer (IN id_category INT,IN id_location INT, IN price DOUBLE,IN limite INT, IN inicio INT)  
 BEGIN  
@@ -32,6 +43,16 @@ BEGIN
     ORDER BY joboffer.idJobOffer DESC LIMIT limite OFFSET inicio;
 END &&  
 DELIMITER ;
+
+-- =============================================
+-- Description: Get number of job offers that meet conditions
+-- Type: Procedure
+-- Parameters:
+--   @id_category - category to be searched
+--   @id_location - location to be searched
+--   @price - price limit
+-- Returns: Number of job offers that meet conditions
+-- =============================================
 
 DELIMITER &&  
 CREATE PROCEDURE get_joboffer_count (IN id_category INT,IN id_location INT, IN price DOUBLE)  
@@ -60,13 +81,22 @@ BEGIN
 END &&  
 DELIMITER ;
 
--- Returns: count sps that can see the joboffers
+-- =============================================
+-- Description: Count service providers that can see job offers
+-- Type: View
+-- Returns: Number of service providers that can see job offers
+-- =============================================
+
 CREATE VIEW count_sps AS 
   SELECT COUNT(*) FROM pi.serviceprovider WHERE serviceprovider.idSubscription = 3 OR serviceprovider.idSubscription = 4 
 	OR serviceprovider.idSubscription = 6 OR serviceprovider.idSubscription = 7;
     
-    
--- Returns: count sps that can see the joboffers
+-- =============================================
+-- Description: Count service providers that can see job offers version 2
+-- Type: View
+-- Returns: Number of service providers that can see job offers
+-- =============================================
+
 CREATE VIEW count_sps_fakeish AS 
   SELECT COUNT(*) FROM pi.serviceprovider WHERE serviceprovider.idSubscription = 3 OR serviceprovider.idSubscription = 4 
 	OR serviceprovider.idSubscription = 6 OR serviceprovider.idSubscription = 7 OR DATE_SUB(serviceprovider.endSub,INTERVAL 3 MONTH) >= now();
