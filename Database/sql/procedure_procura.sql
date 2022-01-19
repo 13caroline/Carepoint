@@ -11,7 +11,13 @@ DROP PROCEDURE IF EXISTS get_service_providers_v3;
 DROP PROCEDURE IF EXISTS get_service_providers_v2_count;
 DROP PROCEDURE IF EXISTS get_companies_count;
 
--- Returns: get max values
+-- =============================================
+-- Description: Get the maximum values like: maximum price, maximum distance and maximum rating
+-- Type: Procedure
+-- Parameters: None
+-- Returns: Maximum price, maximum distance and maximum rating
+-- =============================================
+ 
 DELIMITER &&  
 CREATE PROCEDURE get_max_values ()  
 BEGIN  
@@ -29,18 +35,37 @@ END &&
 DELIMITER ;
 
     
--- Returns: get all locations
+-- =============================================
+-- Description: Get all the locations
+-- Type: View
+-- Parameters: None
+-- Returns: All locations
+-- =============================================
+
 CREATE VIEW get_locations 
 AS  
     SELECT location.idLocation, location.name FROM location;
     
--- Returns: get all categories
+-- =============================================
+-- Description: Get all the categories
+-- Type: View
+-- Parameters: None
+-- Returns: All categories
+-- =============================================
+
 CREATE VIEW get_categories
 AS  
     SELECT category.idCategory, category.name FROM category;
 
 
--- Returns: get all job offers for given consumer
+-- =============================================
+-- Description: Get all job offers of a scpecific user
+-- Type: Procedure
+-- Parameters:
+--   @in_email - email of the user
+-- Returns:  All job offers of a scpecific user, ordered by post date
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_consumers_joboffers (IN in_email VARCHAR(90))  
 BEGIN  
@@ -56,7 +81,21 @@ BEGIN
 END &&  
 DELIMITER ;
 
--- Returns: service providers
+-- =============================================
+-- Description: Get service providers that meet conditions
+-- Type: Procedure
+-- Parameters:
+--   @id_category - category to be searched
+--   @id_location - location to be searched
+--   @experience - experience to be searched
+--   @price - price to be searched
+--   @rating - rating to be searched
+--   @in_sex - sex to be searched
+--   @limite - number of service providers to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: All service providers that meet conditions, ordered by end date of the vip subscription 
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_service_providers (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)  
 BEGIN  
@@ -109,7 +148,16 @@ END &&
 DELIMITER ;
 
 
--- Returns: companies
+-- =============================================
+-- Description: Get companies that meet conditions
+-- Type: Procedure
+-- Parameters:
+--   @id - location to be searched
+--   @limite - number of companies to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: All companies that meet conditions, ordered by end date of the vip subscription 
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_companies (IN id INT,IN limite INT, IN inicio INT)  
 BEGIN  
@@ -126,7 +174,16 @@ BEGIN
 END &&  
 DELIMITER ;
 
--- Returns: count companies
+-- =============================================
+-- Description: Get number of companies that meet conditions
+-- Type: Procedure
+-- Parameters:
+--   @id - location to be searched
+--   @limite - number of companies to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: Number of companies that meet conditions
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_companies_count (IN id INT)  
 BEGIN  
@@ -146,7 +203,21 @@ END &&
 DELIMITER ;
 
 
--- Returns: service providers
+-- =============================================
+-- Description: Get number of service providers that meet conditions
+-- Type: Procedure
+-- Parameters:
+--   @id_category - category to be searched
+--   @id_location - location to be searched
+--   @experience - experience to be searched
+--   @price - price to be searched
+--   @rating - rating to be searched
+--   @in_sex - sex to be searched
+--   @limite - number of service providers to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: Number of service providers that meet conditions
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_service_providers_v2 (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)  
 BEGIN  
@@ -188,7 +259,21 @@ END &&
 DELIMITER ;
 
 
--- Returns: count service providers
+-- =============================================
+-- Description: Get service providers that meet conditions
+-- Type: Procedure
+-- Parameters:
+--   @id_category - category to be searched
+--   @id_location - location to be searched
+--   @experience - experience to be searched
+--   @price - price to be searched
+--   @rating - rating to be searched
+--   @in_sex - sex to be searched
+--   @limite - number of service providers to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: All service providers that meet conditions, ordered by end date of the vip subscription 
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_service_providers_v2_count (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1))  
 BEGIN  
@@ -229,7 +314,21 @@ BEGIN
 END &&  
 DELIMITER ;
 
--- Returns: service providers
+-- =============================================
+-- Description: Get service providers that meet conditions version 3 (this one uses more than one category)
+-- Type: Procedure
+-- Parameters:
+--   @id_category - category to be searched
+--   @id_location - location to be searched
+--   @experience - experience to be searched
+--   @price - price to be searched
+--   @rating - rating to be searched
+--   @in_sex - sex to be searched
+--   @limite - number of service providers to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: All service providers that meet conditions, ordered by end date of the vip subscription 
+-- =============================================
+
 DELIMITER &&  
 CREATE PROCEDURE get_service_providers_v3 (IN categories JSON, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)  
 BEGIN  
