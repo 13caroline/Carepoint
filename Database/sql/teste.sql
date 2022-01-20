@@ -12,7 +12,7 @@ USE PI;
 
 -- CALL update_company_endSub(151,9);
  -- CALL update_company_vip(151,3);
- 
+  CALL update_company_vip(153,2);
  -- CALL get_service_providers (1, NULL, NULL, NULL,10, 0) ;
  -- DELETE FROM pi.user WHERE idUser = 207; 
  
@@ -23,7 +23,7 @@ USE PI;
 -- CALL update_last_activity(2);
 
 -- UPDATE pi.review SET review.rating = 10 WHERE review.idReview = 75;
--- CALL update_averageRating(51);
+ CALL update_averageRating(51);
 
 -- category , location, experience, price, rating, sex, limite, offset
   -- CALL get_service_providers_v2 (NULL, NULL, NULL, NULL,NULL, NULL,40,0);
@@ -32,6 +32,6 @@ USE PI;
   CALL get_companies_count(713);
   CALL get_max_values();
 -- '["1","5","3"]'
---  CALL get_service_providers_v3 (NULL, NULL, NULL, NULL, NULL, NULL,40,0);
+  CALL get_service_providers_v3 (NULL, NULL, NULL, NULL, NULL, NULL,40,0);
 -- CALL get_consumers_joboffers("exvqvb@hotmail.com");
 -- CALL get_service_providers_v3 ('["1","2"]', NULL, NULL, NULL, NULL, NULL,20,0);

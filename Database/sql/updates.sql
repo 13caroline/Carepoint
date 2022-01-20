@@ -414,10 +414,15 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE update_serviceProvider_vip (IN id INT, IN in_type INT)  
 BEGIN  
+	
+    DECLARE last_endSubVip DATETIME DEFAULT NULL;
+    DECLARE new_endSubVip DATETIME DEFAULT NULL;
+    DECLARE price_per_day DOUBLE DEFAULT 0.07;
+    
 	-- end date of the vip subscription
-	SET @last_endSubVip = (SELECT serviceprovider.endSubVip FROM serviceprovider WHERE serviceprovider.idSP = id);
+	SET last_endSubVip = (SELECT serviceprovider.endSubVip FROM serviceprovider WHERE serviceprovider.idSP = id);
     -- price per day
-    SET @price_per_day = 0.07;
+    SET price_per_day = 0.07;
 	SET foreign_key_checks = 0;
     
 	UPDATE pi.serviceprovider SET serviceprovider.endSubVip= CASE
@@ -441,10 +446,10 @@ BEGIN
         SET foreign_key_checks = 1;
         
         -- new end date of the vip subscription
-        SET @new_endSubVip = (SELECT serviceprovider.endSubVip FROM serviceprovider WHERE serviceprovider.idSP = id);
+        SET new_endSubVip = (SELECT serviceprovider.endSubVip FROM serviceprovider WHERE serviceprovider.idSP = id);
         
-        IF @last_endSubVip IS NULL THEN SELECT DATEDIFF(@new_endSubVip,now())*@price_per_day;
-        ELSE SELECT DATEDIFF(@new_endSubVip,@last_endSubVip)*@price_per_day;
+        IF last_endSubVip IS NULL THEN SELECT DATEDIFF(new_endSubVip,now())*price_per_day;
+        ELSE SELECT DATEDIFF(new_endSubVip,last_endSubVip)*price_per_day;
         END IF;
 	
 END &&  
@@ -467,10 +472,15 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE update_company_vip (IN id INT, IN in_type INT)  
 BEGIN  
+
+	DECLARE last_endSubVip DATETIME DEFAULT NULL;
+    DECLARE new_endSubVip DATETIME DEFAULT NULL;
+    DECLARE price_per_day DOUBLE DEFAULT 0.12;
+    
 	-- end date of the vip subscription
-	SET @last_endSubVip = (SELECT company.endSubVip FROM company WHERE company.idCompany = id);
+	SET last_endSubVip = (SELECT company.endSubVip FROM company WHERE company.idCompany = id);
     -- price per day
-    SET @price_per_day = 0.12;
+    SET price_per_day = 0.12;
 	SET foreign_key_checks = 0;
     
 	UPDATE pi.company SET company.endSubVip= CASE
@@ -494,10 +504,10 @@ BEGIN
         SET foreign_key_checks = 1;
         
         -- new end date of the vip subscription
-        SET @new_endSubVip = (SELECT company.endSubVip FROM company WHERE company.idCompany = id);
+        SET new_endSubVip = (SELECT company.endSubVip FROM company WHERE company.idCompany = id);
         
-        IF @last_endSubVip IS NULL THEN SELECT DATEDIFF(@new_endSubVip,now())*@price_per_day;
-        ELSE SELECT DATEDIFF(@new_endSubVip,@last_endSubVip)*@price_per_day;
+        IF last_endSubVip IS NULL THEN SELECT DATEDIFF(new_endSubVip,now())*price_per_day;
+        ELSE SELECT DATEDIFF(new_endSubVip,last_endSubVip)*price_per_day;
         END IF;
 	
 END &&  
@@ -533,9 +543,14 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE update_averageRating (IN in_idUser INT)  
 BEGIN  
+	
+    DECLARE new_avg DOUBLE DEFAULT 0.0;
+    
 	-- new average rating
-	SET @new_avg = (SELECT AVG(rating) FROM review WHERE review.idReceive = in_idUser);
-	UPDATE pi.serviceprovider SET serviceprovider.averageRating = @new_avg WHERE serviceprovider.idSP = in_idUser;
-        
+	SET new_avg = (SELECT AVG(rating) FROM review WHERE review.idReceive = in_idUser);
+    IF new_avg IS NOT NULL THEN
+			UPDATE pi.serviceprovider SET serviceprovider.averageRating = new_avg WHERE serviceprovider.idSP = in_idUser;
+	END IF;
+    
 END &&  
 DELIMITER ;

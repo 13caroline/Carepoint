@@ -21,15 +21,21 @@ DROP PROCEDURE IF EXISTS get_companies_count;
 DELIMITER &&  
 CREATE PROCEDURE get_max_values ()  
 BEGIN  
-
-	SET @price = (SELECT MAX(category_has_serviceprovider.price) FROM serviceprovider
+	DECLARE price DOUBLE DEFAULT 0.0;
+    DECLARE distance INT DEFAULT 0;
+    DECLARE rating DOUBLE DEFAULT 0.0;
+    
+    -- calculate maximum price
+	SET price = (SELECT MAX(category_has_serviceprovider.price) FROM serviceprovider
 		INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider);
-        
-	SET @distance = (SELECT MAX(serviceprovider.distance) FROM serviceprovider);
+	
+    -- calculate maximum distance   
+	SET distance = (SELECT MAX(serviceprovider.distance) FROM serviceprovider);
     
-    SET @rating = (SELECT MAX(serviceprovider.averageRating) FROM serviceprovider);
+     -- calculate maximum rating 
+    SET rating = (SELECT MAX(serviceprovider.averageRating) FROM serviceprovider);
     
-    SELECT @price as price, @distance as distance, @rating as rating;
+    SELECT price, distance , rating;
     
 END &&  
 DELIMITER ;
@@ -333,12 +339,19 @@ DELIMITER &&
 CREATE PROCEDURE get_service_providers_v3 (IN categories JSON, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)  
 BEGIN  
 	
-    SET @category1 = IF (categories LIKE '%1%', '1',NULL);
-    SET @category2 = IF (categories LIKE '%2%', '2',NULL);
-    SET @category3 = IF (categories LIKE '%3%', '3',NULL);
-    SET @category4 = IF (categories LIKE '%4%', '4',NULL);
-    SET @category5 = IF (categories LIKE '%5%', '5',NULL);
-    SET @category6 = IF (categories LIKE '%6%', '6',NULL);
+    DECLARE category1 VARCHAR(20) DEFAULT NULL;
+    DECLARE category2 VARCHAR(20) DEFAULT NULL;
+    DECLARE category3 VARCHAR(20) DEFAULT NULL;
+    DECLARE category4 VARCHAR(20) DEFAULT NULL;
+    DECLARE category5 VARCHAR(20) DEFAULT NULL;
+    DECLARE category6 VARCHAR(20) DEFAULT NULL;
+    
+    SET category1 = IF (categories LIKE '%1%', '1',NULL);
+    SET category2 = IF (categories LIKE '%2%', '2',NULL);
+    SET category3 = IF (categories LIKE '%3%', '3',NULL);
+    SET category4 = IF (categories LIKE '%4%', '4',NULL);
+    SET category5 = IF (categories LIKE '%5%', '5',NULL);
+    SET category6 = IF (categories LIKE '%6%', '6',NULL);
     
     -- @category1 ,@category2,@category3,@category4,@category5,@category6 TESTE
     
@@ -369,39 +382,39 @@ BEGIN
 				THEN (user.sex = in_sex OR user.sex = 'I')
                 ELSE 1
                 END
-		AND CASE WHEN @category1 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+		AND CASE WHEN category1 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 1) IS NOT NULL THEN 1
-				WHEN @category1 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+				WHEN category1 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 1) IS NULL THEN 0
 				ELSE 1
         END
-        AND CASE WHEN @category2 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+        AND CASE WHEN category2 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 2) IS NOT NULL THEN 1
-				WHEN @category2 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+				WHEN category2 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 2) IS NULL THEN 0
 				ELSE 1
         END
-        AND CASE WHEN @category3 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+        AND CASE WHEN category3 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 3) IS NOT NULL THEN 1
-				WHEN @category3 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+				WHEN category3 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 3) IS NULL THEN 0
 				ELSE 1
         END
-        AND CASE WHEN @category4 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+        AND CASE WHEN category4 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 4) IS NOT NULL THEN 1
-				WHEN @category4 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+				WHEN category4 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 4) IS NULL THEN 0
 				ELSE 1
         END
-        AND CASE WHEN @category5 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+        AND CASE WHEN category5 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 5) IS NOT NULL THEN 1
-				WHEN @category5 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+				WHEN category5 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 5) IS NULL THEN 0
 				ELSE 1
         END
-        AND CASE WHEN @category6 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+        AND CASE WHEN category6 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 6) IS NOT NULL THEN 1
-				WHEN @category6 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
+				WHEN category6 IS NOT NULL AND (SELECT category_has_serviceprovider.idServiceProvider FROM category_has_serviceprovider 
 			WHERE user.idUser = category_has_serviceprovider.idServiceProvider AND category_has_serviceprovider.idCategory = 6) IS NULL THEN 0
 				ELSE 1
         END
