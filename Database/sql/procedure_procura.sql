@@ -10,6 +10,8 @@ DROP PROCEDURE IF EXISTS get_service_providers_v2;
 DROP PROCEDURE IF EXISTS get_service_providers_v3;
 DROP PROCEDURE IF EXISTS get_service_providers_v2_count;
 DROP PROCEDURE IF EXISTS get_companies_count;
+DROP PROCEDURE IF EXISTS user_messages_with;
+DROP PROCEDURE IF EXISTS all_messages_with;
 
 -- =============================================
 -- Description: Get the maximum values like: maximum price, maximum distance and maximum rating
@@ -420,5 +422,51 @@ BEGIN
         END
 	GROUP BY user.idUser
     ORDER BY serviceprovider.endSubVip DESC LIMIT limite OFFSET inicio;
+END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Get all the users that a specific user has messages with
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - user identification number
+-- Returns: identification number, name and profile picture of each user that @in_idUser has messages with
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE user_messages_with (IN in_idUser INT)  
+BEGIN  
+	
+	SELECT user.idUser, user.name, file.image FROM message
+    INNER JOIN user ON message.idReceive = user.idUser
+    INNER JOIN file ON message.idReceive = file.idUser
+    WHERE message.idGive = in_idUser
+    UNION
+    SELECT user.idUser, user.name, file.image FROM message
+    INNER JOIN user ON message.idGive = user.idUser
+	INNER JOIN file ON message.idGive = file.idUser
+    WHERE message.idReceive = in_idUser
+    GROUP BY user.idUser;
+    
+END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Get all the user messages with someone
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - user one identification number
+--   @in_idUser2 - user two identification number
+-- Returns: All the user messages with someone
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE all_messages_with (IN in_idUser INT, IN in_idUser2 INT)  
+BEGIN  
+	
+	SELECT message.date, message.content, message.idGive, message.idReceive FROM message
+    WHERE (message.idGive = in_idUser AND message.idReceive = in_idUser2) OR (message.idGive = in_idUser2 AND message.idReceive = in_idUser)
+    ORDER BY message.date ASC;
+    
 END &&  
 DELIMITER ;
