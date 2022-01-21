@@ -3104,10 +3104,20 @@
 						{
 							"name": "Get all messages users",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0Mjc5MTkxMSwiZXhwIjoxNjQyNzk1NTExfQ.EigehAS-oMxUIcNTT_3pZw_JgheLkwrRre84Yditnuc",
+											"type": "text"
+										}
+									]
+								},
 								"url": {
-									"raw": "http://localhost:9040/message/203",
+									"raw": "http://localhost:9040/message/204",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3115,7 +3125,7 @@
 									"port": "9040",
 									"path": [
 										"message",
-										"203"
+										"204"
 									]
 								}
 							},
@@ -3123,24 +3133,61 @@
 						},
 						{
 							"name": "Get all messages between users",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MjcxNDMyMCwiZXhwIjoxNjQyNzE3OTIwfQ.p-vRH0wuxSMbaqaLvhCHQbArGcIQMLPFjLsWz-PpF00",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0Mjc5MTkxMSwiZXhwIjoxNjQyNzk1NTExfQ.EigehAS-oMxUIcNTT_3pZw_JgheLkwrRre84Yditnuc",
 											"type": "default"
 										},
 										{
 											"key": "idUser2",
 											"value": "90",
 											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/message/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"message",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Message",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0Mjc5MTkxMSwiZXhwIjoxNjQyNzk1NTExfQ.EigehAS-oMxUIcNTT_3pZw_JgheLkwrRre84Yditnuc",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Mensagem de teste",
+											"type": "text"
+										},
+										{
+											"key": "idUser2",
+											"value": "90",
+											"type": "text"
 										}
 									]
 								},
