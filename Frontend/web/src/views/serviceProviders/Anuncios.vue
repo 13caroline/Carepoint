@@ -2,6 +2,11 @@
   <div>
     <Bar />
     <v-container>
+            <v-row justify="center">
+       <v-col cols="12" md="3" lg="3">
+          <search />
+        </v-col>
+              <v-col cols="12" md="9" sm="9" class="ml-auto ml-sm-11 ma-md-0 mb-5">
       <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa">
         <v-tab v-for="item in items" :key="item.tab">
           {{ item.tab }}
@@ -22,6 +27,8 @@
         </v-tab-item> 
 
       </v-tabs-items>
+              </v-col>
+            </v-row>
     </v-container>
     <Foot />
   </div>
@@ -30,6 +37,7 @@
 <script>
 import axios from "axios";
 import store from "@/store/index.js";
+
 //import moment from "moment";
 export default {
     
@@ -45,6 +53,8 @@ export default {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
     spAds: () => import("@/components/ads/ViewAds.vue"),
+    Search: () => import("@/components/global/Search"),
+
   },
 
   methods: {

@@ -47,7 +47,7 @@ export default {
   data() {
     return {
       tab: null,
-      items: [{ tab: "Dados de utilizador" }, { tab: "Subscription" }, { tab: "Horários" }],
+      items: [{ tab: "Dados de utilizador" }, { tab: "Subscrição" }, { tab: "Horários" }],
       user: {},
       categories: {},
     };
