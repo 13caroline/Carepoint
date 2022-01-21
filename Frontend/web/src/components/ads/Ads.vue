@@ -18,7 +18,7 @@
             lg="4"
             md="4"
             sm="6"
-            class="ml-4 ml-sm-0 mx-md-0"
+            class="mx-auto mx-sm-0"
             v-for="(a, index) in props.items"
             :key="index"
           >
@@ -28,8 +28,9 @@
                 class="card rounded-xl overflow-auto"
                 color="#c0e4ec"
                 tile
-                height="400"
-                width="300"
+                min-height="350"
+                max-height="400"
+                max-width="600"
                 @click="infoSP(a.idUser)"
               >
                 <v-card-text>
