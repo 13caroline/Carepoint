@@ -38,3 +38,10 @@ USE PI;
 
 CALL user_messages_with(1);
 CALL all_messages_with(105,1);
+
+CALL createMessage ( 'mensagem11',1,105);
+CALL createMessage ( 'mensagem21',1,105);
+CALL createMessage ( 'mensagem31',1,105);
+CALL createMessage ( 'mensagem41',1,105);
+CALL createMessage ( 'mensagem51',1,105);
+CALL createMessage ( 'mensagem61',1,105);

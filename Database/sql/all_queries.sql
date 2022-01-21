@@ -41,6 +41,7 @@ DROP PROCEDURE IF EXISTS update_last_activity;
 DROP PROCEDURE IF EXISTS update_averageRating;
 DROP PROCEDURE IF EXISTS user_messages_with;
 DROP PROCEDURE IF EXISTS all_messages_with;
+DROP PROCEDURE IF EXISTS createMessage;
 
 -- =============================================
 -- Description: Insert review
@@ -1404,5 +1405,25 @@ BEGIN
     WHERE (message.idGive = in_idUser AND message.idReceive = in_idUser2) OR (message.idGive = in_idUser2 AND message.idReceive = in_idUser)
     ORDER BY message.date ASC;
     
+END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Insert message
+-- Type: Procedure
+-- Parameters:
+--   @in_content - content of the message
+--   @in_idGive - person that gives the review
+--   @in_idReceive - person that gets the review
+-- Returns: Nothing
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE createMessage (IN in_content VARCHAR(200), IN in_idGive INT, IN in_idReceive INT)  
+BEGIN  
+
+	INSERT INTO message (idMessage, date, content, idGive, idReceive)
+    VALUES (0, now(), in_content, in_idGive, in_idReceive);
+        
 END &&  
 DELIMITER ;
