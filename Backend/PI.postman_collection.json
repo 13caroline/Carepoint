@@ -3117,7 +3117,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/message/204",
+									"raw": "http://localhost:9040/message/seeUsers",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3125,7 +3125,7 @@
 									"port": "9040",
 									"path": [
 										"message",
-										"204"
+										"seeUsers"
 									]
 								}
 							},
@@ -3152,7 +3152,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/message/",
+									"raw": "http://localhost:9040/message/seeMessages",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3160,7 +3160,7 @@
 									"port": "9040",
 									"path": [
 										"message",
-										""
+										"seeMessages"
 									]
 								}
 							},
@@ -3169,7 +3169,7 @@
 						{
 							"name": "Add Message",
 							"request": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "urlencoded",
@@ -3181,7 +3181,7 @@
 										},
 										{
 											"key": "content",
-											"value": "Mensagem de teste",
+											"value": "Mensagem de teste 2",
 											"type": "text"
 										},
 										{
@@ -3192,7 +3192,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/message/",
+									"raw": "http://localhost:9040/message/addMessage",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3200,7 +3200,7 @@
 									"port": "9040",
 									"path": [
 										"message",
-										""
+										"addMessage"
 									]
 								}
 							},
