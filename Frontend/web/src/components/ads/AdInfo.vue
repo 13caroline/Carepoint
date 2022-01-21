@@ -6,7 +6,7 @@
           <v-img
             :src="processImage(serviceProviderData.image)"
             aspect-ratio="1"
-            class="grey lighten-2 mx-4 rounded"
+            class="grey lighten-2 rounded"
             cover
           >
             <template v-slot:placeholder>
@@ -118,8 +118,11 @@
         </span>
       </v-col>
 
-      <v-col cols="12" md="9" sm class="d-flex justify-end">
-        <add-review :dados="id" />
+      <v-col cols="12" md="4" sm class="d-flex justify-end">
+        <add-review :dados="id" @clicked="update()" />
+      </v-col>
+      <v-col cols="12" md="5" sm class="d-flex justify-end">
+        <send-message :dados="id" @clicked="update()" />
       </v-col>
     </v-row>
 
@@ -165,7 +168,14 @@
                   </div>
                 </v-col>
                 <v-col cols="3" md="2" sm="2">
-                  <div class="font-weight-bold ratings ml-4 ml-md-0 vertical-center">
+                  <div
+                    class="
+                      font-weight-bold
+                      ratings
+                      ml-4 ml-md-0
+                      vertical-center
+                    "
+                  >
                     <v-icon color="#FFE082" class="icon mb-1"
                       >fas fa-star</v-icon
                     >
@@ -257,6 +267,23 @@ export default {
     formerPage() {
       if (this.page - 1 >= 1) this.page -= 1;
     },
+    update: async function () {
+      try {
+        let response = await axios.get(
+          "http://localhost:9040/serviceProvider/?id=" + this.id
+        );
+        this.serviceProviderData = response.data.ServiceProvider[0];
+        this.serviceProvider = response.data;
+        this.reviews = response.data.reviews.length;
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
     },
@@ -270,6 +297,7 @@ export default {
   components: {
     Schedule: () => import("@/components/ads/Schedule"),
     AddReview: () => import("@/components/dialogs/AddReview"),
+    SendMessage: () => import("@/components/dialogs/SendMessage"),
   },
   computed: {
     numberOfPages() {
@@ -277,21 +305,7 @@ export default {
     },
   },
   created: async function () {
-    try {
-      let response = await axios.get(
-        "http://localhost:9040/serviceProvider/?id=" + this.id
-      );
-      this.serviceProviderData = response.data.ServiceProvider[0];
-      this.serviceProvider = response.data;
-      this.reviews = response.data.reviews.length;
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.update();
   },
 };
 </script>
