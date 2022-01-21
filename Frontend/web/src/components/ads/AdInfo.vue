@@ -100,7 +100,7 @@
         <div>
           <v-icon color="#FFE082" class="mb-1" small>fas fa-star</v-icon>
           <span class="font-weight-bold ma-2">{{
-            serviceProviderData.averageRating
+            serviceProviderData.averageRating.toFixed(1)
           }}</span>
         </div>
       </v-col>

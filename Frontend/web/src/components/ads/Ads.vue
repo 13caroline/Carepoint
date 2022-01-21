@@ -39,7 +39,7 @@
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
                         >
-                        {{ a.averageRating }} ({{ a.nr_reviews }})</span
+                        {{ a.averageRating.toFixed(1) }} ({{ a.nr_reviews }})</span
                       >
                     </v-col>
                     <v-col md="7" sm="8" class="text-right">
@@ -165,12 +165,6 @@ export default {
         if (response) {
           this.ads = response.data.ServiceProviders;
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
-          /*this.ads = response.data.ServiceProviders.map((an) => {
-            an.image = an.image
-              ? "data:image/png;base64," +
-                btoa(String.fromCharCode.apply(null, new Uint8Array(an.image)))
-              : require("@/assets/userTest.png");
-          });*/
         }
       } catch (e) {
         this.$snackbar.showMessage({
