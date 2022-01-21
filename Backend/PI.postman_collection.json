@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2d642d25-7dab-41d5-ac05-a7aba2b6b05b",
+		"_postman_id": "1653cddb-a785-47a3-87dc-8ccc2bb2aedc",
 		"name": "PI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -714,7 +714,9 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -3089,6 +3091,69 @@
 									"path": [
 										"joboffer",
 										"own"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Message",
+					"item": [
+						{
+							"name": "Get all messages users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/message/203",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"message",
+										"203"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all messages between users",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MjcxNDMyMCwiZXhwIjoxNjQyNzE3OTIwfQ.p-vRH0wuxSMbaqaLvhCHQbArGcIQMLPFjLsWz-PpF00",
+											"type": "default"
+										},
+										{
+											"key": "idUser2",
+											"value": "90",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/message/",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"message",
+										""
 									]
 								}
 							},
