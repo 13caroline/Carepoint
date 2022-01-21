@@ -6,7 +6,7 @@
           <v-img
             :src="processImage(company.image)"
             aspect-ratio="1"
-            class="grey lighten-2 mx-4 rounded"
+            class="grey lighten-2 rounded"
             cover
           >
             <template v-slot:placeholder>

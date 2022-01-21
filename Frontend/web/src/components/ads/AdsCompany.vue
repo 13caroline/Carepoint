@@ -33,7 +33,7 @@
                 <v-card-text>
                   <v-row justify="center">
                     <v-col cols="auto">
-                      <v-avatar class="profile" color="grey" size="100">
+                      <v-avatar class="profile" color="white" size="100">
                         <v-img :src="processImage(a.image.data)"></v-img>
                       </v-avatar>
                     </v-col>
