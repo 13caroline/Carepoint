@@ -19,6 +19,7 @@ var subscriptionRouter = require('./routes/subscription');
 var serviceProvRouter = require('./routes/serviceProvider');
 var addRouter = require('./routes/add');
 var reviewRouter = require('./routes/review');
+var messageRouter = require('./routes/message');
 
 
 // Para construir a DB----------------------------------------------------------------------------------------------------------
@@ -66,6 +67,7 @@ app.use('/subscription', subscriptionRouter);
 app.use('/serviceProvider', serviceProvRouter);
 app.use('/add', addRouter);
 app.use('/review', reviewRouter);
+app.use('/message',messageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
