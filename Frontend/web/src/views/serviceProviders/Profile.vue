@@ -19,8 +19,7 @@
         </v-tab-item>
 
         <v-tab-item>
-          <!--<Consultas :animal="dados"></Consultas>-->
-          <p> cenx  as3 </p>
+          <schedules></schedules>
         </v-tab-item>
       </v-tabs-items>
     </v-container>
@@ -45,7 +44,8 @@ export default {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
     personalData: () => import("@/components/serviceProvider/PersonalData.vue"),
-    subscriptionData: () => import("@/components/serviceProvider/Subscription.vue")
+    subscriptionData: () => import("@/components/serviceProvider/Subscription.vue"),
+    schedules: () => import("@/components/serviceProvider/Schedules.vue")
   },
 
   methods: {

@@ -15,6 +15,7 @@
           item-value="id"
           hide-details
           @change="categorySchedule"
+          no-data-text="Sem categorias registadas"
         ></v-select>
       </v-sheet>
     </div>
@@ -86,7 +87,6 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
-   
     this.received = response.data.categories;
     for (var j = 0; j < this.received.length; j++) {
       let schedule = this.received[j].workSchedule;

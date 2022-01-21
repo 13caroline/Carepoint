@@ -164,6 +164,7 @@
                   </template>
                   <v-date-picker
                     v-model="date"
+                    color="#78c4d4"
                     @input="menu = false"
                     locale="pt PT"
                     :max="new Date().toISOString().substr(0, 10)"
