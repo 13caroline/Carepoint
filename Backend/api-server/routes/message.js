@@ -5,7 +5,7 @@ const auth = require('../authorization/auth')
 const message_controller = require('../controllers/message');
 const User = require('../controllers/user');
 
-router.post('/seeUsers', function(req, res, next) {
+router.post('/seeUsers', auth.validToken, function(req, res, next) {
     token = req.body.token;
     email = auth.getEmailFromJWT(token);
 

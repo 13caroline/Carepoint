@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1653cddb-a785-47a3-87dc-8ccc2bb2aedc",
+		"_postman_id": "7c4a54ff-7c3f-4d5a-a065-d23085e636e4",
 		"name": "PI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1770,6 +1770,56 @@
 									"path": [
 										"users",
 										"image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ID (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0Mjc5NzQzMSwiZXhwIjoxNjQyODAxMDMxfQ.ubiMyeajxuRI8HyJ6Nbxq8uTHiEQF03hskdhFtPh-Ss",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Error Messages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/users/testErrorMessage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"testErrorMessage"
 									]
 								}
 							},

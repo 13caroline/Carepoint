@@ -19,6 +19,10 @@ const config = require('../models/Config/API_info');
  *                                   GET
  ****************************************************************************************/
 
+router.get('/testErrorMessage', (req, res) => {
+    res.status(500).jsonp({error: "Custom Error message"})
+})
+
 // List all users given the query param
 router.get('/', function(req, res, next) {
     // By access user's type
@@ -56,11 +60,16 @@ router.get('/email/:email', function(req, res, next) {
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });
-
 /****************************************************************************************
  *                                   POST
  ****************************************************************************************/
 
+router.post('/id', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token);
+    User.consult(email)
+    .then(usr => res.status(200).jsonp(usr.idUser))
+    .catch(e => res.status(500).jsonp({ error: e }))
+})
 
 //Devolve o perfil do Utilizador, quer seja Consumer / Service Provider / Company
 router.post('/perfil', (req, res, next) => {

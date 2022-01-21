@@ -48,7 +48,7 @@ router.post('/', auth.validToken, (req, res) => {
                     .then((dt) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
                     .catch((err) => res.status(500).jsonp({error: err}))
                 }else{
-                    res.status(500).jsonp({error: "Já existe review com este par de ID's"})
+                    res.status(500).jsonp({error: "Já publicou review."})
                 }
             })
             .catch((err) => res.status(500).jsonp({error: err}))
