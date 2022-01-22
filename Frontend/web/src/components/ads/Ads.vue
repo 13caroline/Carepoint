@@ -73,7 +73,7 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{
+                      <v-clamp autoresize :max-lines="3">{{
                         a.description
                       }}</v-clamp>
                     </span>
