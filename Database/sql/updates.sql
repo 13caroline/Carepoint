@@ -602,16 +602,23 @@ CREATE PROCEDURE remove_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot 
 BEGIN  
 	
     DECLARE os JSON DEFAULT '[]';
+    DECLARE new_os JSON DEFAULT '[]';
+    
     -- get the occupied schedule
     SET os = (SELECT category_has_serviceprovider.occupiedSchedule FROM category_has_serviceprovider 
 			WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory);
+            
+	SET new_os = (select json_arrayagg(j1) from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
+		where json_extract(j1, '$.date_end') <> json_extract(in_slot, '$.date_end') and json_extract(j1, '$.date_begin') <> json_extract(in_slot, '$.date_begin'));
 
+	SELECT os,new_os;
+    
 	UPDATE pi.category_has_serviceprovider SET
 		category_has_serviceprovider.occupiedSchedule= CASE 
-					WHEN in_slot IS NOT NULL AND os IS NOT NULL
-                    THEN JSON_REMOVE(category_has_serviceprovider.occupiedSchedule, JSON_UNQUOTE(JSON_SEARCH(category_has_serviceprovider.occupiedSchedule, os, in_slot)))
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND new_os IS NOT NULL
+                    THEN new_os
                     ELSE category_has_serviceprovider.occupiedSchedule
                     END
-	WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND os IS NOT NULL AND JSON_SEARCH(category_has_serviceprovider.occupiedSchedule, os, in_slot) IS NOT NULL;
+	WHERE category_has_serviceprovider.idServiceProvider = in_idUser;
 END &&  
 DELIMITER ;
