@@ -58,6 +58,19 @@ Out.getPerfilUser = (email) => {
     }})
 }
 
+Out.adicionarSP = (body, id) => {
+    return ServiceProvider.create({
+        idSP: id,
+        description: body.description,
+        dateOfBirth: body.dateOfBirth,
+        endSub: body.endSub,
+        distance: body.distance,
+        qualifications: body.qualifications,
+        idSubscription: 1,
+        averageRating: 0
+    })
+}
+
 //Creates a new ServiceProvider
 Out.insert = (serviceProvider) => {
     return ServiceProvider.create({

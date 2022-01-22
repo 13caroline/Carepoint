@@ -1,5 +1,4 @@
 const dbconfig = require('../models/Config/Database_Info');
-const dbViewsPath = '../../../Database/';
 
 var Out = module.exports;
 

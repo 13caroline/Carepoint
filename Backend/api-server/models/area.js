@@ -1,5 +1,4 @@
 const dbconfig = require("./Config/Database_Info")
-const Category = require("./category")
 
 const Area = dbconfig.sequelize.define('Area', {
     idArea: {

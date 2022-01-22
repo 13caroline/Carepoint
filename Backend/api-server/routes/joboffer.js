@@ -1,7 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
-const config = require('../models/Config/API_info'); 
 
 const auth = require('../authorization/auth');
 

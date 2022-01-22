@@ -67,7 +67,7 @@ app.use('/subscription', subscriptionRouter);
 app.use('/serviceProvider', serviceProvRouter);
 app.use('/add', addRouter);
 app.use('/review', reviewRouter);
-app.use('/message',messageRouter);
+app.use('/message', messageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

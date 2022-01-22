@@ -8,7 +8,6 @@ const upload = multer({ dest: 'uploads/', storage: storage })
 
 const User = require('../controllers/user');
 const ServiceProvider = require('../controllers/serviceProvider');
-const Auth_ServiceProvider = require('../../auth-server/controllers/serviceProvider')
 const Company = require('../controllers/company');
 const auth = require('../authorization/auth');
 
@@ -128,7 +127,7 @@ router.post('/upgrade', auth.matchPasswords, (req,res) => {
         .then((usr) => {
             User.changeType(email)
             .then((unimportant) => {
-                Auth_ServiceProvider.adicionarSP(req.body, usr.idUser)
+                ServiceProvider.adicionarSP(req.body, usr.idUser)
                 .then((sp) => {
                     axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
                         email: email,                                                                   //Tenta fazer login
