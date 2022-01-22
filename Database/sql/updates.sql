@@ -11,6 +11,7 @@ DROP PROCEDURE IF EXISTS update_serviceProvider_vip;
 DROP PROCEDURE IF EXISTS update_company_vip;
 DROP PROCEDURE IF EXISTS update_last_activity;
 DROP PROCEDURE IF EXISTS update_averageRating;
+DROP PROCEDURE IF EXISTS add_slot;
 
 -- =============================================
 -- Description: Update information of a consumer
@@ -552,5 +553,35 @@ BEGIN
 			UPDATE pi.serviceprovider SET serviceprovider.averageRating = new_avg WHERE serviceprovider.idSP = in_idUser;
 	END IF;
     
+END &&  
+DELIMITER ;
+
+
+-- =============================================
+-- Description: Add a new occupied slot
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - service provider identification number
+--   @in_idCategory - category identification number
+--   @in_slot - slot to be added
+-- Returns: None
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE add_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
+BEGIN  
+	
+    DECLARE os JSON DEFAULT '[]';
+    -- get the occupied schedule
+    SET os = (SELECT category_has_serviceprovider.occupiedSchedule FROM category_has_serviceprovider 
+			WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory);
+    
+	UPDATE pi.category_has_serviceprovider SET
+		category_has_serviceprovider.occupiedSchedule= CASE 
+					WHEN in_slot IS NOT NULL 
+                    THEN JSON_MERGE_PRESERVE(os,in_slot)
+                    ELSE category_has_serviceprovider.occupiedSchedule
+                    END
+	WHERE category_has_serviceprovider.idServiceProvider = in_idUser;
 END &&  
 DELIMITER ;
