@@ -340,8 +340,9 @@ export default {
   },
   methods: {
     redirect() {
-      if (this.$store.getters.tipo == "3") this.$router.push("/edit/profile");
-      else this.$router.push("/company/edit/profile");
+      this.$store.getters.tipo == "3"
+        ? this.$router.push("/edit/profile")
+        : this.$router.push("/company/edit/profile");
     },
     processImage(img) {
       return (

@@ -64,8 +64,11 @@
                       {{ a.beginDate }}</span
                     >
                     <span class="activity"> até</span>
-                    <span class="font-weight-bold ml-2">
+                    <span class="font-weight-bold ml-2" v-if="a.endDate">
                       {{ a.endDate }}
+                    </span>
+                    <span class="font-weight-bold ml-2" v-else>
+                      ND
                     </span>
                   </v-row>
 
@@ -166,12 +169,12 @@ export default {
       itemsPerPage: 9,
       total: 0,
       category: [
-        { name: "Companhia", icon: "fas fa-user-friends", color: "#FFFFFF" },
-        { name: "Compras", icon: "fas fa-shopping-cart", color: "#B0BEC5" },
-        { name: "Medicação", icon: "fas fa-tablets", color: "#FFCCBC" },
-        { name: "Higiene", icon: "fas fa-pump-medical", color: "#FFECB3" },
-        { name: "Passeios", icon: "fas fa-walking", color: "#DCEDC8" },
-        { name: "Refeições", icon: "fas fa-utensils", color: "#D7CCC8" },
+        { name: "Companhia", icon: "fas fa-user-friends", color: "#D7BFDC" },
+        { name: "Compras", icon: "fas fa-shopping-cart", color: "#FDA172" },
+        { name: "Medicação", icon: "fas fa-tablets", color: "#F5C3C2" },
+        { name: "Higiene", icon: "fas fa-pump-medical", color: "#95C8D8" },
+        { name: "Passeios", icon: "fas fa-walking", color: "#C5E1A5" },
+        { name: "Refeições", icon: "fas fa-utensils", color: "#EEDC82" },
       ],
     };
   },
