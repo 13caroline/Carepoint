@@ -40,7 +40,6 @@
 
 <script>
 import axios from "axios"
-import moment from "moment";
 export default {
   props: ["dados"],
   data: () => ({
@@ -68,15 +67,12 @@ export default {
       this.events = [];
       var found = this.received.find((e) => e.name === value);
 
-      let schedule = found.workSchedule;
-      for (var i = 0; i < schedule.length; i++) {
-        let state = schedule[i].occupied == 0 ? "Livre" : "Preenchido";
+      let workSchedule = found.workSchedule;
+      for (var i = 0; i < workSchedule.length; i++) {
 
         this.events.push({
-          start: schedule[i].date,
-          occupied: schedule[i].occupied,
-          end: moment(schedule[i].date).add(30, "m").format("YYYY-MM-DD HH:mm"),
-          name: state,
+          start: workSchedule[i].date_begin,
+          end: workSchedule[i].date_end,
         });
       }
     },
@@ -87,17 +83,16 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
+    
     this.received = response.data.categories;
     for (var j = 0; j < this.received.length; j++) {
-      let schedule = this.received[j].workSchedule;
-      for (var i = 0; i < schedule.length; i++) {
-        let state = schedule[i].occupied == 0 ? "Livre" : "Preenchido";
+      let workSchedule = this.received[j].workSchedule;
+      for (var i = 0; i < workSchedule.length; i++) {
 
         this.events.push({
-          start: schedule[i].date,
-          occupied: schedule[i].occupied,
-          end: moment(schedule[i].date).add(30, "m").format("YYYY-MM-DD HH:mm"),
-          name: state,
+          start: workSchedule[i].date_begin,
+          
+          end: workSchedule[i].date_end,
         });
       }
     }
