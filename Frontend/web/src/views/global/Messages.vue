@@ -1,5 +1,6 @@
 <template>
-  <div id="app">
+  <div>
+    <Bar />
     <v-container>
       <v-row no-gutters class="w-100">
         <v-col cols="3">
@@ -9,7 +10,7 @@
               <v-list-item
                 v-for="item in users"
                 :key="item.title"
-                @click="doSomething()"
+                @click="openChat(item.idUser)"
               >
                 <v-list-item-avatar>
                   <v-img :src="processImage(item.image)"></v-img>
@@ -25,8 +26,8 @@
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
-            <v-divider></v-divider>
-            <!-- <v-list subheader>
+            <!--<v-divider></v-divider>
+             <v-list subheader>
               <v-subheader>Previous chats</v-subheader>
               <v-list-item
                 v-for="item in items2"
@@ -44,7 +45,7 @@
           </v-card>
         </v-col>
 
-        <!--
+        
         <v-col cols="9">
           <v-card class="mx-auto h-100" style="height:98vh">
             <v-row justify="end">
@@ -57,8 +58,8 @@
                   :key="i"
                   :class="item.sent ? 'text-right' : ''"
                 >
-                  <v-chip pill v-if="item.sent">
-                    {{ item.msg }}
+                  <v-chip pill v-if="item.idReceive==53">
+                    {{ item.content }}
                     <v-avatar right>
                       <v-img
                         src="https://cdn.vuetifyjs.com/images/john.png"
@@ -77,7 +78,7 @@
                 <v-list-item>
                   <v-textarea
                     append-outer-icon="mdi-send"
-                    @click:append-outer="sendMessage"
+                    @click:append-outer="send"
                     v-model="messageNew.text"
                     class="mx-2"
                     label="Mensagem"
@@ -92,6 +93,8 @@
         </v-col>-->
       </v-row>
     </v-container>
+        <Foot />
+
   </div>
 </template>
 
@@ -102,6 +105,9 @@ import store from "@/store/index.js";
 export default {
   data: () => ({
     users: {},
+    messages:{},
+    activeUser:0,
+    idUser: 0,
     items: [
       {
         active: true,
@@ -131,7 +137,7 @@ export default {
     messageNew: {
       text: null,
     },
-    messages: [
+    messages2: [
       {
         msg: "Real-Time",
         avatar: "https://cdn.vuetifyjs.com/images/john.png",
@@ -165,6 +171,11 @@ export default {
       { text: "Backups", icon: "mdi-cloud-upload" },
     ],
   }),
+  components: {
+    Bar: () => import("@/components/global/AppBarAccount.vue"),
+    Foot: () => import("@/components/global/Footer"),
+
+  },
   methods: {
     send: async function () {
       if (this.$refs.form.validate()) {
@@ -205,6 +216,35 @@ export default {
     doSomething() {
       console.log("Do something");
     },
+    openChat(idUser){
+      this.activeUser=idUser;
+      this.showChats();
+
+    },
+    showChats: async function(){
+      try {
+      let response = await axios.post(
+        "http://localhost:9040/message/seeUsers",
+        {
+          token: store.getters.token,
+        }
+      );
+      console.log(response.data);
+      this.users = response.data;
+      console.log("current user: " +this.users[0].idUser)
+      console.log("active user: "+this.activeUser)
+      if(this.activeUser!=0)
+      this.getMessage(this.activeUser)
+      else this.getMessage(this.users[0].idUser)
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
+    },
     processImage(img) {
       return (
         "data:image/png;base64," +
@@ -218,10 +258,13 @@ export default {
           "http://localhost:9040/message/seeMessages",
           {
             token: store.getters.token,
+            idUser2: idReceiver,
           }
         );
         console.log(response.data);
-        this.users = response.data;
+        this.messages = response.data;
+        if(this.messages[0]==idReceiver) this.idUser=this.messages[0].idGive
+        else this.idUser=this.messages[0].idReceive
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -233,23 +276,7 @@ export default {
     },
   },
   created: async function () {
-    try {
-      let response = await axios.post(
-        "http://localhost:9040/message/seeUsers",
-        {
-          token: store.getters.token,
-        }
-      );
-      console.log(response.data);
-      this.users = response.data;
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.showChats();
   },
 };
 </script>
