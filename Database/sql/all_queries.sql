@@ -180,13 +180,13 @@ DELIMITER ;
 -- Type: Procedure
 -- Parameters:
 --   @id - service provider identification number
--- Returns: All information about categories that belongs to a specific service provider (name of category, experience, work schedule and price)
+-- Returns: All information about categories that belongs to a specific service provider (name of category, experience, work schedule, occupied schedule and price)
 -- =============================================
 
 DELIMITER &&
 CREATE PROCEDURE get_sp_category_info (IN id INT)
 BEGIN
-	SELECT category.name, category_has_serviceprovider.experience, category_has_serviceprovider.workSchedule, 
+	SELECT category.name, category_has_serviceprovider.experience, category_has_serviceprovider.workSchedule, category_has_serviceprovider.occupiedSchedule,
 		category_has_serviceprovider.price FROM user
 	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
     INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
@@ -211,17 +211,17 @@ END &&
 DELIMITER ;
 
 -- =============================================
--- Description: Get work schedule information of a scpecific service provider
+-- Description: Get work schedule and occupied schedule of a scpecific service provider
 -- Type: Procedure
 -- Parameters:
 --   @id - service provider identification number
--- Returns: Work schedule and category name that belongs to a specific service provider 
+-- Returns: Work schedule, occupied schedule and category name that belongs to a specific service provider 
 -- =============================================
 
 DELIMITER &&
 CREATE PROCEDURE get_sp_horarios (IN id INT)
 BEGIN
-	SELECT category.name, category_has_serviceprovider.workSchedule FROM user
+	SELECT category.name, category_has_serviceprovider.workSchedule,category_has_serviceprovider.occupiedSchedule FROM user
 	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
     INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
 END &&
