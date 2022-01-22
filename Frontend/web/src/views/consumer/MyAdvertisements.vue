@@ -73,8 +73,11 @@
                       <span class="text-uppercase">Valor</span>
                     </v-col>
                     <v-col class="pl-0 pb-0" cols="7">
-                      <span class="black--text">
+                      <span class="black--text" v-if="a.price">
                         <strong>{{ a.price }} €/hora</strong>
+                      </span>
+                      <span class="black--text" v-else>
+                        <strong>Preço negociável</strong>
                       </span>
                     </v-col>
 
