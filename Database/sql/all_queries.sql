@@ -43,6 +43,7 @@ DROP PROCEDURE IF EXISTS user_messages_with;
 DROP PROCEDURE IF EXISTS all_messages_with;
 DROP PROCEDURE IF EXISTS createMessage;
 DROP PROCEDURE IF EXISTS add_slot;
+DROP PROCEDURE IF EXISTS remove_slot;
 
 -- =============================================
 -- Description: Insert review
@@ -1450,10 +1451,39 @@ BEGIN
     
 	UPDATE pi.category_has_serviceprovider SET
 		category_has_serviceprovider.occupiedSchedule= CASE 
-					WHEN in_slot IS NOT NULL 
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL
                     THEN JSON_MERGE_PRESERVE(os,in_slot)
                     ELSE category_has_serviceprovider.occupiedSchedule
                     END
-	WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory;
+	WHERE category_has_serviceprovider.idServiceProvider = in_idUser;
+END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Remove an occupied slot
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - service provider identification number
+--   @in_idCategory - category identification number
+--   @in_slot - slot to be added
+-- Returns: None
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE remove_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
+BEGIN  
+	
+    DECLARE os JSON DEFAULT '[]';
+    -- get the occupied schedule
+    SET os = (SELECT category_has_serviceprovider.occupiedSchedule FROM category_has_serviceprovider 
+			WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory);
+
+	UPDATE pi.category_has_serviceprovider SET
+		category_has_serviceprovider.occupiedSchedule= CASE 
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL
+                    THEN JSON_REMOVE(category_has_serviceprovider.occupiedSchedule, JSON_UNQUOTE(JSON_SEARCH(category_has_serviceprovider.occupiedSchedule, os, in_slot)))
+                    ELSE category_has_serviceprovider.occupiedSchedule
+                    END
+	WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND os IS NOT NULL AND JSON_SEARCH(category_has_serviceprovider.occupiedSchedule, os, in_slot) IS NOT NULL;
 END &&  
 DELIMITER ;
