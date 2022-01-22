@@ -46,4 +46,5 @@ CALL createMessage ( 'mensagem41',1,105);
 CALL createMessage ( 'mensagem51',1,105);
 CALL createMessage ( 'mensagem61',1,105);
 
-CALL add_slot(56,1,'[{"date_end": "2022-01-01 20:00:00", "date_begin": "2022-01-01 14:30:00"},{"date_end": "2022-01-01 20:00:00", "date_begin": "2022-01-01 14:30:00"}]');
+CALL add_slot(51,3,'[{"date_end": "2022-01-01 20:00:00", "date_begin": "2022-01-01 14:30:00"}]');
+CALL remove_slot(51,3,'{"date_end": "2022-01-01 20:00:00", "date_begin": "2022-01-01 14:30:00"}');
