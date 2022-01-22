@@ -4,7 +4,7 @@
       <v-sheet height="64">
         <v-spacer></v-spacer>
         <v-select
-          v-model="search"
+          v-model="selectedDefault"
           append-icon="mdi-magnify"
           label="Categoria"
           outlined
@@ -39,11 +39,11 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios";
 export default {
   props: ["dados"],
   data: () => ({
-    search: "",
+    selectedDefault: "",
     today: "2022-01-03",
     events: [],
     start: null,
@@ -54,14 +54,38 @@ export default {
     type: "",
     cat: [],
     schedules: {},
-    received: []
+    received: [],
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
   },
   methods: {
     getEventColor(event) {
-      return event.occupied == 0 ? "#78C4D4" : "#BDBDBD";
+      var color = "#78C4D4";
+      if (event.occupied == 1) return "#D7CCC8";
+      else {
+        switch (event.category) {
+          case "Companhia":
+            color = "#D7BFDC";
+            break;
+          case "Compras":
+            color = "#FDA172";
+            break;
+          case "Medicação":
+            color = "#F5C3C2";
+            break;
+          case "Higiene":
+            color = "#95C8D8";
+            break;
+          case "Passeios":
+            color = "#C5E1A5";
+            break;
+          case "Refeições":
+            color = "#EEDC82";
+            break;
+        }
+        return color;
+      }
     },
     categorySchedule(value) {
       this.events = [];
@@ -69,35 +93,60 @@ export default {
 
       let workSchedule = found.workSchedule;
       for (var i = 0; i < workSchedule.length; i++) {
-
         this.events.push({
           start: workSchedule[i].date_begin,
           end: workSchedule[i].date_end,
+          occupied: 0,
+          category: found.name,
+        });
+      }
+
+      let occupiedSchedule = found.occupiedSchedule;
+      for (var k = 0; k < occupiedSchedule.length; k++) {
+        this.events.push({
+          start: occupiedSchedule[k].date_begin,
+          end: occupiedSchedule[k].date_end,
+          occupied: 1,
+          category: found.name,
         });
       }
     },
   },
-  
+
   created: async function () {
     try {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
-    
-    this.received = response.data.categories;
-    for (var j = 0; j < this.received.length; j++) {
-      let workSchedule = this.received[j].workSchedule;
-      for (var i = 0; i < workSchedule.length; i++) {
+      this.received = response.data.categories;
 
-        this.events.push({
-          start: workSchedule[i].date_begin,
-          
-          end: workSchedule[i].date_end,
-        });
+      if (this.received) {
+        this.selectedDefault = this.received[0];
+
+        let workSchedule = this.selectedDefault.workSchedule;
+
+        for (var i = 0; i < workSchedule.length; i++) {
+          this.events.push({
+            start: workSchedule[i].date_begin,
+            end: workSchedule[i].date_end,
+            occupied: 0,
+            category: this.selectedDefault.name,
+          });
+        }
+
+        let occupiedSchedule = this.selectedDefault.occupiedSchedule;
+
+        for (var k = 0; k < occupiedSchedule.length; k++) {
+          this.events.push({
+            start: occupiedSchedule[k].date_begin,
+            end: occupiedSchedule[k].date_end,
+            occupied: 1,
+            category: this.selectedDefault.name,
+          });
+        }
       }
-    }
-
-     } catch (e) {
+    } catch (e) {
+      console.log(e);
       this.$snackbar.showMessage({
         show: true,
         color: "error",
@@ -106,7 +155,6 @@ export default {
       });
     }
   },
-  
 };
 </script>
 

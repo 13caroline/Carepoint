@@ -234,6 +234,7 @@ export default {
 
     postAd: async function () {
       if (this.$refs.form.validate()) {
+        if (!this.price) this.price = 0;
         try {
           await axios.post("http://localhost:9040/joboffer/new", {
             token: store.getters.token,

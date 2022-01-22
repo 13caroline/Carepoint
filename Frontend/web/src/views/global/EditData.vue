@@ -238,7 +238,9 @@ export default {
   }),
   methods: {
     close() {
-      this.$router.push("/consumer/profile");
+      this.$store.getters.tipo == "2"
+        ? this.$router.push("/consumer/profile")
+        : this.$router.push("/service/provider/page");
     },
     isNumber(e) {
       let char = String.fromCharCode(e.keyCode);
