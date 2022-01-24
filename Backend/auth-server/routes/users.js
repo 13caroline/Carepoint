@@ -40,14 +40,18 @@ router.post('/register', (req, res) => {
         console.log(3)
         ServiceProvider.adicionarSP(req.body, user.idUser)                                    //Adiciona o SP
         .then((SP) => {                                                                       //Se tiver sucesso (1)
-          axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {      
-            email: req.body.email,                                                            //Tenta fazer login
-            password: req.body.password
-          }).then(data => {                                                                   //Se tiver sucesso (2)
-            res.status(201).jsonp({token: data.data.token})                                   //Envia o token come resposta
-          }).catch(e => {                                                                     //Se falhar o sucesso (2)
-            res.status(500).jsonp({error: e})                                                 //Retorna o erro
+          ServiceProvider.addCategorias(req.body.categorias, user.idUser)
+          .then((SPc) => {
+            axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {      
+              email: req.body.email,                                                            //Tenta fazer login
+              password: req.body.password
+            }).then(data => {                                                                   //Se tiver sucesso (2)
+              res.status(201).jsonp({token: data.data.token})                                   //Envia o token come resposta
+            }).catch(e => {                                                                     //Se falhar o sucesso (2)
+              res.status(500).jsonp({error: e})                                                 //Retorna o erro
+            })  
           })
+          .catch((err) => res.status(401).jsonp({error:err}))
         })
         .catch((err) => res.status(401).jsonp({error:err}))                                   //Se falhar o sucesso (1), retorna o erro
         break;
