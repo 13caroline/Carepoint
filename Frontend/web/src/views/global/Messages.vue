@@ -73,7 +73,7 @@
                       </v-chip>
                       <v-row v-else>
                         <v-col>
-                          <v-chip pill>
+                          <v-chip pill class="py-6">
                             {{ item.content }}
                           </v-chip>
                         </v-col>
@@ -215,5 +215,8 @@ export default {
 </script>
 
 <style scoped>
-
+.v-chip{
+  height: auto; 
+  white-space: normal;
+}
 </style>
