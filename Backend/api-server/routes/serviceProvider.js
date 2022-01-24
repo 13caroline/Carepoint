@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../authorization/auth');
 
 const ServiceProvider = require('../controllers/serviceProvider');
-
+const User = require('../controllers/user');
 
 /****************************************************************************************
  *                                   GET
@@ -71,6 +72,45 @@ router.post('/', function(req, res) {
  *                                   PUT
  ****************************************************************************************/
 
+router.put('/regHorario', auth.validToken, (req, res) => {
+    email = auth.getTypeFromJWT(req.body.token)
+    User.consult(email)
+    .then((usr) => {
+        var uid = usr.idUser;
+        var dateBegin = req.body.dateBegin;
+        var dateEnd = req.body.dateEnd;
+        var text = '{"date_end": "'+dateEnd+'",' + '"date_begin": "'+dateBegin+'"}'
+        ServiceProvider.addHorario(uid, req.body.category, text)
+        .then((upd) => {res.status(200).jsonp({ message: "success" })})
+        .catch((err) => {res.status(500).jsonp({ error : err })})
+    })
+    .catch((err) => res.status(500).jsonp({ error : err }))
+})
+
+router.put('/newSlot', auth.validToken, (req,res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((usr) => {
+        var uid = usr.idUser;
+        var dateBegin = req.body.dateBegin;
+        var dateEnd = req.body.dateEnd;
+        var d = new Date();
+        var ymd = d.getFullYear() + "-" + (('0'+(d.getMonth()+1)).slice(-2)) + "-" + d.getDate();
+        var hms = d.getHours() + ":" + (('0'+d.getMinutes()).slice(-2)) + ":" + (('0'+d.getSeconds()).slice(-2));
+        var postDate = ymd + " " + hms;
+        var occupied = "0";
+        let text = '{"id": "'+uid+'",' +
+                   '"date_end": "'+dateEnd+'",' +
+                   '"occupied": "'+occupied+'",' +
+                   '"date_begin": "'+dateBegin+'",' +
+                   '"date_requested": "'+postDate+'"}';
+
+        ServiceProvider.addSlot(req.body.spId, req.body.category, text)
+        .then((upd) => {res.status(200).jsonp({ message: "success" })})
+        .catch((err) => {res.status(500).jsonp({ error : err })})  
+    })
+    .catch((err) => {res.status(500).jsonp({ error : err })})    
+})
 
 // Update an ServiceProvider
 router.put('/:id', function(req, res, next) {

@@ -1,5 +1,6 @@
 // Controller for the serviceProvider model
 
+const Category = require('../models/category');
 const dbconfig = require('../models/Config/Database_Info');
 const ServiceProvider = require('../models/serviceProvider')
 
@@ -83,6 +84,24 @@ Out.insert = (serviceProvider) => {
         idUser: serviceProvider.idUser,
         idSubscription: serviceProvider.idSubscription
     });
+}
+
+Out.addHorario = (id, cat, jsonObj) => {
+    return dbconfig.sequelize.query('CALL add_workSchedule_slot (:id, :cat, :slot)',
+        {replacements : {
+            id: id,
+            cat: cat,
+            slot: jsonObj
+        }})
+}
+
+Out.addSlot = (id, cat, jsonObj) => {
+    return dbconfig.sequelize.query('CALL add_slot (:id, :cat, :slot)',
+        {replacements : {
+            id: id,
+            cat: cat,
+            slot: jsonObj
+        }})
 }
 
 // Update a ServiceProvider

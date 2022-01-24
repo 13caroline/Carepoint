@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "ramili@gmail.com",
+									"value": "ramili3@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -182,6 +182,21 @@
 									"key": "qualifications",
 									"value": "I am qualified to walk throughdasd",
 									"description": "Opcional",
+									"type": "text"
+								},
+								{
+									"key": "categorias",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "categorias",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "categorias",
+									"value": "3",
 									"type": "text"
 								}
 							]
@@ -1700,7 +1715,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MjI2OTA2OSwiZXhwIjoxNjQyMjcyNjY5fQ.exQBuGarlrS6DVh5Hq9h_p3ukcqhcResM6Mac50DjQw",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzA1MDI3NywiZXhwIjoxNjQzMDUzODc3fQ.l51cTqeuRiaDWJdCO585nh9kTMN5VvT3z7nJwTrUaIM",
 											"type": "text"
 										},
 										{
@@ -2325,6 +2340,101 @@
 											"key": "id",
 											"value": "62"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar Slot Ocupado (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzA0MzUyNywiZXhwIjoxNjQzMDQ3MTI3fQ.vR3nL3eIYlRPgW-JRg6zmm6jn4OSwJni7ELBiQOwHtc",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "2022-01-06 17:30:00",
+											"type": "text"
+										},
+										{
+											"key": "dateEnd",
+											"value": "2022-01-06 18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "spId",
+											"value": "51",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "4",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/newSlot",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"newSlot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar Slot de Horário (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzA1MDMyMCwiZXhwIjoxNjQzMDUzOTIwfQ.9JXC_nDnNpYlylP45ME8AOm4PA2mxaaGuNBdOObkVHI",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "2022-01-06 17:30:00",
+											"type": "text"
+										},
+										{
+											"key": "dateEnd",
+											"value": "2022-01-06 18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "4",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/regHorario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"regHorario"
 									]
 								}
 							},
