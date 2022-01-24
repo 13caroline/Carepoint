@@ -33,12 +33,7 @@ node ./bin/www
 
 5. In *MySQL Workbench* run __povoamento.sql__ from __Database/povoamento__ 
 6. In *MySQL Workbench* run, from __Database/sql__
-  * *procedures_insert.sql*
-  * *procedures_joboffer.sql*
-  * *procedures_perfil.sql*
-  * *procedure_procura.sql*
-  * *trigger.sql*
-  * *updates.sql*
+  * *all_queries.sql*
 
 7. Do
 ~~~
