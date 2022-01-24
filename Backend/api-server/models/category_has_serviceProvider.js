@@ -10,14 +10,6 @@ const category_Has_ServiceProvider = dbconfig.sequelize.define('Category_has_Ser
     experience : {
         type: dbconfig.Sequelize.INTEGER,
         allowNull: false
-    },
-    workSchedule : {
-        type: dbconfig.Sequelize.JSON,
-        allowNull: false
-    },
-    occupiedSchedule : {
-        type: dbconfig.Sequelize.JSON,
-        allowNull: false
     }
 }, {
     freezeTableName: true,
