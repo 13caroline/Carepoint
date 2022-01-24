@@ -11,7 +11,7 @@ Out.getServiceProviders = (category, location, experience, price, rating, sex, l
         {replacements: {
             idC: category,
             idL: location,
-            exp: experience,
+            exp: null,
             prc: price,
             rt: rating,
             sex: sex,
