@@ -65,6 +65,7 @@
                         <v-img :src="processImage(pic)"></v-img>
                       </v-avatar>
                       <v-chip
+                      class="pa-6"
                         pill
                         v-if="item.idReceive == idUser"
                         color="#c0e4ec"
@@ -73,7 +74,7 @@
                       </v-chip>
                       <v-row v-else>
                         <v-col>
-                          <v-chip pill class="py-6">
+                          <v-chip pill class="pa-6">
                             {{ item.content }}
                           </v-chip>
                         </v-col>
