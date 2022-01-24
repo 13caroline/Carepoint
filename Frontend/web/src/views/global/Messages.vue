@@ -7,6 +7,9 @@
           <v-card class="mx-auto h-100" style="height: 98vh">
             <v-list subheader>
               <v-subheader>Prestadores de Serviços</v-subheader>
+                  <v-list-item-group
+        active-class="light-blue lighten-4"
+      >
               <v-list-item
                 v-for="item in users"
                 :key="item.title"
@@ -25,6 +28,7 @@
                   >
                 </v-list-item-icon>
               </v-list-item>
+                  </v-list-item-group>
             </v-list>
             <!--<v-divider></v-divider>
              <v-list subheader>
@@ -87,7 +91,6 @@
               v-model="messageNew.text"
               class="mx-5"
               label="Mensagem"
-              :rules="[(v) => v.length > 200 || 'Máximo de 200 caracteres']"
               rows="1"
               outlined
             ></v-textarea>
@@ -131,15 +134,9 @@ export default {
             content: this.messageNew.text,
             idUser2: receiver,
           });
-          this.$emit("clicked", "update");
-          (this.dialog = false),
-            this.$snackbar.showMessage({
-              show: true,
-              text: "Mensagem enviada com sucesso.",
-              color: "success",
-              snackbar: true,
-              timeout: 4000,
-            });
+            this.showChats();
+            this.messageNew.text=""
+           
         } catch (e) {
           this.$snackbar.showMessage({
             show: true,
@@ -165,10 +162,13 @@ export default {
           }
         );
         this.users = response.data;
-        this.pic = response.data[0].image;
-        this.activeUser = response.data[0].idUser;
+        
         if (this.activeUser != 0) this.getMessage(this.activeUser);
-        else this.getMessage(this.users[0].idUser);
+        else{
+          this.activeUser=response.data[0].idUser;
+        this.pic = response.data[0].image;
+         this.getMessage(this.users[0].idUser);
+        }
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
