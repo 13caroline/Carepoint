@@ -5,7 +5,7 @@
     <v-container class="d-flex flex-column">
       <v-row justify="center">
         <v-col cols="12" md="3" lg="3">
-          <search />
+          <search :tipo="tab"/>
         </v-col>
       <v-col cols="12" md="9" sm="9" class="ml-auto ml-sm-11 ma-md-0 mb-5">
       <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa" show-arrows>

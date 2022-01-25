@@ -103,7 +103,6 @@
 import axios from "axios";
 import moment from "moment";
 import VClamp from "vue-clamp";
-import { EventBus } from '../global/Search.vue'
 
 export default {
   name: "Ads",
@@ -145,35 +144,26 @@ export default {
       if (this.page - 1 >= 1) this.page -= 1;
       this.getData();
     },
-    getData: async function () {
+    getData: async function (form) {
       try {
-        let response = await axios.get(
-          "http://localhost:9040/search/?page=" + this.page
-        );
+        let url = "http://localhost:9040/search/?page=";
+          // console.log('fomr => ',form);
+          this.ads = [];
+        if(form) {
+          this.page = 1;
+          // console.log('ads => ',this.ads);
+         url = url + this.page +
+         (form.category ? "&category=".concat(form.category) : "") + 
+         (form.location ? "&location=".concat(form.location) : "") + 
+         (form.price ? "&price=".concat(form.price) : "") + 
+         (form.rating ? "&rating=".concat(form.rating) : "") + 
+         (form.sex ? "&sex=".concat(form.sex) : "");
 
-        if (response) {
-          console.log(response.data);
-          this.ads = response.data.Companies;
-          this.total = response.data.Companies_Sum[0].number_companies;
-          /*this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
-         })*/
         }
-      } catch (e) {
-        this.$snackbar.showMessage({
-          show: true,
-          color: "error",
-          text: "Ocorreu um erro. Por favor tente mais tarde!",
-          timeout: 4000,
-        });
-      }
-    },
-        searchNewData: async function () {
-      try {
-        this.page = 1;
-        let response = await axios.get(
-          "http://localhost:9040/search/?page=" + this.page 
-        );
+         else url = url + this.page;
+        console.log(url);
+        let response = await axios.get(url);
+
 
         if (response) {
           console.log(response.data);
@@ -203,11 +193,7 @@ export default {
     this.getData();
   },
 };
-const searchForm = function(clickCount) {
-  console.log('Search received => ' ,clickCount)
-}
 
-EventBus.$on('clicked', searchForm);
 </script>
 
 <style scoped>

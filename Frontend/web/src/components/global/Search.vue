@@ -115,19 +115,22 @@
 import axios from "axios";
 import Vue from 'vue';
 export const EventBus = new Vue();
+import adsCmpanySearch from '../ads/AdsCompany.vue' ;
+import ads from '../ads/Ads.vue';
 export default {
   name: "Search",
+  props: ["tipo"],
 
   data() {
     return {
       formValues: {
-        search: "",
-        category: "",
-        distance: 0,
-        price: 0,
-        rating: 0,
-        sex: "",
-        location: "",
+        search: null,
+        category: null,
+        distance: null,
+        price: null,
+        rating: null,
+        sex: null,
+        location: null,
       },
       form: {
         categories: [
@@ -151,7 +154,11 @@ export default {
   methods: {
     searchForm() {
       console.log(this.formValues);
-      EventBus.$emit('clicked', this.formValues);
+      console.log('Procura em => ' , this.tipo);
+      this.tipo==1 ? adsCmpanySearch.methods.getData(this.formValues) : 
+          ads.methods.getData(this.formValues);
+
+
     },
   },
   created: async function () {
