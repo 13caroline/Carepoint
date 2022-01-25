@@ -214,24 +214,24 @@ router.put('/update', auth.matchUsers, (req, res, next) => {
     }
 })
 
-router.put('/updatePassword', auth.validToken, (req, res, next) => {
+router.put('/updatePassword', auth.matchUsers, (req, res, next) => {
     var email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((user) => {
-        if(bcrypt.compareSync(req.body.repeatPassword1, user.password)){
-            if(bcrypt.compareSync(req.body.repeatPassword2, user.password)){
-                bcrypt.hash(req.body.newPassword, 10)
+        if(bcrypt.compareSync(req.body.oldPassword, user.password)){
+            if(req.body.newPassword_1 == req.body.newPassword_2){
+                bcrypt.hash(req.body.newPassword_1, 10)
                 .then((cryptPass) => {
                     User.updatePassword(email, cryptPass)
-                    .then((user) => res.status(201).jsonp(user))
-                    .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+                    .then((user) => res.status(201).jsonp({message: "success"}))
+                    .catch((err) => res.status(500).jsonp({error : err}))
                 })
-                .catch((err) => res.status(500).jsonp("Failure changing password: " + err))
+                .catch((err) => res.status(500).jsonp({error : err}))
             }else{
-                res.status(400).jsonp("Repeat Password 2 errada.")
+                res.status(400).jsonp({error : "As novas passwords não coicidem."})
             }
         }else{
-            res.status(400).jsonp("Repeat Password 1 errada.")
+            res.status(400).jsonp({error : "Password Antiga não coincide."})
         }
     })
 })

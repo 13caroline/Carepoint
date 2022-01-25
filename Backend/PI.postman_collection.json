@@ -1420,27 +1420,27 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDAyNzIyNTIsImV4cCI6MTY0MDI3NTg1Mn0.kbT6relitMz48nq8E4huWotl_ZZut_FdLMYEnfjLw50",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzE0NTM2MCwiZXhwIjoxNjQzMTg4NTYwfQ.oilXcGaOj8LO9_rpAI4MU3F6ZMgLEQ88Pk12S_nuyBE",
 											"type": "text"
 										},
 										{
-											"key": "repeatPassword1",
-											"value": "poopy",
+											"key": "oldPassword",
+											"value": "987654321",
 											"type": "text"
 										},
 										{
-											"key": "repeatPassword2",
-											"value": "poopy",
+											"key": "newPassword_1",
+											"value": "123456789",
 											"type": "text"
 										},
 										{
-											"key": "newPassword",
-											"value": "6666",
+											"key": "newPassword_2",
+											"value": "123456789",
 											"type": "text"
 										},
 										{
 											"key": "idUser",
-											"value": "203",
+											"value": "205",
 											"type": "text"
 										}
 									]
@@ -1825,7 +1825,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0Mjc5NzQzMSwiZXhwIjoxNjQyODAxMDMxfQ.ubiMyeajxuRI8HyJ6Nbxq8uTHiEQF03hskdhFtPh-Ss",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzE0NTM2MCwiZXhwIjoxNjQzMTg4NTYwfQ.oilXcGaOj8LO9_rpAI4MU3F6ZMgLEQ88Pk12S_nuyBE",
 											"type": "default"
 										}
 									]
