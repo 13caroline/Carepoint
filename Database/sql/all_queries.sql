@@ -43,7 +43,7 @@ DROP PROCEDURE IF EXISTS user_messages_with;
 DROP PROCEDURE IF EXISTS all_messages_with;
 DROP PROCEDURE IF EXISTS createMessage;
 DROP PROCEDURE IF EXISTS add_slot;
-DROP PROCEDURE IF EXISTS remove_slot;
+DROP PROCEDURE IF EXISTS remove_workSchedule_slot;
 DROP PROCEDURE IF EXISTS add_workSchedule_slot;
 DROP PROCEDURE IF EXISTS insert_categorias;
 
@@ -1461,38 +1461,37 @@ END &&
 DELIMITER ;
 
 -- =============================================
--- Description: Remove an occupied slot
+-- Description: Remove a work slot
 -- Type: Procedure
 -- Parameters: 
 --   @in_idUser - service provider identification number
---   @in_idCategory - category identification number
 --   @in_slot - slot to be added
 -- Returns: None
 -- =============================================
 
 DELIMITER &&  
-CREATE PROCEDURE remove_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
+CREATE PROCEDURE remove_workSchedule_slot (IN in_idUser INT, IN in_slot JSON)  
 BEGIN  
 	
     DECLARE os JSON DEFAULT '[]';
     DECLARE new_os JSON DEFAULT '[]';
     
-    -- get the occupied schedule
-    SET os = (SELECT category_has_serviceprovider.occupiedSchedule FROM category_has_serviceprovider 
-			WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory);
+    -- get the work schedule
+    SET os = (SELECT serviceprovider.workSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser );
             
 	SET new_os = (select json_arrayagg(j1) from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
 		where json_extract(j1, '$.date_end') <> json_extract(in_slot, '$.date_end') and json_extract(j1, '$.date_begin') <> json_extract(in_slot, '$.date_begin'));
 
-	SELECT os,new_os;
+	-- SELECT os,new_os;
     
-	UPDATE pi.category_has_serviceprovider SET
-		category_has_serviceprovider.occupiedSchedule= CASE 
+	UPDATE pi.serviceprovider SET
+		serviceprovider.workSchedule= CASE 
 					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND new_os IS NOT NULL
                     THEN new_os
-                    ELSE category_has_serviceprovider.occupiedSchedule
+                    ELSE serviceprovider.workSchedule
                     END
-	WHERE category_has_serviceprovider.idServiceProvider = in_idUser;
+	WHERE serviceprovider.idSP = in_idUser;
 END &&  
 DELIMITER ;
 

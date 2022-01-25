@@ -18,7 +18,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_11@gmail.com",
+									"value": "theUserTestingEmail_01@gmail.com",
 									"type": "text"
 								},
 								{
@@ -59,7 +59,7 @@
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_01@gmail.com",
+									"value": "theUserTestingEmail_02@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1390,7 +1390,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbWlsaUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQxNjUyNDEyLCJleHAiOjE2NDE2NTYwMTJ9.ydZsR_AIlEadG5nLuOnkW_D_9XRIsOSQpelGmXwErdk",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDJAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzE0MTQwNywiZXhwIjoxNjQzMTQ1MDA3fQ.cNyWZuXQkbFrJqDPJfv_JB16gMkGmaVaCTqh7S7NXF0",
 											"type": "default"
 										}
 									]
@@ -1420,27 +1420,27 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDAyNzIyNTIsImV4cCI6MTY0MDI3NTg1Mn0.kbT6relitMz48nq8E4huWotl_ZZut_FdLMYEnfjLw50",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzE0NTM2MCwiZXhwIjoxNjQzMTg4NTYwfQ.oilXcGaOj8LO9_rpAI4MU3F6ZMgLEQ88Pk12S_nuyBE",
 											"type": "text"
 										},
 										{
-											"key": "repeatPassword1",
-											"value": "poopy",
+											"key": "oldPassword",
+											"value": "987654321",
 											"type": "text"
 										},
 										{
-											"key": "repeatPassword2",
-											"value": "poopy",
+											"key": "newPassword_1",
+											"value": "123456789",
 											"type": "text"
 										},
 										{
-											"key": "newPassword",
-											"value": "6666",
+											"key": "newPassword_2",
+											"value": "123456789",
 											"type": "text"
 										},
 										{
 											"key": "idUser",
-											"value": "203",
+											"value": "205",
 											"type": "text"
 										}
 									]
@@ -1720,7 +1720,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzA1MDI3NywiZXhwIjoxNjQzMDUzODc3fQ.l51cTqeuRiaDWJdCO585nh9kTMN5VvT3z7nJwTrUaIM",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDJAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzE0MTM2MSwiZXhwIjoxNjQzMTQ0OTYxfQ.nDpLR5uGAiUEmqjoFzwQxZccFFSPzkolmpijz0-yjsQ",
 											"type": "text"
 										},
 										{
@@ -1825,7 +1825,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0Mjc5NzQzMSwiZXhwIjoxNjQyODAxMDMxfQ.ubiMyeajxuRI8HyJ6Nbxq8uTHiEQF03hskdhFtPh-Ss",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzE0NTM2MCwiZXhwIjoxNjQzMTg4NTYwfQ.oilXcGaOj8LO9_rpAI4MU3F6ZMgLEQ88Pk12S_nuyBE",
 											"type": "default"
 										}
 									]
@@ -2349,7 +2349,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9040/serviceProvider/horarios/?id=62",
+									"raw": "http://localhost:9040/serviceProvider/horarios/?id=51",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2363,7 +2363,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "62"
+											"value": "51"
 										}
 									]
 								}
@@ -2465,6 +2465,76 @@
 									"path": [
 										"serviceProvider",
 										"regHorario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove a WorkSchedule Slot",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "slotJson",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/remHorario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"remHorario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Occupied Slot",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "slotJson",
+											"value": "",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/remSlot",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"remSlot"
 									]
 								}
 							},
