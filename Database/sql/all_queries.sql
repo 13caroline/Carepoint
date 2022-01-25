@@ -220,16 +220,13 @@ DELIMITER ;
 -- Type: Procedure
 -- Parameters:
 --   @id - service provider identification number
--- Returns: Work schedule, occupied schedule and category name that belongs to a specific service provider 
+-- Returns: Work schedule, occupied schedule that belongs to a specific service provider 
 -- =============================================
 
 DELIMITER &&
 CREATE PROCEDURE get_sp_horarios (IN id INT)
 BEGIN
-	SELECT category.name, serviceprovider.workSchedule,serviceprovider.occupiedSchedule FROM user
-	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
-    INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory 
-    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP WHERE id = user.idUser;
+	SELECT serviceprovider.workSchedule, serviceprovider.occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP;
 END &&
 DELIMITER ;
 
