@@ -1471,7 +1471,7 @@ DELIMITER ;
 -- =============================================
 
 DELIMITER &&  
-CREATE PROCEDURE remove_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
+CREATE PROCEDURE remove_workSchedule_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
 BEGIN  
 	
     DECLARE os JSON DEFAULT '[]';
