@@ -70,8 +70,9 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{a.description}}</v-clamp>
-                      
+                      <v-clamp autoresize :max-lines="4">{{
+                        a.description
+                      }}</v-clamp>
                     </span>
                   </v-row>
                 </v-card-text>
@@ -117,7 +118,7 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import VClamp from 'vue-clamp'
+import VClamp from "vue-clamp";
 export default {
   name: "Ads",
 
@@ -134,13 +135,14 @@ export default {
     };
   },
   components: {
-    VClamp
+    VClamp,
   },
   methods: {
     difDate(dateLA) {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
+      console.log("img => ", img);
       return "data:image/jpeg;base64," + btoa(img);
     },
     infoSP(id) {
@@ -156,7 +158,9 @@ export default {
     },
     getData: async function () {
       try {
-        let response = await axios.get("http://localhost:9040/search/?page=" + this.page);
+        let response = await axios.get(
+          "http://localhost:9040/search/?page=" + this.page
+        );
         if (response) {
           this.ads = response.data.ServiceProviders;
           this.total = response.data.ServiceProviders_Sum[0].number_sps;

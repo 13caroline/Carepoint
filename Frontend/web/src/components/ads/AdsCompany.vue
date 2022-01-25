@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <v-data-iterator
-      
       :items="ads"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
@@ -55,8 +54,9 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{a.description}}</v-clamp>
-                      
+                      <v-clamp autoresize :max-lines="4">{{
+                        a.description
+                      }}</v-clamp>
                     </span>
                   </v-row>
                 </v-card-text>
@@ -68,7 +68,7 @@
     </v-data-iterator>
     <!--<small v-else> <em> não existem anúncios publicados </em></small>-->
 
-    <v-row class="mt-4" align="center" justify="center" >
+    <v-row class="mt-4" align="center" justify="center">
       <v-btn
         fab
         dark
@@ -93,7 +93,7 @@
       </v-btn>
     </v-row>
 
-    <v-row class="mt-5" align="center" justify="center" >
+    <v-row class="mt-5" align="center" justify="center">
       <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
     </v-row>
   </v-container>
@@ -102,7 +102,9 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import VClamp from 'vue-clamp'
+import VClamp from "vue-clamp";
+import { EventBus } from '../global/Search.vue'
+
 export default {
   name: "Ads",
 
@@ -119,14 +121,18 @@ export default {
     };
   },
   components: {
-    VClamp
+    VClamp,
   },
   methods: {
+    
     difDate(dateLA) {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      return "data:image/jpeg;base64," + btoa(img);
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+      );
     },
     infoSP(id) {
       this.$router.push("/ad/info/" + id);
@@ -141,10 +147,35 @@ export default {
     },
     getData: async function () {
       try {
-        let response = await axios.get("http://localhost:9040/search/?page=" + this.page);
-        
+        let response = await axios.get(
+          "http://localhost:9040/search/?page=" + this.page
+        );
+
         if (response) {
-          console.log(response.data)
+          console.log(response.data);
+          this.ads = response.data.Companies;
+          this.total = response.data.Companies_Sum[0].number_companies;
+          /*this.ads = response.data.ServiceProviders.map(an => {
+      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
+         })*/
+        }
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+        searchNewData: async function () {
+      try {
+        let response = await axios.get(
+          "http://localhost:9040/search/?page=1" 
+        );
+
+        if (response) {
+          console.log(response.data);
           this.ads = response.data.Companies;
           this.total = response.data.Companies_Sum[0].number_companies;
           /*this.ads = response.data.ServiceProviders.map(an => {
@@ -171,6 +202,11 @@ export default {
     this.getData();
   },
 };
+const searchForm = function(clickCount) {
+  console.log('Search received => ' ,clickCount)
+}
+
+EventBus.$on('clicked', searchForm);
 </script>
 
 <style scoped>
