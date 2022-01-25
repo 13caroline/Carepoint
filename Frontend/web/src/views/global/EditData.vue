@@ -22,6 +22,21 @@
                         ></v-text-field>
                       </v-col>
                     </div>
+
+                    <v-row class="mx-auto" align="center">
+                      <v-col md="10">
+                      <span>Password</span>
+                      <v-text-field
+                        outlined
+                        disabled
+                        dense
+                        placeholder="*******"
+                      ></v-text-field>
+                      </v-col>
+                        <v-col>
+                      <change-password/>
+                      </v-col>
+                    </v-row>
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -205,6 +220,7 @@ import axios from "axios";
 import store from "@/store/index.js";
 export default {
   data: () => ({
+    dialogPass: false,
     user: {},
     loc: [],
     textRules: [
@@ -237,6 +253,9 @@ export default {
     },
   }),
   methods: {
+    openDialog(){
+      this.dialogPass = true;
+    },
     close() {
       this.$store.getters.tipo == "2"
         ? this.$router.push("/consumer/profile")
@@ -248,41 +267,38 @@ export default {
       else e.preventDefault();
     },
     processImage(img) {
-      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+      );
     },
     confirm: async function () {
       if (this.$refs.form.validate()) {
         try {
           if (store.getters.tipo == "2") {
-            await axios.put(
-              "http://localhost:9040/users/update",
-              {
-                token: store.getters.token,
-                name: this.user.name,
-                email: this.user.email,
-                type: store.getters.tipo.toString(),
-                location: this.user.locationName,
-                phoneNumber: this.user.phoneNumber,
-                idUser: this.user.idUser,
-              }
-            );
+            await axios.put("http://localhost:9040/users/update", {
+              token: store.getters.token,
+              name: this.user.name,
+              email: this.user.email,
+              type: store.getters.tipo.toString(),
+              location: this.user.locationName,
+              phoneNumber: this.user.phoneNumber,
+              idUser: this.user.idUser,
+            });
             this.$router.push("/consumer/profile");
           } else if (store.getters.tipo == "3") {
-            await axios.put(
-              "http://localhost:9040/users/update",
-              {
-                token: store.getters.token,
-                name: this.user.name,
-                email: this.user.email,
-                type: store.getters.tipo.toString(),
-                location: 1,
-                phoneNumber: this.user.phoneNumber,
-                idUser: this.user.idUser,
-                distance: this.user.distance,
-                description: this.user.description,
-                qualifications: this.user.qualifications,
-              }
-            );
+            await axios.put("http://localhost:9040/users/update", {
+              token: store.getters.token,
+              name: this.user.name,
+              email: this.user.email,
+              type: store.getters.tipo.toString(),
+              location: 1,
+              phoneNumber: this.user.phoneNumber,
+              idUser: this.user.idUser,
+              distance: this.user.distance,
+              description: this.user.description,
+              qualifications: this.user.qualifications,
+            });
             this.$router.push("/service/provider/page");
           }
           this.$snackbar.showMessage({
@@ -315,6 +331,7 @@ export default {
     Cancel: () => import("@/components/dialogs/Cancel"),
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
+    ChangePassword: () => import("@/components/dialogs/ChangePassword")
   },
   created: async function () {
     try {
