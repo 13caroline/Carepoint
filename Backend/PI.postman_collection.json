@@ -2526,7 +2526,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/serviceProvider/remHorario",
+									"raw": "http://localhost:9040/serviceProvider/remSlot",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2534,7 +2534,7 @@
 									"port": "9040",
 									"path": [
 										"serviceProvider",
-										"remHorario"
+										"remSlot"
 									]
 								}
 							},
