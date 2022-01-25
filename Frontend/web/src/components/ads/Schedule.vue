@@ -1,25 +1,6 @@
 <template>
   <div>
     <div>
-      <v-sheet height="64">
-        <v-spacer></v-spacer>
-        <v-select
-          v-model="selectedDefault"
-          append-icon="mdi-magnify"
-          label="Categoria"
-          outlined
-          dense
-          color="#78C4D4"
-          :items="received"
-          item-text="name"
-          item-value="id"
-          hide-details
-          @change="categorySchedule"
-          no-data-text="Sem categorias registadas"
-        ></v-select>
-      </v-sheet>
-    </div>
-    <div>
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
@@ -54,7 +35,6 @@ export default {
     type: "",
     cat: [],
     schedules: {},
-    received: [],
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -118,30 +98,23 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
-      this.received = response.data.categories;
-
-      if (this.received) {
-        this.selectedDefault = this.received[0];
-
-        let workSchedule = this.selectedDefault.workSchedule;
+      if (response.data.categories){ 
+        let workSchedule = response.data.categories[0].workSchedule;
 
         for (var i = 0; i < workSchedule.length; i++) {
           this.events.push({
             start: workSchedule[i].date_begin,
             end: workSchedule[i].date_end,
             occupied: 0,
-            category: this.selectedDefault.name,
           });
         }
 
-        let occupiedSchedule = this.selectedDefault.occupiedSchedule;
-
+        let occupiedSchedule = response.data.categories[0].occupiedSchedule;
         for (var k = 0; k < occupiedSchedule.length; k++) {
           this.events.push({
             start: occupiedSchedule[k].date_begin,
             end: occupiedSchedule[k].date_end,
             occupied: 1,
-            category: this.selectedDefault.name,
           });
         }
       }
@@ -182,3 +155,4 @@ export default {
   margin-right: 0px;
 }
 </style>
+

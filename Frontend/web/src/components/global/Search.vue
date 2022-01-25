@@ -113,10 +113,10 @@
 
 <script>
 import axios from "axios";
-import Vue from 'vue';
+import Vue from "vue";
 export const EventBus = new Vue();
-import adsCmpanySearch from '../ads/AdsCompany.vue' ;
-import ads from '../ads/Ads.vue';
+import adsCmpanySearch from "../ads/AdsCompany.vue";
+import ads from "../ads/Ads.vue";
 export default {
   name: "Search",
   props: ["tipo"],
@@ -154,11 +154,10 @@ export default {
   methods: {
     searchForm() {
       console.log(this.formValues);
-      console.log('Procura em => ' , this.tipo);
-      this.tipo==1 ? adsCmpanySearch.methods.getData(this.formValues) : 
-          ads.methods.getData(this.formValues);
-
-
+      console.log("Procura em => ", this.tipo);
+      this.tipo == 1
+        ? adsCmpanySearch.methods.getData(this.formValues)
+        : ads.methods.searchForm(this.formValues);
     },
   },
   created: async function () {

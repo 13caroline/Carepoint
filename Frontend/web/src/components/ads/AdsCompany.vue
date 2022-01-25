@@ -33,7 +33,7 @@
                   <v-row justify="center">
                     <v-col cols="auto">
                       <v-avatar class="profile" color="grey" size="100">
-                        <v-img :src="processImage(a.image.data)"></v-img>
+                        <v-img :src="processImage(a.image)"></v-img>
                       </v-avatar>
                     </v-col>
                   </v-row>
@@ -123,18 +123,17 @@ export default {
     VClamp,
   },
   methods: {
-    
     difDate(dateLA) {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
       return (
         "data:image/png;base64," +
-        btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
       );
     },
     infoSP(id) {
-      this.$router.push("/ad/info/" + id);
+      this.$router.push("/company/ad/info/" + id);
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
@@ -147,31 +146,27 @@ export default {
     getData: async function (form) {
       try {
         let url = "http://localhost:9040/search/?page=";
-          // console.log('fomr => ',form);
-          this.ads = [];
-        if(form) {
-          this.page = 1;
-          // console.log('ads => ',this.ads);
-         url = url + this.page +
-         (form.category ? "&category=".concat(form.category) : "") + 
-         (form.location ? "&location=".concat(form.location) : "") + 
-         (form.price ? "&price=".concat(form.price) : "") + 
-         (form.rating ? "&rating=".concat(form.rating) : "") + 
-         (form.sex ? "&sex=".concat(form.sex) : "");
 
-        }
-         else url = url + this.page;
+        this.ads = [];
+        if (form) {
+          this.page = 1;
+
+          url =
+            url +
+            this.page +
+            (form.category ? "&category=".concat(form.category) : "") +
+            (form.location ? "&location=".concat(form.location) : "") +
+            (form.price ? "&price=".concat(form.price) : "") +
+            (form.rating ? "&rating=".concat(form.rating) : "") +
+            (form.sex ? "&sex=".concat(form.sex) : "");
+        } else url = url + this.page;
         console.log(url);
         let response = await axios.get(url);
-
 
         if (response) {
           console.log(response.data);
           this.ads = response.data.Companies;
           this.total = response.data.Companies_Sum[0].number_companies;
-          /*this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
-         })*/
         }
       } catch (e) {
         this.$snackbar.showMessage({
@@ -193,7 +188,6 @@ export default {
     this.getData();
   },
 };
-
 </script>
 
 <style scoped>
