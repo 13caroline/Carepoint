@@ -45,6 +45,7 @@ DROP PROCEDURE IF EXISTS createMessage;
 DROP PROCEDURE IF EXISTS add_slot;
 DROP PROCEDURE IF EXISTS remove_slot;
 DROP PROCEDURE IF EXISTS add_workSchedule_slot;
+DROP PROCEDURE IF EXISTS insert_categorias;
 
 -- =============================================
 -- Description: Insert review
@@ -1525,4 +1526,24 @@ BEGIN
                     END
 	WHERE serviceprovider.idSP = in_idUser;
 END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Insert a new category for a certain Service Provider
+-- Type: Procedure
+-- Parameters:
+--   @in_idUser - Identification number of the Service Provider in question
+--   @in_idCat - Identification number of the Category to be added
+--   @in_exp - Amount of years of experience the Service Provider has in the Category
+-- Returns: Nothing
+-- =============================================
+
+DELIMITER &&
+CREATE PROCEDURE insert_categorias (IN in_idUser INT, IN in_idCat INT, IN in_exp INT)
+BEGIN
+
+	INSERT INTO category_has_serviceprovider (price, experience, idCategory, idServiceProvider)
+    VALUES (0, in_exp, in_idCat, in_idUser);
+
+END &&
 DELIMITER ;

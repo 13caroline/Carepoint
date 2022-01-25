@@ -40,7 +40,7 @@ router.post('/register', (req, res) => {
         console.log(3)
         ServiceProvider.adicionarSP(req.body, user.idUser)                                    //Adiciona o SP
         .then((SP) => {                                                                       //Se tiver sucesso (1)
-          ServiceProvider.addCategorias(req.body.categorias, user.idUser)
+          ServiceProvider.addCategorias(req.body.categorias, user.idUser, req.body.experience)
           .then((SPc) => {
             axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {      
               email: req.body.email,                                                            //Tenta fazer login

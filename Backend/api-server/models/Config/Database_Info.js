@@ -4,7 +4,10 @@ const connection = {
     options: {
         host: 'localhost',
         dialect: 'mysql',
-        logging: false //disable logging;
+        logging: false, //disable logging;
+        dialectOptions: {
+            multipleStatements: true
+        }
     },
     user: {
         username: 'root',
