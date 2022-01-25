@@ -28,30 +28,8 @@
           </p>
         </div>
         <p class="infos font-weight-bold mb-3">Anos de experiência</p>
-        <v-row>
-          <v-col
-            cols="12"
-            md="4"
-            v-for="(a, index) in serviceProvider.categories"
-            :key="index"
-          >
-            <v-tooltip top color="#78C4D4">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn icon outlined color="#78C4D4" v-bind="attrs" v-on="on">
-                  <v-icon color="#78C4D4" small>{{ getIcon(a.name) }}</v-icon>
-                </v-btn>
-              </template>
-              <span>{{ a.name }}</span>
-            </v-tooltip>
-
-            <span class="font-weight-bold ml-2" v-if="a.experience == 0">
-              {{ noExp }}
-            </span>
-            <span class="font-weight-bold ml-2" v-else>
-              {{ a.experience }} anos
-            </span>
-          </v-col>
-        </v-row>
+        <v-chip class="font-weight-bold" v-if="categories" > {{categories[0].experience}} anos</v-chip>
+        <v-chip v-else class="font-weight-bold" >{{noExp}}</v-chip>
       </v-col>
     </v-row>
 
@@ -81,7 +59,7 @@
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
             <v-chip
-              v-for="(c, index) in serviceProvider.categories"
+              v-for="(c, index) in categories"
               :key="index"
               outlined
               color="#78C4D4"
@@ -114,7 +92,7 @@
       <v-col cols="12" md="3" sm>
         <span class="infos font-weight-bold">Comentários</span>
         <span class="grey--text text--lighten-2 text-caption mr-2">
-          ({{ reviews }})
+          ({{ nrReviews }})
         </span>
       </v-col>
 
@@ -127,8 +105,8 @@
     </v-row>
 
     <v-data-iterator
-      v-if="reviews"
-      :items="serviceProvider.reviews"
+      v-if="nrReviews"
+      :items="reviews"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
       :sort-desc="sortDesc"
@@ -190,7 +168,7 @@
     </v-data-iterator>
     <small v-else> <em> prestador sem comentários realizados </em></small>
 
-    <v-row class="mt-4" align="center" justify="center" v-if="reviews">
+    <v-row class="mt-4" align="center" justify="center" v-if="nrReviews">
       <v-btn
         fab
         dark
@@ -215,7 +193,7 @@
       </v-btn>
     </v-row>
 
-    <v-row class="mt-5" align="center" justify="center" v-if="reviews">
+    <v-row class="mt-5" align="center" justify="center" v-if="nrReviews">
       <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
     </v-row>
   </v-container>
@@ -235,18 +213,11 @@ export default {
       pageCount: 0,
       page: 1,
       itemsPerPage: 6,
-      reviews: 0,
+      nrReviews: 0,
       styleObject: { border: "1px solid #78c4d4" },
-      category: [
-        { name: "Companhia", icon: "fas fa-user-friends" },
-        { name: "Compras", icon: "fas fa-shopping-cart" },
-        { name: "Medicação", icon: "fas fa-tablets" },
-        { name: "Higiene", icon: "fas fa-pump-medical" },
-        { name: "Passeios", icon: "fas fa-walking" },
-        { name: "Refeições", icon: "fas fa-utensils" },
-      ],
       serviceProviderData: {},
-      serviceProvider: {},
+      reviews: {},
+      categories: []
     };
   },
   methods: {
@@ -254,12 +225,6 @@ export default {
       return moment(d, moment.ISO_8601)
         .locale("pt")
         .format("DD MMMM YYYY, HH:MM:SS");
-    },
-    getIcon(c) {
-      var row = this.category.filter((obj) => {
-        return obj.name === c;
-      });
-      return Object.values(row[0])[1];
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
@@ -273,8 +238,9 @@ export default {
           "http://localhost:9040/serviceProvider/?id=" + this.id
         );
         this.serviceProviderData = response.data.ServiceProvider[0];
-        this.serviceProvider = response.data;
-        this.reviews = response.data.reviews.length;
+        this.reviews = response.data.reviews;
+        this.nrReviews = response.data.reviews.length;
+        this.categories = response.data.categories;
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -301,7 +267,7 @@ export default {
   },
   computed: {
     numberOfPages() {
-      return Math.ceil(this.reviews / this.itemsPerPage);
+      return Math.ceil(this.nrReviews / this.itemsPerPage);
     },
   },
   created: async function () {

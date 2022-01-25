@@ -107,7 +107,6 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/company/specific/?id=" + this.id
       );
-      console.log(response.data)
       this.company = response.data[0];
     } catch (e) {
       this.$snackbar.showMessage({

@@ -35,12 +35,14 @@
               >
                 <v-card-text>
                   <v-row>
-                    <v-col cols="5" md="5" sm="4" >
+                    <v-col cols="5" md="5" sm="4">
                       <span class="activity d-flex justify-start pb-2"
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
                         >
-                        {{ a.averageRating.toFixed(1) }} ({{ a.nr_reviews }})</span
+                        {{ a.averageRating.toFixed(1) }} ({{
+                          a.nr_reviews
+                        }})</span
                       >
                     </v-col>
                     <v-col md="7" sm="8" class="text-right">
@@ -145,43 +147,61 @@ export default {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      );
     },
     infoSP(id) {
       this.$router.push("/ad/info/" + id);
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
-      this.getData();
+      this.getData(this.page);
     },
     formerPage() {
       if (this.page - 1 >= 1) this.page -= 1;
-      this.getData();
+      this.getData(this.page);
     },
-    getData: async function (form) {
+    getData: async function (search) {
       try {
         let url = "http://localhost:9040/search/?page=";
-          // console.log('fomr => ',form);
-          this.ads = [];
-        if(form) {
-          this.page = 1;
-          // console.log('ads => ',this.ads);
-         url = url + this.page +
-         (form.category ? "&category=".concat(form.category) : "") + 
-         (form.location ? "&location=".concat(form.location) : "") + 
-         (form.price ? "&price=".concat(form.price) : "") + 
-         (form.rating ? "&rating=".concat(form.rating) : "") + 
-         (form.sex ? "&sex=".concat(form.sex) : "");
 
-        }
-         else url = url + this.page;
-        console.log(url);
-        let response = await axios.get(url);
+        let response = await axios.get(url + search);
         if (response) {
-          console.log(response.data);
           this.ads = response.data.ServiceProviders;
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
+
+          console.log(this.ads);
         }
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+
+    searchForm(form) {
+      try {
+        this.ads = [];
+        let url = "";
+
+        if (form) {
+          this.page = 1;
+          url =
+            url +
+            this.page +
+            (form.category ? "&category=".concat(form.category) : "") +
+            (form.location ? "&location=".concat(form.location) : "") +
+            (form.price ? "&price=".concat(form.price) : "") +
+            (form.rating ? "&rating=".concat(form.rating) : "") +
+            (form.sex ? "&sex=".concat(form.sex) : "");
+        } else url = url + this.page;
+
+        this.getData(url);
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -199,7 +219,7 @@ export default {
   },
 
   created: async function () {
-    this.getData();
+    this.getData(this.page);
   },
 };
 </script>
