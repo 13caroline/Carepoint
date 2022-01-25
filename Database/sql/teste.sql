@@ -9,13 +9,14 @@ USE PI;
 
 -- CALL update_company_endSub(151,13);
 -- CALL update_joboffer(4, 'teste', '2026-08-11', 10, '2026-08-14', 6, 180);
-
+CALL get_max_values();
 -- CALL update_company_endSub(151,9);
  -- CALL update_company_vip(151,3);
   CALL update_company_vip(153,2);
  -- CALL get_service_providers (1, NULL, NULL, NULL,10, 0) ;
  -- DELETE FROM pi.user WHERE idUser = 207; 
- 
+ CALL get_sp_category_info(51);
+ CALL get_sp_horarios(51);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',2,'2022-03-18 10:27:16',17,51);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',3,'2022-03-18 10:27:16',17,52);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',4,'2022-03-18 10:27:16',17,52);
@@ -46,5 +47,9 @@ CALL createMessage ( 'mensagem41',1,105);
 CALL createMessage ( 'mensagem51',1,105);
 CALL createMessage ( 'mensagem61',1,105);
 
-CALL add_slot(51,3,'[{"date_end": "2022-01-01 20:00:00", "date_begin": "2022-01-01 14:30:00"},{"date_end": "2022-01-02 20:00:00", "date_begin": "2022-01-02 14:30:00"}]');
-CALL remove_slot(51,3,'{"date_end": "2022-01-01 20:00:00", "date_begin": "2022-01-01 14:30:00"}');
+CALL add_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
+        
+
+CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
+CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
+CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00","idCategory": "1"}');
