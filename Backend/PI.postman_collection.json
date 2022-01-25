@@ -3111,7 +3111,7 @@
 									"urlencoded": []
 								},
 								"url": {
-									"raw": "http://localhost:9040/search/?page=1&rating=10&sex=N",
+									"raw": "http://localhost:9040/search/?page=1&sex=N&experience=5",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3135,25 +3135,30 @@
 										},
 										{
 											"key": "location",
-											"value": "1",
+											"value": "2",
 											"description": "Opcional",
 											"disabled": true
 										},
 										{
 											"key": "price",
-											"value": "10",
+											"value": "3",
 											"description": "Opcional - retorna menor ou igual",
 											"disabled": true
 										},
 										{
 											"key": "rating",
-											"value": "10",
-											"description": "Opcional - Entre 1 a 10"
+											"value": "6",
+											"description": "Opcional - Entre 1 a 10",
+											"disabled": true
 										},
 										{
 											"key": "sex",
 											"value": "N",
 											"description": "Opcional - M or F ou N"
+										},
+										{
+											"key": "experience",
+											"value": "5"
 										}
 									]
 								}
