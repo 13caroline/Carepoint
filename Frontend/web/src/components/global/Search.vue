@@ -1,7 +1,7 @@
 <template>
-  <v-col justify-centered sm="12" md="12">
+  <v-col justify-centered cols="12" sm="12" md="12">
     <v-card flat>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Pesquisar</span>
         <v-text-field
           outlined
@@ -13,7 +13,7 @@
           append-icon="mdi-magnify"
         ></v-text-field>
       </div>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Preço</span>
         <v-slider
           v-model="formValues.price"
@@ -25,7 +25,7 @@
           min="0"
         ></v-slider>
       </div>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Distância</span>
         <v-slider
           v-model="formValues.distance"
@@ -37,7 +37,7 @@
           min="0"
         ></v-slider>
       </div>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Categoria</span>
         <v-autocomplete
           outlined
@@ -51,7 +51,7 @@
           v-model="formValues.category"
         />
       </div>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Localização</span>
         <v-autocomplete
           outlined
@@ -65,7 +65,7 @@
           v-model="formValues.location"
         />
       </div>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Classificação </span>
         <v-slider
           v-model="formValues.rating"
@@ -77,7 +77,7 @@
           min="0"
         ></v-slider>
       </div>
-      <div>
+      <div class="mx-sm-16 mx-md-0 mx-5 mx-lg-0 mx-xl-0">
         <span>Sexo</span>
         <v-radio-group v-model="formValues.sex" row class="radio">
           <v-radio
@@ -195,10 +195,5 @@ span {
 
 .radio {
   font-size: 10px;
-}
-
-div {
-  margin-left: 5%;
-  margin-right: 10%;
 }
 </style>

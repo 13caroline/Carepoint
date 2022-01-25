@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2d642d25-7dab-41d5-ac05-a7aba2b6b05b",
+		"_postman_id": "7c4a54ff-7c3f-4d5a-a065-d23085e636e4",
 		"name": "PI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_3@gmail.com",
+									"value": "theUserTestingEmail_11@gmail.com",
 									"type": "text"
 								},
 								{
@@ -53,13 +53,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Iroha Oshi",
+									"value": "Iroha Kazama",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_3@gmail.com",
+									"value": "theUserTestingEmail_11@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "ramili@gmail.com",
+									"value": "ramili3@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -182,6 +182,21 @@
 									"key": "qualifications",
 									"value": "I am qualified to walk throughdasd",
 									"description": "Opcional",
+									"type": "text"
+								},
+								{
+									"key": "categorias",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "categorias",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "categorias",
+									"value": "3",
 									"type": "text"
 								}
 							]
@@ -714,7 +729,9 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": null
+								"url": {
+									"raw": ""
+								}
 							},
 							"response": []
 						}
@@ -1448,18 +1465,13 @@
 									"formdata": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVRlc3QzNzQ1QGdtYWlsLmNvbSIsImxldmVsIjoyLCJpYXQiOjE2NDAyNzIyNTIsImV4cCI6MTY0MDI3NTg1Mn0.kbT6relitMz48nq8E4huWotl_ZZut_FdLMYEnfjLw50",
-											"type": "text"
-										},
-										{
-											"key": "idUser",
-											"value": "202",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MjMzOTQ1NCwiZXhwIjoxNjQyMzQzMDU0fQ.LU9vniKR8zCEXl4nNQwdX34FyA6_t8uAZbMBEqKqtuo",
 											"type": "text"
 										},
 										{
 											"key": "image",
 											"type": "file",
-											"src": "/C:/Users/Thol/Pictures/nobuShcok.png"
+											"src": "/C:/Users/Thol/Pictures/1420458246520.jpg"
 										}
 									]
 								},
@@ -1692,6 +1704,141 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Upgrade to Service Provider (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzA1MDI3NywiZXhwIjoxNjQzMDUzODc3fQ.l51cTqeuRiaDWJdCO585nh9kTMN5VvT3z7nJwTrUaIM",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456789",
+											"type": "default"
+										},
+										{
+											"key": "description",
+											"value": "we null",
+											"type": "text"
+										},
+										{
+											"key": "dateOfBirth",
+											"value": "2020-01-09",
+											"type": "text"
+										},
+										{
+											"key": "distance",
+											"value": "14578",
+											"type": "text"
+										},
+										{
+											"key": "qualifications",
+											"value": "sleep, forgetfullness",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/upgrade",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"upgrade"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Image (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQyMzM2MTQ5LCJleHAiOjE2NDIzMzk3NDl9.22er2ZQ10ttxx1hJNV3sG5_ALyleGZzPP_e6x6HeJOQ",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/image",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get ID (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0Mjc5NzQzMSwiZXhwIjoxNjQyODAxMDMxfQ.ubiMyeajxuRI8HyJ6Nbxq8uTHiEQF03hskdhFtPh-Ss",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"id"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Test Error Messages",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/users/testErrorMessage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"testErrorMessage"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
@@ -1911,6 +2058,33 @@
 									"path": [
 										"company",
 										"{{new_company_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get company info (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/company/specific/?id=151",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"company",
+										"specific",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "151"
+										}
 									]
 								}
 							},
@@ -2139,6 +2313,128 @@
 											"key": "id",
 											"value": "62"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Service Provider Horários (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/horarios/?id=62",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"horarios",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "62"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar Slot Ocupado (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzA0MzUyNywiZXhwIjoxNjQzMDQ3MTI3fQ.vR3nL3eIYlRPgW-JRg6zmm6jn4OSwJni7ELBiQOwHtc",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "2022-01-06 17:30:00",
+											"type": "text"
+										},
+										{
+											"key": "dateEnd",
+											"value": "2022-01-06 18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "spId",
+											"value": "51",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "4",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/newSlot",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"newSlot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar Slot de Horário (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzA1MDMyMCwiZXhwIjoxNjQzMDUzOTIwfQ.9JXC_nDnNpYlylP45ME8AOm4PA2mxaaGuNBdOObkVHI",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "2022-01-06 17:30:00",
+											"type": "text"
+										},
+										{
+											"key": "dateEnd",
+											"value": "2022-01-06 18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "4",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/regHorario",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"regHorario"
 									]
 								}
 							},
@@ -2715,7 +3011,7 @@
 									"urlencoded": []
 								},
 								"url": {
-									"raw": "http://localhost:9040/search/?page=1",
+									"raw": "http://localhost:9040/search/?page=1&rating=10&sex=N",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2744,16 +3040,20 @@
 											"disabled": true
 										},
 										{
-											"key": "experience",
-											"value": "4",
-											"description": "Opcional - retorna maior ou igual",
-											"disabled": true
-										},
-										{
 											"key": "price",
 											"value": "10",
 											"description": "Opcional - retorna menor ou igual",
 											"disabled": true
+										},
+										{
+											"key": "rating",
+											"value": "10",
+											"description": "Opcional - Entre 1 a 10"
+										},
+										{
+											"key": "sex",
+											"value": "N",
+											"description": "Opcional - M or F ou N"
 										}
 									]
 								}
@@ -2955,6 +3255,116 @@
 									"path": [
 										"joboffer",
 										"own"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Message",
+					"item": [
+						{
+							"name": "Get all messages users",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0Mjc5MTkxMSwiZXhwIjoxNjQyNzk1NTExfQ.EigehAS-oMxUIcNTT_3pZw_JgheLkwrRre84Yditnuc",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/message/seeUsers",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"message",
+										"seeUsers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all messages between users",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0Mjc5MTkxMSwiZXhwIjoxNjQyNzk1NTExfQ.EigehAS-oMxUIcNTT_3pZw_JgheLkwrRre84Yditnuc",
+											"type": "default"
+										},
+										{
+											"key": "idUser2",
+											"value": "90",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/message/seeMessages",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"message",
+										"seeMessages"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Message",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0Mjc5MTkxMSwiZXhwIjoxNjQyNzk1NTExfQ.EigehAS-oMxUIcNTT_3pZw_JgheLkwrRre84Yditnuc",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "Mensagem de teste 2",
+											"type": "text"
+										},
+										{
+											"key": "idUser2",
+											"value": "90",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/message/addMessage",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"message",
+										"addMessage"
 									]
 								}
 							},

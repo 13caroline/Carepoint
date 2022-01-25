@@ -1,33 +1,25 @@
 <template>
-  <v-row>
-    <v-col>
+  <div>
+    <div>
       <v-sheet height="64">
-        <v-toolbar flat>
-          <v-spacer></v-spacer>
-          <v-menu bottom right>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn outlined color="grey darken-2" v-bind="attrs" v-on="on">
-                <span>{{ cat[type] }}</span>
-                <v-icon right> mdi-menu-down </v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="type = 'day'">
-                <v-list-item-title>Day</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Week</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Month</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 days</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-toolbar>
+        <v-spacer></v-spacer>
+        <v-select
+          v-model="selectedDefault"
+          append-icon="mdi-magnify"
+          label="Categoria"
+          outlined
+          dense
+          color="#78C4D4"
+          :items="received"
+          item-text="name"
+          item-value="id"
+          hide-details
+          @change="categorySchedule"
+          no-data-text="Sem categorias registadas"
+        ></v-select>
       </v-sheet>
+    </div>
+    <div>
       <v-sheet height="600">
         <v-calendar
           ref="calendar"
@@ -42,15 +34,16 @@
           <template v-slot:day-label-header="{}">-</template>
         </v-calendar>
       </v-sheet>
-    </v-col>
-  </v-row>
+    </div>
+  </div>
 </template>
 
 <script>
-import moment from "moment";
+import axios from "axios";
 export default {
   props: ["dados"],
   data: () => ({
+    selectedDefault: "",
     today: "2022-01-03",
     events: [],
     start: null,
@@ -60,32 +53,107 @@ export default {
     weekday: [1, 2, 3, 4, 5, 6, 0],
     type: "",
     cat: [],
+    schedules: {},
+    received: [],
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
   },
   methods: {
     getEventColor(event) {
-      return event.occupied == 0 ? "#78C4D4" : "#BDBDBD";
-    },
-  },
-  created() {
-      for (var j = 0; j < this.dados.length; j++) {
-        this.cat.push(this.dados[j].name);
+      var color = "#78C4D4";
+      if (event.occupied == 1) return "#D7CCC8";
+      else {
+        switch (event.category) {
+          case "Companhia":
+            color = "#D7BFDC";
+            break;
+          case "Compras":
+            color = "#FDA172";
+            break;
+          case "Medicação":
+            color = "#F5C3C2";
+            break;
+          case "Higiene":
+            color = "#95C8D8";
+            break;
+          case "Passeios":
+            color = "#C5E1A5";
+            break;
+          case "Refeições":
+            color = "#EEDC82";
+            break;
+        }
+        return color;
       }
+    },
+    categorySchedule(value) {
+      this.events = [];
+      var found = this.received.find((e) => e.name === value);
 
-      let schedule = this.dados[0].workSchedule;
-      for (var i = 0; i < schedule.length; i++) {
-        let state = schedule[i].occupied == 0 ? "Livre" : "Preenchido";
-
+      let workSchedule = found.workSchedule;
+      for (var i = 0; i < workSchedule.length; i++) {
         this.events.push({
-          start: schedule[i].date,
-          occupied: schedule[i].occupied,
-          end: moment(schedule[i].date).add(30, "m").format("YYYY-MM-DD HH:mm"),
-          name: state,
+          start: workSchedule[i].date_begin,
+          end: workSchedule[i].date_end,
+          occupied: 0,
+          category: found.name,
         });
       }
-    
+
+      let occupiedSchedule = found.occupiedSchedule;
+      for (var k = 0; k < occupiedSchedule.length; k++) {
+        this.events.push({
+          start: occupiedSchedule[k].date_begin,
+          end: occupiedSchedule[k].date_end,
+          occupied: 1,
+          category: found.name,
+        });
+      }
+    },
+  },
+
+  created: async function () {
+    try {
+      let response = await axios.get(
+        "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
+      );
+      this.received = response.data.categories;
+
+      if (this.received) {
+        this.selectedDefault = this.received[0];
+
+        let workSchedule = this.selectedDefault.workSchedule;
+
+        for (var i = 0; i < workSchedule.length; i++) {
+          this.events.push({
+            start: workSchedule[i].date_begin,
+            end: workSchedule[i].date_end,
+            occupied: 0,
+            category: this.selectedDefault.name,
+          });
+        }
+
+        let occupiedSchedule = this.selectedDefault.occupiedSchedule;
+
+        for (var k = 0; k < occupiedSchedule.length; k++) {
+          this.events.push({
+            start: occupiedSchedule[k].date_begin,
+            end: occupiedSchedule[k].date_end,
+            occupied: 1,
+            category: this.selectedDefault.name,
+          });
+        }
+      }
+    } catch (e) {
+      console.log(e);
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
   },
 };
 </script>

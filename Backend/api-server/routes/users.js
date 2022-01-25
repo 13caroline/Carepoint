@@ -6,18 +6,21 @@ const multer  = require('multer')
 const storage = multer.memoryStorage();
 const upload = multer({ dest: 'uploads/', storage: storage })
 
-const Blob = require('node-blob');
-
 const User = require('../controllers/user');
 const ServiceProvider = require('../controllers/serviceProvider');
 const Company = require('../controllers/company');
 const auth = require('../authorization/auth');
 
-
+const axios = require('axios');
+const config = require('../models/Config/API_info');
 
 /****************************************************************************************
  *                                   GET
  ****************************************************************************************/
+
+router.get('/testErrorMessage', (req, res) => {
+    res.status(500).jsonp({error: "Custom Error message"})
+})
 
 // List all users given the query param
 router.get('/', function(req, res, next) {
@@ -56,11 +59,16 @@ router.get('/email/:email', function(req, res, next) {
         .then(data => res.status(200).jsonp(data))
         .catch(e => res.status(500).jsonp({ error: e }))
 });
-
 /****************************************************************************************
  *                                   POST
  ****************************************************************************************/
 
+router.post('/id', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token);
+    User.consult(email)
+    .then(usr => res.status(200).jsonp(usr.idUser))
+    .catch(e => res.status(500).jsonp({ error: e }))
+})
 
 //Devolve o perfil do Utilizador, quer seja Consumer / Service Provider / Company
 router.post('/perfil', (req, res, next) => {
@@ -107,6 +115,46 @@ router.post('/perfil', (req, res, next) => {
     }
 })
 
+/*
+Rota Usada para transformar um Consumer (type 2) num Service Provider (type 3)
+**/
+router.post('/upgrade', auth.matchPasswords, (req,res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    type = auth.getTypeFromJWT(req.body.token)
+
+    if(type == 2){
+        User.consult(email)
+        .then((usr) => {
+            User.changeType(email)
+            .then((unimportant) => {
+                ServiceProvider.adicionarSP(req.body, usr.idUser)
+                .then((sp) => {
+                    axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
+                        email: email,                                                                   //Tenta fazer login
+                        password: req.body.password
+                      }).then(data => {                                                                 //Se tiver sucesso (3)
+                        res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
+                      }).catch(e => {                                                                   //Se falhar o sucesso (3)
+                        res.status(500).jsonp({error: e})                                               //Retorna o Erro
+                      })
+                })
+                .catch((err) => res.status(500).jsonp({error: err})) 
+            })
+            .catch((err) => res.status(500).jsonp({error: err})) 
+        })
+        .catch((err) => res.status(500).jsonp({error: err}))    
+    }else{
+        res.status(500).jsonp({message:"You are not a consumer!"})
+    }
+})
+
+router.post('/image', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.getImage(email)
+    .then((image) => res.status(200).jsonp(image))
+    .catch((err) => res.status(500).jsonp({error: err}))
+})
+
 // Insert a new user
 router.post('/', function(req, res) {
 
@@ -123,7 +171,6 @@ router.post('/', function(req, res) {
         .catch(e => res.status(500).jsonp({ error: e }))
 });
 
-
 /****************************************************************************************
  *                                   PUT
  ****************************************************************************************/
@@ -139,7 +186,6 @@ router.put('/:id', function(req, res, next) {
 */
 
 router.put('/update', auth.matchUsers, (req, res, next) => {
-    console.log(req.body.type)
     switch (req.body.type){
         case '2':
             User.updateConsumer(req.body)
@@ -187,7 +233,7 @@ router.put('/updatePassword', auth.validToken, (req, res, next) => {
 })
 
 //auth.matchUsers,
-router.put('/updatePhoto', upload.single('image'), auth.validToken,(req, res, next) => {
+router.put('/updatePhoto', upload.single('image'), auth.validToken, (req, res) => {
     var email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((usr) => {

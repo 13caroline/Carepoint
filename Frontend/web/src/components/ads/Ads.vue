@@ -14,33 +14,36 @@
       <template v-slot:default="props">
         <v-row>
           <v-col
-            cols="auto"
+            cols="12"
             lg="4"
             md="4"
+            sm="6"
             class="mx-auto mx-sm-0"
             v-for="(a, index) in props.items"
             :key="index"
           >
             <div class="user">
               <v-card
+                id="advertise123"
                 class="card rounded-xl overflow-auto"
                 color="#c0e4ec"
                 tile
-                height="400"
-                width="500"
+                min-height="350"
+                max-height="400"
+                max-width="600"
                 @click="infoSP(a.idUser)"
               >
                 <v-card-text>
                   <v-row>
-                    <v-col cols="12" md="4" sm="2">
+                    <v-col cols="5" md="5" sm="4" >
                       <span class="activity d-flex justify-start pb-2"
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
                         >
-                        {{ a.averageRating }} ({{ a.nr_reviews }})</span
+                        {{ a.averageRating.toFixed(1) }} ({{ a.nr_reviews }})</span
                       >
                     </v-col>
-                    <v-col cols="12" md="8" sm="10">
+                    <v-col md="7" sm="8" class="text-right">
                       <span class="activity d-flex justify-end"
                         >última vez ativo {{ difDate(a.lastActivity) }}</span
                       >
@@ -48,8 +51,8 @@
                   </v-row>
                   <v-row justify="center">
                     <v-col cols="auto">
-                      <v-avatar class="profile" color="grey" size="100">
-                        <v-img :src="processImage(a.image.data)"></v-img>
+                      <v-avatar class="profile" color="white" size="100">
+                        <v-img :src="processImage(a.image)"></v-img>
                       </v-avatar>
                     </v-col>
                   </v-row>
@@ -70,7 +73,7 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{
+                      <v-clamp autoresize :max-lines="3">{{
                         a.description
                       }}</v-clamp>
                     </span>
@@ -88,7 +91,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="mr-1"
@@ -99,7 +102,7 @@
       <v-btn
         fab
         dark
-        small
+        x-small
         depressed
         color="#78C4D4"
         class="ml-1"
@@ -142,8 +145,7 @@ export default {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      console.log("img => ", img);
-      return "data:image/jpeg;base64," + btoa(img);
+      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
     },
     infoSP(id) {
       this.$router.push("/ad/info/" + id);
@@ -164,9 +166,6 @@ export default {
         if (response) {
           this.ads = response.data.ServiceProviders;
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
-          /*this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
-         })*/
         }
       } catch (e) {
         this.$snackbar.showMessage({
@@ -214,4 +213,10 @@ export default {
   font-size: smaller;
   text-align-last: right;
 }
+
+#advertise123::-webkit-scrollbar {
+  display: none;
+}
 </style>
+
+<!-- advertise123 css is to hide the scrollbar on the ads-->

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="50%">
+  <v-dialog v-model="dialog" width="auto">
     <template v-slot:activator="{ on, attrs }">
       <v-btn
         class="body-2 mr-2 rounded-xl button"
@@ -21,16 +21,24 @@
         <v-card-text>
           <div class="ma-auto">
             <span>Carregar fotografia</span>
-            <v-file-input
+            <!--<v-file-input
               append-icon="fas fa-camera"
               v-model="image"
               type="file"
               class="input"
               color="#78C4D4"
               prepend-icon=""
+              :rules="rules"
               outlined
               dense
               @change="onFileChange"
+            />-->
+            <input
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+              :rules="rules"
             />
           </div>
           <div>
@@ -54,7 +62,8 @@
                 class="rounded-lg white--text"
                 required
                 type="submit"
-                :disabled="!image"
+                @click="upload()"
+                :disabled="!valid"
                 >Confirmar</v-btn
               >
             </v-col>
@@ -66,15 +75,26 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
+  props: ["id"],
   name: "upload-image",
   data() {
     return {
       dialog: false,
+      valid: false, 
       image: null,
+      file: "",
       imageUrl: "",
-        cancelar: { title: "a alteração da sua fotografia", text: "a alteração da sua fotografia" },
-
+      cancelar: {
+        title: "a alteração da sua fotografia",
+        text: "a alteração da sua fotografia",
+      },
+      rules: [
+        (file) =>
+          !file || (file.size > 102400) || "Avatar size should be less than 100 KB!",
+      ],
     };
   },
   components: {
@@ -89,16 +109,58 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    onFileChange(file) {
-      if (!file) {
-        return;
-      }
-      this.createImage(file);
-    },
     close() {
-        this.imageUrl = "";
-        this.image = null;
+      this.imageUrl = "";
+      this.image = null;
+      this.dialog = false;
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+
+      if (this.file.size < 102400){
+        this.url = URL.createObjectURL(this.file);
+        this.createImage(this.file);
+        this.valid = true; 
+      }
+      else{
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "A fotografia ultrapassa o limite de tamanho!",
+          timeout: 4000,
+        });
+      }
+    },
+    upload: async function () {
+      let formData = new FormData();
+
+      formData.append("token", store.getters.token);
+      formData.append("image", this.file);
+
+      try {
+        await axios.put(
+          "http://localhost:9040/users/updatePhoto",
+          formData,
+          {}
+        );
         this.dialog = false;
+        this.$emit("clicked", "uploaded");
+        this.$snackbar.showMessage({
+          show: true,
+          text: "Imagem atualizada com sucesso.",
+          color: "success",
+          snackbar: true,
+          timeout: 4000,
+        });
+      } catch (e) {
+        console.log(e);
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
     },
   },
 };

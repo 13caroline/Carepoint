@@ -25,13 +25,13 @@
                 v-for="(p, index) in exp.pros"
                 :key="index"
               >
-                <v-col cols="12" md="9" sm="7">
+                <v-col cols="10" md="9" sm="7">
                   <span>
                     {{ p.title }}
                   </span>
                 </v-col>
 
-                <v-col cols="12" md="3" sm="2">
+                <v-col cols="2" md="3" sm="2">
                   <v-icon smal :color="p.color">
                     {{ `fas fa-${p.icon}` }}
                   </v-icon>
@@ -71,13 +71,13 @@
                 v-for="(p, index) in s.pros"
                 :key="index"
               >
-                <v-col cols="12" md="9" sm="7">
+                <v-col cols="10" md="9" sm="7">
                   <span>
                     {{ p.title }}
                   </span>
                 </v-col>
 
-                <v-col cols="12" md="3" sm="2">
+                <v-col cols="2" md="3" sm="2">
                   <v-icon smal :color="p.color">
                     {{ `fas fa-${p.icon}` }}
                   </v-icon>

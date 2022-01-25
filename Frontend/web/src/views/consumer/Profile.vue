@@ -5,7 +5,7 @@
       <v-card flat>
         <v-row>
           <v-col cols="auto" class="ml-auto">
-            <image-upload />
+            <image-upload :id="user.idUser" @clicked="uploaded()" />
             <v-btn
               class="body-2 rounded-xl button"
               small
@@ -68,10 +68,10 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos">Sexo</p>
+                        <p class="infos mb-0">Sexo</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{ user.sex }}</p>
+                        <p class="respos mb-0">{{ user.sex }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -82,9 +82,10 @@
           <v-col cols="auto" order="first" order-sm="last">
             <div class="foto h-100 mt-5">
               <v-img
-                src="@/assets/userImgTest.jpg"
+                :src="processImage(user.image)"
                 aspect-ratio="1"
-                class="grey lighten-2 mx-2 rounded"
+                :width="115"                
+                class="grey lighten-2 my-2 ml-5 rounded"
                 cover
               >
                 <template v-slot:placeholder>
@@ -193,25 +194,37 @@ export default {
     wannaBeSP() {
       this.$router.push("/consumer/become/service/provider");
     },
+    processImage(img) {
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      );
+    },
+    uploaded() {
+      this.atualiza();
+    },
+    atualiza: async function () {
+      try {
+        let response = await axios.post("http://localhost:9040/users/perfil", {
+          token: store.getters.token,
+        });
+        this.user = response.data.perfil[0];
+
+        if (this.user.sex == "M") this.user.sex = "Masculino";
+        else if (this.user.sex == "F") this.user.sex = "Feminino";
+        else this.user.sex = "Indefinido";
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
   },
   created: async function () {
-
-try {
-      let response = await axios.post("http://localhost:9040/users/perfil", {
-        token: store.getters.token,
-      });
-      this.user = response.data.perfil[0];
-      if (this.user.sex == "M") this.user.sex = "Masculino";
-      else if (this.user.sex == "F") this.user.sex = "Feminino";
-      else this.user.sex = "Indefinido";
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.atualiza();
   },
 };
 </script>

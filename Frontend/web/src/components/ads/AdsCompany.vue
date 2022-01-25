@@ -170,8 +170,9 @@ export default {
     },
         searchNewData: async function () {
       try {
+        this.page = 1;
         let response = await axios.get(
-          "http://localhost:9040/search/?page=1" 
+          "http://localhost:9040/search/?page=" + this.page 
         );
 
         if (response) {

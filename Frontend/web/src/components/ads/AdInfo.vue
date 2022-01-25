@@ -1,27 +1,27 @@
 <template>
   <v-container>
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2">
+      <v-col cols="4" md="2">
         <div class="foto h-100">
           <v-img
-            :src="image"
+            :src="processImage(serviceProviderData.image)"
             aspect-ratio="1"
-            class="grey lighten-2 mx-2 rounded"
+            class="grey lighten-2 rounded"
             cover
           >
-            <!--<template v-slot:placeholder>
+            <template v-slot:placeholder>
               <v-row class="fill-height ma-0" align="center" justify="center">
                 <v-progress-circular
                   indeterminate
                   color="grey lighten-5"
                 ></v-progress-circular>
               </v-row>
-            </template>-->
+            </template>
           </v-img>
         </div>
       </v-col>
 
-      <v-col cols="12" md="10" sm>
+      <v-col cols="6" md="6" sm="6" class="ml-13 ml-md-16 ml-sm-0">
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -31,7 +31,7 @@
         <v-row>
           <v-col
             cols="12"
-            md="2"
+            md="4"
             v-for="(a, index) in serviceProvider.categories"
             :key="index"
           >
@@ -52,17 +52,22 @@
             </span>
           </v-col>
         </v-row>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col cols="12">
+        <p class="infos font-weight-bold mb-3">Descrição</p>
         <div>
           <p class="desc mt-3">
             {{ serviceProviderData.description }}
           </p>
         </div>
-        <v-divider></v-divider>
       </v-col>
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2">
+      <v-col cols="12" sm="3" md="2">
         <div class="infos font-weight-bold">Contactos</div>
         <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
           Sem dados de contacto
@@ -71,7 +76,7 @@
         <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" md="10" sm>
+      <v-col cols="12" sm="9" md="9" class="ml-md-5">
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
@@ -90,18 +95,18 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="2" sm>
+      <v-col cols="12" sm="2" md="2">
         <p class="infos font-weight-bold">Classificação global</p>
         <div>
           <v-icon color="#FFE082" class="mb-1" small>fas fa-star</v-icon>
           <span class="font-weight-bold ma-2">{{
-            serviceProviderData.averageRating
+            serviceProviderData.averageRating.toFixed(1)
           }}</span>
         </div>
       </v-col>
       <v-col cols="12" md="10" sm>
         <p class="infos font-weight-bold">Horário</p>
-        <schedule :dados="serviceProvider.categories"/>
+        <schedule :dados="id" />
       </v-col>
     </v-row>
 
@@ -113,8 +118,11 @@
         </span>
       </v-col>
 
-      <v-col cols="12" md="9" sm class="d-flex justify-end">
-        <add-review :dados="id" />
+      <v-col cols="12" md="4" sm class="d-flex justify-end">
+        <add-review :dados="id" @clicked="update()" />
+      </v-col>
+      <v-col cols="12" md="5" sm class="d-flex justify-end">
+        <send-message :dados="id" @clicked="update()" />
       </v-col>
     </v-row>
 
@@ -147,7 +155,7 @@
               height="100%"
             >
               <v-row align="center">
-                <v-col cols="12" md="10" sm="10" xs="8">
+                <v-col cols="8" md="10" sm="10">
                   <div>
                     <span class="font-weight-bold">{{
                       formatDate(a.postDate)
@@ -159,8 +167,15 @@
                     </span>
                   </div>
                 </v-col>
-                <v-col cols="12" md="2" sm="2" xs="4">
-                  <div class="font-weight-bold ratings">
+                <v-col cols="3" md="2" sm="2">
+                  <div
+                    class="
+                      font-weight-bold
+                      ratings
+                      ml-4 ml-md-0
+                      vertical-center
+                    "
+                  >
                     <v-icon color="#FFE082" class="icon mb-1"
                       >fas fa-star</v-icon
                     >
@@ -216,7 +231,6 @@ export default {
   data() {
     return {
       noExp: "<1 ano",
-      image: "",
       sortDesc: false,
       pageCount: 0,
       page: 1,
@@ -253,13 +267,37 @@ export default {
     formerPage() {
       if (this.page - 1 >= 1) this.page -= 1;
     },
+    update: async function () {
+      try {
+        let response = await axios.get(
+          "http://localhost:9040/serviceProvider/?id=" + this.id
+        );
+        this.serviceProviderData = response.data.ServiceProvider[0];
+        this.serviceProvider = response.data;
+        this.reviews = response.data.reviews.length;
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
     updateItemsPerPage(number) {
       this.itemsPerPage = number;
+    },
+    processImage(img) {
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img.data)))
+      );
     },
   },
   components: {
     Schedule: () => import("@/components/ads/Schedule"),
     AddReview: () => import("@/components/dialogs/AddReview"),
+    SendMessage: () => import("@/components/dialogs/SendMessage"),
   },
   computed: {
     numberOfPages() {
@@ -267,23 +305,7 @@ export default {
     },
   },
   created: async function () {
-    try {
-      let response = await axios.get(
-        "http://localhost:9040/serviceProvider/?id=" + this.id
-      );
-      (this.serviceProviderData = response.data.ServiceProvider[0]);
-      (this.serviceProvider = response.data);
-      this.reviews = response.data.reviews.length;
-      this.image =
-        "data:image/jpeg;base64," + btoa(this.serviceProviderData.image.data);
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.update();
   },
 };
 </script>
@@ -305,5 +327,13 @@ export default {
 
 .reviews {
   align-content: center;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 </style>

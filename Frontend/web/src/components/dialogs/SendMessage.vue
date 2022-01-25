@@ -12,35 +12,23 @@
           class="rounded-lg"
         >
           <v-icon small class="mr-1">fas fa-comment</v-icon>
-          Deixar um comentário
+          Enviar uma mensagem
         </v-btn>
       </template>
       <v-card class="rounded-lg">
         <v-card-title class="font-weight-bold pt-6">
-          Deixar um comentário
+          Enviar mensagens
         </v-card-title>
         <v-card-subtitle class="my-4 text-subtitle-1">
-          O seu feedback é muito importante para avaliar a qualidade dos
-          serviços prestados.
+          Entre em contacto com o prestador de serviços
         </v-card-subtitle>
         <v-card-text>
           <v-form ref="form" v-model="valid">
-            <h4 class="group font-weight-light text-uppercase">
-              Classificação
-            </h4>
-            <v-divider></v-divider>
-            <div class="text-center mt-3">
-              <v-rating
-                v-model="form.rating"
-                :length="length"
-                background-color="warning lighten-1"
-                color="warning"
-                hover
-              ></v-rating>
-            </div>
+            
+            
 
             <h4 class="mt-6 group font-weight-light text-uppercase">
-              Comentário
+              Mensagem
             </h4>
             <v-divider></v-divider>
             <div class="text-center mt-3">
@@ -80,9 +68,9 @@
                 dark
                 block
                 color="#78c4d4"
-                @click="review()"
+                @click="send()"
               >
-                Confirmar
+                Enviar
               </v-btn>
             </v-col>
           </v-row>
@@ -108,21 +96,21 @@ export default {
     },
   }),
   methods: {
-    review: async function () {
+    send: async function () {
       if (this.$refs.form.validate()) {
         try {
             console.log(this.dados)
-          await axios.post("http://localhost:9040/review", {
+          await axios.post("http://localhost:9040/message/addMessage", {
             token: store.getters.token,
-            receivingId: this.dados,
-            description: this.form.description,
-            rating: this.form.rating,
+            content: this.form.description,
+            idUser2:this.dados,
           });
           this.$emit("clicked","update")
           this.dialog= false,
+
           this.$snackbar.showMessage({
             show: true,
-            text: "Comentário enviado com sucesso.",
+            text: "Mensagem enviada com sucesso.",
             color: "success",
             snackbar: true,
             timeout: 4000,

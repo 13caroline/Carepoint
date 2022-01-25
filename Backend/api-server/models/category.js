@@ -1,6 +1,5 @@
 const dbconfig = require("./Config/Database_Info");
 const Area = require("./area");
-const { INTEGER } = require("sequelize/dist");
 
 const Category = dbconfig.sequelize.define('Category', {
     idCategory: {
@@ -18,7 +17,7 @@ const Category = dbconfig.sequelize.define('Category', {
     timestamps: false
 })
 
-Category.belongsTo(Area, { onDelete: 'CASCADE', foreignKey: { name: 'idArea', allowNull: false, type: INTEGER }, targetKey: 'idArea' })
+Category.belongsTo(Area, { onDelete: 'CASCADE', foreignKey: { name: 'idArea', allowNull: false, type: dbconfig.Sequelize.INTEGER }, targetKey: 'idArea' })
 
 Category.sync()
 

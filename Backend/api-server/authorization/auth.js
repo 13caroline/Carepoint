@@ -1,7 +1,9 @@
 const jwt = require('jsonwebtoken')
 
 const jobOffer_controller = require('../controllers/joboffer')
-const user_controller = require('../controllers/user')
+const user_controller = require('../controllers/user');
+
+const bcrypt = require('bcryptjs')
 
 var Out = module.exports;
 
@@ -186,6 +188,24 @@ Out.matchReview = (req, res, next) => {
             })
         }else{
             res.status(500).jsonp("Invalid JWT token.")
+        }
+    })
+}
+
+Out.matchPasswords = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
+        if(!err){
+            user_controller.consult(payload.email)
+            .then((user) => {
+                if (bcrypt.compareSync(req.body.password, user.password)) {
+                    next()
+                } else {
+                    res.status(500).jsonp({error: "Password Inválida"})
+                }
+            })
+            .catch((err) => res.status(500).jsonp({ error: err }))
+        }else{
+            res.status(500).jsonp({ error: err })
         }
     })
 }

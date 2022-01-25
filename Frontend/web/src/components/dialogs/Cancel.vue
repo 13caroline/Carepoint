@@ -16,7 +16,7 @@
         </v-btn>
       </template>
       <v-card>
-        <v-card-title class="justify-center cancel">
+        <v-card-title id="card-title" class="justify-center cancel">
           Cancelar {{ dialogs.title }}
         </v-card-title>
         <v-card-text>
@@ -64,3 +64,9 @@ export default {
   },
 };
 </script>
+
+<style>
+  #card-title {
+    word-break: keep-all;
+  };
+</style>

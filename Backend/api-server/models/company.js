@@ -1,7 +1,6 @@
 const dbconfig = require("./Config/Database_Info");
 const User = require("./user")
 const Subscription = require("./subscription");
-const { INTEGER } = require("sequelize/dist");
 
 const Company = dbconfig.sequelize.define('Company', {
     idCompany: {
@@ -36,7 +35,7 @@ const Company = dbconfig.sequelize.define('Company', {
 })
 
 // A chave de Company é o ID 
-Company.belongsTo(User, { foreignKey: 'idCompany', targetKey: 'idUser', type: INTEGER })
+Company.belongsTo(User, { foreignKey: 'idCompany', targetKey: 'idUser', type: dbconfig.Sequelize.INTEGER })
     // Meter a FK de subscription em Company
 Subscription.hasMany(Company, { foreignKey: { name: 'idSubscription', allowNull: false, defaultValue: 1 }, onDelete: 'CASCADE', targetKey: 'idSubscription' })
 
