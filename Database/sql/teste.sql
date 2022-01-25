@@ -53,3 +53,13 @@ CALL add_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0",
 CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
 CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
 CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00","idCategory": "1"}');
+
+CALL remove_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 12:30:00",
+        "date_begin": "2022-01-09 05:00:00"
+    }');
+    
+CALL remove_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 23:00:00",
+        "date_begin": "2022-01-09 15:30:00"
+    }');
