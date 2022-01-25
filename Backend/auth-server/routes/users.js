@@ -85,7 +85,7 @@ router.post('/register', (req, res) => {
 
 //Type :: 1 = admin -- 2 = consumer -- 3 = SP -- 4 = company 
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
-  jwt.sign({ email: req.user.email, level: req.user.type }, 'Project_PI', { expiresIn: '1h' }, (e, token) => {
+  jwt.sign({ email: req.user.email, level: req.user.type }, 'Project_PI', { expiresIn: '12h' }, (e, token) => {
     if (e) {
       res.status(500).jsonp({ error: "Error within token generation: " + e })
     } else {

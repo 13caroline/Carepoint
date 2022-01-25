@@ -158,12 +158,27 @@ export default {
       if (this.page - 1 >= 1) this.page -= 1;
       this.getData();
     },
-    getData: async function () {
+    getData: async function (form) {
       try {
-        let response = await axios.get(
-          "http://localhost:9040/search/?page=" + this.page
-        );
+        let url = "http://localhost:9040/search/?page=";
+          // console.log('fomr => ',form);
+          this.ads = [];
+        if(form) {
+          this.page = 1;
+          // console.log('ads => ',this.ads);
+         url = url + this.page +
+         (form.category ? "&category=".concat(form.category) : "") + 
+         (form.location ? "&location=".concat(form.location) : "") + 
+         (form.price ? "&price=".concat(form.price) : "") + 
+         (form.rating ? "&rating=".concat(form.rating) : "") + 
+         (form.sex ? "&sex=".concat(form.sex) : "");
+
+        }
+         else url = url + this.page;
+        console.log(url);
+        let response = await axios.get(url);
         if (response) {
+          console.log(response.data);
           this.ads = response.data.ServiceProviders;
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
         }

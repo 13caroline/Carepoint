@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <v-data-iterator
-      v-if="ads.length"
       :items="ads"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
@@ -17,7 +16,6 @@
             cols="auto"
             lg="4"
             md="4"
-            sm="6"
             class="mx-auto mx-sm-0"
             v-for="(a, index) in props.items"
             :key="index"
@@ -27,15 +25,14 @@
                 class="card rounded-xl overflow-auto"
                 color="#c0e4ec"
                 tile
-                min-height="350"
-                max-height="400"
-                max-width="600"
+                height="300"
+                width="500"
                 @click="infoSP(a.idUser)"
               >
                 <v-card-text>
                   <v-row justify="center">
                     <v-col cols="auto">
-                      <v-avatar class="profile" color="white" size="100">
+                      <v-avatar class="profile" color="grey" size="100">
                         <v-img :src="processImage(a.image.data)"></v-img>
                       </v-avatar>
                     </v-col>
@@ -57,8 +54,9 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="6">{{a.description}}</v-clamp>
-                      
+                      <v-clamp autoresize :max-lines="4">{{
+                        a.description
+                      }}</v-clamp>
                     </span>
                   </v-row>
                 </v-card-text>
@@ -68,13 +66,13 @@
         </v-row>
       </template>
     </v-data-iterator>
-    <small v-else> <em> não existem anúncios publicados </em></small>
+    <!--<small v-else> <em> não existem anúncios publicados </em></small>-->
 
-    <v-row class="mt-4" align="center" justify="center" >
+    <v-row class="mt-4" align="center" justify="center">
       <v-btn
         fab
         dark
-        x-small
+        small
         depressed
         color="#78C4D4"
         class="mr-1"
@@ -85,7 +83,7 @@
       <v-btn
         fab
         dark
-        x-small
+        small
         depressed
         color="#78C4D4"
         class="ml-1"
@@ -95,7 +93,7 @@
       </v-btn>
     </v-row>
 
-    <v-row class="mt-5" align="center" justify="center" >
+    <v-row class="mt-5" align="center" justify="center">
       <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
     </v-row>
   </v-container>
@@ -104,7 +102,8 @@
 <script>
 import axios from "axios";
 import moment from "moment";
-import VClamp from 'vue-clamp'
+import VClamp from "vue-clamp";
+
 export default {
   name: "Ads",
 
@@ -121,17 +120,21 @@ export default {
     };
   },
   components: {
-    VClamp
+    VClamp,
   },
   methods: {
+    
     difDate(dateLA) {
       return moment(dateLA).locale("pt").fromNow();
     },
     processImage(img) {
-      return "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+      return (
+        "data:image/png;base64," +
+        btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
+      );
     },
     infoSP(id) {
-      this.$router.push("/company/ad/info/" + id);
+      this.$router.push("/ad/info/" + id);
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
@@ -141,14 +144,34 @@ export default {
       if (this.page - 1 >= 1) this.page -= 1;
       this.getData();
     },
-    getData: async function () {
+    getData: async function (form) {
       try {
-        let response = await axios.get("http://localhost:9040/search/?page=" + this.page);
-        
+        let url = "http://localhost:9040/search/?page=";
+          // console.log('fomr => ',form);
+          this.ads = [];
+        if(form) {
+          this.page = 1;
+          // console.log('ads => ',this.ads);
+         url = url + this.page +
+         (form.category ? "&category=".concat(form.category) : "") + 
+         (form.location ? "&location=".concat(form.location) : "") + 
+         (form.price ? "&price=".concat(form.price) : "") + 
+         (form.rating ? "&rating=".concat(form.rating) : "") + 
+         (form.sex ? "&sex=".concat(form.sex) : "");
+
+        }
+         else url = url + this.page;
+        console.log(url);
+        let response = await axios.get(url);
+
+
         if (response) {
-          console.log(response.data)
+          console.log(response.data);
           this.ads = response.data.Companies;
           this.total = response.data.Companies_Sum[0].number_companies;
+          /*this.ads = response.data.ServiceProviders.map(an => {
+      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
+         })*/
         }
       } catch (e) {
         this.$snackbar.showMessage({
@@ -170,6 +193,7 @@ export default {
     this.getData();
   },
 };
+
 </script>
 
 <style scoped>
