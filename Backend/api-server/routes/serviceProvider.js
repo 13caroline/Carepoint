@@ -87,6 +87,16 @@ router.put('/regHorario', auth.validToken, (req, res) => {
     .catch((err) => res.status(500).jsonp({ error : err }))
 })
 
+router.put('/remHorario', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.remHorario(usr.idUser,  req.body.slotJson)
+        .then((upd) => {res.status(200).jsonp({ message: "success" })})
+        .catch((err) => {res.status(500).jsonp({ error : err })})
+    })
+})
+
 router.put('/newSlot', auth.validToken, (req,res) => {
     email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
@@ -113,6 +123,15 @@ router.put('/newSlot', auth.validToken, (req,res) => {
     .catch((err) => {res.status(500).jsonp({ error : err })})    
 })
 
+router.put('/remSlot', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.remSlot(usr.idUser, req.body.slotJson)
+        .then((upd) => {res.status(200).jsonp({ message: "success" })})
+        .catch((err) => {res.status(500).jsonp({ error : err })})
+    })
+})
 // Update an ServiceProvider
 router.put('/:id', function(req, res, next) {
     ServiceProvider.update(req.params.id, req.body)
