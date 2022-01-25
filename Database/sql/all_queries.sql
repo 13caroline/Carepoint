@@ -44,7 +44,8 @@ DROP PROCEDURE IF EXISTS all_messages_with;
 DROP PROCEDURE IF EXISTS createMessage;
 DROP PROCEDURE IF EXISTS add_slot;
 DROP PROCEDURE IF EXISTS remove_slot;
-DROP PROCEDURE IF EXISTS add_workSchedule_slot
+DROP PROCEDURE IF EXISTS add_workSchedule_slot;
+DROP PROCEDURE IF EXISTS insert_categorias;
 
 -- =============================================
 -- Description: Insert review
@@ -189,10 +190,11 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE get_sp_category_info (IN id INT)
 BEGIN
-	SELECT category.name, category_has_serviceprovider.experience, category_has_serviceprovider.workSchedule, category_has_serviceprovider.occupiedSchedule,
+	SELECT category.name, category_has_serviceprovider.experience, serviceprovider.workSchedule, serviceprovider.occupiedSchedule,
 		category_has_serviceprovider.price FROM user
 	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
-    INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
+    INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory 
+    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP WHERE id = user.idUser;
 END &&
 DELIMITER ;
 
@@ -218,15 +220,13 @@ DELIMITER ;
 -- Type: Procedure
 -- Parameters:
 --   @id - service provider identification number
--- Returns: Work schedule, occupied schedule and category name that belongs to a specific service provider 
+-- Returns: Work schedule, occupied schedule that belongs to a specific service provider 
 -- =============================================
 
 DELIMITER &&
 CREATE PROCEDURE get_sp_horarios (IN id INT)
 BEGIN
-	SELECT category.name, category_has_serviceprovider.workSchedule,category_has_serviceprovider.occupiedSchedule FROM user
-	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
-    INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
+	SELECT serviceprovider.workSchedule, serviceprovider.occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP;
 END &&
 DELIMITER ;
 
@@ -362,30 +362,31 @@ END &&
 DELIMITER ;
 
 -- =============================================
--- Description: Get the maximum values like: maximum price, maximum distance and maximum rating
+-- Description: Get the maximum values like: maximum price, maximum experience and maximum rating
 -- Type: Procedure
 -- Parameters: None
--- Returns: Maximum price, maximum distance and maximum rating
+-- Returns: Maximum price, maximum experience and maximum rating
 -- =============================================
  
 DELIMITER &&  
 CREATE PROCEDURE get_max_values ()  
 BEGIN  
 	DECLARE price DOUBLE DEFAULT 0.0;
-    DECLARE distance INT DEFAULT 0;
+    DECLARE experience INT DEFAULT 0;
     DECLARE rating DOUBLE DEFAULT 0.0;
     
     -- calculate maximum price
 	SET price = (SELECT MAX(category_has_serviceprovider.price) FROM serviceprovider
 		INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider);
 	
-    -- calculate maximum distance   
-	SET distance = (SELECT MAX(serviceprovider.distance) FROM serviceprovider);
+    -- calculate maximum experience   
+	SET experience = (SELECT MAX(category_has_serviceprovider.experience) FROM serviceprovider
+		INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider);
     
      -- calculate maximum rating 
     SET rating = (SELECT MAX(serviceprovider.averageRating) FROM serviceprovider);
     
-    SELECT price, distance , rating;
+    SELECT price, experience , rating;
     
 END &&  
 DELIMITER ;
@@ -1436,27 +1437,26 @@ DELIMITER ;
 -- Type: Procedure
 -- Parameters: 
 --   @in_idUser - service provider identification number
---   @in_idCategory - category identification number
 --   @in_slot - slot to be added
 -- Returns: None
 -- =============================================
 
 DELIMITER &&  
-CREATE PROCEDURE add_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
+CREATE PROCEDURE add_slot (IN in_idUser INT, IN in_slot JSON)  
 BEGIN  
 	
     DECLARE os JSON DEFAULT '[]';
     -- get the occupied schedule
-    SET os = (SELECT category_has_serviceprovider.occupiedSchedule FROM category_has_serviceprovider 
-			WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory);
+    SET os = (SELECT serviceprovider.occupiedSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser );
     
-	UPDATE pi.category_has_serviceprovider SET
-		category_has_serviceprovider.occupiedSchedule= CASE 
+	UPDATE pi.serviceprovider SET
+		serviceprovider.occupiedSchedule= CASE 
 					WHEN in_slot IS NOT NULL AND os IS NOT NULL
                     THEN JSON_MERGE_PRESERVE(os,in_slot)
-                    ELSE category_has_serviceprovider.occupiedSchedule
+                    ELSE serviceprovider.occupiedSchedule
                     END
-	WHERE category_has_serviceprovider.idServiceProvider = in_idUser;
+	WHERE serviceprovider.idSP = in_idUser;
 END &&  
 DELIMITER ;
 
@@ -1501,26 +1501,46 @@ DELIMITER ;
 -- Type: Procedure
 -- Parameters: 
 --   @in_idUser - service provider identification number
---   @in_idCategory - category identification number
 --   @in_slot - slot to be added
 -- Returns: None
 -- =============================================
 
 DELIMITER &&  
-CREATE PROCEDURE add_workSchedule_slot (IN in_idUser INT,IN in_idCategory INT, IN in_slot JSON)  
+CREATE PROCEDURE add_workSchedule_slot (IN in_idUser INT,IN in_slot JSON)  
 BEGIN  
 	
     DECLARE os JSON DEFAULT '[]';
-    -- get the workSchedule schedule
-    SET os = (SELECT category_has_serviceprovider.workSchedule FROM category_has_serviceprovider 
-			WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory);
     
-	UPDATE pi.category_has_serviceprovider SET
-		category_has_serviceprovider.workSchedule= CASE 
+    -- get the workSchedule schedule
+    SET os =  (SELECT serviceprovider.workSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser);
+    
+	UPDATE pi.serviceprovider SET
+		serviceprovider.workSchedule= CASE 
 					WHEN in_slot IS NOT NULL AND os IS NOT NULL
                     THEN JSON_MERGE_PRESERVE(os,in_slot)
-                    ELSE category_has_serviceprovider.workSchedule
+                    ELSE serviceprovider.workSchedule
                     END
-	WHERE category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategory;
+	WHERE serviceprovider.idSP = in_idUser;
 END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Insert a new category for a certain Service Provider
+-- Type: Procedure
+-- Parameters:
+--   @in_idUser - Identification number of the Service Provider in question
+--   @in_idCat - Identification number of the Category to be added
+--   @in_exp - Amount of years of experience the Service Provider has in the Category
+-- Returns: Nothing
+-- =============================================
+
+DELIMITER &&
+CREATE PROCEDURE insert_categorias (IN in_idUser INT, IN in_idCat INT, IN in_exp INT)
+BEGIN
+
+	INSERT INTO category_has_serviceprovider (price, experience, idCategory, idServiceProvider)
+    VALUES (0, in_exp, in_idCat, in_idUser);
+
+END &&
 DELIMITER ;

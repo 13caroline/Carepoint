@@ -53,13 +53,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Iroha Kazama",
+									"value": "Kazama Iroha",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_11@gmail.com",
+									"value": "theUserTestingEmail_01@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -120,13 +120,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "The one and only",
+									"value": "Service Provider Example",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "ramili3@gmail.com",
+									"value": "serviceProvider_01@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -180,7 +180,7 @@
 								},
 								{
 									"key": "qualifications",
-									"value": "I am qualified to walk throughdasd",
+									"value": "I am qualified to walk",
 									"description": "Opcional",
 									"type": "text"
 								},
@@ -197,6 +197,11 @@
 								{
 									"key": "categorias",
 									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "experience",
+									"value": "5",
 									"type": "text"
 								}
 							]
@@ -226,13 +231,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Ganyu",
+									"value": "Company Example",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "void",
+									"value": "company_emai_01@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1742,6 +1747,26 @@
 											"key": "qualifications",
 											"value": "sleep, forgetfullness",
 											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "3",
+											"type": "text"
+										},
+										{
+											"key": "experience",
+											"value": "5",
+											"type": "text"
 										}
 									]
 								},
@@ -2355,7 +2380,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzA0MzUyNywiZXhwIjoxNjQzMDQ3MTI3fQ.vR3nL3eIYlRPgW-JRg6zmm6jn4OSwJni7ELBiQOwHtc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzEyNTUxNSwiZXhwIjoxNjQzMTI5MTE1fQ.92dVqOpIlLC1Zwf9vMm4FFwP2oscSvUkHqAaRr3GHDs",
 											"type": "text"
 										},
 										{
@@ -2370,12 +2395,17 @@
 										},
 										{
 											"key": "spId",
-											"value": "51",
+											"value": "52",
 											"type": "text"
 										},
 										{
-											"key": "category",
-											"value": "4",
+											"key": "categories",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "2",
 											"type": "text"
 										}
 									]

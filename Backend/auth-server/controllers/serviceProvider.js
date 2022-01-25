@@ -12,15 +12,18 @@ Out.adicionarSP = (body, id) => {
         distance: body.distance,
         qualifications: body.qualifications,
         idSubscription: 1,
-        averageRating: 0
+        averageRating: 0,
+        workSchedule: '[]',
+        occupiedSchedule: '[]',
     })
 }
 
-Out.addCategorias = (arr, id) => {
+Out.addCategorias = (arr, id, experience) => {
     var cat_ids = (typeof arr === 'undefined') ? [] : arr;
-    return dbconfig.sequelize.query('CALL insert_categorias (:idm :cats)',
-        { replacements: {
-            id: id,
-            cats: cat_ids
-        }})
+    var query = "";
+    for (let i = 0; i < cat_ids.length; i++) {
+        query += ('CALL insert_categorias ('+id+','+cat_ids[i]+','+experience+'); ')
+    }
+
+    return dbconfig.sequelize.query(query);
 }

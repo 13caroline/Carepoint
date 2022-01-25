@@ -20,4 +20,6 @@ const Add = dbconfig.sequelize.define('add', {
 //Add.belongsTo(Company, {foreignKey: 'idCompany', targetKey: 'idCompany'})
 Add.belongsTo(Company, {onDelete: 'CASCADE', foreignKey: {name : 'idCompany',allowNull: false},  targetKey: 'idCompany'})
 
+Add.sync()
+
 module.exports = Add

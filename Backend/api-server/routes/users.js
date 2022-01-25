@@ -129,14 +129,18 @@ router.post('/upgrade', auth.matchPasswords, (req,res) => {
             .then((unimportant) => {
                 ServiceProvider.adicionarSP(req.body, usr.idUser)
                 .then((sp) => {
-                    axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
-                        email: email,                                                                   //Tenta fazer login
-                        password: req.body.password
-                      }).then(data => {                                                                 //Se tiver sucesso (3)
-                        res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
-                      }).catch(e => {                                                                   //Se falhar o sucesso (3)
-                        res.status(500).jsonp({error: e})                                               //Retorna o Erro
-                      })
+                    ServiceProvider.addCategorias(req.body.categories, usr.idUser, req.body.experience)
+                    .then((sp2) => {
+                        axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
+                            email: email,                                                                   //Tenta fazer login
+                            password: req.body.password
+                          }).then(data => {                                                                 //Se tiver sucesso (3)
+                            res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
+                          }).catch(e => {                                                                   //Se falhar o sucesso (3)
+                            res.status(500).jsonp({error: e})                                               //Retorna o Erro
+                          })
+                    })
+                    .catch((err) => res.status(500).jsonp({error: err})) 
                 })
                 .catch((err) => res.status(500).jsonp({error: err})) 
             })

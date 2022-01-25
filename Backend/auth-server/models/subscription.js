@@ -23,4 +23,6 @@ const Subscription = dbconfig.sequelize.define('subscription',{
     timestamps: false
 })
 
+Subscription.sync()
+
 module.exports = Subscription

@@ -94,6 +94,7 @@ router.put('/newSlot', auth.validToken, (req,res) => {
         var uid = usr.idUser;
         var dateBegin = req.body.dateBegin;
         var dateEnd = req.body.dateEnd;
+        var r_categories = req.body.categories;
         var d = new Date();
         var ymd = d.getFullYear() + "-" + (('0'+(d.getMonth()+1)).slice(-2)) + "-" + d.getDate();
         var hms = d.getHours() + ":" + (('0'+d.getMinutes()).slice(-2)) + ":" + (('0'+d.getSeconds()).slice(-2));
@@ -103,9 +104,9 @@ router.put('/newSlot', auth.validToken, (req,res) => {
                    '"date_end": "'+dateEnd+'",' +
                    '"occupied": "'+occupied+'",' +
                    '"date_begin": "'+dateBegin+'",' +
+                   '"idCategory": "['+r_categories+']",'+
                    '"date_requested": "'+postDate+'"}';
-
-        ServiceProvider.addSlot(req.body.spId, req.body.category, text)
+        ServiceProvider.addSlot(req.body.spId, text)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
         .catch((err) => {res.status(500).jsonp({ error : err })})  
     })
