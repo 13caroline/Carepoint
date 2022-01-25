@@ -34,7 +34,7 @@
                       ></v-text-field>
                       </v-col>
                         <v-col>
-                      <change-password/>
+                      <change-password :id="user.idUser" @clicked="update()"/>
                       </v-col>
                     </v-row>
                   </v-list-item-content>
@@ -272,6 +272,30 @@ export default {
         btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
       );
     },
+    update: async function(){
+      try {
+      let response = await axios.post("http://localhost:9040/users/perfil", {
+        token: store.getters.token,
+      });
+      this.user = response.data.perfil[0];  
+      console.log(response)
+      if (this.user.sex == "M") this.user.sex = "Masculino";
+      else if (this.user.sex == "F") this.user.sex = "Feminino";
+      else this.user.sex = "Indefinido";
+
+      let response2 = await axios.get("http://localhost:9040/location");
+      if (response2) {
+        this.loc = response2.data;
+      }
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
+    },
     confirm: async function () {
       if (this.$refs.form.validate()) {
         try {
@@ -334,28 +358,7 @@ export default {
     ChangePassword: () => import("@/components/dialogs/ChangePassword")
   },
   created: async function () {
-    try {
-      let response = await axios.post("http://localhost:9040/users/perfil", {
-        token: store.getters.token,
-      });
-      this.user = response.data.perfil[0];
-
-      if (this.user.sex == "M") this.user.sex = "Masculino";
-      else if (this.user.sex == "F") this.user.sex = "Feminino";
-      else this.user.sex = "Indefinido";
-
-      let response2 = await axios.get("http://localhost:9040/location");
-      if (response2) {
-        this.loc = response2.data;
-      }
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+    this.update();
   },
 };
 </script>

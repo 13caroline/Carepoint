@@ -26,9 +26,10 @@
                 <span>Palavra-passe atual</span>
                 <v-text-field
                   outlined
+                  required
                   type="password"
                   dense
-                  v-model="oldPassword"
+                  v-model="form.oldPassword"
                 ></v-text-field>
               </v-col>
               
@@ -38,6 +39,7 @@
                 <span>Nova palavra-passe</span>
                 <v-text-field
                   outlined
+                  required
                   type="password"
                   :rules="passwordRules"
                   dense
@@ -48,6 +50,7 @@
                 <span>Repita a palavra-passe</span>
                 <v-text-field
                   outlined
+                  required
                   type="password"
                    :rules="[
                     form.newPassword === form.newPasswordRepeat ||
@@ -77,7 +80,7 @@
               </v-btn>
             </v-col>
             <v-col cols="12" md="6">
-              <v-btn depressed large dark block color="#78c4d4" @click="save()">
+              <v-btn depressed large dark block color="#78c4d4" @click="change()">
                 Enviar
               </v-btn>
             </v-col>
@@ -93,7 +96,7 @@ import axios from "axios";
 import store from "@/store/index.js";
 
 export default {
-  props: ["dados"],
+  props: ["id"],
   data: () => ({
     passwordRules: [
         (v) => !!v || "Palavra-passe inválida",
@@ -118,17 +121,19 @@ export default {
     change: async function () {
       if (this.$refs.form.validate()) {
         try {
-          console.log(this.dados);
-          await axios.post("http://localhost:9040/message/addMessage", {
+          await axios.put("http://localhost:9040/users/updatePassword", {
             token: store.getters.token,
-            content: this.form.description,
-            idUser2: this.dados,
+            idUser: this.id,
+            oldPassword: this.form.oldPassword,
+            newPassword_1: this.form.newPassword,
+            newPassword_2: this.form.newPasswordRepeat,
           });
+          console.log("fgasgf")
           this.$emit("clicked", "update");
           (this.dialog = false),
             this.$snackbar.showMessage({
               show: true,
-              text: "Mensagem enviada com sucesso.",
+              text: "Palavra-passe alteradaw com sucesso.",
               color: "success",
               snackbar: true,
               timeout: 4000,
