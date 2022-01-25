@@ -281,9 +281,9 @@
                       <v-col>
                         <p class="infos mb-0">Categorias</p>
                       </v-col>
-                      <v-col>
-                        <span v-for="(c, index) in categories" :key="index">
-                          {{ c.nameC }}
+                      <v-col class="d-flex justify-end">
+                        <span class="respos ml-1" v-for="(c, index) in categories" :key="index">
+                          {{ c.name }}
                           <span v-if="index != categories.length - 1">| </span>
                         </span>
                         <!--<p v-for="(c,index) in categories" :key="index" class="respos mb-0">nameC</p> -->
@@ -359,13 +359,13 @@ export default {
           token: store.getters.token,
         });
         console.log(response.data)
-        /*
+        
         this.user = response.data.perfil[0];
         this.categories = response.data.categories;
         
         if (this.user.sex == "M") this.user.sex = "Masculino";
         else if (this.user.sex == "F") this.user.sex = "Feminino";
-        else this.user.sex = "Indefinido"; */
+        else this.user.sex = "Indefinido"; 
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,

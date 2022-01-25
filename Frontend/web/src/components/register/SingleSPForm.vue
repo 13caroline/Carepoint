@@ -136,6 +136,60 @@
                   required
                 />
               </v-col>
+              <v-col class="py-0" cols="12" md="4" sm="4">
+                <span>Raio de Atividade *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  v-model="form.distance"
+                  single-line
+                  color="#78C4D4"
+                  name="raius"
+                  suffix="km"
+                  type="number"
+                  required
+                  v-on:keypress="isNumber($event)"
+                />
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col class="py-0">
+                <span>Categorias *</span>
+                <v-autocomplete
+                  outlined
+                  flat
+                  dense
+                  v-model="form.categories"
+                  :items="cat"
+                  item-value="idCategory"
+                  item-text="name"
+                  :rules="textRules"
+                  color="#78C4D4"
+                  name="categories"
+                  required
+                  chips
+                  small-chips
+                  multiple
+                />
+              </v-col>
+              <v-col class="py-0" cols="12" md="4" sm="4">
+                <span>Anos de Experiência *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  v-model="form.experience"
+                  single-line
+                  color="#78C4D4"
+                  name="experience"
+                  suffix="anos"
+                  type="number"
+                  required
+                  v-on:keypress="isNumber($event)"
+                />
+              </v-col>
             </v-row>
 
             <v-row>
@@ -170,22 +224,6 @@
                     :max="new Date().toISOString().substr(0, 10)"
                   ></v-date-picker>
                 </v-menu>
-              </v-col>
-              <v-col class="py-0" cols="12" md="6" sm="6">
-                <span>Raio de Atividade *</span>
-                <v-text-field
-                  outlined
-                  flat
-                  dense
-                  v-model="form.distance"
-                  single-line
-                  color="#78C4D4"
-                  name="raius"
-                  suffix="km"
-                  type="number"
-                  required
-                  v-on:keypress="isNumber($event)"
-                />
               </v-col>
             </v-row>
 
@@ -270,6 +308,7 @@ export default {
       dialogs: {},
       valid: false,
       date: new Date().toISOString().substr(0, 10),
+      cat: [],
       cancelar: { title: "o seu registo", text: "o seu registo" },
       emailRules: [
         (value) => !!value || "Campo inválido",
@@ -300,6 +339,8 @@ export default {
         description: "",
         distance: "",
         qualifications: "",
+        experience: "",
+        categories: [],
       },
       items: [
         { name: "Feminino", value: "F" },
@@ -330,6 +371,8 @@ export default {
             dateOfBirth: this.date,
             distance: this.form.distance,
             qualifications: this.form.qualifications,
+            categorias: this.form.categories,
+            experience: this.form.experience, 
           });
           if (res.data.token != undefined) {
             this.$store.commit("guardaTokenUtilizador", res.data.token);
@@ -366,6 +409,15 @@ export default {
       let response = await axios.get("http://localhost:9040/location");
       if (response) {
         this.loc = response.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let response3 = await axios.get("http://localhost:9040/category");
+      if (response3) {
+        this.cat = response3.data;
       }
     } catch (e) {
       console.log(e);
