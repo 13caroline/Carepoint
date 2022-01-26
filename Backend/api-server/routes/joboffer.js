@@ -27,16 +27,16 @@ router.get('/', (req, res, next) => {
                 Total: count
             });
         })
-        .catch((err) => res.status(500).jsonp("Error obtaining Jobs: " + err));
+        .catch((err) => res.status(400).jsonp("Error obtaining Jobs: " + err));
     })
-    .catch((err) => res.status(500).jsonp("Error obtaining Jobs: " + err));
+    .catch((err) => res.status(400).jsonp("Error obtaining Jobs: " + err));
 })
 
 router.post('/own', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     jobOffer_controller.getOwnJobs(email)
     .then((jobs) => res.status(200).jsonp(jobs))
-    .catch((err) => res.status(500).jsonp(err))
+    .catch((err) => res.status(400).jsonp(err))
 })
 
 router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
@@ -48,17 +48,17 @@ router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
         .then((job) => {
             jobOffer_controller.get_JobOffers(null,null,null,10,0)
             .then(jobs => {res.status(200).jsonp({jobs});})
-            .catch((err) => res.status(500).jsonp("Job inserted successfully, but error retrieving jobs: " + err));
+            .catch((err) => res.status(400).jsonp("Job inserted successfully, but error retrieving jobs: " + err));
         })
-        .catch((err) => res.status(500).jsonp("Failure inserting job: " + err));
+        .catch((err) => res.status(400).jsonp("Failure inserting job: " + err));
     })
-    .catch((err) => res.status(500).jsonp("Failure inserting job: " + err))
+    .catch((err) => res.status(400).jsonp("Failure inserting job: " + err))
 })
 
 router.put('/conclude', auth.checkOwnershipJobOffer, (req, res, next) => {
     jobOffer_controller.concludeJob(req.body.id_job_offer)
     .then((job) => res.status(200).jsonp(job))
-    .catch((err) =>  res.status(500).jsonp("Failure marking job as completed: " + err))
+    .catch((err) =>  res.status(400).jsonp("Failure marking job as completed: " + err))
 })
 
 module.exports = router;

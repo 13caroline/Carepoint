@@ -122,7 +122,7 @@ function getVisibilityType_CP(n) {
 router.get('/:id', function(req, res, next) {
     Subscription_controller.consult_id(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 
@@ -160,15 +160,15 @@ router.post('/', (req, res, next) => {
                     
                         Subscription_controller.activateSubscriptionVisibility_SP(user.idUser, visibility)
                         .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
-                        .catch((err) => res.status(500).jsonp({error: err}))
+                        .catch((err) => res.status(400).jsonp({error: err}))
 
                     }else{
                         res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
                     }
                 })
-                .catch((err1) => res.status(500).jsonp({error: err1}))
+                .catch((err1) => res.status(400).jsonp({error: err1}))
             })
-            .catch((erro) => res.status(500).jsonp({error: erro}))
+            .catch((erro) => res.status(400).jsonp({error: erro}))
         }else{
             var normal = getSubscriptionType_CP(normalSub);
             var visibility = getVisibilityType_CP(visiSub);
@@ -183,15 +183,15 @@ router.post('/', (req, res, next) => {
                     
                         Subscription_controller.activateSubscriptionVisibility_CP(user.idUser, visibility)
                         .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
-                        .catch((err) => res.status(500).jsonp({error: err}))
+                        .catch((err) => res.status(400).jsonp({error: err}))
 
                     }else{
                         res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
                     }
                 })
-                .catch((err1) => res.status(500).jsonp({error: err1}))
+                .catch((err1) => res.status(400).jsonp({error: err1}))
             })
-            .catch((erro) => res.status(500).jsonp({error: erro}))
+            .catch((erro) => res.status(400).jsonp({error: erro}))
         }
     }
 });
@@ -207,7 +207,7 @@ router.post('/', (req, res, next) => {
 router.put('/:id', function(req, res, next) {
     Subscription_controller.update(req.params.id, req.body)
         .then(data => res.status(201).jsonp({ data: data }))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 })
 
 
@@ -220,7 +220,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
     Subscription_controller.remove(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 module.exports = router;

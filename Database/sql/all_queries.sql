@@ -47,6 +47,10 @@ DROP PROCEDURE IF EXISTS remove_workSchedule_slot;
 DROP PROCEDURE IF EXISTS add_workSchedule_slot;
 DROP PROCEDURE IF EXISTS insert_categorias;
 DROP PROCEDURE IF EXISTS remove_slot;
+DROP PROCEDURE IF EXISTS get_service_provider_by_name;
+DROP PROCEDURE IF EXISTS get_service_provider_by_name_count;
+DROP PROCEDURE IF EXISTS get_companies_by_name;
+DROP PROCEDURE IF EXISTS get_companies_by_name_count;
 
 -- =============================================
 -- Description: Insert review
@@ -1589,4 +1593,98 @@ where not exists (
                     END
 	WHERE serviceprovider.idSP = in_idUser;
 END &&  
+
+-- Description: Get a list of service providers that meet the conditions
+-- Type: Procedure
+-- Parameters:
+--   @in_name - name of the service provider to search for
+--   @limite - number of service providers to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: A list of service providers where max_length = @limite
+-- =============================================
+
+DELIMITER &&
+CREATE PROCEDURE get_service_provider_by_name (IN in_name VARCHAR(100), IN limite INT, IN inicio INT)
+BEGIN
+
+	SELECT (SELECT count(*) FROM review WHERE user.idUser = review.idReceive) as nr_reviews ,
+		user.idUser, user.name,user.lastActivity,user.active,user.sex,serviceprovider.description,location.name AS location, location.cordsX, location.cordsY,serviceprovider.endSubVip, serviceprovider.averageRating,category_has_serviceprovider.experience,category_has_serviceprovider.price ,file.image FROM user
+    INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN file ON user.idUser = file.idUser
+    INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
+	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
+	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+	GROUP BY user.idUser
+    ORDER BY serviceprovider.endSubVip DESC LIMIT limite OFFSET inicio;
+
+END &&
+DELIMITER ;
+
+-- =============================================
+-- Description: Get a list of companies that meet the conditions
+-- Type: Procedure
+-- Parameters:
+--   @in_name - name of the company to search for
+--   @limite - number of companies to return
+--   @inicio - value for the pagination, represents the page
+-- Returns: A list of companies where max_length = @limite
+-- =============================================
+
+DELIMITER &&
+CREATE PROCEDURE get_companies_by_name (IN in_name VARCHAR(100), IN limite INT, IN inicio INT)
+BEGIN
+
+	SELECT user.idUser, user.name,company.link,company.firm,company.nipc,PI.add.description,location.name AS location,location.cordsX, location.cordsY, file.image FROM user
+    INNER JOIN company ON user.idUser = company.idCompany 
+    INNER JOIN PI.add ON user.idUser = PI.add.idCompany
+    INNER JOIN location ON user.idLocation = location.idLocation
+    INNER JOIN file ON user.idUser = file.idUser 
+    WHERE user.type = 4 AND company.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+    ORDER BY company.endSubVip DESC LIMIT limite OFFSET inicio;
+
+END &&
+DELIMITER ;
+
+-- =============================================
+-- Description: Get the number of service providers that meet the conditions
+-- Type: Procedure
+-- Parameters:
+--   @in_name - name of the company to search for
+-- Returns: The number of service providers that meet the conditions
+-- =============================================
+
+DELIMITER &&
+CREATE PROCEDURE get_service_provider_by_name_count (IN in_name VARCHAR(100))
+BEGIN
+
+	SELECT COUNT(*) AS number_sps FROM ( 
+		SELECT user.idUser FROM user
+		INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
+		WHERE user.type = 3 AND serviceprovider.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+		GROUP BY user.idUser
+    ) AS aux;
+
+END &&
+DELIMITER ;
+
+-- =============================================
+-- Description: Get the number of companies that meet the conditions
+-- Type: Procedure
+-- Parameters:
+--   @in_name - name of the company to search for
+-- Returns: The number of companies that meet the conditions
+-- =============================================
+
+DELIMITER &&
+CREATE PROCEDURE get_companies_by_name_count (IN in_name VARCHAR(100))
+BEGIN
+
+	SELECT COUNT(*) AS number_cps FROM ( 
+		SELECT user.idUser FROM user
+        INNER JOIN company ON user.idUser = company.idCompany 
+		WHERE user.type = 4 AND company.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+		GROUP BY user.idUser 
+	) AS aux;
+
+END &&
 DELIMITER ;

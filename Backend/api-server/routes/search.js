@@ -33,13 +33,13 @@ router.get('/', (req, res, next) => {
                         Companies_Sum: cpCount
                     });
                 })
-                .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
+                .catch((err) => res.status(400).jsonp("Error obtaining Providers:" + err));
             })
-            .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
+            .catch((err) => res.status(400).jsonp("Error obtaining Providers:" + err));
         })
-        .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
+        .catch((err) => res.status(400).jsonp("Error obtaining Providers:" + err));
     })
-    .catch((err) => res.status(500).jsonp("Error obtaining Providers:" + err));
+    .catch((err) => res.status(400).jsonp("Error obtaining Providers:" + err));
 })
 
 router.get('/serviceProviders', (req, res) => {
@@ -65,9 +65,9 @@ router.get('/serviceProviders', (req, res) => {
                 ServiceProviders_Sum: spCount,
                 });
         })
-        .catch((err) => res.status(500).jsonp({error: "Error obtaining Service Providers:" + err}));
+        .catch((err) => res.status(400).jsonp({error: "Error obtaining Service Providers:" + err}));
     })
-    .catch((err) => res.status(500).jsonp({error: "Error obtaining Service Providers:" + err}));
+    .catch((err) => res.status(400).jsonp({error: "Error obtaining Service Providers:" + err}));
 })
 
 router.get('/companies', (req, res) => {
@@ -88,9 +88,9 @@ router.get('/companies', (req, res) => {
                 Companies_Sum: cpCount
             });
         })
-        .catch((err) => res.status(500).jsonp({error: "Error obtaining Colective Providers:" + err}));
+        .catch((err) => res.status(400).jsonp({error: "Error obtaining Colective Providers:" + err}));
     })
-    .catch((err) => res.status(500).jsonp({error: "Error obtaining Colective Providers:" + err}));
+    .catch((err) => res.status(400).jsonp({error: "Error obtaining Colective Providers:" + err}));
 })
 
 router.get('/BySpName', (req, res) => {
@@ -102,19 +102,47 @@ router.get('/BySpName', (req, res) => {
 
     var name = (typeof req.query.name === 'undefined') ? null : req.query.name;
 
-    ServiceProvider.getSP_Name(name)
-    .then()
-    .catch()
+    search_controller.getServiceProviders_name(name, limit, offset)
+    .then((sp) => {
+        search_controller.getSPSum_name(name)
+        .then((spCount) => {
+            res.status(200).jsonp({
+                ServiceProviders: sp,
+                ServiceProviders_Sum: spCount,
+                });
+        })
+        .catch((err) => res.status(400).jsonp({error: "Error obtaining Service Providers:" + err}));
+    })
+    .catch((err) => res.status(400).jsonp({error: "Error obtaining Service Providers:" + err}));
 })
 
 router.get('/ByCompanyName', (req, res) => {
+    var page = req.query.page;
+    if(page === undefined){page = 1;}
 
+    var limit = 9; // possível alterar depois
+    var offset = (page * limit) - limit
+
+    var name = (typeof req.query.name === 'undefined') ? null : req.query.name;
+
+    search_controller.getCompanies_name(name, limit, offset)
+    .then((cp) => {
+        search_controller.getCPSum_name(name)
+        .then((cpCount) => {
+            res.status(200).jsonp({
+                Companies: cp,
+                Companies_Sum: cpCount
+            });
+        })
+        .catch((err) => res.status(400).jsonp({error: "Error obtaining Colective Providers:" + err}));
+    })
+    .catch((err) => res.status(400).jsonp({error: "Error obtaining Colective Providers:" + err}));
 })
 
 router.get('/max', (req, res) => {
     search_controller.getMaxValues()
     .then(data => res.status(200).jsonp(data))
-    .catch((err) => res.status(500).jsonp({error: err}));
+    .catch((err) => res.status(400).jsonp({error: err}));
 })
 
 module.exports = router;

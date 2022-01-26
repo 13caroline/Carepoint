@@ -20,10 +20,28 @@ Out.getServiceProviders = (category, location, experience, price, rating, sex, l
         }})
 }
 
+Out.getServiceProviders_name = (name, limit, offset) => {
+    return dbconfig.sequelize.query('CALL get_service_provider_by_name (:nm, :lm, :off)',
+        {replacements: {
+            nm: name,
+            lm: limit,
+            off: offset
+        }})
+}
+
 Out.getCompanies = (location, limit, offset) => {
     return dbconfig.sequelize.query('CALL get_companies (:idL, :lm, :off)',
         {replacements: {
             idL: location,
+            lm: limit,
+            off: offset
+        }})
+}
+
+Out.getCompanies_name = (name, limit, offset) => {
+    return dbconfig.sequelize.query('CALL get_companies_by_name (:nm, :lm, :off)',
+        {replacements: {
+            nm: name,
             lm: limit,
             off: offset
         }})
@@ -41,9 +59,23 @@ Out.getSPSum = (category, location, experience, price, rating, sex) => {
         }})
 }
 
+Out.getSPSum_name = (name) => {
+    return dbconfig.sequelize.query('CALL get_service_provider_by_name_count (:nm)',
+        {replacements: {
+            nm: name
+        }})
+}
+
 Out.getCPSum = (location) => {
     return dbconfig.sequelize.query('CALL get_companies_count (:idL)',
         {replacements: {
             idL: location
+        }})
+}
+
+Out.getCPSum_name = (name) => {
+    return dbconfig.sequelize.query('CALL get_companies_by_name_count (:nm)',
+        {replacements: {
+            nm: name
         }})
 }

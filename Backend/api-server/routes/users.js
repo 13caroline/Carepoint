@@ -19,7 +19,7 @@ const config = require('../models/Config/API_info');
  ****************************************************************************************/
 
 router.get('/testErrorMessage', (req, res) => {
-    res.status(500).jsonp({error: "Custom Error message"})
+    res.status(400).jsonp({error: "Custom Error message"})
 })
 
 // List all users given the query param
@@ -28,19 +28,19 @@ router.get('/', function(req, res, next) {
     if (req.query.type) {
         User.type(req.query.type)
             .then(data => res.status(200).jsonp(data))
-            .catch(e => res.status(500).jsonp({ error: e }))
+            .catch(e => res.status(400).jsonp({ error: e }))
     }
     //By active
     else if (req.query.active) {
         User.active(req.query.active)
             .then(data => res.status(200).jsonp(data))
-            .catch(e => res.status(500).jsonp({ error: e }))
+            .catch(e => res.status(400).jsonp({ error: e }))
     }
     // Default list
     else {
         User.list()
             .then(data => res.status(200).jsonp(data))
-            .catch(e => res.status(500).jsonp({ error: e }))
+            .catch(e => res.status(400).jsonp({ error: e }))
     }
 });
 
@@ -49,7 +49,7 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     User.consult_id(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 
@@ -57,7 +57,7 @@ router.get('/:id', function(req, res, next) {
 router.get('/email/:email', function(req, res, next) {
     User.consult(req.params.email)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 /****************************************************************************************
  *                                   POST
@@ -67,7 +67,7 @@ router.post('/id', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token);
     User.consult(email)
     .then(usr => res.status(200).jsonp(usr.idUser))
-    .catch(e => res.status(500).jsonp({ error: e }))
+    .catch(e => res.status(400).jsonp({ error: e }))
 })
 
 //Devolve o perfil do Utilizador, quer seja Consumer / Service Provider / Company
@@ -80,7 +80,7 @@ router.post('/perfil', (req, res, next) => {
         case 2:
             User.getPerfil(email)
             .then((data) => res.status(200).jsonp({perfil: data}))
-            .catch((err) => res.status(500).jsonp({error: err}))
+            .catch((err) => res.status(400).jsonp({error: err}))
             break;
 
         case 3:
@@ -96,17 +96,17 @@ router.post('/perfil', (req, res, next) => {
                             categories: categories
                         })
                     })
-                    .catch((err) => res.status(500).jsonp({error: err}))
+                    .catch((err) => res.status(400).jsonp({error: err}))
                 })
-                .catch((err) => res.status(500).jsonp({error: err}))
+                .catch((err) => res.status(400).jsonp({error: err}))
             })
-            .catch((err) => res.status(500).jsonp({error: err}))
+            .catch((err) => res.status(400).jsonp({error: err}))
             break;
         
         case 4:
             Company.getPerfilCompany(email)
             .then((data) => res.status(200).jsonp({perfil: data}))
-            .catch((err) => res.status(500).jsonp({error: err}))        
+            .catch((err) => res.status(400).jsonp({error: err}))        
             break;
 
         default:
@@ -137,18 +137,18 @@ router.post('/upgrade', auth.matchPasswords, (req,res) => {
                           }).then(data => {                                                                 //Se tiver sucesso (3)
                             res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
                           }).catch(e => {                                                                   //Se falhar o sucesso (3)
-                            res.status(500).jsonp({error: e})                                               //Retorna o Erro
+                            res.status(400).jsonp({error: e})                                               //Retorna o Erro
                           })
                     })
-                    .catch((err) => res.status(500).jsonp({error: err})) 
+                    .catch((err) => res.status(400).jsonp({error: err})) 
                 })
-                .catch((err) => res.status(500).jsonp({error: err})) 
+                .catch((err) => res.status(400).jsonp({error: err})) 
             })
-            .catch((err) => res.status(500).jsonp({error: err})) 
+            .catch((err) => res.status(400).jsonp({error: err})) 
         })
-        .catch((err) => res.status(500).jsonp({error: err}))    
+        .catch((err) => res.status(400).jsonp({error: err}))    
     }else{
-        res.status(500).jsonp({message:"You are not a consumer!"})
+        res.status(400).jsonp({message:"You are not a consumer!"})
     }
 })
 
@@ -156,7 +156,7 @@ router.post('/image', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     User.getImage(email)
     .then((image) => res.status(200).jsonp(image))
-    .catch((err) => res.status(500).jsonp({error: err}))
+    .catch((err) => res.status(400).jsonp({error: err}))
 })
 
 // Insert a new user
@@ -172,7 +172,7 @@ router.post('/', function(req, res) {
 
     User.insert(user)
         .then(data => { res.status(201).jsonp({ data: data }) })
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 /****************************************************************************************
@@ -185,7 +185,7 @@ router.post('/', function(req, res) {
 router.put('/:id', function(req, res, next) {
     User.update(req.params.id, req.body)
         .then(data => res.status(201).jsonp({ data: data }))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 })
 */
 
@@ -194,19 +194,19 @@ router.put('/update', auth.matchUsers, (req, res, next) => {
         case '2':
             User.updateConsumer(req.body)
             .then((user) => res.status(201).jsonp(user))
-            .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+            .catch((err) => res.status(400).jsonp("Error updating user: " + err))
             break;
         
         case '3':
             User.updateServiceProvider(req.body)
             .then((user) => res.status(201).jsonp(user))
-            .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+            .catch((err) => res.status(400).jsonp("Error updating user: " + err))
             break;
 
         case '4':
             User.updateCompany(req.body)
             .then((user) => res.status(201).jsonp(user))
-            .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+            .catch((err) => res.status(400).jsonp("Error updating user: " + err))
             break;
 
         default:
@@ -224,9 +224,9 @@ router.put('/updatePassword', auth.matchUsers, (req, res, next) => {
                 .then((cryptPass) => {
                     User.updatePassword(email, cryptPass)
                     .then((user) => res.status(201).jsonp({message: "success"}))
-                    .catch((err) => res.status(500).jsonp({error : err}))
+                    .catch((err) => res.status(400).jsonp({error : err}))
                 })
-                .catch((err) => res.status(500).jsonp({error : err}))
+                .catch((err) => res.status(400).jsonp({error : err}))
             }else{
                 res.status(400).jsonp({error : "As novas passwords não coicidem."})
             }
@@ -243,9 +243,9 @@ router.put('/updatePhoto', upload.single('image'), auth.validToken, (req, res) =
     .then((usr) => {
         User.updatePhoto(usr.idUser, [req.file.buffer])
         .then((user) => res.status(201).jsonp(user))
-        .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+        .catch((err) => res.status(400).jsonp("Error updating user: " + err))
     })
-    .catch((err) => res.status(500).jsonp("Error updating user: " + err))
+    .catch((err) => res.status(400).jsonp("Error updating user: " + err))
 })
 
 /****************************************************************************************
@@ -257,7 +257,7 @@ router.put('/updatePhoto', upload.single('image'), auth.validToken, (req, res) =
 router.delete('/:id', function(req, res, next) {
     User.remove(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 module.exports = router;

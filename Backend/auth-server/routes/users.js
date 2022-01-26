@@ -32,7 +32,7 @@ router.post('/register', (req, res) => {
         }).then(data => {                                                                     //Se tiver sucesso (1)
           res.status(201).jsonp({token: data.data.token})                                     //Envia o token como resposta
         }).catch(e => {                                                                       //Se falhar o sucesso (1)
-          res.status(500).jsonp({error: e})                                                   //Retorna o Erro
+          res.status(400).jsonp({error: e})                                                   //Retorna o Erro
         })
         break;
 
@@ -48,7 +48,7 @@ router.post('/register', (req, res) => {
             }).then(data => {                                                                   //Se tiver sucesso (2)
               res.status(201).jsonp({token: data.data.token})                                   //Envia o token come resposta
             }).catch(e => {                                                                     //Se falhar o sucesso (2)
-              res.status(500).jsonp({error: e})                                                 //Retorna o erro
+              res.status(400).jsonp({error: e})                                                 //Retorna o erro
             })  
           })
           .catch((err) => res.status(401).jsonp({error:err}))
@@ -68,7 +68,7 @@ router.post('/register', (req, res) => {
             }).then(data => {                                                                 //Se tiver sucesso (3)
               res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
             }).catch(e => {                                                                   //Se falhar o sucesso (3)
-              res.status(500).jsonp({error: e})                                               //Retorna o Erro
+              res.status(400).jsonp({error: e})                                               //Retorna o Erro
             })
           })
           .catch((err) => res.status(401).jsonp({error:err}))                                 //Falhar o sucesso (2), retorna erro
@@ -87,7 +87,7 @@ router.post('/register', (req, res) => {
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
   jwt.sign({ email: req.user.email, level: req.user.type }, 'Project_PI', { expiresIn: '12h' }, (e, token) => {
     if (e) {
-      res.status(500).jsonp({ error: "Error within token generation: " + e })
+      res.status(400).jsonp({ error: "Error within token generation: " + e })
     } else {
       User.activate(req.user.email)
       .then((dt) => {
@@ -106,7 +106,7 @@ router.post('/logout', (req, res) => {
 
   token = req.body.token
   if(token === undefined){
-    res.status(500).jsonp({error: "No JWT Token Provided!!!!"});
+    res.status(400).jsonp({error: "No JWT Token Provided!!!!"});
   }
   else{
     email = auth.getEmailFromJWT(token)

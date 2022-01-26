@@ -15,7 +15,7 @@ const User = require('../controllers/user');
 
     ServiceProvider.get_horarios(iden)
     .then((categories) => res.status(200).jsonp({categories: categories}))
-    .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+    .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));
  })
 
 // List a Service Provider given it's id
@@ -35,11 +35,11 @@ router.get('/', (req, res, next) => {
                     categories: categories
                 })
             })
-            .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+            .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));
         })
-        .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+        .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));
     })
-    .catch((err) => res.status(500).jsonp("Error obtaining Provider: " + err));
+    .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));
 })
 
 // Consult a ServiceProvider given its id
@@ -48,7 +48,7 @@ router.get('/:id', function(req, res, next) {
     console.log(req.params.id)
     ServiceProvider.consult_id(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 //Obter toda a informação referente a um service provider
@@ -64,7 +64,7 @@ router.post('/', function(req, res) {
     console.log(req.body)
     ServiceProvider.insert(req.body)
         .then(data => { res.status(201).jsonp({ data: data }) })
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 
@@ -82,9 +82,9 @@ router.put('/regHorario', auth.validToken, (req, res) => {
         var text = '{"date_end": "'+dateEnd+'",' + '"date_begin": "'+dateBegin+'"}'
         ServiceProvider.addHorario(uid, req.body.category, text)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
-        .catch((err) => {res.status(500).jsonp({ error : err })})
+        .catch((err) => {res.status(400).jsonp({ error : err })})
     })
-    .catch((err) => res.status(500).jsonp({ error : err }))
+    .catch((err) => res.status(400).jsonp({ error : err }))
 })
 
 router.put('/remHorario', auth.validToken, (req, res) => {
@@ -93,7 +93,7 @@ router.put('/remHorario', auth.validToken, (req, res) => {
     .then((usr) => {
         ServiceProvider.remHorario(usr.idUser,  req.body.slotJson)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
-        .catch((err) => {res.status(500).jsonp({ error : err })})
+        .catch((err) => {res.status(400).jsonp({ error : err })})
     })
 })
 
@@ -118,9 +118,9 @@ router.put('/newSlot', auth.validToken, (req,res) => {
                    '"date_requested": "'+postDate+'"}';
         ServiceProvider.addSlot(req.body.spId, text)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
-        .catch((err) => {res.status(500).jsonp({ error : err })})  
+        .catch((err) => {res.status(400).jsonp({ error : err })})  
     })
-    .catch((err) => {res.status(500).jsonp({ error : err })})    
+    .catch((err) => {res.status(400).jsonp({ error : err })})    
 })
 
 router.put('/remSlot', auth.validToken, (req, res) => {
@@ -129,14 +129,14 @@ router.put('/remSlot', auth.validToken, (req, res) => {
     .then((usr) => {
         ServiceProvider.remSlot(usr.idUser, req.body.slotJson)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
-        .catch((err) => {res.status(500).jsonp({ error : err })})
+        .catch((err) => {res.status(400).jsonp({ error : err })})
     })
 })
 // Update an ServiceProvider
 router.put('/:id', function(req, res, next) {
     ServiceProvider.update(req.params.id, req.body)
         .then(data => res.status(201).jsonp({ data: data }))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 })
 
 
@@ -149,7 +149,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
     ServiceProvider.remove(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 module.exports = router;

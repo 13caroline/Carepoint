@@ -14,14 +14,14 @@ const User = require('../controllers/user');
 router.get('/', function(req, res, next) {
     Review.list()
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 // Consult a Review given its id
 router.get('/:id', function(req, res, next) {
     Review.consult_id(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 
@@ -69,16 +69,16 @@ router.put('/edit', auth.matchReview, (req, res, next) => {
     .then((dt1) => {
         Review.atualizarRating(req.body.idReceive)
         .then((dt) => res.status(200).jsonp({message: "Review editada com sucesso."}))
-        .catch((err) => res.status(500).jsonp({error: err}))
+        .catch((err) => res.status(400).jsonp({error: err}))
     })
-    .catch((err) => res.status(500).jsonp({error: err}))
+    .catch((err) => res.status(400).jsonp({error: err}))
 })
 
 // Update a Review
 router.put('/:id', function(req, res, next) {
     Review.update(req.params.id, req.body)
         .then(data => res.status(201).jsonp({ data: data }))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 })
 
 
@@ -91,7 +91,7 @@ router.put('/:id', function(req, res, next) {
 router.delete('/:id', function(req, res, next) {
     Review.remove(req.params.id)
         .then(data => res.status(200).jsonp(data))
-        .catch(e => res.status(500).jsonp({ error: e }))
+        .catch(e => res.status(400).jsonp({ error: e }))
 });
 
 module.exports = router;

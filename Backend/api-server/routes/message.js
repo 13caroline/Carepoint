@@ -12,7 +12,7 @@ router.post('/seeUsers', auth.validToken, function(req, res, next) {
     User.consult(email).then((user) => {
         message_controller.getAllId(user.idUser)
         .then((dt) => res.status(200).jsonp(dt))
-        .catch((err) => res.status(500).jsonp({error: err}))
+        .catch((err) => res.status(400).jsonp({error: err}))
     })
 })
 
@@ -25,7 +25,7 @@ router.post('/addMessage', auth.validToken, function(req, res, next) {
     User.consult(email).then((user) => {
         message_controller.addMessage(req.body.content,user.idUser,idUser2)
         .then((dt) => res.status(200).jsonp(dt))
-        .catch((err) => res.status(500).jsonp({error: err}))
+        .catch((err) => res.status(400).jsonp({error: err}))
     });
 })
 
@@ -37,7 +37,7 @@ router.post('/seeMessages', auth.validToken, function(req, res, next) {
     User.consult(email).then((user) => {
         message_controller.getAllMessagesBetween(user.idUser,idUser2)
         .then((dt) => res.status(200).jsonp(dt))
-        .catch((err) => res.status(500).jsonp({error: err}))
+        .catch((err) => res.status(400).jsonp({error: err}))
     });
 })
 

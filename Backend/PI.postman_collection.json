@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_01@gmail.com",
+									"value": "serviceProvider_02@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -3099,6 +3099,26 @@
 					"name": "Search",
 					"item": [
 						{
+							"name": "Get Max Values (R)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:9040/search/max",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"search",
+										"max"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get All Service Providers & Companies (R)",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -3272,12 +3292,19 @@
 							"response": []
 						},
 						{
-							"name": "Get Max Values (R)",
+							"name": "Get All Service Providers  By Name (R)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
 								"url": {
-									"raw": "http://localhost:9040/search/max",
+									"raw": "http://localhost:9040/search/BySpName?page=1&name=war",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3285,7 +3312,56 @@
 									"port": "9040",
 									"path": [
 										"search",
-										"max"
+										"BySpName"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "name",
+											"value": "war"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Companies (R) Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:9040/search/ByCompanyName?page=1&name=Sa",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"search",
+										"ByCompanyName"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Obrigatório"
+										},
+										{
+											"key": "name",
+											"value": "Sa",
+											"description": "Opcional"
+										}
 									]
 								}
 							},

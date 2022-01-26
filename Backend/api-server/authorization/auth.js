@@ -42,7 +42,7 @@ Out.validToken = (req, res, next) => {
         if(!err){
             next()
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -58,7 +58,7 @@ Out.checkAdminLevel = (req, res, next) => {
                 res.status(401).jsonp({message: "No permission."})
             }
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -74,7 +74,7 @@ Out.checkAdminOrUserOrSP = (req, res, next) => {
                 res.status(401).jsonp({message: "No permission."})
             }
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -90,7 +90,7 @@ Out.checkUserLevel = (req, res, next) => {
                 res.status(401).jsonp({message: "No permission."})
             }
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -106,7 +106,7 @@ Out.checkCompanyLevel = (req, res, next) => {
                 res.status(401).jsonp({message: "No permission."})
             }
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -122,7 +122,7 @@ Out.checkServiceProviderLevel = (req, res, next) => {
                 res.status(401).jsonp({message: "No permission."})
             }
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -152,7 +152,7 @@ Out.checkOwnershipJobOffer = (req, res, next) => {
                 res.status(401).jsonp({message: "No permission."})
             }
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
@@ -170,7 +170,7 @@ Out.matchUsers = (req, res, next) => {
                 }
             })
         }else{
-            res.status(500).jsonp("Invalid JWT token.")
+            res.status(400).jsonp("Invalid JWT token.")
         }
     })
 }
@@ -187,7 +187,7 @@ Out.matchReview = (req, res, next) => {
                 }
             })
         }else{
-            res.status(500).jsonp("Invalid JWT token.")
+            res.status(400).jsonp("Invalid JWT token.")
         }
     })
 }
@@ -200,12 +200,12 @@ Out.matchPasswords = (req, res, next) => {
                 if (bcrypt.compareSync(req.body.password, user.password)) {
                     next()
                 } else {
-                    res.status(500).jsonp({error: "Password Inválida"})
+                    res.status(400).jsonp({error: "Password Inválida"})
                 }
             })
-            .catch((err) => res.status(500).jsonp({ error: err }))
+            .catch((err) => res.status(400).jsonp({ error: err }))
         }else{
-            res.status(500).jsonp({ error: err })
+            res.status(400).jsonp({ error: err })
         }
     })
 }
