@@ -28,8 +28,10 @@
           </p>
         </div>
         <p class="infos font-weight-bold mb-3">Anos de experiência</p>
-        <v-chip class="font-weight-bold" v-if="categories" > {{categories[0].experience}} anos</v-chip>
-        <v-chip v-else class="font-weight-bold" >{{noExp}}</v-chip>
+        <v-chip class="font-weight-bold" v-if="categories">
+          {{ categories[0].experience }} anos</v-chip
+        >
+        <v-chip v-else class="font-weight-bold">{{ noExp }}</v-chip>
       </v-col>
     </v-row>
 
@@ -80,6 +82,20 @@
           <span class="font-weight-bold ma-2">{{
             serviceProviderData.averageRating.toFixed(1)
           }}</span>
+        </div>
+
+        <p class="infos font-weight-bold mt-5">Preços praticados</p>
+        <div v-for="(c, index) in categories" :key="index">
+          <v-tooltip top color="#78C4D4">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn icon outlined color="#78C4D4" v-bind="attrs" v-on="on" class="my-1">
+                <v-icon color="#78C4D4" small>{{ getIcon(c.name) }}</v-icon>
+              </v-btn>
+            </template>
+            <span>{{ c.name }}</span>
+          </v-tooltip>
+          <span v-if="c.price" class="infos"> {{c.price}} €/hora</span>
+          <span v-else class="infos"> Preço negociável</span>
         </div>
       </v-col>
       <v-col cols="12" md="10" sm>
@@ -217,7 +233,18 @@ export default {
       styleObject: { border: "1px solid #78c4d4" },
       serviceProviderData: {},
       reviews: {},
-      categories: []
+      categories: [],
+      category: [
+        { name: "Apoio externo", icon: "fas fa-car-side" },
+        {
+          name: "Cuidados de higiene e conforto pessoal",
+          icon: "fas fa-pump-medical",
+        },
+        { name: "Cuidados de lazer", icon: "fas fa-book-open" },
+        { name: "Cuidados médicos", icon: "fas fa-pills" },
+        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils" },
+        { name: "Higiene habitacional", icon: "fas fa-home" },
+      ],
     };
   },
   methods: {
@@ -225,6 +252,12 @@ export default {
       return moment(d, moment.ISO_8601)
         .locale("pt")
         .format("DD MMMM YYYY, HH:MM:SS");
+    },
+    getIcon(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+      return Object.values(row[0])[1];
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
