@@ -305,11 +305,13 @@ export default {
             this.$store.commit("guardaTipoUtilizador", 3);
           }
           this.$router.push("/register/subscription/" + 3);
-        } catch (e) {
+        } catch (error) {
+          let message = "";
+          (error.response.data.error == 'Password Inválida') ? message = "Palavra-passe incorreta." : message = "Ocorreu um erro, por favor tente mais tarde!";
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
-            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            text: message,
             timeout: 4000,
           });
         }
