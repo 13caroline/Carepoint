@@ -50,6 +50,7 @@
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
                       v-model="date"
+                      color="#78C4D4"
                       append-icon="fas fa-calendar-alt"
                       readonly
                       dense
@@ -61,6 +62,7 @@
                   </template>
                   <v-date-picker
                     v-model="date"
+                    color="#78C4D4"
                     @input="menu = false"
                     locale="pt PT"
                     :max="new Date().toISOString().substr(0, 10)"
@@ -75,24 +77,29 @@
             <v-row>
               <v-divider class="mt-4 mb-4 divider"></v-divider>
             </v-row>
+
             <v-row>
-              <v-col class="py-0" cols="12" md="6" sm="6">
-                <span>Localização *</span>
+              <v-col class="py-0">
+                <span>Categorias *</span>
                 <v-autocomplete
                   outlined
                   flat
                   dense
-                  v-model="user.locationName"
-                  single-line
-                  :items="loc"
-                  item-value="idLocation"
+                  v-model="form.categories"
+                  :items="cat"
+                  item-value="idCategory"
                   item-text="name"
                   :rules="textRules"
                   color="#78C4D4"
-                  name="location"
+                  name="categories"
                   required
+                  chips
+                  small-chips
+                  multiple
                 />
               </v-col>
+            </v-row>
+            <v-row>
               <v-col class="py-0" cols="12" md="6" sm="6">
                 <span>Raio de Atividade *</span>
                 <v-text-field
@@ -106,6 +113,22 @@
                   suffix="km"
                   type="number"
                   required
+                />
+              </v-col>
+              <v-col class="py-0" cols="12" md="6" sm="6">
+                <span>Anos de Experiência *</span>
+                <v-text-field
+                  outlined
+                  flat
+                  dense
+                  v-model="form.experience"
+                  single-line
+                  color="#78C4D4"
+                  name="experience"
+                  suffix="anos"
+                  type="number"
+                  required
+                  v-on:keypress="isNumber($event)"
                 />
               </v-col>
             </v-row>
@@ -127,31 +150,6 @@
               </v-col>
             </v-row>
 
-            <h3 class="mt-6 group font-weight-light text-uppercase">
-              Dados Contacto
-            </h3>
-            <v-row>
-              <v-divider class="mt-4 mb-4 divider"></v-divider>
-            </v-row>
-            <v-row>
-              <v-col class="py-0">
-                <span>Contacto Telefónico *</span>
-                <v-text-field
-                  prefix="+351"
-                  outlined
-                  flat
-                  dense
-                  single-line
-                  color="#78C4D4"
-                  name="contact"
-                  v-model="user.phoneNumber"
-                  maxlength="9"
-                  :rules="numberRules"
-                  required
-                  v-on:keypress="isNumber($event)"
-                />
-              </v-col>
-            </v-row>
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
@@ -176,13 +174,62 @@
                 required
                 type="submit"
                 :disabled="!valid"
-                @click="goToSub()"
+                @click="confirm()"
                 >Próximo</v-btn
               >
             </v-col>
           </v-row>
         </v-col>
       </v-row>
+
+      <v-dialog v-model="dialog" width="40%" persistent>
+        <v-card class="rounded-lg">
+          <v-card-title class="font-weight-bold pt-6">
+            Confirmar palavra-passe
+          </v-card-title>
+          <v-card-subtitle> Confirme a sua palavra-passe para se tornar um prestador de serviços. </v-card-subtitle>
+          <v-card-text>
+            <v-form ref="form" v-model="valid">
+              <v-divider></v-divider>
+              <v-row class="mt-3">
+                <v-col>
+                  <span>Palavra-passe * </span>
+                  <v-text-field
+                    outlined
+                    color="#78c4d4"
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    @click:append="show1 = !show1"
+                    :type="show1 ? 'text' : 'password'"
+                    required
+                    dense
+                    v-model="form.password"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-form>
+          </v-card-text>
+
+          <v-card-actions>
+            <v-row align="end" justify="end">
+              <v-col cols="auto">
+                <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
+              </v-col>
+              <v-col cols="auto" class="pl-0">
+                <v-btn
+                  dense
+                  color="#78c4d4"
+                  class="rounded-lg white--text"
+                  required
+                  type="submit"
+                  @click="next()"
+                  :disabled="!form.password"
+                  >Confirmar</v-btn
+                >
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-container>
     <Foot />
   </div>
@@ -196,10 +243,13 @@ export default {
   data() {
     return {
       menu: false,
+      dialog: false,
+      show1: false,
       termos: false,
       dialogs: {},
       cancelar: { title: "o seu registo", text: "o seu registo" },
       valid: false,
+      cat: [],
       date: new Date().toISOString().substr(0, 10),
       textRules: [(v) => !!v || "Campo inválido"],
       numberRules: [
@@ -209,10 +259,12 @@ export default {
         },
       ],
       form: {
-        location: "",
+        password: "",
         radius: "",
         qualification: "",
         description: "",
+        experience: "",
+        categories: [],
       },
       loc: [],
       user: {},
@@ -224,16 +276,51 @@ export default {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
   },
   methods: {
+    confirm(){
+      this.dialog = true;
+    },
     close() {
       this.$router.back();
-    },
-    goToSub() {
-      this.$router.push("/register/subscription");
     },
     isNumber(e) {
       let char = String.fromCharCode(e.keyCode);
       if (/^[0-9]+$/.test(char)) return true;
       else e.preventDefault();
+    },
+    next: async function () {
+      if (this.$refs.form.validate()) {
+        try {
+          let res = await axios.post("http://localhost:9041/users/upgrade", {
+            token: store.getters.token,
+            password: this.form.password,
+            description: this.form.description,
+            dateOfBirth: this.date,
+            distance: this.form.radius,
+            qualifications: this.form.qualification,
+            categories: this.form.categories,
+            experience: this.form.experience,
+          });
+          if (res.data.token != undefined) {
+            this.$store.commit("guardaTokenUtilizador", res.data.token);
+            this.$store.commit("guardaTipoUtilizador", 3);
+          }
+          this.$router.push("/register/subscription/" + 3);
+        } catch (e) {
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: "Ocorreu um erro no registo, por favor tente mais tarde!",
+            timeout: 4000,
+          });
+        }
+      } else {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Por favor preencha todos os campos.",
+          timeout: 4000,
+        });
+      }
     },
   },
   created: async function () {
@@ -241,14 +328,21 @@ export default {
       let response = await axios.post("http://localhost:9040/users/perfil", {
         token: store.getters.token,
       });
-  
+      console.log(response.data.perfil[0]);
       this.user = response.data.perfil[0];
-      console.log(this.user)
-
 
       let response2 = await axios.get("http://localhost:9040/location");
       if (response2) {
         this.loc = response2.data;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let response3 = await axios.get("http://localhost:9040/category");
+      if (response3) {
+        this.cat = response3.data;
       }
     } catch (e) {
       console.log(e);

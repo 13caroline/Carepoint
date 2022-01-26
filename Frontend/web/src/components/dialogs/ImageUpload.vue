@@ -20,7 +20,6 @@
         <v-divider></v-divider>
         <v-card-text>
           <div class="ma-auto">
-            <span>Carregar fotografia</span>
             <!--<v-file-input
               append-icon="fas fa-camera"
               v-model="image"
@@ -42,10 +41,13 @@
             />
           </div>
           <div>
-            <span>Preview</span>
+            <p class="infos font-weight-bold mt-3">Preview</p>
             <v-img
               :src="imageUrl"
-              style="border: 1px dashed #ccc; min-height: 250px"
+              style="border: 1px dashed #ccc"
+              height="250"
+              width="250"
+              contain
             />
           </div>
         </v-card-text>
@@ -167,4 +169,9 @@ export default {
 </script>
 
 <style scoped>
+.infos {
+  color: #797878;
+  text-align: justify;
+  text-justify: inter-word;
+}
 </style>
