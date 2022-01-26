@@ -127,11 +127,13 @@ export default {
             snackbar: true,
             timeout: 4000,
           });
-        } catch (e) {
+        } catch (error) {
+          let message = "";
+          (error.response.data.error == 'Já publicou review.') ? message = "Já publicou um comentário." : message = "Ocorreu um erro, por favor tente mais tarde!";
           this.$snackbar.showMessage({
             show: true,
             color: "warning",
-            text: "Ocorreu um erro, por favor tente mais tarde!",
+            text: message,
             timeout: 4000,
           });
         }
