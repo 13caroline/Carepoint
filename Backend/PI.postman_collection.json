@@ -3166,6 +3166,112 @@
 							"response": []
 						},
 						{
+							"name": "Get All Service Providers  (R)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:9040/search/serviceProviders?page=1&sex=N&experience=5",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"search",
+										"serviceProviders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Obrigatório"
+										},
+										{
+											"key": "category",
+											"value": "5",
+											"description": "Opcional",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "2",
+											"description": "Opcional",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "3",
+											"description": "Opcional - retorna menor ou igual",
+											"disabled": true
+										},
+										{
+											"key": "rating",
+											"value": "6",
+											"description": "Opcional - Entre 1 a 10",
+											"disabled": true
+										},
+										{
+											"key": "sex",
+											"value": "N",
+											"description": "Opcional - M or F ou N"
+										},
+										{
+											"key": "experience",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Companies (R)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:9040/search/companies?page=1&location=6",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"search",
+										"companies"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "Obrigatório"
+										},
+										{
+											"key": "location",
+											"value": "6",
+											"description": "Opcional"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get Max Values (R)",
 							"request": {
 								"method": "GET",
