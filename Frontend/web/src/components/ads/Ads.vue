@@ -165,7 +165,7 @@ export default {
     },
     getData: async function (search) {
       try {
-        let url = "http://localhost:9040/search/?page=";
+        let url = "http://localhost:9040/search/serviceProviders?page=";
 
         let response = await axios.get(url + search);
         if (response) {

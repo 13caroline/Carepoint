@@ -145,7 +145,7 @@ export default {
     },
     getData: async function (form) {
       try {
-        let url = "http://localhost:9040/search/?page=";
+        let url = "http://localhost:9040/search/companies?page=";
 
         this.ads = [];
         if (form) {
