@@ -25,11 +25,17 @@
               <v-col>
                 <span>Palavra-passe atual</span>
                 <v-text-field
+                 
                   outlined
+                  color="#78c4d4"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                   required
-                  type="password"
                   dense
                   v-model="form.oldPassword"
+                              
+
                 ></v-text-field>
               </v-col>
               
@@ -40,7 +46,10 @@
                 <v-text-field
                   outlined
                   required
-                  type="password"
+                  olor="#78c4d4"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                   :rules="passwordRules"
                   dense
                   v-model="form.newPassword"
@@ -51,7 +60,10 @@
                 <v-text-field
                   outlined
                   required
-                  type="password"
+                  olor="#78c4d4"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                    :rules="[
                     form.newPassword === form.newPasswordRepeat ||
                       'As palavra-passes devem corresponder.',
@@ -98,6 +110,7 @@ import store from "@/store/index.js";
 export default {
   props: ["id"],
   data: () => ({
+            show1: false,
     passwordRules: [
         (v) => !!v || "Palavra-passe inválida",
         (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",

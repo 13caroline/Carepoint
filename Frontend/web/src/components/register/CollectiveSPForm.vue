@@ -54,13 +54,15 @@
                   outlined
                   flat
                   dense
+                  olor="#78c4d4"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                   v-model="form.password"
                   :rules="passwordRules"
                   single-line
                   color="#78C4D4"
                   name="password"
-                  type="password"
-                  required
                 />
               </v-col>
               <v-col class="py-0">
@@ -76,7 +78,9 @@
                       'As palavra-passes devem corresponder.',
                   ]"
                   color="#78C4D4"
-                  type="password"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                   required
                 />
               </v-col>
@@ -220,6 +224,7 @@ export default {
   name: "CollectiveSPForm",
   data() {
     return {
+      show1: false,
       termos: false,
       dialogs: {},
       valid: false,

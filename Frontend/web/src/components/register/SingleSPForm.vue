@@ -59,7 +59,9 @@
                   single-line
                   color="#78C4D4"
                   name="password"
-                  type="password"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                   required
                 />
               </v-col>
@@ -76,7 +78,9 @@
                       'As palavra-passes devem corresponder.',
                   ]"
                   color="#78C4D4"
-                  type="password"
+                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show1 = !show1"
+                  :type="show1 ? 'text' : 'password'"
                   required
                 />
               </v-col>
@@ -302,6 +306,7 @@ export default {
   name: "SingleSPForm",
   data() {
     return {
+      show1: false,
       menu: false,
       loc: [],
       termos: false,

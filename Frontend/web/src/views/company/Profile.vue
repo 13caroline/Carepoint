@@ -18,20 +18,6 @@
            <subscriptionData :user="user"></subscriptionData>
         </v-tab-item>
 
-        <v-tab-item>
-          <!--<Consultas :animal="dados"></Consultas>-->
-          <p> cenas3 </p>
-        </v-tab-item>
-
-        <v-tab-item>
-          <!--<Cirurgia :animal="dados"></Cirurgia>-->
-          <p> cenas4 </p>
-        </v-tab-item>
-
-        <v-tab-item>
-          <!--<Historico :animal="dados"></Historico> -->
-          <p> cenas5 </p>
-        </v-tab-item>
       </v-tabs-items>
     </v-container>
     <Foot />

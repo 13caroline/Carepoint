@@ -22,6 +22,20 @@
                         ></v-text-field>
                       </v-col>
                     </div>
+                     <v-row class="mx-auto" align="center">
+                      <v-col md="10">
+                      <span>Password</span>
+                      <v-text-field
+                        outlined
+                        disabled
+                        dense
+                        placeholder="*******"
+                      ></v-text-field>
+                      </v-col>
+                        <v-col>
+                      <change-password :id="user.idUser" @clicked="update()"/>
+                      </v-col>
+                    </v-row>
                     <!--<div>
                       <v-col>
                         <span>Palavra-passe atual</span>
@@ -93,7 +107,6 @@
                           outlined
                           dense
                           color="#2596be"
-                          :rules="textRules"
                           v-model="user.link"
                         ></v-text-field>
                       </v-col>
@@ -310,14 +323,8 @@ export default {
         });
       }
     },
-  },
-  components: {
-    Cancel: () => import("@/components/dialogs/Cancel"),
-    AppBarAccount: () => import("@/components/global/AppBarAccount"),
-    Foot: () => import("@/components/global/Footer"),
-  },
-  created: async function () {
-    try {
+    update: async function(){
+        try {
       let response = await axios.post("http://localhost:9040/users/perfil", {
         token: store.getters.token,
       });
@@ -334,6 +341,17 @@ export default {
         timeout: 4000,
       });
     }
+    }
+  },
+  components: {
+    Cancel: () => import("@/components/dialogs/Cancel"),
+    AppBarAccount: () => import("@/components/global/AppBarAccount"),
+    Foot: () => import("@/components/global/Footer"),
+    ChangePassword: () => import("@/components/dialogs/ChangePassword")
+
+  },
+  created: async function () {
+  this.update();
   },
 };
 </script>
