@@ -46,17 +46,17 @@ router.post('/', auth.validToken, (req, res) => {
                 if( value ){
                     Review.addNewReview(req.body.description, req.body.rating, user.idUser, receivingId)
                     .then((dt) => res.status(200).jsonp({message: "Review adicionada com sucesso."}))
-                    .catch((err) => res.status(500).jsonp({error: err}))
+                    .catch((err) => res.status(400).jsonp({error: err}))
                 }else{
-                    res.status(500).jsonp({error: "Já publicou review."})
+                    res.status(400).jsonp({error: "Já publicou review."})
                 }
             })
-            .catch((err) => res.status(500).jsonp({error: err}))
+            .catch((err) => res.status(400).jsonp({error: err}))
         }else{
-            res.status(500).jsonp({error: "Cannot give a review to yourself!"})
+            res.status(400).jsonp({error: "Cannot give a review to yourself!"})
         }
     })
-    .catch((err) => res.status(500).jsonp({error: err}))
+    .catch((err) => res.status(400).jsonp({error: err}))
 }); 
 
 
