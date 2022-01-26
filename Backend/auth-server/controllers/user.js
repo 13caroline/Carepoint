@@ -25,6 +25,13 @@ Out.deactivate = (email) => {
     )
 }
 
+Out.changeType = (email) => {
+    return User.update(
+        {type: 3},
+        {where: { 'email' : email}}
+    )
+}
+
 Out.adicionarUser = (body) => {
     return User.create({
         name: body.name,

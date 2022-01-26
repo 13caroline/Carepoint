@@ -115,43 +115,6 @@ router.post('/perfil', (req, res, next) => {
     }
 })
 
-/*
-Rota Usada para transformar um Consumer (type 2) num Service Provider (type 3)
-**/
-router.post('/upgrade', auth.matchPasswords, (req,res) => {
-    email = auth.getEmailFromJWT(req.body.token)
-    type = auth.getTypeFromJWT(req.body.token)
-
-    if(type == 2){
-        User.consult(email)
-        .then((usr) => {
-            User.changeType(email)
-            .then((unimportant) => {
-                ServiceProvider.adicionarSP(req.body, usr.idUser)
-                .then((sp) => {
-                    ServiceProvider.addCategorias(req.body.categories, usr.idUser, req.body.experience)
-                    .then((sp2) => {
-                        axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
-                            email: email,                                                                   //Tenta fazer login
-                            password: req.body.password
-                          }).then(data => {                                                                 //Se tiver sucesso (3)
-                            res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
-                          }).catch(e => {                                                                   //Se falhar o sucesso (3)
-                            res.status(400).jsonp({error: e})                                               //Retorna o Erro
-                          })
-                    })
-                    .catch((err) => res.status(400).jsonp({error: err})) 
-                })
-                .catch((err) => res.status(400).jsonp({error: err})) 
-            })
-            .catch((err) => res.status(400).jsonp({error: err})) 
-        })
-        .catch((err) => res.status(400).jsonp({error: err}))    
-    }else{
-        res.status(400).jsonp({message:"You are not a consumer!"})
-    }
-})
-
 router.post('/image', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     User.getImage(email)

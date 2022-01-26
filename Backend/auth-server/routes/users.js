@@ -20,6 +20,43 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
+/*
+Rota Usada para transformar um Consumer (type 2) num Service Provider (type 3)
+**/
+router.post('/upgrade', auth.matchPasswords, (req,res) => {
+  email = auth.getEmailFromJWT(req.body.token)
+  type = auth.getTypeFromJWT(req.body.token)
+
+  if(type == 2){
+      User.consultar(email)
+      .then((usr) => {
+          User.changeType(email)
+          .then((unimportant) => {
+              ServiceProvider.adicionarSP(req.body, usr.idUser)
+              .then((sp) => {
+                  ServiceProvider.addCategorias(req.body.categories, usr.idUser, req.body.experience)
+                  .then((sp2) => {
+                      axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
+                          email: email,                                                                   //Tenta fazer login
+                          password: req.body.password
+                        }).then(data => {                                                                 //Se tiver sucesso (3)
+                          res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
+                        }).catch(e => {                                                                   //Se falhar o sucesso (3)
+                          res.status(400).jsonp({error: e})                                               //Retorna o Erro
+                        })
+                  })
+                  .catch((err) => res.status(400).jsonp({error: err})) 
+              })
+              .catch((err) => res.status(400).jsonp({error: err})) 
+          })
+          .catch((err) => res.status(400).jsonp({error: err})) 
+      })
+      .catch((err) => res.status(400).jsonp({error: err}))    
+  }else{
+      res.status(400).jsonp({message:"You already are a Service Provider or Company!"})
+  }
+})
+
 //Type :: 1 = admin -- 2 = consumer -- 3 = SP -- 4 = company
 router.post('/register', (req, res) => {
   User.adicionarUser(req.body)                                                                //Tenta inserir um user
