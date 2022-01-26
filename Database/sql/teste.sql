@@ -1,5 +1,6 @@
 USE PI;
---  CALL get_service_providers_v2 (NULL, NULL, NULL, NULL, 6, NULL,10,0);
+ CALL get_service_providers_v2 (1, NULL, 1, 3, 6, NULL,10,0);
+ CALL get_service_providers_v2_count(1, NULL, 1, 3, 6, NULL);
  -- get_service_providers (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)
 -- CALL get_companies(NULL,50,0);
 -- CALL get_average_rating(55);
@@ -63,3 +64,13 @@ CALL remove_workSchedule_slot(51,'{
         "date_end": "2022-01-09 23:00:00",
         "date_begin": "2022-01-09 15:30:00"
     }');
+    
+CALL remove_slot(51, '{
+        "id": "39",
+        "date_end": "2022-01-03 11:30:00",
+        "occupied": "1",
+        "date_begin": "2022-01-03 08:00:00",
+        "idCategory": "3",
+        "date_requested": "2022-01-01 22:40:58"
+    }');
+
