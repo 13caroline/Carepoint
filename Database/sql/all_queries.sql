@@ -231,7 +231,24 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE get_sp_horarios (IN id INT)
 BEGIN
-	SELECT serviceprovider.workSchedule, serviceprovider.occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP;
+	
+    DECLARE os JSON DEFAULT '[]';
+    DECLARE sorted_os JSON DEFAULT '[]';
+    
+    -- get the occupied schedule
+    SET os = (SELECT serviceprovider.occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP);
+    
+    -- sort occupied shcedule
+    SET sorted_os = (SELECT JSON_ARRAYAGG(object)
+		FROM (
+			SELECT object
+				FROM JSON_TABLE(os,
+                    '$[*]' COLUMNS (object JSON PATH '$',
+                                    date_requested DATETIME PATH '$.date_requested')) jsontable
+		ORDER BY date_requested LIMIT 18446744073709551615
+		) parsed);
+
+	SELECT serviceprovider.workSchedule, sorted_os AS occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP;
 END &&
 DELIMITER ;
 
@@ -1550,7 +1567,7 @@ END &&
 DELIMITER ;
 
 -- =============================================
--- Description: Remove a occupied slot
+-- Description: Remove an occupied slot
 -- Type: Procedure
 -- Parameters: 
 --   @in_idUser - service provider identification number

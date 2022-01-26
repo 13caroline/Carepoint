@@ -44,3 +44,46 @@ where not exists (
 ));
 
 SELECT @os,@new_os;
+
+
+CALL get_sp_horarios(53);
+
+
+
+
+SET @nonSorted = '[
+    {
+        "id": "119",
+        "date_end": "2022-01-04 18:30:00",
+        "occupied": "0",
+        "date_begin": "2022-01-04 16:00:00",
+        "idCategory": "2",
+        "date_requested": "2022-01-01 11:14:39"
+    },
+    {
+        "id": "134",
+        "date_end": "2022-01-06 11:30:00",
+        "occupied": "0",
+        "date_begin": "2022-01-06 08:00:00",
+        "idCategory": "4",
+        "date_requested": "2022-01-02 16:15:49"
+    },
+    {
+        "id": "142",
+        "date_end": "2022-01-09 11:00:00",
+        "occupied": "1",
+        "date_begin": "2022-01-09 08:30:00",
+        "idCategory": "4",
+        "date_requested": "2022-01-01 18:11:20"
+    }
+]';
+
+
+SELECT JSON_ARRAYAGG(object)
+FROM (
+    SELECT object
+    FROM JSON_TABLE(@nonSorted,
+                    '$[*]' COLUMNS (object JSON PATH '$',
+                                    date_requested DATETIME PATH '$.date_requested')) jsontable
+    ORDER BY date_requested LIMIT 18446744073709551615
+) parsed;
