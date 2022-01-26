@@ -93,6 +93,24 @@ router.get('/companies', (req, res) => {
     .catch((err) => res.status(500).jsonp({error: "Error obtaining Colective Providers:" + err}));
 })
 
+router.get('/BySpName', (req, res) => {
+    var page = req.query.page;
+    if(page === undefined){page = 1;}
+
+    var limit = 9; // possível alterar depois
+    var offset = (page * limit) - limit
+
+    var name = (typeof req.query.name === 'undefined') ? null : req.query.name;
+
+    ServiceProvider.getSP_Name(name)
+    .then()
+    .catch()
+})
+
+router.get('/ByCompanyName', (req, res) => {
+
+})
+
 router.get('/max', (req, res) => {
     search_controller.getMaxValues()
     .then(data => res.status(200).jsonp(data))

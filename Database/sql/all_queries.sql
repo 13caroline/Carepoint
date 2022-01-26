@@ -46,6 +46,7 @@ DROP PROCEDURE IF EXISTS add_slot;
 DROP PROCEDURE IF EXISTS remove_workSchedule_slot;
 DROP PROCEDURE IF EXISTS add_workSchedule_slot;
 DROP PROCEDURE IF EXISTS insert_categorias;
+DROP PROCEDURE IF EXISTS remove_slot;
 
 -- =============================================
 -- Description: Insert review
@@ -1465,7 +1466,7 @@ DELIMITER ;
 -- Type: Procedure
 -- Parameters: 
 --   @in_idUser - service provider identification number
---   @in_slot - slot to be added
+--   @in_slot - slot to be removed
 -- Returns: None
 -- =============================================
 
@@ -1542,4 +1543,50 @@ BEGIN
     VALUES (0, in_exp, in_idCat, in_idUser);
 
 END &&
+DELIMITER ;
+
+-- =============================================
+-- Description: Remove a occupied slot
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - service provider identification number
+--   @in_slot - slot to be removed
+-- Returns: None
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE remove_slot (IN in_idUser INT, IN in_slot JSON)  
+BEGIN  
+	
+    DECLARE os JSON DEFAULT '[]';
+    DECLARE new_os JSON DEFAULT '[]';
+    
+    -- get the work schedule
+    SET os = (SELECT serviceprovider.occupiedSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser );
+            
+	SET new_os = (
+select json_pretty(json_arrayagg(os.js)) as new_os
+from json_table(os, '$[*]' columns (js json path '$')) as os
+where not exists (
+  select 1
+  from json_table(in_slot, '$' columns ( js json path '$')) as tst
+  where json_extract(os.js, '$.id') = json_extract(tst.js, '$.id')
+    and json_extract(os.js, '$.date_end') = json_extract(tst.js, '$.date_end')
+    and json_extract(os.js, '$.date_begin') = json_extract(tst.js, '$.date_begin')
+    and json_extract(os.js, '$.date_requested') = json_extract(tst.js, '$.date_requested')
+    and json_extract(os.js, '$.idCategory') = json_extract(tst.js, '$.idCategory')
+    and json_extract(os.js, '$.occupied') = json_extract(tst.js, '$.occupied')
+));
+
+	SELECT os,new_os;
+    
+	UPDATE pi.serviceprovider SET
+		serviceprovider.occupiedSchedule= CASE 
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND new_os IS NOT NULL
+                    THEN new_os
+                    ELSE serviceprovider.occupiedSchedule
+                    END
+	WHERE serviceprovider.idSP = in_idUser;
+END &&  
 DELIMITER ;
