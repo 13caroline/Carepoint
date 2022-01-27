@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_02@gmail.com",
+									"value": "serviceProvider_04@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1214,7 +1214,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhbWlsaUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQxNjUyNDEyLCJleHAiOjE2NDE2NTYwMTJ9.ydZsR_AIlEadG5nLuOnkW_D_9XRIsOSQpelGmXwErdk",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzMzI1MzA0LCJleHAiOjE2NDMzNjg1MDR9.v4CJkv7IY6EYEYoUf4Y-LTF8YgC7_kYXkG9GA0Chs6s",
 											"type": "text"
 										},
 										{
@@ -3439,18 +3439,15 @@
 						},
 						{
 							"name": "Get Job Offers (R)",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "urlencoded",
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzMzI1MzA0LCJleHAiOjE2NDMzNjg1MDR9.v4CJkv7IY6EYEYoUf4Y-LTF8YgC7_kYXkG9GA0Chs6s",
 											"type": "text"
 										},
 										{
@@ -3479,7 +3476,7 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/joboffer/",
+									"raw": "http://localhost:9040/joboffer/search",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3487,7 +3484,7 @@
 									"port": "9040",
 									"path": [
 										"joboffer",
-										""
+										"search"
 									]
 								}
 							},

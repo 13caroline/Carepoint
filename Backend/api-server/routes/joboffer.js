@@ -29,7 +29,7 @@ router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
     .catch((err) => res.status(400).jsonp("Failure inserting job: " + err))
 })
 
-router.post('/', auth.check3MonthSubscription, (req, res, next) => {
+router.post('/search', auth.check3MonthSubscription, (req, res, next) => {
     
     var page = req.body.page;
     if(page === undefined){page = 1;}
