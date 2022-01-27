@@ -1,0 +1,230 @@
+openapi: 3.0.1
+info:
+  title: Carepoint
+  version: 1.0.0
+servers:
+- url: http://localhost:9040/
+paths:
+  /users/perfil:
+    post:
+      tags:
+        - User
+      description: Get the profile of the logged in user
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - token
+              properties:
+                token:
+                  type: string
+                  description: A JavaWebToken.
+        required: true
+      responses:
+        200:
+          description: A JSON containing user information.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/perfil_consumer'
+                  - $ref: '#/components/schemas/perfil_service_provider'
+                  - $ref: '#/components/schemas/perfil_company'
+        400:
+          description: Sends the error created.
+  
+  /users/updatePassword:
+    put:
+      tags:
+        - User
+      description: Update a users password
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - token
+              - oldPassword
+              - newPassword_1
+              - newPassword_2
+              - idUser
+              properties:
+                token:
+                  type: string
+                  description: A JavaWebToken.
+                oldPassword:
+                  type: string
+                newPassword_1:
+                  type: string
+                newPassword_2:
+                  type: string
+                idUser:
+                  type: integer
+                  description: The ID of the user whose password is being altered, to be matched with the given token to confirm the user that's trying to be changed matches with the currently logged in user.
+      responses:
+        201:
+          description: Success
+        400:
+          description: Error message explaining whether the passwords don't match or the old password is wrong.
+components:
+  schemas:
+    perfil_consumer:
+      type: object
+      properties:
+        perfil:
+          type: object
+          properties:
+            idUser:
+              type: integer
+            name:
+              type: string
+            email:
+              type: string
+            sex:
+              type: string
+              enum: [M, F, I]
+            type:
+              type: integer
+              enum: [1, 2, 3, 4]
+            createdAt:
+              type: string
+            lastActivity:
+              type: string
+            active:
+              type: integer
+              enum: [0, 1]
+            locationName: 
+              type: string
+            coordsX: 
+              type: number
+            coordsY: 
+              type: number
+            image:
+              type: string
+        
+    perfil_service_provider:
+      type: object
+      properties:
+        perfil:
+          type: object
+          properties:
+            idUser:
+              type: integer
+            name:
+              type: string
+            email:
+              type: string
+            phoneNumber:
+              type: string
+            sex:
+              type: string
+              enum: [M, F, I]
+            type:
+              type: integer
+              enum: [1, 2, 3, 4]
+            createdAt:
+              type: string
+            lastActivity:
+              type: string
+            active:
+              type: integer
+              enum: [0, 1]
+            locationName: 
+              type: string
+            coordsX: 
+              type: number
+            coordsY: 
+              type: number
+            image:
+              type: string
+            description:
+              type: string
+            endSub:
+              type: string
+              description: End of the Regular Subscription
+            endSubVip:
+              type: string
+              description: End of the VIP Subscription
+            subType:
+              type: integer
+              description: Current subscription type held by the Service Provider
+              enum: [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9 ,10, 11, 12]
+        reviews:
+          type: array
+          items: 
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              rating:
+                type: number
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              experience:
+                type: integer
+              workSchedule:
+                type: object
+              occupiedSchedule:
+                type: object
+              price:
+                type: number
+          
+    perfil_company:
+      type: object
+      properties:
+        perfil:
+          type: object
+          properties:
+            idUser:
+              type: integer
+            name:
+              type: string
+            email:
+              type: string
+            phoneNumber:
+              type: string
+            sex:
+              type: string
+              enum: [M, F, I]
+            type:
+              type: integer
+              enum: [1, 2, 3, 4]
+            createdAt:
+              type: string
+            lastActivity:
+              type: string
+            active:
+              type: integer
+              enum: [0, 1]
+            locationName: 
+              type: string
+            coordsX: 
+              type: number
+            coordsY: 
+              type: number
+            image:
+              type: string
+            link:
+              type: string
+            firm:
+              type: string
+            nipc:
+              type: number
+            endSub:
+              type: string
+              description: End of the Regular Subscription
+            endSubVip:
+              type: string
+              description: End of the VIP Subscription
+            subType:
+              type: integer
+              description: Current subscription type held by the Service Provider
+              enum: [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9 ,10, 11, 12]

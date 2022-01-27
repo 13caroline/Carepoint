@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7c4a54ff-7c3f-4d5a-a065-d23085e636e4",
+		"_postman_id": "9a64f5e7-291b-4c8c-a3da-0995eb56d509",
 		"name": "PI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -1465,7 +1465,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDRAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzIwODIxMywiZXhwIjoxNjQzMjUxNDEzfQ.tMQ58KV-y5Fu25sRq-ssasiyuejSoHHQKuxUvLNxh0M",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbXBhbnlfZW1haV8wMUBnbWFpbC5jb20iLCJsZXZlbCI6NCwiaWF0IjoxNjQzMzA5NjU1LCJleHAiOjE2NDMzNTI4NTV9.beaONittFtic2eaU1jJaG-Eubvwf83iAmJR1gDoRFD8",
 											"type": "default"
 										}
 									]
@@ -3329,7 +3329,7 @@
 							"response": []
 						},
 						{
-							"name": "Get All Companies (R) Copy",
+							"name": "Get All Companies By Name (R)",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -3518,7 +3518,7 @@
 							"response": []
 						},
 						{
-							"name": "Get Consumer JobOffers",
+							"name": "Get Consumer JobOffers (R)",
 							"request": {
 								"method": "POST",
 								"header": [],
