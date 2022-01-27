@@ -19,7 +19,7 @@
         <v-card-title>Alterar fotografia</v-card-title>
         <v-divider></v-divider>
         <v-card-text>
-          <div class="ma-auto">
+          <div class="ml-auto">
             <!--<v-file-input
               append-icon="fas fa-camera"
               v-model="image"
@@ -44,6 +44,7 @@
             <p class="infos font-weight-bold mt-3">Preview</p>
             <v-img
               :src="imageUrl"
+              class="ml-2 ml-sm-6"
               style="border: 1px dashed #ccc"
               height="250"
               width="250"
