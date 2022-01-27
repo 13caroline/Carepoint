@@ -6,7 +6,7 @@ const auth = require('../authorization/auth');
 const jobOffer_controller = require('../controllers/joboffer');
 const user_controller = require('../controllers/user')
 
-router.get('/', (req, res, next) => {
+router.get('/', auth.check3MonthSubscription, (req, res, next) => {
     
     var page = req.query.page;
     if(page === undefined){page = 1;}
@@ -57,7 +57,7 @@ router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
 
 router.put('/conclude', auth.checkOwnershipJobOffer, (req, res, next) => {
     jobOffer_controller.concludeJob(req.body.id_job_offer)
-    .then((job) => res.status(200).jsonp(job))
+    .then((job) => res.status(200).jsonp({message: "Success"}))
     .catch((err) =>  res.status(400).jsonp("Failure marking job as completed: " + err))
 })
 

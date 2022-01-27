@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 
 const jobOffer_controller = require('../controllers/joboffer')
 const user_controller = require('../controllers/user');
+const serviceProvider_controller = require('../controllers/serviceProvider')
 
 const bcrypt = require('bcryptjs')
 
@@ -202,6 +203,28 @@ Out.matchPasswords = (req, res, next) => {
                 } else {
                     res.status(400).jsonp({error: "Password Inválida"})
                 }
+            })
+            .catch((err) => res.status(400).jsonp({ error: err }))
+        }else{
+            res.status(400).jsonp({ error: err })
+        }
+    })
+}
+
+Out.check3MonthSubscription = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
+        if(!err){
+            user_controller.consult(payload.email)
+            .then((user) => {
+                serviceProvider_controller.consult_id(user.idUser)
+                .then((sp) => {
+                    if (sp.idSubscription == 3 || sp.idSubscription == 4 || sp.idSubscription == 6 || sp.idSubscription == 7){
+                        next();
+                    }
+                    else{
+                        res.status(400).jsonp({error : "A sua subscrição não lhe garante privilegios para visualizar esta pagina."})
+                    }
+                })
             })
             .catch((err) => res.status(400).jsonp({ error: err }))
         }else{
