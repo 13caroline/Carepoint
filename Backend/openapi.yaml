@@ -67,6 +67,32 @@ paths:
           description: Success
         400:
           description: Error message explaining whether the passwords don't match or the old password is wrong.
+    
+  /users/updatePhoto:
+    put:
+      tags:
+        - User
+      description: Update a users profile picture
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - token
+              - image
+              properties:
+                token:
+                  type: string
+                  description: A JavaWebToken.
+          image/png:
+            schema:
+              type: string
+              format: hexadecimal
+      responses:
+        201:
+          description: Success
+        400:
+          description: Error message explaining whether the passwords don't match or the old password is wrong.
 components:
   schemas:
     perfil_consumer:
