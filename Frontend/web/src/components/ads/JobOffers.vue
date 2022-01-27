@@ -155,6 +155,8 @@
 import axios from "axios";
 import moment from "moment";
 import VClamp from "vue-clamp";
+import store from "@/store/index.js";
+
 export default {
   name: "Ads",
 
@@ -216,9 +218,12 @@ export default {
     },
     getData: async function () {
       try {
-        let response = await axios.get(
-          "http://localhost:9040/joboffer/?page=" + this.page
+        let response = await axios.post("http://localhost:9040/search",{
+            page: this.page,
+            token: store.getters.token,
+          }
         );
+        console.log(response.data);
         if (response) {
           console.log(response.data);
           this.ads = response.data.JobOffers;
