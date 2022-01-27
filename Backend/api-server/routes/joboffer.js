@@ -6,32 +6,6 @@ const auth = require('../authorization/auth');
 const jobOffer_controller = require('../controllers/joboffer');
 const user_controller = require('../controllers/user')
 
-router.get('/', auth.check3MonthSubscription, (req, res, next) => {
-    
-    var page = req.query.page;
-    if(page === undefined){page = 1;}
-
-    var limit = 9; // possível alterar depois
-    var offset = (page * limit) - limit
-
-    var cat_id = (typeof req.query.category === 'undefined') ? null : req.query.category;
-    var loc_id = (typeof req.query.location === 'undefined') ? null : req.query.location;
-    var price = (typeof req.query.price === 'undefined') ? null : req.query.price;
-
-    jobOffer_controller.get_JobOffers(cat_id,loc_id,price,limit,offset)
-    .then((jobs) => {
-        jobOffer_controller.get_JobOffers_Count(cat_id,loc_id,price)
-        .then((count) => {
-            res.status(200).jsonp({
-                JobOffers: jobs,
-                Total: count
-            });
-        })
-        .catch((err) => res.status(400).jsonp("Error obtaining Jobs: " + err));
-    })
-    .catch((err) => res.status(400).jsonp("Error obtaining Jobs: " + err));
-})
-
 router.post('/own', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     jobOffer_controller.getOwnJobs(email)
@@ -53,6 +27,32 @@ router.post('/new', auth.checkAdminOrUserOrSP, (req, res, next) => {
         .catch((err) => res.status(400).jsonp("Failure inserting job: " + err));
     })
     .catch((err) => res.status(400).jsonp("Failure inserting job: " + err))
+})
+
+router.post('/', auth.check3MonthSubscription, (req, res, next) => {
+    
+    var page = req.body.page;
+    if(page === undefined){page = 1;}
+
+    var limit = 9; // possível alterar depois
+    var offset = (page * limit) - limit
+
+    var cat_id = (typeof req.body.category === 'undefined') ? null : req.body.category;
+    var loc_id = (typeof req.body.location === 'undefined') ? null : req.body.location;
+    var price = (typeof req.body.price === 'undefined') ? null : req.body.price;
+
+    jobOffer_controller.get_JobOffers(cat_id,loc_id,price,limit,offset)
+    .then((jobs) => {
+        jobOffer_controller.get_JobOffers_Count(cat_id,loc_id,price)
+        .then((count) => {
+            res.status(200).jsonp({
+                JobOffers: jobs,
+                Total: count
+            });
+        })
+        .catch((err) => res.status(400).jsonp("Error obtaining Jobs: " + err));
+    })
+    .catch((err) => res.status(400).jsonp("Error obtaining Jobs: " + err));
 })
 
 router.put('/conclude', auth.checkOwnershipJobOffer, (req, res, next) => {

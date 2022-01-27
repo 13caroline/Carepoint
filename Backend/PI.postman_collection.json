@@ -3439,11 +3439,47 @@
 						},
 						{
 							"name": "Get Job Offers (R)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
 							"request": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "page",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "location",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "price",
+											"value": "100",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
 								"url": {
-									"raw": "http://localhost:9040/joboffer/?page=1",
+									"raw": "http://localhost:9040/joboffer/",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -3452,31 +3488,6 @@
 									"path": [
 										"joboffer",
 										""
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1",
-											"description": "Obrigatório"
-										},
-										{
-											"key": "category",
-											"value": "2",
-											"description": "Opcional (passar o id)",
-											"disabled": true
-										},
-										{
-											"key": "location",
-											"value": "1",
-											"description": "Opcional (passar o id)",
-											"disabled": true
-										},
-										{
-											"key": "price",
-											"value": "100",
-											"description": "Opcional -> Returns equal or greater",
-											"disabled": true
-										}
 									]
 								}
 							},
