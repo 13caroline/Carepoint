@@ -4,12 +4,158 @@ info:
   version: 1.0.0
 servers:
 - url: http://localhost:9040/
+  description: API-Server.
 paths:
+  /users/register:
+    post:
+      tags:
+        - Users
+      description: Register a new User in the platform. Uses a different server!
+      servers:
+        - url: http://localhost:9041/
+          description: AUTH-Server.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/register_consumer'
+                - $ref: '#/components/schemas/register_service_provider'
+                - $ref: '#/components/schemas/register_company'
+      responses:
+        200:
+          description: Success. (Automatically logs in the user)
+          content:
+            application/json:
+              schema:
+                properties:
+                  token:
+                    type: string
+                    description: This user's newly generated JavaWebToken
+                  type:
+                    type: integer
+                    enum: [1, 2, 3, 4]
+        400:
+          description: Error message generated.
+      
+  /users/login:
+    post:
+      tags:
+        - Users
+      description: Login. Uses a different server!
+      servers:
+        - url: http://localhost:9041/
+          description: AUTH-Server.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  token:
+                    type: string
+                    description: This user's newly generated JavaWebToken
+                  type:
+                    type: integer
+                    enum: [1, 2, 3, 4]
+        400:
+          description: Error message generated.
+  
+  /users/logout:
+    post:
+      tags:
+        - Users
+      description: Logout. Uses a different server!
+      servers:
+        - url: http://localhost:9041/
+          description: AUTH-Server.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+                  description: A Java Web Token.
+      responses:
+        200:
+          description: Success.
+        400:
+          description: Failure.
+      
+  /users/upgrade:
+    post:
+      tags:
+        - Users
+      description: Upgrades a regular user to Service Provider. Type 2 -> 3
+      servers:
+        - url: http://localhost:9041/
+          description: AUTH-Server.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - token
+                - password
+                - description
+                - dateOfBirth
+                - distance
+                - qualifications
+                - categories
+              properties:
+                token:
+                  type: string
+                password:
+                  type: string
+                description:
+                  type: string
+                dateOfBirth:
+                  type: string
+                distance:
+                  type: number
+                  description: distance in KM they are willing to travel for work.
+                qualifications:
+                  type: string
+                  description: Qualifications of the Service Provider.
+                categories:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                properties:
+                  token:
+                    type: string
+                    description: This user's newly generated JavaWebToken
+        400:
+          description: Error message generated.
+  
   /users/perfil:
     post:
       tags:
-        - User
-      description: Get the profile of the logged in user
+        - Users
+      description: Get the profile of the logged in user.
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -34,10 +180,73 @@ paths:
         400:
           description: Sends the error created.
   
+  /users/image:
+    post:
+      tags:
+        - Users
+      description: Obtain a users profile picture
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - token
+              properties:
+                token:
+                  type: string
+                  description: A JavaWebToken
+        required: true
+      responses:
+        200:
+          description: A JSON containing the picture.
+        400:
+          description: Sends the error created.
+    
+  /users/id:
+    post:
+      tags:
+        - Users
+      description: Obtain a users Identification Number
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - token
+              properties:
+                token:
+                  type: string
+                  description: A JavaWebToken
+        required: true
+      responses:
+        200:
+          description: A JSON containing the ID.
+        400:
+          description: Sends the error created.
+    
+  /users/update:
+    put:
+      tags:
+        - Users
+      description: Update a users profile
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/update_consumer'
+                - $ref: '#/components/schemas/update_service_provider'
+                - $ref: '#/components/schemas/update_company'
+      responses:
+        201:
+          description: Success
+        400:
+          description: Error message generated.
+  
   /users/updatePassword:
     put:
       tags:
-        - User
+        - Users
       description: Update a users password
       requestBody:
         content:
@@ -71,7 +280,7 @@ paths:
   /users/updatePhoto:
     put:
       tags:
-        - User
+        - Users
       description: Update a users profile picture
       requestBody:
         content:
@@ -93,6 +302,300 @@ paths:
           description: Success
         400:
           description: Error message explaining whether the passwords don't match or the old password is wrong.
+  
+  /location/:
+    get:
+      tags:
+        - Location
+      description: Get a list of all locations in the database.
+      responses:
+        200:
+          description: JSON with all the locations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    idLocation:
+                      type: integer
+                    name:
+                      type: string
+
+  /subscription/:
+    post:
+      tags:
+        - Subscription
+      description: Add a subscription to a new Service provider or Company.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - token
+                - subscription
+                - visibility
+              properties:
+                token:
+                  type: string
+                  description: A Java Web Token.
+                subscription:
+                  type: integer
+                  enum: [0, 1, 3, 6]
+                visibility: 
+                  type: integer
+                  enum: [1, 3, 6]
+      responses:
+        200: 
+          description: Success.
+        400:
+          description: Failure.
+
+  /company/specific:
+    get:
+      tags:
+        - Company
+      description: Get information about one specific company
+      parameters:
+        - in: query
+          name: id
+          description: Company Identification Number
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                properties:
+                  idUser:
+                    type: integer
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  phoneNumber:
+                    type: string
+                  sex:
+                    type: string
+                    enum: [M, F, I]
+                  type:
+                    type: integer
+                    enum: [4]
+                  createdAt:
+                    type: string
+                  lastActivity:
+                    type: string
+                  active:
+                    type: integer
+                    enum: [0, 1]
+                  locationName:
+                    type: string
+                  cordsX:
+                    type: number
+                  cordsY:
+                    type: number
+                  link: 
+                    type: string
+                  firm:
+                    type: string
+                  nipc:
+                    type: number
+                  description:
+                    type: string
+                  image:
+                    type: string
+        400:
+          description: Failure
+
+  /search/max:
+    get:
+      tags:
+        - Search
+      description: Returns the max value of Price, Experience and Rating present within the database.
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  price:
+                    type: number
+                  experience:
+                    type: number
+                  rating:
+                    type: number
+        400:
+          description: Failure
+  
+  /search/serviceProviders:
+    get:
+      tags:
+        - Search
+      description: Get all Service Providers that fit the criteria
+      parameters:
+        - in: query
+          name: page
+          description: Desired page of the search
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: category
+          schema: 
+            type: integer
+        - in: query
+          name: location
+          schema:
+            type: integer
+        - in: query
+          name: rating
+          schema:
+            type: integer
+        - in: query
+          name: sex
+          schema:
+            type: string
+            enum: [M, F, N]
+        - in: query
+          name: experience
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/perfil_company'
+                  ServiceProviders_Sum:
+                    type: object
+                    properties:
+                      number_sps:
+                        type: integer
+                        description: Number of Service Providers found
+        400:
+          description: Failure.
+
+  /search/companies:
+    get:
+      tags:
+        - Search
+      description: Get all Companies that fit the criteria
+      parameters:
+        - in: query
+          name: page
+          description: Desired page of the search
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: location
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/perfil_company'
+                  Companies_Sum:
+                    type: object
+                    properties:
+                      number_cps:
+                        type: integer
+                        description: Number of Companies found
+        400:
+          description: Failure.    
+  
+  /search/BySpName:
+    get:
+      tags:
+        - Search
+      description: Get all Service Providers with matching names
+      parameters:
+        - in: query
+          name: page
+          description: Desired page of the search
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/perfil_company'
+                  ServiceProviders_Sum:
+                    type: object
+                    properties:
+                      number_sps:
+                        type: integer
+                        description: Number of Service Providers found
+        400:
+          description: Failure.    
+  
+  /search/ByCompanyName:
+    get:
+      tags:
+        - Search
+      description: Get all Companies with matching names
+      parameters:
+        - in: query
+          name: page
+          description: Desired page of the search
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: name
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Companies:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/perfil_company'
+                  Companies_Sum:
+                    type: object
+                    properties:
+                      number_cps:
+                        type: integer
+                        description: Number of Companies found
+        400:
+          description: Failure.  
+  
 components:
   schemas:
     perfil_consumer:
@@ -121,6 +624,8 @@ components:
               type: integer
               enum: [0, 1]
             locationName: 
+              type: string
+            phoneNumber:
               type: string
             coordsX: 
               type: number
@@ -254,3 +759,273 @@ components:
               type: integer
               description: Current subscription type held by the Service Provider
               enum: [0, 1, 2, 3, 4, 5, 6, 7, 8 ,9 ,10, 11, 12]
+
+    update_consumer:
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: A JavaWebToken
+        idUser:
+          type: integer
+        type:
+          type: integer
+          enum: [1, 2, 3, 4]
+        name:
+          type: string
+        email:
+          type: string
+        location:
+          type: integer
+        phoneNumber:
+          type: string
+    
+    update_service_provider:
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: A JavaWebToken
+        idUser:
+          type: integer
+        type:
+          type: integer
+          enum: [1, 2, 3, 4]
+        name:
+          type: string
+        email:
+          type: string
+        location:
+          type: integer
+        phoneNumber:
+          type: string
+        quali:
+          type: string
+          description: Qualifications of the Service Provider.
+        raio:
+          type: number
+          description: distance in KM they are willing to travel for work.
+        description:
+          type: string
+
+    update_company:
+      required:
+        - token
+      properties:
+        token:
+          type: string
+          description: A JavaWebToken
+        idUser:
+          type: integer
+        type:
+          type: integer
+          enum: [1, 2, 3, 4]
+        name:
+          type: string
+        email:
+          type: string
+        location:
+          type: integer
+        phoneNumber:
+          type: string
+        link:
+          type: string
+          description: Link to their personal website.
+        firm:
+          type: string
+        nipc:
+          type: number
+        description:
+          type: string
+
+    register_consumer:
+      required:
+        - name
+        - email
+        - password
+        - sex
+        - type
+        - location
+        - phoneNumber
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        sex:
+          type: string
+          enum: [M, F, I]
+        type:
+          type: integer
+          enum: [1, 2, 3]
+        location:
+          type: integer
+        phoneNumber:
+          type: string
+
+    register_service_provider:
+      required:
+        - name
+        - email
+        - password
+        - sex
+        - type
+        - location
+        - phoneNumber
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        sex:
+          type: string
+          enum: [M, F, I]
+        type:
+          type: integer
+          enum: [1, 2, 3]
+        location:
+          type: integer
+        phoneNumber:
+          type: string
+        description:
+          type: string
+        dateOfBirth:
+          type: string
+        distance:
+          type: number
+          description: distance in KM they are willing to travel for work.
+        qualifications:
+          type: string
+          description: Qualifications of the Service Provider.
+        categorias:
+          type: array
+          items:
+            type: integer
+      
+    register_company:
+      required:
+        - name
+        - email
+        - password
+        - sex
+        - type
+        - location
+        - phoneNumber
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        sex:
+          type: string
+          enum: [M, F, I]
+        type:
+          type: integer
+          enum: [1, 2, 3]
+        location:
+          type: integer
+        phoneNumber:
+          type: string
+        link:
+          type: string
+        firm:
+          type: string
+        nipc:
+          type: number
+        description:
+          type: string
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
