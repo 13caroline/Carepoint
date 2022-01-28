@@ -36,7 +36,7 @@ CALL get_max_values();
 -- '["1","5","3"]'
   CALL get_service_providers_v3 (NULL, NULL, NULL, NULL, NULL, NULL,40,0);
 -- CALL get_consumers_joboffers("exvqvb@hotmail.com");
--- CALL get_service_providers_v3 ('["1","2"]', NULL, NULL, NULL, NULL, NULL,20,0);
+CALL get_service_providers_v3_count (NULL, NULL, NULL, NULL, NULL, NULL);
 
 CALL user_messages_with(1);
 CALL all_messages_with(105,1);
