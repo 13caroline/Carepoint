@@ -4,7 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const bodyParser = require('body-parser');
-
+const router = require('express').Router();
+// Add the swagger module and the yaml loader
+const swaggerUi = require('swagger-ui-express');
+YAML = require('yamljs');
+swaggerDocument = YAML.load('./openapi-part2.yaml');
 
 // Routes
 var indexRouter = require('./routes/index');
@@ -68,6 +72,8 @@ app.use('/serviceProvider', serviceProvRouter);
 app.use('/add', addRouter);
 app.use('/review', reviewRouter);
 app.use('/message', messageRouter);
+// Add the documentation route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
