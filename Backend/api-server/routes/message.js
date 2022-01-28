@@ -24,7 +24,7 @@ router.post('/addMessage', auth.validToken, function(req, res, next) {
 
     User.consult(email).then((user) => {
         message_controller.addMessage(req.body.content,user.idUser,idUser2)
-        .then((dt) => res.status(200).jsonp(dt))
+        .then((dt) => res.status(200).jsonp("Message added successfully"))
         .catch((err) => res.status(400).jsonp({error: err}))
     });
 })
