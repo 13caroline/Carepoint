@@ -98,11 +98,10 @@ Out.insert = (serviceProvider) => {
     });
 }
 
-Out.addHorario = (id, cat, jsonObj) => {
-    return dbconfig.sequelize.query('CALL add_workSchedule_slot (:id, :cat, :slot)',
+Out.addHorario = (id, jsonObj) => {
+    return dbconfig.sequelize.query('CALL add_workSchedule_slot (:id, :slot)',
         {replacements : {
             id: id,
-            cat: cat,
             slot: jsonObj
         }})
 }

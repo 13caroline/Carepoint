@@ -80,7 +80,7 @@ router.put('/regHorario', auth.validToken, (req, res) => {
         var dateBegin = req.body.dateBegin;
         var dateEnd = req.body.dateEnd;
         var text = '{"date_end": "'+dateEnd+'",' + '"date_begin": "'+dateBegin+'"}'
-        ServiceProvider.addHorario(uid, req.body.category, text)
+        ServiceProvider.addHorario(uid, text)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })
