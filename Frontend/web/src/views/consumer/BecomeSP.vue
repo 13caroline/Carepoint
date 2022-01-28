@@ -184,13 +184,13 @@
         </v-col>
       </v-row>
 
-      <v-dialog v-model="dialog" width="40%" persistent>
-        <v-card class="rounded-lg">
-          <v-card-title class="font-weight-bold pt-6">
+      <v-dialog v-model="dialog" width=auto persistent>
+        <v-card id="dialog" class="rounded-lg">
+          <v-card-title class="font-weight-bold pt-5">
             Confirmar palavra-passe
           </v-card-title>
           <v-card-subtitle> Confirme a sua palavra-passe para se tornar um prestador de serviços. </v-card-subtitle>
-          <v-card-text>
+          <v-card-text >
             <v-form ref="form" v-model="valid">
               <v-divider></v-divider>
               <v-row class="mt-3">
@@ -376,6 +376,9 @@ span {
 .group {
   color: #282424;
   font-size: 20px;
+}
+#dialog{
+overflow: hidden;
 }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row class="w-100" align="start">
-      <v-col cols="4" md="2">
+      <v-col xs="3" sm="3" md="3" lg="2" xl="2">
         <div class="foto h-100">
           <v-img
             :src="processImage(serviceProviderData.image)"
@@ -21,7 +21,7 @@
         </div>
       </v-col>
 
-      <v-col cols="6" md="6" sm="6" class="ml-13 ml-md-16 ml-sm-0">
+      <v-col xs="9" md="6" sm="6" class="">
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -47,7 +47,7 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" sm="3" md="2">
+      <v-col cols="12" sm="3" md="2" lg="2">
         <div class="infos font-weight-bold">Contactos</div>
         <div class="infos" v-if="serviceProviderData.phoneNumber === 'null'">
           Sem dados de contacto
@@ -56,7 +56,7 @@
         <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" sm="9" md="9" class="ml-md-5">
+      <v-col cols="12" sm="9" md="9" lg="9" class="ml-md-5 ">
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>

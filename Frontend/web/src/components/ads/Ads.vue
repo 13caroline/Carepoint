@@ -18,7 +18,7 @@
             lg="4"
             md="4"
             sm="6"
-            class="mx-auto mx-sm-0"
+            class="mx-auto"
             v-for="(a, index) in props.items"
             :key="index"
           >
@@ -35,7 +35,7 @@
               >
                 <v-card-text>
                   <v-row>
-                    <v-col cols="5" md="5" sm="4">
+                    <v-col cols="5" md="6" sm="4">
                       <span class="activity d-flex justify-start pb-2"
                         ><v-icon color="warning lighten-1" class="mb-1" small
                           >fas fa-star</v-icon
@@ -45,7 +45,7 @@
                         }})</span
                       >
                     </v-col>
-                    <v-col md="7" sm="8" class="text-right">
+                    <v-col md="6" sm="8" class="text-right">
                       <span class="activity d-flex justify-end"
                         >última vez ativo {{ difDate(a.lastActivity) }}</span
                       >
