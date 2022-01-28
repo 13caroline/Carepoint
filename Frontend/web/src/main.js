@@ -5,9 +5,12 @@ import router from './router'
 import store from './store'
 import snackbarPlugin from './plugins/snackbar';
 import '@fortawesome/fontawesome-free/css/all.css'
+import Chat from 'vue-beautiful-chat'
+
 
 Vue.config.productionTip = false
-Vue.use(snackbarPlugin, { store })
+Vue.use(snackbarPlugin, { store}, Chat)
+
 
 new Vue({
   iconfont: 'fa',

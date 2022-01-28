@@ -23,6 +23,9 @@
 
       <v-col xs="9" md="6" sm="6" class="">
         <div>
+          <Chat />
+        </div>
+        <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
           </p>
@@ -248,6 +251,9 @@ export default {
     };
   },
   methods: {
+    goTo(){
+      this.$router.push("/chat")
+    },
     formatDate(d) {
       return moment(d, moment.ISO_8601)
         .locale("pt")
@@ -297,6 +303,7 @@ export default {
     Schedule: () => import("@/components/ads/Schedule"),
     AddReview: () => import("@/components/dialogs/AddReview"),
     SendMessage: () => import("@/components/dialogs/SendMessage"),
+    Chat: ()=> import("@/components/global/Chat")
   },
   computed: {
     numberOfPages() {

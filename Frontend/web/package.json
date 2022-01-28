@@ -13,6 +13,7 @@
     "core-js": "^3.6.5",
     "moment": "^2.29.1",
     "vue": "^2.6.11",
+    "vue-beautiful-chat": "^2.5.0",
     "vue-clamp": "^0.4.0",
     "vue-daily-scheduler": "^1.0.9",
     "vue-messenger": "^2.3.3",
