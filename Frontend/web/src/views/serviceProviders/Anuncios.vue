@@ -7,7 +7,7 @@
           <search />
         </v-col>
         <v-col cols="12" md="9" sm="9" class="ml-auto ml-sm-11 ma-md-0 mb-5">
-          <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa">
+          <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa" show-arrows>
             <v-tab v-for="item in items" :key="item.tab">
               {{ item.tab }}
             </v-tab>

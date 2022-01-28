@@ -3,7 +3,7 @@
     <Bar />
     <v-container>
      
-      <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa">
+      <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa" show-arrows>
         <v-tab v-for="item in items" :key="item.tab">
           {{ item.tab }}
         </v-tab>

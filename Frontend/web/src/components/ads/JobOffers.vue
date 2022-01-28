@@ -82,13 +82,11 @@
                   <v-row justify="center" class="mx-auto">
                  
                       <v-chip class="mt-4" :color="estado(a.category)">
-                        <span class="mr-1">
+                        <span class="mr-1 overline">
                           <strong> {{ a.category}} </strong>
                         </span>
 
                         <v-icon small>{{ getIcon(a.category) }}</v-icon>
-
-                        <span class="chipLabel ml-1"> Apoio a idosos </span>
                       </v-chip>
                    
                   </v-row>
@@ -171,12 +169,15 @@ export default {
       itemsPerPage: 9,
       total: 0,
       category: [
-        { name: "Companhia", icon: "fas fa-user-friends", color: "#D7BFDC" },
-        { name: "Compras", icon: "fas fa-shopping-cart", color: "#FDA172" },
-        { name: "Medicação", icon: "fas fa-tablets", color: "#F5C3C2" },
-        { name: "Higiene", icon: "fas fa-pump-medical", color: "#95C8D8" },
-        { name: "Passeios", icon: "fas fa-walking", color: "#C5E1A5" },
-        { name: "Refeições", icon: "fas fa-utensils", color: "#EEDC82" },
+        { name: "Apoio externo", icon: "fas fa-car-side" },
+        {
+          name: "Cuidados de higiene e conforto pessoal",
+          icon: "fas fa-pump-medical",
+        },
+        { name: "Cuidados de lazer", icon: "fas fa-book-open" },
+        { name: "Cuidados médicos", icon: "fas fa-pills" },
+        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils" },
+        { name: "Higiene habitacional", icon: "fas fa-home" },
       ],
     };
   },
@@ -194,6 +195,7 @@ export default {
       var row = this.category.filter((obj) => {
         return obj.name === c;
       });
+    
       return Object.values(row[0])[2];
     },
     difDate(dateLA) {
@@ -218,19 +220,15 @@ export default {
     },
     getData: async function () {
       try {
-        let response = await axios.post("http://localhost:9040/search",{
-            page: this.page,
+        let response = await axios.post("http://localhost:9040/joboffer/search",{
             token: store.getters.token,
+            page: this.page,
           }
         );
-        console.log(response.data);
+
         if (response) {
-          console.log(response.data);
           this.ads = response.data.JobOffers;
           this.total = response.data.Total[0].number_offers;
-          /*this.ads = response.data.ServiceProviders.map(an => {
-      an.image = an.image ? "data:image/jpeg;charset=utf-8;base64," + an.image : require("@/assets/userTest.png")
-         })*/
         }
       } catch (e) {
         this.$snackbar.showMessage({
