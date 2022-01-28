@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-data-iterator
+      v-if="ads.length"
       :items="ads"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
@@ -66,7 +67,7 @@
         </v-row>
       </template>
     </v-data-iterator>
-    <!--<small v-else> <em> não existem anúncios publicados </em></small>-->
+    <small v-else> <em> não existem anúncios publicados </em></small>
 
     <v-row class="mt-4" align="center" justify="center">
       <v-btn
