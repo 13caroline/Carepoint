@@ -73,7 +73,7 @@ router.post('/', function(req, res) {
  ****************************************************************************************/
 
 router.put('/regHorario', auth.validToken, (req, res) => {
-    email = auth.getTypeFromJWT(req.body.token)
+    email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((usr) => {
         var uid = usr.idUser;
