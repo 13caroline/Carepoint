@@ -97,7 +97,7 @@
             </template>
             <span>{{ c.name }}</span>
           </v-tooltip>
-          <span v-if="c.price" class="infos"> {{c.price}} €/hora</span>
+          <span v-if="c.price" class="infos"> {{c.price.toFixed(1)}} €/hora</span>
           <span v-else class="infos"> Preço negociável</span>
         </div>
       </v-col>

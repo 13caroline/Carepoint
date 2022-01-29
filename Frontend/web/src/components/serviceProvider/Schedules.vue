@@ -1,10 +1,5 @@
 <template>
   <v-container>
-    <v-row justify="end">
-      <v-col cols="auto">
-        <NewSlot @clicked="updated"></NewSlot>
-      </v-col>
-    </v-row>
     <schedule :dados="id"></schedule>
   </v-container>
 </template>
@@ -20,21 +15,19 @@ export default {
     };
   },
   components: {
-    NewSlot: () => import("@/components/dialogs/NewSlot"),
-    Schedule: () => import("@/components/ads/Schedule"),
+    Schedule: () => import("@/components/ads/EditSchedules"),
   },
   methods: {
-    updated: async function(){
+    updated: async function () {
       try {
-      let response = await axios.post("http://localhost:9040/users/id", {
-        token: store.getters.token,
-      });
-      this.id = response.data;
-    } catch (e) {
-      console.log(e);
-    }
-
-    }
+        let response = await axios.post("http://localhost:9040/users/id", {
+          token: store.getters.token,
+        });
+        this.id = response.data;
+      } catch (e) {
+        console.log(e);
+      }
+    },
   },
   created: async function () {
     this.updated();

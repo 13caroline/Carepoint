@@ -4,8 +4,8 @@
       <v-tooltip top>
         <template v-slot:activator="{ on }">
           <v-btn
-            color="#2596be"
-            class="mt-8"
+            color="#78C4D4"
+            class="mb-2"
             v-bind="attrs"
             v-on="{ ...on, ...diag }"
             small
@@ -13,7 +13,7 @@
             dark
             @click="dialog = true"
           >
-            <v-icon small> fas fa-scroll</v-icon>
+            <v-icon small> fas fa-plus</v-icon>
           </v-btn>
         </template>
         <span class="caption">Registar horário</span>
