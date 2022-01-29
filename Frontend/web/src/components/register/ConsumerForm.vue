@@ -142,13 +142,19 @@
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
-              v-model="termos"
-              :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
-              label="Li e aceito os Termos e Condições"
               required
               class="my-checkbox"
               color="#78c4d4"
-            ></v-checkbox>
+              v-model="termos"
+              id="terms"
+              :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
+            >
+              <template v-slot:label>
+                <div>
+                  <Termos />
+                </div>
+              </template>
+            </v-checkbox>
           </v-form>
 
           <v-row align="end" justify="end">
@@ -180,7 +186,7 @@ export default {
   name: "SingleSPForm",
   data() {
     return {
-      show1:false,
+      show1: false,
       termos: false,
       dialogs: {},
       valid: false,
@@ -221,6 +227,7 @@ export default {
     };
   },
   components: {
+    Termos: () => import("@/components/dialogs/Terms"),
     Cancel: () => import("@/components/dialogs/Cancel"),
   },
 
@@ -245,7 +252,7 @@ export default {
             this.$store.commit("guardaTokenUtilizador", res.data.token);
             this.$store.commit("guardaTipoUtilizador", this.form.type);
           }
-          this.$router.push("/page")
+          this.$router.push("/page");
           this.$snackbar.showMessage({
             show: true,
             color: "#78c4d4",

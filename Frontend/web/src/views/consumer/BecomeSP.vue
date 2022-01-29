@@ -155,13 +155,19 @@
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
-              v-model="termos"
-              :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
-              label="Li e aceito os Termos e Condições"
               required
               class="my-checkbox"
               color="#78c4d4"
-            ></v-checkbox>
+              v-model="termos"
+              id="terms"
+              :rules="[(v) => !!v || 'Aceite os Termos e Condições']"
+            >
+              <template v-slot:label>
+                <div>
+                  <Termos />
+                </div>
+              </template>
+            </v-checkbox>
           </v-form>
 
           <v-row align="end" justify="end">
@@ -274,6 +280,7 @@ export default {
   },
   components: {
     Cancel: () => import("@/components/dialogs/Cancel"),
+    Termos: () => import("@/components/dialogs/Terms"),
     Foot: () => import("@/components/global/Footer"),
     Bar: () => import("@/components/global/AppBarAccount.vue"),
   },

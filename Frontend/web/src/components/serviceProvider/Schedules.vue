@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-row justify="end">
+              <v-col cols="auto">
+                <NewSlot @clicked="registar"></NewSlot>
+              </v-col>
+            </v-row>
     <schedule :dados="id"></schedule>
   </v-container>
 </template>
@@ -15,6 +20,7 @@ export default {
     };
   },
   components: {
+    NewSlot: () => import("@/components/dialogs/NewSlot"),
     Schedule: () => import("@/components/ads/Schedule"),
   },
   created: async function () {

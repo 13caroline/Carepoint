@@ -98,6 +98,7 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
+      console.log(response.data)
       if (response.data.categories){ 
         let workSchedule = response.data.categories[0].workSchedule;
 
