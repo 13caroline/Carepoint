@@ -6,9 +6,9 @@ var logger = require('morgan');
 const bodyParser = require('body-parser');
 //const router = require('express').Router();
 // Add the swagger module and the yaml loader
-//const swaggerUi = require('swagger-ui-express');
-//YAML = require('yamljs');
-//swaggerDocument = YAML.load('./openapi-part2.yaml');
+const swaggerUi = require('swagger-ui-express');
+YAML = require('yamljs');
+swaggerDocument = YAML.load('../openapi.yaml')
 
 // Routes
 var indexRouter = require('./routes/index');
