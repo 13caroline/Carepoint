@@ -196,8 +196,7 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE get_sp_category_info (IN id INT)
 BEGIN
-	SELECT category.name, category_has_serviceprovider.experience,  IF(JSON_LENGTH(serviceprovider.workSchedule) = 0, NULL, serviceprovider.workSchedule) AS workSchedule, 
-    IF( JSON_LENGTH(serviceprovider.occupiedSchedule) = 0, NULL, serviceprovider.occupiedSchedule) AS occupiedSchedule, category_has_serviceprovider.price FROM user
+	SELECT category.name, category_has_serviceprovider.experience,  serviceprovider.workSchedule,serviceprovider.occupiedSchedule, category_has_serviceprovider.price FROM user
 	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
     INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory 
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP WHERE id = user.idUser;
@@ -249,7 +248,7 @@ BEGIN
 		ORDER BY date_requested LIMIT 18446744073709551615
 		) parsed);
 
-	SELECT IF(JSON_LENGTH(serviceprovider.workSchedule) = 0, NULL, serviceprovider.workSchedule) AS workSchedule, IF( JSON_LENGTH(sorted_os) = 0, NULL, sorted_os) AS occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP;
+	SELECT serviceprovider.workSchedule, sorted_os AS occupiedSchedule FROM serviceprovider WHERE id = serviceprovider.idSP;
 END &&
 DELIMITER ;
 
@@ -1472,6 +1471,7 @@ BEGIN
     -- get the occupied schedule
     SET os = (SELECT serviceprovider.occupiedSchedule FROM serviceprovider 
 			WHERE serviceprovider.idSP = in_idUser );
+    SET os = IF (os IS NULL, '[]', os);
     
 	UPDATE pi.serviceprovider SET
 		serviceprovider.occupiedSchedule= CASE 
@@ -1502,7 +1502,9 @@ BEGIN
     -- get the work schedule
     SET os = (SELECT serviceprovider.workSchedule FROM serviceprovider 
 			WHERE serviceprovider.idSP = in_idUser );
-            
+	
+    SET os = IF (os IS NULL, '[]', os);
+    
 	SET new_os = (select json_arrayagg(j1) from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
 		where json_extract(j1, '$.date_end') <> json_extract(in_slot, '$.date_end') and json_extract(j1, '$.date_begin') <> json_extract(in_slot, '$.date_begin'));
 
@@ -1536,6 +1538,8 @@ BEGIN
     -- get the workSchedule schedule
     SET os =  (SELECT serviceprovider.workSchedule FROM serviceprovider 
 			WHERE serviceprovider.idSP = in_idUser);
+    
+    SET os = IF (os IS NULL, '[]', os);
     
 	UPDATE pi.serviceprovider SET
 		serviceprovider.workSchedule= CASE 
@@ -1587,6 +1591,8 @@ BEGIN
     SET os = (SELECT serviceprovider.occupiedSchedule FROM serviceprovider 
 			WHERE serviceprovider.idSP = in_idUser );
             
+	SET os = IF (os IS NULL, '[]', os);
+    
 	SET new_os = (
 select json_pretty(json_arrayagg(os.js)) as new_os
 from json_table(os, '$[*]' columns (js json path '$')) as os
