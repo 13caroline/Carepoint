@@ -3,6 +3,7 @@
     <div>
       <v-sheet height="600">
         <v-calendar
+          v-if="events"
           ref="calendar"
           :start="today"
           :events="events"
@@ -14,6 +15,7 @@
         >
           <template v-slot:day-label-header="{}">-</template>
         </v-calendar>
+        <small v-else> <em> não existem horários registados </em></small>
       </v-sheet>
     </div>
   </div>
@@ -99,8 +101,10 @@ export default {
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
       console.log(response.data)
-      if (response.data.categories){ 
-        let workSchedule = response.data.categories[0].workSchedule;
+      let workSchedule = null;
+      let occupiedSchedule = null;
+      if (response.data.categories.length){ 
+        workSchedule = response.data.categories[0].workSchedule;
 
         for (var i = 0; i < workSchedule.length; i++) {
           this.events.push({
@@ -110,7 +114,7 @@ export default {
           });
         }
 
-        let occupiedSchedule = response.data.categories[0].occupiedSchedule;
+        occupiedSchedule = response.data.categories[0].occupiedSchedule;
         for (var k = 0; k < occupiedSchedule.length; k++) {
           this.events.push({
             start: occupiedSchedule[k].date_begin,
@@ -121,12 +125,6 @@ export default {
       }
     } catch (e) {
       console.log(e);
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
     }
   },
 };
