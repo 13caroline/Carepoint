@@ -20,7 +20,7 @@
       </v-tooltip>
     </template>
     <v-card>
-      <v-form>
+      <v-form ref="form" v-model="valid">
         <v-card-title class="font-weight-regular text-uppercase">
           Registar um novo horário
         </v-card-title>
@@ -125,7 +125,7 @@
               <Cancelar :dialogs="cancelar" @clicked="close()"></Cancelar>
             </v-col>
             <v-col cols="auto">
-              <v-btn depressed class="white--text" color="#78c4d4" @click="register()">
+              <v-btn depressed class="white--text" color="#78c4d4" @click="register()" :disabled="!valid">
                 Registar
               </v-btn>
             </v-col>
@@ -167,6 +167,7 @@ export default {
       title: "registo de horário",
       text: "o registo de horário",
     },
+    valid: false,
   }),
   components: {
     Cancelar,
@@ -180,11 +181,15 @@ export default {
 
     register: async function(){
         if (this.$refs.form.validate()) {
+          let data1 = this.form.date + " " + this.hora;
+          let data2 = this.form.date + " " + this.hora2;
         try {
-          await axios.post("http://localhost:9040/serviceProvider/regHorario", {
+          console.log(data1);
+          console.log(data2)
+          await axios.put("http://localhost:9040/serviceProvider/regHorario", {
             token: store.getters.token,
-            dateBegin: this.form.description,
-            dateEnd:this.dados,
+            dateBegin: data1,
+            dateEnd: data2,
 
           });
           this.$emit("clicked","update")

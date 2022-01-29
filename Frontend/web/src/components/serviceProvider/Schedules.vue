@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row justify="end">
-              <v-col cols="auto">
-                <NewSlot @clicked="registar"></NewSlot>
-              </v-col>
-            </v-row>
+      <v-col cols="auto">
+        <NewSlot @clicked="updated"></NewSlot>
+      </v-col>
+    </v-row>
     <schedule :dados="id"></schedule>
   </v-container>
 </template>
@@ -23,8 +23,9 @@ export default {
     NewSlot: () => import("@/components/dialogs/NewSlot"),
     Schedule: () => import("@/components/ads/Schedule"),
   },
-  created: async function () {
-    try {
+  methods: {
+    updated: async function(){
+      try {
       let response = await axios.post("http://localhost:9040/users/id", {
         token: store.getters.token,
       });
@@ -32,6 +33,11 @@ export default {
     } catch (e) {
       console.log(e);
     }
+
+    }
+  },
+  created: async function () {
+    this.updated();
   },
 };
 </script>

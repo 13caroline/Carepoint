@@ -35,15 +35,15 @@ export default {
     styleObject: { background: "transparent", border: "1px solid white" },
     content: [
       {
-        text: "Lorem ipsum dolor sit amet, smod tempor incididunt ut labore et dolore magna aliqua.",
+        text: "Queremos ajudá-lo a ajudar, por isso, comprometemo-nos a divulgar e a promover as suas competências numa das maiores plataformas digitais de assistência a idosos.",
         align: "start",
       },
       {
-        text: "Lorem ipsum dolor sit amet, smod tempor incididunt ut labore et dolore magna aliqua.",
+        text: "A nossa plataforma digital oferece-lhe um palco de divulgação nacional, onde pode transformar a sua carreiga e a sua marca.",
         align: "center",
       },
       {
-        text: "Lorem ipsum dolor sit amet, smod tempor incididunt ut labore et dolore magna aliqua.",
+        text: "Para que possa escolher o cuidador com que mais se identifica, reunimos uma vasta rede de prestadores e cuidadores que pode filtrar de acordo com os critérios que mais lhe aprouver.",
         align: "end",
       },
     ],
@@ -59,8 +59,6 @@ export default {
 .card {
   height: 50;
   width: 50;
-  padding-top:10%;
-
 }
 
 </style>

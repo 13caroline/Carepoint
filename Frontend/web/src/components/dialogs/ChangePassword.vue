@@ -25,7 +25,6 @@
               <v-col>
                 <span>Palavra-passe atual</span>
                 <v-text-field
-                 
                   outlined
                   color="#78c4d4"
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -34,11 +33,8 @@
                   required
                   dense
                   v-model="form.oldPassword"
-                              
-
                 ></v-text-field>
               </v-col>
-              
             </v-row>
             <v-row>
               <v-col>
@@ -64,7 +60,7 @@
                   :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="show1 = !show1"
                   :type="show1 ? 'text' : 'password'"
-                   :rules="[
+                  :rules="[
                     form.newPassword === form.newPasswordRepeat ||
                       'As palavra-passes devem corresponder.',
                   ]"
@@ -92,7 +88,14 @@
               </v-btn>
             </v-col>
             <v-col cols="12" md="6">
-              <v-btn depressed large dark block color="#78c4d4" @click="change()">
+              <v-btn
+                depressed
+                large
+                dark
+                block
+                color="#78c4d4"
+                @click="change()"
+              >
                 Enviar
               </v-btn>
             </v-col>
@@ -110,15 +113,15 @@ import store from "@/store/index.js";
 export default {
   props: ["id"],
   data: () => ({
-            show1: false,
+    show1: false,
     passwordRules: [
-        (v) => !!v || "Palavra-passe inválida",
-        (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",
-        (v) => /(?=.*\d)/.test(v) || "Deve ter um número",
-        (v) =>
-          (v && v.length >= 5) ||
-          "A palavra-passe deve ter pelo menos 5 caracteres",
-      ],
+      (v) => !!v || "Palavra-passe inválida",
+      (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",
+      (v) => /(?=.*\d)/.test(v) || "Deve ter um número",
+      (v) =>
+        (v && v.length >= 5) ||
+        "A palavra-passe deve ter pelo menos 5 caracteres",
+    ],
     dialog: false,
     oldPassword: "",
     newPassword: "",
@@ -141,7 +144,7 @@ export default {
             newPassword_1: this.form.newPassword,
             newPassword_2: this.form.newPasswordRepeat,
           });
-          console.log("fgasgf")
+          console.log("fgasgf");
           this.$emit("clicked", "update");
           (this.dialog = false),
             this.$snackbar.showMessage({
