@@ -17,7 +17,7 @@ CALL get_max_values();
  -- CALL get_service_providers (1, NULL, NULL, NULL,10, 0) ;
  -- DELETE FROM pi.user WHERE idUser = 207; 
  CALL get_sp_category_info(62);
- CALL get_sp_horarios(61);
+ CALL get_sp_horarios(60);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',2,'2022-03-18 10:27:16',17,51);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',3,'2022-03-18 10:27:16',17,52);
 -- INSERT INTO Review(idReview,description,rating,postDate,idGive,idReceive)VALUES(0,'Teste.',4,'2022-03-18 10:27:16',17,52);
@@ -48,12 +48,9 @@ CALL createMessage ( 'mensagem41',1,105);
 CALL createMessage ( 'mensagem51',1,105);
 CALL createMessage ( 'mensagem61',1,105);
 
-CALL add_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
+CALL add_slot(59,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
         
-
-CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","occupied": "0","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
-CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00","idCategory": "1","date_requested": "2022-01-02 22:15:47"}');
-CALL add_workSchedule_slot(51,'{"id": "69","date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00","idCategory": "1"}');
+CALL add_workSchedule_slot(59,'{"date_end": "2022-01-03 11:00:00","date_begin": "2022-01-03 08:30:00"}');
 
 CALL remove_workSchedule_slot(51,'{
         "date_end": "2022-01-09 12:30:00",
@@ -65,7 +62,7 @@ CALL remove_workSchedule_slot(51,'{
         "date_begin": "2022-01-09 15:30:00"
     }');
     
-CALL remove_slot(51, '{
+CALL remove_slot(60, '{
         "id": "39",
         "date_end": "2022-01-03 11:30:00",
         "occupied": "1",

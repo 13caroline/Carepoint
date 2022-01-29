@@ -39,13 +39,11 @@ const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
     },
     workSchedule : {
         type: dbconfig.Sequelize.JSON,
-        allowNull: false,
-        defaultValue: '[]'
+        allowNull: true
     },
     occupiedSchedule : {
         type: dbconfig.Sequelize.JSON,
-        allowNull: false,
-        defaultValue: '[]'
+        allowNull: true
     }
 }, {
         freezeTableName: true,
