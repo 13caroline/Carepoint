@@ -1,5 +1,6 @@
 USE PI;
 DROP PROCEDURE IF EXISTS teste;
+DROP PROCEDURE IF EXISTS teste2;
 
 
     -- =============================================
@@ -33,6 +34,28 @@ BEGIN
 END &&  
 DELIMITER ;
 
-CALL teste(53);
+DELIMITER &&  
+CREATE PROCEDURE teste2 (IN in_idUser INT)  
+BEGIN  
+	
+    DECLARE os JSON DEFAULT '[]';
 
-CALL info_requested_slots(53);
+    
+    -- get the occupied schedule
+    SET os = (SELECT serviceprovider.occupiedSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser );
+	
+    SET os = IF (os IS NULL, '[]', os);
+    
+	select user.name, j1 from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
+		inner join user ON json_extract(j1, '$.id') = user.idUser
+		where json_extract(j1, '$.occupied') = "0";
+
+	
+END &&  
+DELIMITER ;
+
+-- CALL teste(53);
+CALL teste2(53);
+CALL info_requested_slots_v2(53);
+-- CALL info_requested_slots(53);
