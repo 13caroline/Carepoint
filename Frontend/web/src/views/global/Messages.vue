@@ -4,7 +4,7 @@
     <v-container>
       <v-row no-gutters class="w-100">
         <v-col cols="3">
-          <v-card class="mx-auto h-100" style="height: 98vh">
+          <v-card class="mx-auto"  style="height: 80vh">
             <v-list subheader>
               <v-subheader>Prestadores de Serviços</v-subheader>
                   <v-list-item-group
@@ -50,7 +50,7 @@
         </v-col>
 
         <v-col cols="9">
-          <v-card class="mx-auto h-100" style="height: 98vh">
+          <v-card class="mx-auto " style="height: 80vh">
             <v-row justify="end">
               <v-col>
                 <v-list disabled rounded>
@@ -90,7 +90,7 @@
               append-outer-icon="mdi-send"
               @click:append-outer="send(activeUser)"
               v-model="messageNew.text"
-              class="mx-5"
+              class="textArea mx-5 mb-5"
               label="Mensagem"
               rows="1"
               outlined
@@ -219,5 +219,13 @@ export default {
 .v-chip{
   height: auto; 
   white-space: normal;
+}
+
+.textArea{
+  width: 95%;
+  height: 50px;
+  position: absolute;
+  bottom: 0; left: 0;
+  resize: none;
 }
 </style>

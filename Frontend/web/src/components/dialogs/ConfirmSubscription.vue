@@ -42,12 +42,13 @@
             <span class="text-uppercase">Utilizador</span>
           </v-col>
           <v-col class="pl-0 pb-0" cols="7">
-            <span class="black--text" v-if="$store.state.tipo === '3'">
-              <strong>Prestador de Serviços Individual</strong>
-            </span>
             <span class="black--text" v-if="$store.state.tipo === '4'">
               <strong>Prestador de Serviços Coletivo</strong>
             </span>
+            <span class="black--text" v-else>
+              <strong>Prestador de Serviços Individual</strong>
+            </span>
+            
           </v-col>
 
           <v-col class="pb-0" align="right" cols="5">
