@@ -1834,10 +1834,10 @@ BEGIN
 	
     SET os = IF (os IS NULL, '[]', os);
     
-	select json_extract(j1, '$.id') AS id, user.name, json_extract(j1, '$.date_begin') AS date_begin, json_extract(j1, '$.date_end') AS date_end, 
+	select CAST(json_extract(j1, '$.id') AS UNSIGNED) AS id, user.name, json_extract(j1, '$.date_begin') AS date_begin, json_extract(j1, '$.date_end') AS date_end, 
 		json_extract(j1, '$.idCategory') AS categories, json_extract(j1, '$.date_requested') AS date_requested from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
-		inner join user ON json_extract(j1, '$.id') = user.idUser
-		where json_extract(j1, '$.occupied') = "0";
+		inner join user ON CAST(json_extract(j1, '$.id') AS UNSIGNED) = user.idUser
+		where CAST(json_extract(j1, '$.occupied') AS UNSIGNED) = 0;
 
 	
 END &&  

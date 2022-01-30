@@ -35,4 +35,4 @@ DELIMITER ;
 
 CALL teste(53);
 
-CALL info_requested_slots(59);
+CALL info_requested_slots(53);
