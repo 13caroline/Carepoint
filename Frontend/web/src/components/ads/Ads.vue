@@ -184,7 +184,7 @@ export default {
       }
     },
 
-    searchForm(form) {
+    searchForm: async function(form) {
       try {
         this.ads = [];
         let url = "";

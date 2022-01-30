@@ -96,8 +96,8 @@
                         format="24hr"
                         v-model="hora"
                         full-width
-                        :min="hora"
-                        :max="hora2"
+                        :min="date_begin"
+                        :max="date_end"
                         :allowed-minutes="allowedStep"
                         color="#78C4D4"
                       ></v-time-picker>
@@ -132,8 +132,8 @@
                         format="24hr"
                         v-model="hora2"
                         full-width
-                        :min="hora"
-                        :max="hora2"
+                        :min="date_begin"
+                        :max="date_end"
                         :allowed-minutes="allowedStep"
                         color="#78C4D4"
                       ></v-time-picker>
@@ -189,6 +189,8 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     day: "",
+    date_begin: "", 
+    date_end: ""
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -198,8 +200,8 @@ export default {
     showEvent({ nativeEvent, event }) {
       const open = () => {
         this.day = moment(event.start).format("YYYY-MM-DD");
-        this.hora = moment(event.start).format("HH:mm");
-        this.hora2 = moment(event.end).format("HH:mm")
+        this.date_begin = moment(event.start).format("HH:mm");
+        this.date_end = moment(event.end).format("HH:mm")
         this.selectedEvent = event;
         this.selectedElement = nativeEvent.target;
         requestAnimationFrame(() =>
