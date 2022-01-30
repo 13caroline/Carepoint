@@ -53,13 +53,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Kazama Iroha",
+									"value": "Kazama Iroha 02",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_04@gmail.com",
+									"value": "theUserTestingEmail_02@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_04@gmail.com",
+									"value": "serviceProvider_01@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1825,7 +1825,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzE0NTM2MCwiZXhwIjoxNjQzMTg4NTYwfQ.oilXcGaOj8LO9_rpAI4MU3F6ZMgLEQ88Pk12S_nuyBE",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNTYzNzU0LCJleHAiOjE2NDM2MDY5NTR9.-W9deb8ejVidSj3Ml3v1FY3A0406eaS-tZp425G6yk0",
 											"type": "default"
 										}
 									]
@@ -2380,7 +2380,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzEyNTUxNSwiZXhwIjoxNjQzMTI5MTE1fQ.92dVqOpIlLC1Zwf9vMm4FFwP2oscSvUkHqAaRr3GHDs",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDJAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzU2Mzg0NiwiZXhwIjoxNjQzNjA3MDQ2fQ.V1AXGGcxVO2jEHmDosS9sm53Uuu1ImEoC9pSDesUEts",
 											"type": "text"
 										},
 										{
@@ -2395,7 +2395,7 @@
 										},
 										{
 											"key": "spId",
-											"value": "52",
+											"value": "201",
 											"type": "text"
 										},
 										{
@@ -2435,17 +2435,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMTFAZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0MzA1MDMyMCwiZXhwIjoxNjQzMDUzOTIwfQ.9JXC_nDnNpYlylP45ME8AOm4PA2mxaaGuNBdOObkVHI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNDY4NTIyLCJleHAiOjE2NDM1MTE3MjJ9.CBr4GYM6EjDrOHpc8a8_L3LqHng1YJvbhB90iHddyZk",
 											"type": "text"
 										},
 										{
 											"key": "dateBegin",
-											"value": "2022-01-06 17:30:00",
+											"value": "2022-01-04 08:00",
 											"type": "text"
 										},
 										{
 											"key": "dateEnd",
-											"value": "2022-01-06 18:00:00",
+											"value": "2022-01-04 09:00",
 											"type": "text"
 										}
 									]
@@ -2530,6 +2530,36 @@
 									"path": [
 										"serviceProvider",
 										"remSlot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Requested Slots (R)",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNTYzNzU0LCJleHAiOjE2NDM2MDY5NTR9.-W9deb8ejVidSj3Ml3v1FY3A0406eaS-tZp425G6yk0",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/requests",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"requests"
 									]
 								}
 							},
