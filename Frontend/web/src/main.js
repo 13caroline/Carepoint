@@ -6,6 +6,7 @@ import store from './store'
 import snackbarPlugin from './plugins/snackbar';
 import '@fortawesome/fontawesome-free/css/all.css'
 import Chat from 'vue-beautiful-chat'
+Vue.use(Chat)
 
 
 Vue.config.productionTip = false

@@ -67,6 +67,15 @@ router.post('/', function(req, res) {
         .catch(e => res.status(400).jsonp({ error: e }))
 });
 
+router.post('/requests', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.getRequestedSlots(usr.idUser)
+        .then((slots) => res.status(200).jsonp({slots: slots}))
+        .catch((err) => {res.status(400).jsonp({ error : err })})
+    })
+})
 
 /****************************************************************************************
  *                                   PUT
@@ -132,6 +141,7 @@ router.put('/remSlot', auth.validToken, (req, res) => {
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })
 })
+
 // Update an ServiceProvider
 router.put('/:id', function(req, res, next) {
     ServiceProvider.update(req.params.id, req.body)

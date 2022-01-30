@@ -19,7 +19,7 @@
               height="225"
             >
               <v-card-text class="white--text">
-                <p class="text-center">{{ n.text }} </p>
+                <p v-bind:class="n.paddding">{{ n.text }} </p>
               </v-card-text>
             </v-card>
           </v-col>
@@ -37,14 +37,17 @@ export default {
       {
         text: "Queremos ajudá-lo a ajudar, por isso, comprometemo-nos a divulgar e a promover as suas competências numa das maiores plataformas digitais de assistência a idosos.",
         align: "start",
+        paddding: "text-center mt-6 mt-sm-6 mt-md-6 mt-lg-6 mt-xl-5",
       },
       {
         text: "A nossa plataforma digital oferece-lhe um palco de divulgação nacional, onde pode transformar a sua carreiga e a sua marca.",
         align: "center",
+        paddding: "text-center mt-9 mt-sm-9 mt-md-9 mt-lg-9 mt-xl-5",
       },
       {
         text: "Para que possa escolher o cuidador com que mais se identifica, reunimos uma vasta rede de prestadores e cuidadores que pode filtrar de acordo com os critérios que mais lhe aprouver.",
         align: "end",
+        paddding: "text-center mt-5 mt-sm-4 mt-md-5 mt-lg-5 mt-xl-5",
       },
     ],
   }),
