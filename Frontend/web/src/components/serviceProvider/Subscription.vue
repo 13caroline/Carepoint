@@ -20,7 +20,7 @@
               color="#78C4D4"
               outlined
               dark
-              to="/edit/profile"
+              @click="cancelSubscription()"
             >
               Cancelar subscrição
               <v-icon small class="ml-2">fas fa-times</v-icon>
@@ -136,8 +136,28 @@ import store from "@/store/index.js";
           if(this.user.subDuration)
             return this.user.subDuration[6];
           return 0;
+        },
+            cancelSubscription: async function(){
+       try {
+       await axios.delete(
+        "http://localhost:9040/subscription/terminate",
+        {
+          token: store.getters.token,
         }
+      );
+      this.$router.push("/register/subscription/"+this.store.tipo)
+    
+    } catch (e) {
+      this.$snackbar.showMessage({
+        show: true,
+        color: "error",
+        text: "Ocorreu um erro. Por favor tente mais tarde!",
+        timeout: 4000,
+      });
+    }
     },
+    },
+
     created: async function () {
     try {
       let response = await axios.post(
