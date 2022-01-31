@@ -166,13 +166,12 @@ export default {
     getData: async function (search) {
       try {
         let url = "http://localhost:9040/search/serviceProviders?page=";
-
+      
         let response = await axios.get(url + search);
+        console.log(response.data.ServiceProviders)
         if (response) {
-          this.ads = response.data.ServiceProviders;
+          this.ads = Object.assign([],response.data.ServiceProviders);
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
-
-          console.log(this.ads);
         }
       } catch (e) {
         this.$snackbar.showMessage({
@@ -182,11 +181,12 @@ export default {
           timeout: 4000,
         });
       }
+      console.log(this.ads)
     },
 
     searchForm: async function(form) {
       try {
-        this.ads = [];
+       // this.ads = [];
         let url = "";
 
         if (form) {
@@ -201,7 +201,7 @@ export default {
             (form.sex ? "&sex=".concat(form.sex) : "");
         } else url = url + this.page;
 
-        this.getData(url);
+        await this.getData(url);
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -210,6 +210,7 @@ export default {
           timeout: 4000,
         });
       }
+      console.log(this.ads);
     },
   },
   computed: {
@@ -219,7 +220,7 @@ export default {
   },
 
   created: async function () {
-    this.getData(this.page);
+    await this.getData(this.page);
   },
 };
 </script>
