@@ -216,6 +216,23 @@ router.put('/:id', function(req, res, next) {
  ****************************************************************************************/
 
 
+router.delete('/terminate', auth.validToken, (req, res) => {
+    var email = auth.getEmailFromJWT(req.body.token)
+    var type = auth.getTypeFromJWT(req.body.token)
+    user_controller.consult(email)
+    .then((usr) => {
+        var id = usr.idUser;
+        if(type==3){
+            Subscription_controller.terminateSubSP(id)
+            .then((upd) => res.status(200).jsonp({message: "success"}))
+            .catch((err) => res.status(400).jsonp({error: err}))
+        }else{
+            Subscription_controller.terminateSubSP(id)
+            .then((upd) => res.status(200).jsonp({message: "success"}))
+            .catch((err) => res.status(400).jsonp({error: err}))
+        }
+    })
+})
 // Delete a subscription given is id address
 router.delete('/:id', function(req, res, next) {
     Subscription_controller.remove(req.params.id)

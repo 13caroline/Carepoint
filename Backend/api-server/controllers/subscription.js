@@ -2,6 +2,8 @@
 
 const dbconfig = require('../models/Config/Database_Info')
 const Subscription = require('../models/subscription')
+const ServiceProvider = require('../models/serviceProvider')
+const Company = require('../models/company')
 
 var Out = module.exports;
 
@@ -90,4 +92,22 @@ Out.activateSubscriptionVisibility_CP = (idUser, visibility) => {
             idSP: idUser,
             tipo: visibility,
         }});
+}
+
+Out.terminateSubSP = (id) => {
+    return ServiceProvider.update(
+        {idSubscription: 1,
+         endSub: null,
+         endSubVip: null},
+        {where: { 'idSP' : id}}
+    )
+}
+
+Out.terminateSubCP = (id) => {
+    return Company.update(
+        {idSubscription: 1,
+         endSub: null,
+         endSubVip: null},
+        {where: { 'idSP' : id}}
+    )
 }
