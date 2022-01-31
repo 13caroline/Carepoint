@@ -1252,7 +1252,7 @@
 						{
 							"name": "Cancel Subscription (R)",
 							"request": {
-								"method": "DELETE",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "urlencoded",
