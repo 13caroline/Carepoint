@@ -44,6 +44,10 @@ const ServiceProvider = dbconfig.sequelize.define('ServiceProvider', {
     occupiedSchedule : {
         type: dbconfig.Sequelize.JSON,
         allowNull: true
+    },
+    solidarity : {
+        type: dbconfig.Sequelize.BOOLEAN,
+        allowNull: false
     }
 }, {
         freezeTableName: true,

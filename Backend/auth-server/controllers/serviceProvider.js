@@ -15,6 +15,7 @@ Out.adicionarSP = (body, id) => {
         averageRating: 0,
         workSchedule: '[]',
         occupiedSchedule: '[]',
+        solidarity: 0
     })
 }
 

@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_01@gmail.com",
+									"value": "serviceProvider_04@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -202,6 +202,11 @@
 								{
 									"key": "experience",
 									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "solidarity",
+									"value": "0",
 									"type": "text"
 								}
 							]
@@ -1214,7 +1219,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzMzI1MzA0LCJleHAiOjE2NDMzNjg1MDR9.v4CJkv7IY6EYEYoUf4Y-LTF8YgC7_kYXkG9GA0Chs6s",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNjU3NzgxLCJleHAiOjE2NDM3MDA5ODF9.5fPbdy28rCB58vFMY7a_1kFvnJXkmvQbVNgTYaljcuw",
 											"type": "text"
 										},
 										{
@@ -1239,6 +1244,36 @@
 									"path": [
 										"subscription",
 										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Subscription (R)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNjU3NzgxLCJleHAiOjE2NDM3MDA5ODF9.5fPbdy28rCB58vFMY7a_1kFvnJXkmvQbVNgTYaljcuw",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/subscription/terminate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"subscription",
+										"terminate"
 									]
 								}
 							},
