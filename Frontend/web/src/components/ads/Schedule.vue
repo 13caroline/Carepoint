@@ -11,7 +11,7 @@
           type="week"
           :weekdays="weekday"
           locale="PT"
-          event-color="#78C4D4"
+          :event-color="getEventColor"
           @click:event="showEvent"
         >
           <template v-slot:day-label-header="{}">-</template>
@@ -196,6 +196,10 @@ export default {
     this.$refs.calendar.scrollToTime("08:00");
   },
   methods: {
+    getEventColor(event) {
+      if (event.occupied == 0) return "#78C4D4";
+      else return "#BDBDBD";
+    },
     allowedStep: (m) => m % 30 === 0,
     showEvent({ nativeEvent, event }) {
       const open = () => {
@@ -221,8 +225,6 @@ export default {
         let data1 = this.day + " " + this.hora;
         let data2 = this.day + " " + this.hora2;
         try {
-          console.log(data1);
-          console.log(data2);
           await axios.put("http://localhost:9040/serviceProvider/newSlot", {
             token: store.getters.token,
             dateBegin: data1,
@@ -272,7 +274,7 @@ export default {
       if (response.data.categories[0].workSchedule !== null) {
         workSchedule = response.data.categories[0].workSchedule;
 
-        for (var i = 1; i < workSchedule.length; i++) {
+        for (var i = 0; i < workSchedule.length; i++) {
           this.events.push({
             start: workSchedule[i].date_begin,
             end: workSchedule[i].date_end,
@@ -282,7 +284,7 @@ export default {
 
         if (response.data.categories[0].occupiedSchedule !== null) {
           occupiedSchedule = response.data.categories[0].occupiedSchedule;
-          for (var k = 1; k < occupiedSchedule.length; k++) {
+          for (var k = 0; k < occupiedSchedule.length; k++) {
             this.events.push({
               start: occupiedSchedule[k].date_begin,
               end: occupiedSchedule[k].date_end,

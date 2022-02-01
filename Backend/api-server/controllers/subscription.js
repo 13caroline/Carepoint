@@ -106,7 +106,7 @@ Out.terminateSubSP = (id) => {
 
 Out.activateFreeTrial = (id) => {
     var date = new Date();
-    date.setDate(date.getDate() + 20);
+    date.setDate(date.getDate() + 14);
     return User.update(
         {freeTrial: date},
         {where: {'idUser': id}}

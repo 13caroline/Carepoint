@@ -42,10 +42,10 @@
                 <v-text-field
                   outlined
                   required
-                  olor="#78c4d4"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="show1 = !show1"
-                  :type="show1 ? 'text' : 'password'"
+                  color="#78c4d4"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show2 = !show2"
+                  :type="show2 ? 'text' : 'password'"
                   :rules="passwordRules"
                   dense
                   v-model="form.newPassword"
@@ -56,10 +56,10 @@
                 <v-text-field
                   outlined
                   required
-                  olor="#78c4d4"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="show1 = !show1"
-                  :type="show1 ? 'text' : 'password'"
+                  color="#78c4d4"
+                  :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show3 = !show3"
+                  :type="show3 ? 'text' : 'password'"
                   :rules="[
                     form.newPassword === form.newPasswordRepeat ||
                       'As palavra-passes devem corresponder.',
@@ -114,6 +114,8 @@ export default {
   props: ["id"],
   data: () => ({
     show1: false,
+    show2: false, 
+    show3: false,
     passwordRules: [
       (v) => !!v || "Palavra-passe inválida",
       (v) => /(?=.*[A-Z])/.test(v) || "Deve ter uma letra maiúscula",

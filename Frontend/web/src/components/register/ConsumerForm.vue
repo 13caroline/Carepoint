@@ -78,9 +78,9 @@
                       'As palavra-passes devem corresponder.',
                   ]"
                   color="#78C4D4"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="show1 = !show1"
-                  :type="show1 ? 'text' : 'password'"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show2 = !show2"
+                  :type="show2 ? 'text' : 'password'"
                   required
                 />
               </v-col>
@@ -187,6 +187,7 @@ export default {
   data() {
     return {
       show1: false,
+      show2: false,
       termos: false,
       dialogs: {},
       valid: false,
