@@ -6,7 +6,7 @@
           <v-img
             :src="processImage(serviceProviderData.image)"
             aspect-ratio="1"
-            class="grey lighten-2 rounded"
+            class="white rounded"
             cover
           >
             <template v-slot:placeholder>
@@ -22,9 +22,6 @@
       </v-col>
 
       <v-col xs="9" md="6" sm="6" class="">
-        <div>
-          <Chat />
-        </div>
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -303,7 +300,6 @@ export default {
     Schedule: () => import("@/components/ads/Schedule"),
     AddReview: () => import("@/components/dialogs/AddReview"),
     SendMessage: () => import("@/components/dialogs/SendMessage"),
-    Chat: ()=> import("@/components/global/Chat")
   },
   computed: {
     numberOfPages() {
