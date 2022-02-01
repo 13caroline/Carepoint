@@ -267,22 +267,22 @@
               </v-col>
             </v-row>
 
-            <span class="ma-0 caption">* Campos obrigatórios</span>
+            <span class="caption">* Campos obrigatórios</span>
 
             <v-checkbox
-            false-value="0"
-            true-value="1"
+              false-value="0"
+              true-value="1"
               required
-              class="my-checkbox"
+              class="my-checkbox pa-0 ma-0"
               color="#78c4d4"
               v-model="solidariedade"
               label="Aderir ao banco de horas"
             >
             </v-checkbox>
-            {{solidariedade}}
+
             <v-checkbox
               required
-              class="my-checkbox"
+              class="my-checkbox pa-0 ma-0"
               color="#78c4d4"
               v-model="termos"
               id="terms"
@@ -398,7 +398,7 @@ export default {
             distance: this.form.distance,
             qualifications: this.form.qualifications,
             categorias: this.form.categories,
-            experience: this.form.experience, 
+            experience: this.form.experience,
             solidarity: this.solidariedade,
           });
           if (res.data.token != undefined) {
