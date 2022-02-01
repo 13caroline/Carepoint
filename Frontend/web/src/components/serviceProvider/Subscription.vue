@@ -139,13 +139,15 @@ import store from "@/store/index.js";
         },
             cancelSubscription: async function(){
        try {
-       await axios.delete(
+         console.log("Hello?")
+      let response =  await axios.post(
         "http://localhost:9040/subscription/terminate",
         {
           token: store.getters.token,
         }
       );
-      this.$router.push("/register/subscription/"+this.store.tipo)
+      console.log(response)
+      this.$router.push("/register/subscription/"+store.getters.tipo)
     
     } catch (e) {
       this.$snackbar.showMessage({
