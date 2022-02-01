@@ -486,7 +486,7 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
 	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
-	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 AND serviceprovider.averageRating >= rating AND category_has_serviceprovider.experience >= experience
+	WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL) AND serviceprovider.averageRating >= rating AND category_has_serviceprovider.experience >= experience
         AND CASE WHEN id_category IS NOT NULL AND id_location IS NOT NULL AND in_sex IS NOT NULL AND price IS NOT NULL
 					THEN user.idLocation = id_location AND category_has_serviceprovider.idCategory = id_category 
 						AND (category_has_serviceprovider.price <= price OR category_has_serviceprovider.price IS NULL) AND (user.sex = in_sex OR user.sex = 'I')
@@ -546,7 +546,7 @@ BEGIN
     INNER JOIN company ON user.idUser = company.idCompany 
     INNER JOIN PI.add ON user.idUser = PI.add.idCompany
     INNER JOIN location ON user.idLocation = location.idLocation
-    INNER JOIN file ON user.idUser = file.idUser WHERE user.type = 4 AND company.idSubscription != 1 
+    INNER JOIN file ON user.idUser = file.idUser WHERE user.type = 4 AND (company.idSubscription != 1 OR user.freeTrial IS NOT NULL)
 		AND CASE WHEN id IS NOT NULL
 					THEN user.idLocation = id
 				ELSE 1
@@ -574,7 +574,7 @@ BEGIN
     INNER JOIN company ON user.idUser = company.idCompany 
     INNER JOIN PI.add ON user.idUser = PI.add.idCompany
     INNER JOIN location ON user.idLocation = location.idLocation
-    INNER JOIN file ON user.idUser = file.idUser WHERE user.type = 4 AND company.idSubscription != 1 
+    INNER JOIN file ON user.idUser = file.idUser WHERE user.type = 4 AND (company.idSubscription != 1 OR user.freeTrial IS NOT NULL)
 		AND CASE WHEN id IS NOT NULL
 					THEN user.idLocation = id
 				ELSE 1
@@ -609,7 +609,7 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
 	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
-	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 
+	WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL) 
 		AND CASE WHEN id_category IS NOT NULL
 				THEN category_has_serviceprovider.idCategory = id_category
                 ELSE 1
@@ -664,7 +664,7 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
 	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
-	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 
+	WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL)
 		AND CASE WHEN id_category IS NOT NULL
 				THEN category_has_serviceprovider.idCategory = id_category
                 ELSE 1
@@ -736,7 +736,7 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
 	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
-	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 
+	WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL) 
 		AND CASE WHEN id_location IS NOT NULL
 				THEN user.idLocation = id_location
                 ELSE 1
@@ -1639,7 +1639,7 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
 	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
-	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+	WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL) AND user.name LIKE Concat('%',in_name,'%')
 	GROUP BY user.idUser
     ORDER BY serviceprovider.endSubVip DESC LIMIT limite OFFSET inicio;
 
@@ -1665,7 +1665,7 @@ BEGIN
     INNER JOIN PI.add ON user.idUser = PI.add.idCompany
     INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN file ON user.idUser = file.idUser 
-    WHERE user.type = 4 AND company.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+    WHERE user.type = 4 AND (company.idSubscription != 1 OR user.freeTrial IS NOT NULL) AND user.name LIKE Concat('%',in_name,'%')
     ORDER BY company.endSubVip DESC LIMIT limite OFFSET inicio;
 
 END &&
@@ -1686,7 +1686,7 @@ BEGIN
 	SELECT COUNT(*) AS number_sps FROM ( 
 		SELECT user.idUser FROM user
 		INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
-		WHERE user.type = 3 AND serviceprovider.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+		WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL) AND user.name LIKE Concat('%',in_name,'%')
 		GROUP BY user.idUser
     ) AS aux;
 
@@ -1708,7 +1708,7 @@ BEGIN
 	SELECT COUNT(*) AS number_cps FROM ( 
 		SELECT user.idUser FROM user
         INNER JOIN company ON user.idUser = company.idCompany 
-		WHERE user.type = 4 AND company.idSubscription != 1 AND user.name LIKE Concat('%',in_name,'%')
+		WHERE user.type = 4 AND (company.idSubscription != 1 OR user.freeTrial IS NOT NULL) AND user.name LIKE Concat('%',in_name,'%')
 		GROUP BY user.idUser 
 	) AS aux;
 
@@ -1754,7 +1754,7 @@ BEGIN
     INNER JOIN file ON user.idUser = file.idUser
     INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP 
 	INNER JOIN category_has_serviceprovider ON serviceprovider.idSP = category_has_serviceprovider.idServiceProvider 
-	WHERE user.type = 3 AND serviceprovider.idSubscription != 1 
+	WHERE user.type = 3 AND (serviceprovider.idSubscription != 1 OR user.freeTrial IS NOT NULL) 
 		AND CASE WHEN id_location IS NOT NULL
 				THEN user.idLocation = id_location
                 ELSE 1
