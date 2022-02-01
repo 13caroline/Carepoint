@@ -270,6 +270,17 @@
             <span class="ma-0 caption">* Campos obrigatórios</span>
 
             <v-checkbox
+            false-value="0"
+            true-value="1"
+              required
+              class="my-checkbox"
+              color="#78c4d4"
+              v-model="solidariedade"
+              label="Aderir ao banco de horas"
+            >
+            </v-checkbox>
+            {{solidariedade}}
+            <v-checkbox
               required
               class="my-checkbox"
               color="#78c4d4"
@@ -318,6 +329,7 @@ export default {
       menu: false,
       loc: [],
       termos: false,
+      solidariedade: 0,
       dialogs: {},
       valid: false,
       date: new Date().toISOString().substr(0, 10),
@@ -387,6 +399,7 @@ export default {
             qualifications: this.form.qualifications,
             categorias: this.form.categories,
             experience: this.form.experience, 
+            solidarity: this.solidariedade,
           });
           if (res.data.token != undefined) {
             this.$store.commit("guardaTokenUtilizador", res.data.token);

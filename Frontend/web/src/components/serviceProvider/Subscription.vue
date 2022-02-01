@@ -139,7 +139,7 @@ import store from "@/store/index.js";
         },
             cancelSubscription: async function(){
        try {
-       await axios.delete(
+       await axios.post(
         "http://localhost:9040/subscription/terminate",
         {
           token: store.getters.token,
