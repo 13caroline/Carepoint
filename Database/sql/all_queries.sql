@@ -318,7 +318,7 @@ DELIMITER ;
 DELIMITER &&  
 CREATE PROCEDURE get_service_provider_profile_v2 (IN em VARCHAR(90))  
 BEGIN  
-    SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.lastActivity,user.active, serviceprovider.description, serviceprovider.endSub, serviceprovider.endSubVip, 
+    SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.lastActivity, user.active, user.freeTrial, serviceprovider.description, serviceprovider.endSub, serviceprovider.endSubVip, 
 		serviceprovider.averageRating, serviceprovider.dateOfBirth, serviceprovider.distance, serviceprovider.qualifications, location.name as locationName, location.cordsX, location.cordsY, 
         subscription.type as subType, subscription.duration as subDuration, subscription.value as subValue, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
@@ -339,7 +339,7 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE get_company_profile (IN em VARCHAR(90))
 BEGIN
-	SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY,
+	SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, user.freeTrial, location.name as locationName, location.cordsX, location.cordsY,
 		   company.link, company.firm, company.nipc, company.endSub, company.endSubVip, pi.add.description, subscription.type as subType, subscription.duration as subDuration, subscription.value as subValue, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN company ON user.idUser = company.idCompany
@@ -360,7 +360,7 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE get_company_profile_2 (IN id INT)
 BEGIN
-	SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, location.name as locationName, location.cordsX, location.cordsY,
+	SELECT user.idUser, user.name, user.email, user.phoneNumber, user.sex, user.type, user.createdAt, user.lastActivity, user.active, user.freeTrial, location.name as locationName, location.cordsX, location.cordsY,
 		   company.link, company.firm, company.nipc, pi.add.description, file.image FROM user
 	INNER JOIN location ON user.idLocation = location.idLocation
     INNER JOIN company ON user.idUser = company.idCompany

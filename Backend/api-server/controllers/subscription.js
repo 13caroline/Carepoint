@@ -4,6 +4,7 @@ const dbconfig = require('../models/Config/Database_Info')
 const Subscription = require('../models/subscription')
 const ServiceProvider = require('../models/serviceProvider')
 const Company = require('../models/company')
+const User = require('../models/user')
 
 var Out = module.exports;
 
@@ -100,6 +101,15 @@ Out.terminateSubSP = (id) => {
          endSub: null,
          endSubVip: null},
         {where: { 'idSP' : id}}
+    )
+}
+
+Out.activateFreeTrial = (id) => {
+    var date = new Date();
+    date.setDate(date.getDate() + 20);
+    return User.update(
+        {freeTrial: date},
+        {where: {'idUser': id}}
     )
 }
 

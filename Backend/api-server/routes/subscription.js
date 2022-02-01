@@ -166,24 +166,30 @@ router.post('/', (req, res, next) => {
         if(type == 3){
             var normal = getSubscriptionType_SP(normalSub);
             var visibility = getVisibilityType_SP(visiSub);
-
+            
             user_controller.consult(email)
             .then((user) => {
 
-                Subscription_controller.activateSubscriptionNormal_SP(user.idUser, normal)
-                .then((dt) => {
+                if(normal == 1){
+                    Subscription_controller.activateFreeTrial(user.idUser)
+                    .then((dt) => {res.status(200).jsonp({message: "Sucesso na ativação do free trial!"})})
+                    .catch((err) => {res.status(400).jsonp({error: err})})
+                }else{
+                    Subscription_controller.activateSubscriptionNormal_SP(user.idUser, normal)
+                    .then((dt) => {
 
-                    if(visiSub != '0'){
+                        if(visiSub != '0'){
                     
-                        Subscription_controller.activateSubscriptionVisibility_SP(user.idUser, visibility)
-                        .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
-                        .catch((err) => res.status(400).jsonp({error: err}))
+                            Subscription_controller.activateSubscriptionVisibility_SP(user.idUser, visibility)
+                            .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
+                            .catch((err) => res.status(400).jsonp({error: err}))
 
-                    }else{
-                        res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
-                    }
+                        }else{
+                            res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
+                        }
                 })
                 .catch((err1) => res.status(400).jsonp({error: err1}))
+                }
             })
             .catch((erro) => res.status(400).jsonp({error: erro}))
         }else{
@@ -193,20 +199,26 @@ router.post('/', (req, res, next) => {
             user_controller.consult(email)
             .then((user) => {
 
-                Subscription_controller.activateSubscriptionNormal_CP(user.idUser, normal)
-                .then((dt) => {
+                if(normal == 1){
+                    Subscription_controller.activateFreeTrial(user.idUser)
+                    .then((dt) => {res.status(200).jsonp({message: "Sucesso na ativação do free trial!"})})
+                    .catch((err) => {res.status(400).jsonp({error: err})})
+                }else{
+                    Subscription_controller.activateSubscriptionNormal_CP(user.idUser, normal)
+                    .then((dt) => {
 
-                    if(visiSub != '0'){
+                        if(visiSub != '0'){
                     
-                        Subscription_controller.activateSubscriptionVisibility_CP(user.idUser, visibility)
-                        .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
-                        .catch((err) => res.status(400).jsonp({error: err}))
+                            Subscription_controller.activateSubscriptionVisibility_CP(user.idUser, visibility)
+                            .then((dt2) => res.status(200).jsonp({message: "Sucesso na adição da subscrição!"}))
+                            .catch((err) => res.status(400).jsonp({error: err}))
 
-                    }else{
-                        res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
-                    }
+                        }else{
+                            res.status(200).jsonp({message: "Sucesso na adição da subscrição!"})
+                        }
                 })
                 .catch((err1) => res.status(400).jsonp({error: err1}))
+                }
             })
             .catch((erro) => res.status(400).jsonp({error: erro}))
         }
