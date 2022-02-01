@@ -6,7 +6,7 @@
           <v-img
             :src="processImage(serviceProviderData.image)"
             aspect-ratio="1"
-            class="white rounded"
+            class="grey lighten-2 rounded"
             cover
           >
             <template v-slot:placeholder>
