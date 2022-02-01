@@ -1,51 +1,33 @@
 <template>
   <v-data-table
-    :headers="dessertHeaders"
-    :items="desserts"
-    :single-expand="singleExpand"
-    :expanded.sync="expanded"
-    item-key="name"
-    show-expand
+    :headers="adsHeaders"
+    :items="ads"
+    :items-per-page="5"
     class="elevation-1"
   >
-    <template v-slot:top>
-      <v-toolbar flat>
-        <v-toolbar-title>Expandable Table</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-switch
-          v-model="singleExpand"
-          label="Single expand"
-          class="mt-2"
-        ></v-switch>
-      </v-toolbar>
-    </template>
-    <template v-slot:expanded-item="{ headers, item }">
-      <td :colspan="headers.length">
-        More info about {{ item.name }}
-      </td>
-    </template>
   </v-data-table>
 </template>
 
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
   export default {
     data () {
       return {
         expanded: [],
-        singleExpand: false,
-        dessertHeaders: [
+        adsHeaders: [
           {
-            text: 'Dessert (100g serving)',
+            text: 'Data início',
             align: 'start',
             sortable: false,
-            value: 'name',
+            value: 'beginDate',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { text: 'Data fim', value: 'endDate' },
+          { text: 'Categoria', value: 'categoryName' },
+          { text: 'Localização', value: 'locationName' },
+          { text: 'Valor', value: 'price' },
+          { text: 'Estado', value: 'done' },
           { text: '', value: 'data-table-expand' },
         ],
         desserts: [
@@ -132,5 +114,154 @@
         ],
       }
     },
+    methods: {
+      update: async function () {
+      this.ads = [];
+      try {
+        let response = await axios.post("http://localhost:9040/joboffer/own", {
+          token: store.getters.token,
+        });
+        this.ads = response.data;
+        console.log(this.ads)
+        this.total = this.ads.length;
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+    },
+    created: async function () {
+      console.log("fa")
+    this.update();
+  },
   }
 </script>
+
+<!--
+<script>
+
+export default {
+  data() {
+    return {
+      viewType: false,
+      dateBegin: "",
+      dateEnd: "",
+      menu: false,
+      menu2: false,
+      valid: false,
+      dialog: false,
+      dialogData: {},
+      show: false,
+      ads: [],
+      pageCount: 0,
+      page: 1,
+      itemsPerPage: 9,
+      total: 0,
+      cancelar: {
+        text: "a publicação de um anúncio",
+        title: "publicação de um anúncio",
+      },
+    };
+  },
+  components: {
+    Bar: () => import("@/components/global/AppBarAccount.vue"),
+    Foot: () => import("@/components/global/Footer"),
+    Cancel: () => import("@/components/dialogs/Cancel"),
+    Table: () => import("@/components/advertisements/Table"),
+  },
+
+  methods: {
+    openGrid() {
+      this.viewType = false;
+      this.update;
+    },
+    openTable() {
+      this.viewType = true;
+      this.update();
+    },
+    getState(done) {
+      if (done == 1) return "Não ativo";
+      else return "Ativo";
+    },
+    estado(item) {
+      if (item == 0) return "#C5E1A5";
+      else return "#EF9A9A";
+    },
+    nextPage() {
+      if (this.page + 1 <= this.numberOfPages) this.page += 1;
+      this.getData();
+    },
+    formerPage() {
+      if (this.page - 1 >= 1) this.page -= 1;
+      this.getData();
+    },
+    openDialog(a) {
+      this.dialog = true;
+      this.dialogData = a;
+    },
+    close() {
+      this.dialog = false;
+    },
+
+    conclude: async function (id) {
+      try {
+        await axios.put("http://localhost:9040/joboffer/conclude", {
+          token: store.getters.token,
+          id_job_offer: id,
+        });
+        this.update();
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+    postAd: async function () {
+      if (this.$refs.form.validate()) {
+        console.log(this.dialogData);
+        try {
+          await axios.post("http://localhost:9040/joboffer/new", {
+            token: store.getters.token,
+            price: this.dialogData.price,
+            description: "DescTeste",
+            beginDate: this.dateBegin,
+            endDate: this.dateEnd,
+            idCategory: this.dialogData.idCategory,
+            idLocation: this.dialogData.idLocation,
+          });
+          this.dialog = false;
+          this.$snackbar.showMessage({
+            show: true,
+            color: "success",
+            text: "Anúncio publicado",
+            snackbar: true,
+            timeout: 4000,
+          });
+          this.update();
+        } catch (e) {
+          this.$snackbar.showMessage({
+            show: true,
+            color: "error",
+            text: "Ocorreu um erro. Por favor tente mais tarde!",
+            timeout: 4000,
+          });
+        }
+      }
+    },
+  },
+
+  computed: {
+    numberOfPages() {
+      return Math.ceil(this.total / this.itemsPerPage);
+    },
+  },
+};
+</script>
+-->
