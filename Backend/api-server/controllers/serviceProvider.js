@@ -68,9 +68,7 @@ Out.adicionarSP = (body, id) => {
         distance: body.distance,
         qualifications: body.qualifications,
         idSubscription: 1,
-        averageRating: 0,
-        workSchedule: '[]',
-        occupiedSchedule: '[]',
+        averageRating: 0
     })
 }
 
