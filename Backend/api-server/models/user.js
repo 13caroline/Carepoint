@@ -46,6 +46,10 @@ const User = dbconfig.sequelize.define('User', {
     active: {
         type: dbconfig.Sequelize.BOOLEAN,
         allowNull: true
+    },
+    freeTrial: {
+        type: dbconfig.Sequelize.DATE,
+        allowNull: true
     }
 }, {
     freezeTableName: true,
