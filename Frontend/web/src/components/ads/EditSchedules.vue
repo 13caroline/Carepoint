@@ -2,6 +2,9 @@
   <div>
     <v-row justify="end" v-if="$store.state.tipo == 3">
       <v-col cols="auto">
+        <SlotsRequests @clicked="updated"></SlotsRequests>
+      </v-col>
+      <v-col cols="auto">
         <NewSlot @clicked="updated"></NewSlot>
       </v-col>
     </v-row>
@@ -69,11 +72,7 @@
                 <v-col class="pb-0" align="right" cols="5">
                   <span class="text-uppercase">estado</span>
                 </v-col>
-                <v-col class="pl-0 pb-0" cols="7">
-                  <v-chip :color="colors" small>
-                    {{ selectedEvent.state }}
-                  </v-chip>
-                </v-col>
+                <v-col class="pl-0 pb-0" cols="7"> </v-col>
               </v-row>
             </v-card-text>
 
@@ -225,7 +224,7 @@ export default {
         if (response.data.categories) {
           workSchedule = response.data.categories[0].workSchedule;
           if (workSchedule) {
-            for (var i = 1; i < workSchedule.length; i++) {
+            for (var i = 0; i < workSchedule.length; i++) {
               this.events.push({
                 start: workSchedule[i].date_begin,
                 end: workSchedule[i].date_end,
@@ -236,7 +235,7 @@ export default {
 
           occupiedSchedule = response.data.categories[0].occupiedSchedule;
           if (occupiedSchedule) {
-            for (var k = 1; k < occupiedSchedule.length; k++) {
+            for (var k = 0; k < occupiedSchedule.length; k++) {
               this.events.push({
                 start: occupiedSchedule[k].date_begin,
                 end: occupiedSchedule[k].date_end,
@@ -260,22 +259,25 @@ export default {
       let occupiedSchedule = null;
       if (response.data.categories.length) {
         workSchedule = response.data.categories[0].workSchedule;
-
-        for (var i = 1; i < workSchedule.length; i++) {
-          this.events.push({
-            start: workSchedule[i].date_begin,
-            end: workSchedule[i].date_end,
-            occupied: 0,
-          });
+        if (workSchedule) {
+          for (var i = 0; i < workSchedule.length; i++) {
+            this.events.push({
+              start: workSchedule[i].date_begin,
+              end: workSchedule[i].date_end,
+              occupied: 0,
+            });
+          }
         }
 
         occupiedSchedule = response.data.categories[0].occupiedSchedule;
-        for (var k = 0; k < occupiedSchedule.length; k++) {
-          this.events.push({
-            start: occupiedSchedule[k].date_begin,
-            end: occupiedSchedule[k].date_end,
-            occupied: 1,
-          });
+        if (occupiedSchedule) {
+          for (var k = 0; k < occupiedSchedule.length; k++) {
+            this.events.push({
+              start: occupiedSchedule[k].date_begin,
+              end: occupiedSchedule[k].date_end,
+              occupied: 1,
+            });
+          }
         }
       }
     } catch (e) {

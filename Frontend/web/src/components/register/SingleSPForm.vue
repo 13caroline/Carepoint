@@ -78,9 +78,9 @@
                       'As palavra-passes devem corresponder.',
                   ]"
                   color="#78C4D4"
-                  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                  @click:append="show1 = !show1"
-                  :type="show1 ? 'text' : 'password'"
+                  :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                  @click:append="show2 = !show2"
+                  :type="show2 ? 'text' : 'password'"
                   required
                 />
               </v-col>
@@ -273,7 +273,7 @@
               false-value="0"
               true-value="1"
               required
-              class="my-checkbox pa-0 ma-0"
+              class="my-checkbox pa-0 mt-2"
               color="#78c4d4"
               v-model="solidariedade"
               label="Aderir ao banco de horas"
@@ -326,6 +326,7 @@ export default {
   data() {
     return {
       show1: false,
+      show2: false,
       menu: false,
       loc: [],
       termos: false,
