@@ -4,7 +4,7 @@
         <v-row>
           <v-col cols="auto" class="ml-auto">
             <v-btn
-              class="body-2 rounded-xl button"
+              class="body-2 rounded-xl button mr-2"
               small
               color="#78C4D4"
               outlined
@@ -14,8 +14,9 @@
               Renovar subscrição
               <v-icon small class="ml-2">fas fa-sync</v-icon>
             </v-btn>
+            
             <v-btn
-              class="body-2 rounded-xl button ml-2"
+              class="body-2 rounded-xl button"
               small
               color="#78C4D4"
               outlined

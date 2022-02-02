@@ -23,7 +23,7 @@
           :close-on-content-click="false"
           :activator="selectedElement"
           offset-x
-          max-width="500px"
+          width="100%" min-width="85%"
         >
           <v-card flat>
             <v-form ref="form" v-model="valid">

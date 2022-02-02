@@ -11,6 +11,7 @@
             outlined
             dark
             @click="redirect()"
+            width="200px"
           >
             Editar dados
             <v-icon small class="ml-2">fas fa-pen</v-icon>
@@ -66,7 +67,7 @@
                 :src="processImage(user.image)"
                 aspect-ratio="1"
                 :width="115"
-                class="grey lighten-2 my-2 ml-5 rounded"
+                class="grey lighten-2 my-2 ml-sm-13 ml-md-13 ml-lg-13 rounded"
                 cover
               >
                 <template v-slot:placeholder>

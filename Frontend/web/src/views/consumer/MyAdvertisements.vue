@@ -3,35 +3,37 @@
     <Bar />
     <v-container>
       <v-row>
-        <div>
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon
-                class="icon"
-                v-bind="attrs"
-                v-on="on"
-                @click="openGrid()"
-                >fas fa-grip-vertical</v-icon
-              >
-            </template>
+        <v-col cols="auto">
+          <div>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon
+                  class="icon"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="openGrid()"
+                  >fas fa-grip-vertical</v-icon
+                >
+              </template>
 
-            <span>Vista normal</span>
-          </v-tooltip>
+              <span>Vista normal</span>
+            </v-tooltip>
 
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon
-                class="ml-3 icon"
-                v-bind="attrs"
-                v-on="on"
-                @click="openTable()"
-                >fas fa-table</v-icon
-              >
-            </template>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon
+                  class="ml-3 icon"
+                  v-bind="attrs"
+                  v-on="on"
+                  @click="openTable()"
+                  >fas fa-table</v-icon
+                >
+              </template>
 
-            <span>Vista compacta</span>
-          </v-tooltip>
-        </div>
+              <span>Vista compacta</span>
+            </v-tooltip>
+          </div>
+        </v-col>
         <v-col cols="auto" class="ml-auto">
           <v-btn
             class="body-2 rounded-xl button"

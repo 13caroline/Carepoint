@@ -80,12 +80,12 @@
             </v-card>
           </v-col>
           <v-col cols="auto" order="first" order-sm="last">
-            <div class="foto h-100 mt-5">
+            <div class="foto h-100 mt-5 ">
               <v-img
                 :src="processImage(user.image)"
                 aspect-ratio="1"
                 :width="115"                
-                class="grey lighten-2 my-2 ml-5 rounded"
+                class="grey lighten-2 my-2 ml-5 ml-sm-13 ml-md-13 ml-lg-13 rounded"
                 cover
               >
                 <template v-slot:placeholder>
