@@ -67,9 +67,7 @@
                     <span class="font-weight-bold ml-2" v-if="a.endDate">
                       {{ a.endDate }}
                     </span>
-                    <span class="font-weight-bold ml-2" v-else>
-                      ND
-                    </span>
+                    <span class="font-weight-bold ml-2" v-else> ND </span>
                   </v-row>
 
                   <v-row justify="center" class="mx-auto">
@@ -80,11 +78,12 @@
                   </v-row>
 
                   <v-row justify="center" class="mx-auto">
-                 
-                      <v-chip  class="mt-4 pa-2 category" :color="estado(a.category)">
-                            <v-icon small>{{ getIcon(a.category) }}</v-icon>
-                      </v-chip>
-                   
+                    <v-chip
+                      class="mt-4 pa-2 category"
+                      :color="estado(a.category)"
+                    >
+                      <v-icon small>{{ getIcon(a.category) }}</v-icon>
+                    </v-chip>
                   </v-row>
 
                   <v-row justify="center" class="mx-auto">
@@ -97,13 +96,7 @@
                 </v-card-text>
                 <v-card-actions class="justify-center">
                   <div class="contact">
-                  <v-btn
-                    outlined 
-                    small
-                    
-                  >
-                    Entrar em Contacto
-                  </v-btn>
+                    <v-btn outlined small> Entrar em Contacto </v-btn>
                   </div>
                 </v-card-actions>
               </v-card>
@@ -170,12 +163,20 @@ export default {
         {
           name: "Cuidados de higiene e conforto pessoal",
           icon: "fas fa-pump-medical",
-          color:"#95C8D8"
+          color: "#95C8D8",
         },
-        { name: "Cuidados de lazer", icon: "fas fa-book-open", color:"#C5E1A5" },
-        { name: "Cuidados médicos", icon: "fas fa-pills", color:"#F5C3C2" },
-        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils", color:"#EEDC82" },
-        { name: "Higiene habitacional", icon: "fas fa-home", color:"#D7BFDC" },
+        {
+          name: "Cuidados de lazer",
+          icon: "fas fa-book-open",
+          color: "#C5E1A5",
+        },
+        { name: "Cuidados médicos", icon: "fas fa-pills", color: "#F5C3C2" },
+        {
+          name: "Fornecimento e apoio nas refeições",
+          icon: "fas fa-utensils",
+          color: "#EEDC82",
+        },
+        { name: "Higiene habitacional", icon: "fas fa-home", color: "#D7BFDC" },
       ],
     };
   },
@@ -193,7 +194,7 @@ export default {
       var row = this.category.filter((obj) => {
         return obj.name === c;
       });
-    
+
       return Object.values(row[0])[2];
     },
     difDate(dateLA) {
@@ -218,7 +219,9 @@ export default {
     },
     getData: async function () {
       try {
-        let response = await axios.post("http://localhost:9040/joboffer/search",{
+        let response = await axios.post(
+          "http://localhost:9040/joboffer/search",
+          {
             token: store.getters.token,
             page: this.page,
           }
@@ -229,14 +232,17 @@ export default {
           this.total = response.data.Total[0].number_offers;
         }
       } catch (error) {
-        
-          (error.response.data.error == 'A sua subscrição não lhe garante privilegios para visualizar esta pagina.') ? this.message = "A sua subscrição não lhe garante privilégios para visualizar esta página." : this.message = "Ocorreu um erro, por favor tente mais tarde!";
-          this.$snackbar.showMessage({
-            show: true,
-            color: "warning",
-            text: this.message,
-            timeout: 4000,
-          });
+        error.response.data.error ==
+        "A sua subscrição não lhe garante privilegios para visualizar esta pagina."
+          ? (this.message =
+              "A sua subscrição não lhe garante privilégios para visualizar esta página.")
+          : (this.message = "Ocorreu um erro, por favor tente mais tarde!");
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: this.message,
+          timeout: 4000,
+        });
       }
     },
   },
@@ -265,7 +271,7 @@ export default {
   border-radius: 100%;
 }
 
-.category{
+.category {
   height: auto;
   white-space: normal;
 }

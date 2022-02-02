@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-data-table
-    :page.sync="page"
+      :page.sync="page"
       :items-per-page="itemsPerPage"
       hide-default-footer
       @page-count="pageCount = $event"
@@ -22,6 +22,15 @@
           {{ getState(item.done) }}
         </v-chip>
       </template>
+
+       <template v-slot:[`item.categoryName`]="{ item }">
+        <v-chip small :color="getColor(item.categoryName)" class="mr-1">
+          <v-icon x-small>{{ getIcon(item.categoryName) }}</v-icon>
+
+        </v-chip>
+        <span>{{item.categoryName}}</span>
+      </template>
+
       <template v-slot:[`item.actions`]="{ item }">
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">
@@ -209,8 +218,8 @@ export default {
   data() {
     return {
       page: 1,
-    pageCount: 0,
-    itemsPerPage: 10,
+      pageCount: 0,
+      itemsPerPage: 10,
       dialog: false,
       expanded: [],
       dialogData: {},
@@ -239,6 +248,18 @@ export default {
         { text: "Actions", value: "actions", sortable: false },
       ],
       ads: [],
+      category: [
+        { name: "Apoio externo", icon: "fas fa-car-side", color: "#FDA172" },
+        {
+          name: "Cuidados de higiene e conforto pessoal",
+          icon: "fas fa-pump-medical",
+          color:"#95C8D8"
+        },
+        { name: "Cuidados de lazer", icon: "fas fa-book-open", color:"#C5E1A5" },
+        { name: "Cuidados médicos", icon: "fas fa-pills", color:"#F5C3C2" },
+        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils", color:"#EEDC82" },
+        { name: "Higiene habitacional", icon: "fas fa-home", color:"#D7BFDC" },
+      ],
     };
   },
   components: {
@@ -252,6 +273,19 @@ export default {
     getState(done) {
       if (done == 1) return "Não ativo";
       else return "Ativo";
+    },
+    getIcon(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+      return Object.values(row[0])[1];
+    },
+    getColor(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+    
+      return Object.values(row[0])[2];
     },
     update: async function () {
       this.ads = [];

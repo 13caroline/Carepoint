@@ -8,6 +8,7 @@
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-icon
+                  small
                   class="icon"
                   v-bind="attrs"
                   v-on="on"
@@ -22,6 +23,7 @@
             <v-tooltip top>
               <template v-slot:activator="{ on, attrs }">
                 <v-icon
+                  small
                   class="ml-3 icon"
                   v-bind="attrs"
                   v-on="on"
