@@ -81,12 +81,8 @@
 
                   <v-row justify="center" class="mx-auto">
                  
-                      <v-chip class="mt-4" :color="estado(a.category)">
-                        <span class="mr-1 overline">
-                          <strong> {{ a.category}} </strong>
-                        </span>
-
-                        <v-icon small>{{ getIcon(a.category) }}</v-icon>
+                      <v-chip  class="mt-4 pa-2 category" :color="estado(a.category)">
+                            <v-icon small>{{ getIcon(a.category) }}</v-icon>
                       </v-chip>
                    
                   </v-row>
@@ -170,15 +166,16 @@ export default {
       total: 0,
       message: "",
       category: [
-        { name: "Apoio externo", icon: "fas fa-car-side" },
+        { name: "Apoio externo", icon: "fas fa-car-side", color: "#FDA172" },
         {
           name: "Cuidados de higiene e conforto pessoal",
           icon: "fas fa-pump-medical",
+          color:"#95C8D8"
         },
-        { name: "Cuidados de lazer", icon: "fas fa-book-open" },
-        { name: "Cuidados médicos", icon: "fas fa-pills" },
-        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils" },
-        { name: "Higiene habitacional", icon: "fas fa-home" },
+        { name: "Cuidados de lazer", icon: "fas fa-book-open", color:"#C5E1A5" },
+        { name: "Cuidados médicos", icon: "fas fa-pills", color:"#F5C3C2" },
+        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils", color:"#EEDC82" },
+        { name: "Higiene habitacional", icon: "fas fa-home", color:"#D7BFDC" },
       ],
     };
   },
@@ -266,6 +263,11 @@ export default {
 
 .round {
   border-radius: 100%;
+}
+
+.category{
+  height: auto;
+  white-space: normal;
 }
 
 .description {
