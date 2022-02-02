@@ -32,7 +32,14 @@
           {{ categories[0].experience }} anos</v-chip
         >
         <v-chip v-else class="font-weight-bold">{{ noExp }}</v-chip>
+        <div class="mt-2">
+          <span class="solidarity" v-if="serviceProviderData.solidarity == 1">
+            Aderente ao banco de horas
+          </span>
+          <v-icon small color="#AED581" v-if="serviceProviderData.solidarity == 1">fas fa-check-circle</v-icon>
+        </div>
       </v-col>
+      
     </v-row>
 
     <v-row>
@@ -308,6 +315,7 @@ export default {
   },
   created: async function () {
     this.update();
+    
   },
 };
 </script>
@@ -315,6 +323,11 @@ export default {
 <style scoped>
 .infos {
   color: #797878;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.solidarity {
+  color: #78C4D4;
   text-align: justify;
   text-justify: inter-word;
 }

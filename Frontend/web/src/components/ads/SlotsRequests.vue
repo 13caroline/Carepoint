@@ -8,6 +8,8 @@
       :items-per-page="itemsPerPage"
       hide-default-footer
       @page-count="pageCount = $event"
+      no-data-text="Não existem horários requisitados."
+      no-results-text="Não foram encontrados resultados."
     >
       <template v-slot:[`item.j1.date_requested`]="{ item }">
         {{ formatDate(item.j1.date_requested) }}
