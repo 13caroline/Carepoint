@@ -295,6 +295,20 @@
                       </v-col>
                     </v-row>
                   </div>
+                  <div>
+                    <span
+                      class="solidarity"
+                      v-if="user.solidarity == 1"
+                    >
+                      Aderente ao banco de horas
+                    </span>
+                    <v-icon
+                      small
+                      color="#AED581"
+                      v-if="user.solidarity == 1"
+                      >fas fa-check-circle</v-icon
+                    >
+                  </div>
                 </v-list-item-content>
               </v-list-item>
             </v-card>
@@ -395,6 +409,12 @@ export default {
 
 .infos {
   text-align: start;
+}
+
+.solidarity {
+  color: #78C4D4;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .body-2 {

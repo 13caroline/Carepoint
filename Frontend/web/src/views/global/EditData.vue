@@ -24,17 +24,20 @@
                     </div>
 
                     <v-row class="mx-auto" align="center">
-                      <v-col md="10">
-                      <span>Password</span>
-                      <v-text-field
-                        outlined
-                        disabled
-                        dense
-                        placeholder="*******"
-                      ></v-text-field>
+                      <v-col md="9">
+                        <span>Password</span>
+                        <v-text-field
+                          outlined
+                          disabled
+                          dense
+                          placeholder="*******"
+                        ></v-text-field>
                       </v-col>
-                        <v-col>
-                      <change-password :id="user.idUser" @clicked="update()"/>
+                      <v-col md="3">
+                        <change-password
+                          :id="user.idUser"
+                          @clicked="update()"
+                        />
                       </v-col>
                     </v-row>
                   </v-list-item-content>
@@ -71,7 +74,8 @@
                           outlined
                           flat
                           dense
-                          v-model="user.locationName"
+                          v-model="location"
+                          :value="user.locationName"
                           single-line
                           :items="loc"
                           item-value="idLocation"
@@ -178,14 +182,35 @@
                       <div>
                         <v-col>
                           <span>Categorias</span>
-                          <v-text-field
+                          <v-autocomplete
                             outlined
+                            flat
                             dense
-                            color="#2596be"
-                            :rules="[(v) => !!v || 'Campo inválido']"
-                            v-model="user.qualifications"
-                          ></v-text-field>
+                            v-model="categories"
+                            :items="cat"
+                            item-value="idCategory"
+                            item-text="name"
+                            color="#78C4D4"
+                            name="categories"
+                            required
+                            chips
+                            small-chips
+                            multiple
+                          />
                         </v-col>
+                      </div>
+
+                      <div>
+                        <v-checkbox
+                          false-value="0"
+                          true-value="1"
+                          required
+                          class="my-checkbox pa-0 mt-2"
+                          color="#78c4d4"
+                          v-model="user.solidarity"
+                          label="Aderir ao banco de horas"
+                        >
+                        </v-checkbox>
                       </div>
                     </v-list-item-content>
                   </v-list-item>
@@ -223,6 +248,9 @@ export default {
     dialogPass: false,
     user: {},
     loc: [],
+    cat: [],
+    categories: [],
+    location: "",
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;
@@ -253,7 +281,7 @@ export default {
     },
   }),
   methods: {
-    openDialog(){
+    openDialog() {
       this.dialogPass = true;
     },
     close() {
@@ -272,29 +300,35 @@ export default {
         btoa(String.fromCharCode.apply(null, new Uint8Array(img)))
       );
     },
-    update: async function(){
+    update: async function () {
       try {
-      let response = await axios.post("http://localhost:9040/users/perfil", {
-        token: store.getters.token,
-      });
-      this.user = response.data.perfil[0];  
-      console.log(response)
-      if (this.user.sex == "M") this.user.sex = "Masculino";
-      else if (this.user.sex == "F") this.user.sex = "Feminino";
-      else this.user.sex = "Indefinido";
+        let response = await axios.post("http://localhost:9040/users/perfil", {
+          token: store.getters.token,
+        });
+        this.user = response.data.perfil[0];
 
-      let response2 = await axios.get("http://localhost:9040/location");
-      if (response2) {
-        this.loc = response2.data;
+        if (this.user.sex == "M") this.user.sex = "Masculino";
+        else if (this.user.sex == "F") this.user.sex = "Feminino";
+        else this.user.sex = "Indefinido";
+
+        let response2 = await axios.get("http://localhost:9040/location");
+        if (response2) {
+          this.loc = response2.data;
+        }
+
+      let response3 = await axios.get("http://localhost:9040/category");
+      if (response3) {
+        this.cat = response3.data;
       }
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
+
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
     },
     confirm: async function () {
       if (this.$refs.form.validate()) {
@@ -316,7 +350,7 @@ export default {
               name: this.user.name,
               email: this.user.email,
               type: store.getters.tipo.toString(),
-              location: 1,
+              location: this.location,
               phoneNumber: this.user.phoneNumber,
               idUser: this.user.idUser,
               distance: this.user.distance,
@@ -355,7 +389,7 @@ export default {
     Cancel: () => import("@/components/dialogs/Cancel"),
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
-    ChangePassword: () => import("@/components/dialogs/ChangePassword")
+    ChangePassword: () => import("@/components/dialogs/ChangePassword"),
   },
   created: async function () {
     this.update();

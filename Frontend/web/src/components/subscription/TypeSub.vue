@@ -2,8 +2,7 @@
   <v-container>
     <v-item-group>
       <v-row justify="center">
-        <v-col cols="auto"
-          class="mx-auto mx-sm-0">
+        <v-col cols="auto" class="mx-auto mx-sm-0">
           <v-card
             class="card rounded-xl overflow-auto"
             outlined
@@ -14,7 +13,7 @@
           >
             <v-card-title class="ma-5">
               <v-row justify="center">
-                {{exp.name}}
+                {{ exp.name }}
               </v-row>
             </v-card-title>
 
@@ -98,7 +97,7 @@
           color="#78c4d4"
           class="rounded-lg mr-4"
           depressed
-          outlined 
+          outlined
           @click="back()"
         >
           Retroceder
@@ -111,34 +110,38 @@
 
 <script>
 export default {
-  components: { Visibility: () => import("@/components/dialogs/Visibility"),
-  },
+  components: { Visibility: () => import("@/components/dialogs/Visibility") },
   name: "Ads",
   props: ["id", "dados"],
   data() {
     return {
-      subscriptionType: { subscription: 5, type: this.id, price: 0, updated: 0 },
+      subscriptionType: {
+        subscription: 5,
+        type: this.id,
+        price: 0,
+        updated: 0,
+      },
       styleObject: { border: "1px solid #78C4D4" },
-      exp :  {
-          id: 0,
-          name: "Período Experimental",
-          pros: [
-            { title: "Publicar anúncios", icon: "check", color: "#AED581" },
-            { title: "Adicionar agenda", icon: "check", color: "#AED581" },
-            {
-              title: "Visualizar pedidos de consumidores",
-              icon: "times",
-              color: "#EF9A9A",
-            },
-            {
-              title: "1 mês de visibilidade gratuito",
-              icon: "times",
-              color: "#EF9A9A",
-            },
-          ],
-          priceS: "0.00",
-          priceC: "0.00"
-        },
+      exp: {
+        id: 0,
+        name: "Período Experimental",
+        pros: [
+          { title: "Publicar anúncios", icon: "times", color: "#EF9A9A" },
+          { title: "Adicionar agenda", icon: "times", color: "#EF9A9A" },
+          {
+            title: "Visualizar pedidos de consumidores",
+            icon: "times",
+            color: "#EF9A9A",
+          },
+          {
+            title: "1 mês de visibilidade gratuito",
+            icon: "times",
+            color: "#EF9A9A",
+          },
+        ],
+        priceS: "0.00",
+        priceC: "0.00",
+      },
       sub: [
         {
           id: 1,
@@ -207,9 +210,9 @@ export default {
   methods: {
     subscribe(s) {
       this.subscriptionType.subscription = s.id;
-      (this.id == 3) 
-      ? this.subscriptionType.price = s.priceS
-      : this.subscriptionType.price = s.priceC;
+      this.id == 3
+        ? (this.subscriptionType.price = s.priceS)
+        : (this.subscriptionType.price = s.priceC);
     },
     back() {
       this.$router.back();
