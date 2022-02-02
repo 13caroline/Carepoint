@@ -3,6 +3,7 @@
 const Category = require('../models/category');
 const dbconfig = require('../models/Config/Database_Info');
 const ServiceProvider = require('../models/serviceProvider')
+const Cat_has_SP = require('../models/category_has_serviceProvider')
 
 
 var Out = module.exports;
@@ -76,10 +77,35 @@ Out.addCategorias = (arr, id, experience) => {
     var cat_ids = (typeof arr === 'undefined') ? [] : arr;
     var query = "";
     for (let i = 0; i < cat_ids.length; i++) {
-        query += ('CALL insert_categorias ('+id+','+cat_ids[i]+','+experience+'); ')
+        query += ('CALL insert_categorias ('+id+','+cat_ids[i]+','+experience+',0'+'); ')
     }
 
     return dbconfig.sequelize.query(query);
+}
+
+Out.addCategoria = (id, cat, experience, price) => {
+    return dbconfig.sequelize.query('CALL insert_categorias (:id, :cat, :exp, :prc)',
+        {replacements : {
+            id: id,
+            cat: cat, 
+            exp: experience,
+            prc: price
+        }})
+}
+
+Out.remCategoria = (id, cat) => {
+    return dbconfig.sequelize.query('CALL remove_categoria (:id, :cat)',
+        {replacements : {
+            id: id,
+            cat: cat
+        }})
+}
+
+Out.updateCategoria = (id, cat, price) => {
+    return Cat_has_SP.update(
+        {price: price},
+        {where: { 'idCategory' : cat, 'idServiceProvider': id}}
+    )
 }
 
 //Creates a new ServiceProvider

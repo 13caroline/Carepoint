@@ -18,12 +18,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_01@gmail.com",
+									"value": "serviceProvider_08@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "123456789",
+									"value": "6666",
 									"type": "text"
 								}
 							]
@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_08@gmail.com",
+									"value": "serviceProvider_11@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1505,7 +1505,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvbXBhbnlfZW1haV8wMUBnbWFpbC5jb20iLCJsZXZlbCI6NCwiaWF0IjoxNjQzMzA5NjU1LCJleHAiOjE2NDMzNTI4NTV9.beaONittFtic2eaU1jJaG-Eubvwf83iAmJR1gDoRFD8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8xMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzODI2MTY2LCJleHAiOjE2NDM4NjkzNjZ9.opp1pCxXCd5OV9lxv1uD9obR8TPedLIxed72HEcfH0A",
 											"type": "default"
 										}
 									]
@@ -2640,6 +2640,121 @@
 									"path": [
 										"serviceProvider",
 										"acceptSlot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Categoria (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8xMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzODI2MTY2LCJleHAiOjE2NDM4NjkzNjZ9.opp1pCxXCd5OV9lxv1uD9obR8TPedLIxed72HEcfH0A",
+											"type": "text"
+										},
+										{
+											"key": "categoria",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "5.99",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/addCategoria",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"addCategoria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Categoria (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8xMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzODI2MTY2LCJleHAiOjE2NDM4NjkzNjZ9.opp1pCxXCd5OV9lxv1uD9obR8TPedLIxed72HEcfH0A",
+											"type": "text"
+										},
+										{
+											"key": "categoria",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/remCategoria",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"remCategoria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Categoria (R)",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8xMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzODI2MTY2LCJleHAiOjE2NDM4NjkzNjZ9.opp1pCxXCd5OV9lxv1uD9obR8TPedLIxed72HEcfH0A",
+											"type": "text"
+										},
+										{
+											"key": "categoria",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "2.99",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/updCategoria",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"updCategoria"
 									]
 								}
 							},

@@ -21,7 +21,7 @@ Out.addCategorias = (arr, id, experience) => {
     var cat_ids = (typeof arr === 'undefined') ? [] : arr;
     var query = "";
     for (let i = 0; i < cat_ids.length; i++) {
-        query += ('CALL insert_categorias ('+id+','+cat_ids[i]+','+experience+'); ')
+        query += ('CALL insert_categorias ('+id+','+cat_ids[i]+','+experience+',0'+'); ')
     }
 
     return dbconfig.sequelize.query(query);
