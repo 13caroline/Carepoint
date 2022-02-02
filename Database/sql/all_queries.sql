@@ -1543,6 +1543,7 @@ CREATE PROCEDURE add_workSchedule_slot (IN in_idUser INT,IN in_slot JSON)
 BEGIN  
 	
     DECLARE os JSON DEFAULT '[]';
+    DECLARE can_add TINYINT DEFAULT 1;
     
     -- get the workSchedule schedule
     SET os =  (SELECT serviceprovider.workSchedule FROM serviceprovider 
@@ -1550,9 +1551,20 @@ BEGIN
     
     SET os = IF (os IS NULL, '[]', os);
     
+    -- CASO 1: slot no meio
+    -- CASO 2: abaixo do begin e meio
+    -- CASO 3: meio e acima do end
+    -- CASO 4: abaixo do begin e acima do end
+    SET can_add = (select IF (COUNT(*) > 0, 0, 1) from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
+		where  (json_extract(j1, '$.date_begin') <= json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') >= json_extract(in_slot, '$.date_end')) OR
+        (json_extract(j1, '$.date_begin') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_begin') < json_extract(in_slot, '$.date_end')) OR
+        (json_extract(j1, '$.date_end') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') < json_extract(in_slot, '$.date_end')) OR
+        (json_extract(j1, '$.date_begin') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') < json_extract(in_slot, '$.date_end')));
+	SELECT can_add;
+    
 	UPDATE pi.serviceprovider SET
 		serviceprovider.workSchedule= CASE 
-					WHEN in_slot IS NOT NULL AND os IS NOT NULL
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND can_add = 1
                     THEN JSON_MERGE_PRESERVE(os,in_slot)
                     ELSE serviceprovider.workSchedule
                     END

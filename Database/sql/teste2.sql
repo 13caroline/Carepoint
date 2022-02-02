@@ -104,4 +104,37 @@ SELECT LENGTH("[4]");
 CALL update_serviceProvider_endSub(78,3);
 CALL update_company_endSub(153,8);
 
+-- "date_begin": "2022-01-09 05:00:00" || "date_end": "2022-01-09 12:30:00"
+-- CASO 1: slot no meio
+-- CASO 2: abaixo do begin e meio
+-- CASO 3: meio e acima do end
+-- CASO 4: abaixo do begin e acima do end
+-- CASO 1
+CALL add_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 12:19:00",
+        "date_begin": "2022-01-09 05:30:00"
+    }');
 
+-- CASO 2
+CALL add_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 12:19:00",
+        "date_begin": "2022-01-09 04:00:00"
+    }');
+
+-- CASO 3
+CALL add_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 12:50:00",
+        "date_begin": "2022-01-09 05:30:00"
+    }');
+
+-- CASO 4
+CALL add_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 17:50:00",
+        "date_begin": "2022-01-09 04:00:00"
+    }');
+
+-- CASO 5 que tem de inserir
+CALL add_workSchedule_slot(51,'{
+        "date_end": "2022-01-09 12:32:00",
+        "date_begin": "2022-01-09 12:30:00"
+    }');
