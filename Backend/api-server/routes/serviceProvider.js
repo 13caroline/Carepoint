@@ -93,7 +93,7 @@ router.put('/regHorario', auth.validToken, (req, res) => {
         ServiceProvider.addHorario(uid, text)
         .then((upd) => {
             
-            if(upd[0].can_add == 0)
+            if(upd[0].can_add == 1)
                 res.status(200).jsonp({ message: "Success!" })
             else    
                 res.status(400).jsonp({ error: "Slot do Hórario já se encontra ocupado." })
