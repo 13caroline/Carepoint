@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-data-iterator
-      v-if="ads"
+      v-if="ads.length"
       :items="ads"
       :items-per-page.sync="itemsPerPage"
       :page.sync="page"
@@ -118,7 +118,7 @@
     </v-data-iterator>
     <small v-else> <em> não existem anúncios publicados </em></small>
 
-    <v-row class="mt-4" align="center" justify="center" v-if="ads">
+    <v-row class="mt-4" align="center" justify="center" v-if="ads && !message">
       <v-btn
         fab
         dark
@@ -143,7 +143,7 @@
       </v-btn>
     </v-row>
 
-    <v-row class="mt-5" align="center" justify="center" v-if="ads">
+    <v-row class="mt-5" align="center" justify="center" v-if="ads && !message">
       <span class="grey--text">Página {{ page }} de {{ numberOfPages }}</span>
     </v-row>
   </v-container>
@@ -168,6 +168,7 @@ export default {
       page: 1,
       itemsPerPage: 9,
       total: 0,
+      message: "",
       category: [
         { name: "Apoio externo", icon: "fas fa-car-side" },
         {
@@ -230,13 +231,15 @@ export default {
           this.ads = response.data.JobOffers;
           this.total = response.data.Total[0].number_offers;
         }
-      } catch (e) {
-        this.$snackbar.showMessage({
-          show: true,
-          color: "error",
-          text: "Ocorreu um erro. Por favor tente mais tarde!",
-          timeout: 4000,
-        });
+      } catch (error) {
+        
+          (error.response.data.error == 'A sua subscrição não lhe garante privilegios para visualizar esta pagina.') ? this.message = "A sua subscrição não lhe garante privilégios para visualizar esta página." : this.message = "Ocorreu um erro, por favor tente mais tarde!";
+          this.$snackbar.showMessage({
+            show: true,
+            color: "warning",
+            text: this.message,
+            timeout: 4000,
+          });
       }
     },
   },

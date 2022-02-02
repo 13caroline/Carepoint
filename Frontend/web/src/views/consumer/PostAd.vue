@@ -154,7 +154,7 @@
                     dense
                     outlined
                     v-model="price"
-                    suffix="€"
+                    suffix="€/hora"
                   ></v-text-field>
                 </v-col>
               </v-row>
