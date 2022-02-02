@@ -404,6 +404,11 @@
 									"key": "experience",
 									"value": "5",
 									"type": "text"
+								},
+								{
+									"key": "solidarity",
+									"value": "",
+									"type": "text"
 								}
 							]
 						},

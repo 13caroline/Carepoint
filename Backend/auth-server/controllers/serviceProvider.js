@@ -13,7 +13,7 @@ Out.adicionarSP = (body, id) => {
         qualifications: body.qualifications,
         idSubscription: 1,
         averageRating: 0,
-        solidarity: 0
+        solidarity: body.solidarity
     })
 }
 
