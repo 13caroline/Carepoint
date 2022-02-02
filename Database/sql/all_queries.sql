@@ -54,6 +54,7 @@ DROP PROCEDURE IF EXISTS get_companies_by_name_count;
 DROP PROCEDURE IF EXISTS get_service_providers_v3_count;
 DROP PROCEDURE IF EXISTS info_requested_slots;
 DROP PROCEDURE IF EXISTS info_requested_slots_v2;
+DROP PROCEDURE IF EXISTS remove_categoria;
 
 -- =============================================
 -- Description: Insert review
@@ -1588,11 +1589,11 @@ DELIMITER ;
 -- =============================================
 
 DELIMITER &&
-CREATE PROCEDURE insert_categorias (IN in_idUser INT, IN in_idCat INT, IN in_exp INT)
+CREATE PROCEDURE insert_categorias (IN in_idUser INT, IN in_idCat INT, IN in_exp INT, IN in_price DOUBLE)
 BEGIN
 
 	INSERT INTO category_has_serviceprovider (price, experience, idCategory, idServiceProvider)
-    VALUES (0, in_exp, in_idCat, in_idUser);
+    VALUES (in_price, in_exp, in_idCat, in_idUser);
 
 END &&
 DELIMITER ;
@@ -1901,4 +1902,13 @@ BEGIN
 
 	
 END &&  
+DELIMITER ;
+
+DELIMITER &&
+CREATE PROCEDURE remove_categoria (IN in_idUser INT, IN in_idCategoria INT)
+BEGIN
+
+	DELETE FROM category_has_serviceprovider WHERE (category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategoria);
+
+END &&
 DELIMITER ;

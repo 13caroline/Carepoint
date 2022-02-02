@@ -170,6 +170,44 @@ router.put('/acceptSlot', auth.validToken, (req, res) => {
     .catch((err) => {res.status(400).jsonp({ error : err })})
 })
 
+router.put('/addCategoria', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token);
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.get_categories(usr.idUser)
+        .then((cats) => {
+            experience = cats[0].experience
+            ServiceProvider.addCategoria(usr.idUser, req.body.categoria, experience, req.body.price)
+            .then((finish) => res.status(200).jsonp({message: "success!"}))
+            .catch(e => res.status(400).jsonp({ error: e }))
+        })
+        .catch(e => res.status(400).jsonp({ error: e }))
+    })
+    .catch(e => res.status(400).jsonp({ error: e }))
+})
+
+router.put('/remCategoria', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token);
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.remCategoria(usr.idUser, req.body.categoria)
+        .then((finish) => res.status(200).jsonp({message: "success!"}))
+        .catch(e => res.status(400).jsonp({ error: e }))
+    })
+    .catch(e => res.status(400).jsonp({ error: e }))
+})
+
+router.put('/updCategoria', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token);
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.updateCategoria(usr.idUser, req.body.categoria, req.body.price)
+        .then((finish) => res.status(200).jsonp({message: "success!"}))
+        .catch(e => res.status(400).jsonp({ error: e }))
+    })
+    .catch(e => res.status(400).jsonp({ error: e }))
+})
+
 // Update an ServiceProvider
 router.put('/:id', function(req, res, next) {
     ServiceProvider.update(req.params.id, req.body)
