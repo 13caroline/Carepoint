@@ -76,7 +76,7 @@ Out.updateConsumer = (body) => {
 }
 
 Out.updateServiceProvider = (body) => {
-    return dbconfig.sequelize.query('CALL update_serviceProvider (:idSP, :name, :email, :locationID, :contact, :descricao,  :raio, :quali)',
+    return dbconfig.sequelize.query('CALL update_serviceProvider (:idSP, :name, :email, :locationID, :contact, :descricao,  :raio, :quali, :sol)',
         {replacements: {
             idSP: body.idUser,
             name: body.name,
@@ -85,7 +85,8 @@ Out.updateServiceProvider = (body) => {
             contact: body.phoneNumber,
             quali: body.qualifications,
             raio: body.distance,
-            descricao: body.description
+            descricao: body.description,
+            sol: body.solidarity
         }})
 }
 

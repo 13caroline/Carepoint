@@ -935,7 +935,7 @@ DELIMITER ;
 
 DELIMITER &&  
 CREATE PROCEDURE update_serviceProvider (IN idUser INT, IN in_name VARCHAR(100), IN in_email VARCHAR(90), IN in_location INT, IN in_phoneNumber VARCHAR(45), 
-	IN in_description VARCHAR(2000), IN in_distance INT, IN in_qualifications VARCHAR(1000))  
+	IN in_description VARCHAR(2000), IN in_distance INT, IN in_qualifications VARCHAR(1000), IN in_solidarity TINYINT)  
 BEGIN  
     SET foreign_key_checks = 0;
 	UPDATE pi.user INNER JOIN serviceprovider ON user.idUser = serviceprovider.idSP SET
@@ -975,6 +975,11 @@ BEGIN
 					WHEN in_qualifications IS NOT NULL
                     THEN in_qualifications
                     ELSE serviceprovider.qualifications
+                    END
+		, serviceprovider.solidarity= CASE
+					WHEN in_solidarity IS NOT NULL
+                    THEN in_solidarity
+                    ELSE serviceprovider.solidarity
                     END
 		WHERE user.idUser = idUser AND user.type = 3;
         SET foreign_key_checks = 1;
