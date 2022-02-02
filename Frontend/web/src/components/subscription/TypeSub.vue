@@ -11,7 +11,7 @@
             height="400"
             @click="subscribe(exp)"
           >
-            <v-card-title class="ma-5">
+            <v-card-title class="ma-5 mb-10 mb-sm-10 mb-md-10 mb-lg-10">
               <v-row justify="center">
                 {{ exp.name }}
               </v-row>
@@ -20,7 +20,7 @@
             <v-card-text>
               <v-row
                 justify="center"
-                class="mx-auto"
+                class="mx-auto ml-sm-0 ml-md-0 ml-lg-6"
                 v-for="(p, index) in exp.pros"
                 :key="index"
               >
@@ -57,7 +57,7 @@
             height="400"
             @click="subscribe(s)"
           >
-            <v-card-title class="ma-5">
+            <v-card-title class="ma-5 mb-10 mb-sm-10 mb-md-10 mb-lg-10">
               <v-row justify="center">
                 {{ s.name }}
               </v-row>
@@ -66,7 +66,7 @@
             <v-card-text>
               <v-row
                 justify="center"
-                class="mx-auto"
+                class="mx-auto ml-sm-0 ml-md-0 ml-lg-6"
                 v-for="(p, index) in s.pros"
                 :key="index"
               >
