@@ -89,8 +89,15 @@ router.put('/regHorario', auth.validToken, (req, res) => {
         var dateBegin = req.body.dateBegin;
         var dateEnd = req.body.dateEnd;
         var text = '{"date_end": "'+dateEnd+'",' + '"date_begin": "'+dateBegin+'"}'
+        console.log(text)
         ServiceProvider.addHorario(uid, text)
-        .then((upd) => {res.status(200).jsonp({ message: "success" })})
+        .then((upd) => {
+            
+            if(upd[0].can_add == 0)
+                res.status(200).jsonp({ message: "Success!" })
+            else    
+                res.status(400).jsonp({ error: "Slot do Hórario já se encontra ocupado." })
+    })
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })
     .catch((err) => res.status(400).jsonp({ error : err }))
