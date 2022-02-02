@@ -204,12 +204,13 @@ export default {
 
       let occupiedSchedule = found.occupiedSchedule;
       for (var k = 0; k < occupiedSchedule.length; k++) {
-        this.events.push({
-          start: occupiedSchedule[k].date_begin,
-          end: occupiedSchedule[k].date_end,
-          occupied: 1,
-          category: found.name,
-        });
+        if (occupiedSchedule[k].occupied == "1")
+          this.events.push({
+            start: occupiedSchedule[k].date_begin,
+            end: occupiedSchedule[k].date_end,
+            occupied: 1,
+            category: found.name,
+          });
       }
     },
     updated: async function () {

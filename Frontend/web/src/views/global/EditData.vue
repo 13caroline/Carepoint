@@ -63,7 +63,6 @@
                           dense
                           v-model="user.name"
                           color="#2596be"
-                          :rules="textRules"
                         ></v-text-field>
                       </v-col>
                     </div>
@@ -179,39 +178,6 @@
                           ></v-text-field>
                         </v-col>
                       </div>
-                      <div>
-                        <v-col>
-                          <span>Categorias</span>
-                          <v-autocomplete
-                            outlined
-                            flat
-                            dense
-                            v-model="categories"
-                            :items="cat"
-                            item-value="idCategory"
-                            item-text="name"
-                            color="#78C4D4"
-                            name="categories"
-                            required
-                            chips
-                            small-chips
-                            multiple
-                          />
-                        </v-col>
-                      </div>
-
-                      <div>
-                        <v-checkbox
-                          false-value="0"
-                          true-value="1"
-                          required
-                          class="my-checkbox pa-0 mt-2"
-                          color="#78c4d4"
-                          v-model="user.solidarity"
-                          label="Aderir ao banco de horas"
-                        >
-                        </v-checkbox>
-                      </div>
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
@@ -248,8 +214,6 @@ export default {
     dialogPass: false,
     user: {},
     loc: [],
-    cat: [],
-    categories: [],
     location: "",
     textRules: [
       (v) => {
@@ -316,11 +280,6 @@ export default {
           this.loc = response2.data;
         }
 
-      let response3 = await axios.get("http://localhost:9040/category");
-      if (response3) {
-        this.cat = response3.data;
-      }
-
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -345,6 +304,7 @@ export default {
             });
             this.$router.push("/consumer/profile");
           } else if (store.getters.tipo == "3") {
+            
             await axios.put("http://localhost:9040/users/update", {
               token: store.getters.token,
               name: this.user.name,
@@ -356,6 +316,7 @@ export default {
               distance: this.user.distance,
               description: this.user.description,
               qualifications: this.user.qualifications,
+              solidarity: this.user.solidarity
             });
             this.$router.push("/service/provider/page");
           }

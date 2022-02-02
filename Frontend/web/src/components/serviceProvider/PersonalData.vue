@@ -280,7 +280,7 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos mb-0">Categorias</p>
+                        <p class="infos">Categorias</p>
                       </v-col>
                       <v-col class="d-flex justify-end">
                         <v-chip

@@ -30,7 +30,7 @@
         <v-slider
           v-model="formValues.distance"
           inverse-label
-          :label="`${form.distance}km`"
+          :label="`5km`" 
           color="#78C4D4"
           thumb-label
           :max="`${form.distance}`"

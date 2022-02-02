@@ -4,7 +4,7 @@
     <v-container>
       <v-row no-gutters class="w-100">
         <v-col cols="3">
-          <v-card class="mx-auto" style="height: 67vh">
+          <v-card class="mx-auto" style="height: 67vh" flat>
             <v-list subheader>
               <v-subheader>Prestadores de Serviços</v-subheader>
               <v-list-item-group active-class="light-blue lighten-4">
@@ -48,8 +48,8 @@
         </v-col>
 
         <v-col cols="12" md="9">
-          <v-card>
-          <v-card class="mx-auto overflow-x-hidden bCard" style="height: 60vh" outlined color="transparent">
+          <v-card flat>
+          <v-card flat class="mx-auto overflow-x-hidden bCard" style="height: 60vh" outlined color="transparent">
             <v-row justify="end">
               <v-col>
                 <v-list disabled rounded class="mb-5">
@@ -63,7 +63,7 @@
                       <div v-if="item.idReceive == idUser">
                         <p class="overline mb-0">{{ item.date }}</p>
                         <v-row class="mt-1">
-                          <v-avatar size="36">
+                          <v-avatar size="36" class="ma-1">
                             <v-img :src="processImage(pic)"></v-img>
                           </v-avatar>
                           <v-chip

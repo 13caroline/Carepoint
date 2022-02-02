@@ -23,7 +23,8 @@
           :close-on-content-click="false"
           :activator="selectedElement"
           offset-x
-          width="100%" min-width="85%"
+          width="100%"
+          min-width="85%"
         >
           <v-card flat>
             <v-form ref="form" v-model="valid">
@@ -189,8 +190,8 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     day: "",
-    date_begin: "", 
-    date_end: ""
+    date_begin: "",
+    date_end: "",
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");
@@ -205,7 +206,7 @@ export default {
       const open = () => {
         this.day = moment(event.start).format("YYYY-MM-DD");
         this.date_begin = moment(event.start).format("HH:mm");
-        this.date_end = moment(event.end).format("HH:mm")
+        this.date_end = moment(event.end).format("HH:mm");
         this.selectedEvent = event;
         this.selectedElement = nativeEvent.target;
         requestAnimationFrame(() =>
@@ -233,7 +234,7 @@ export default {
             categories: this.categories,
           });
           this.$emit("clicked", "update");
-
+          this.selectedOpen = false
           this.$snackbar.showMessage({
             show: true,
             text: "Horário requisitado com sucesso.",
@@ -285,11 +286,12 @@ export default {
         if (response.data.categories[0].occupiedSchedule !== null) {
           occupiedSchedule = response.data.categories[0].occupiedSchedule;
           for (var k = 0; k < occupiedSchedule.length; k++) {
-            this.events.push({
-              start: occupiedSchedule[k].date_begin,
-              end: occupiedSchedule[k].date_end,
-              occupied: 1,
-            });
+            if (occupiedSchedule[k].occupied == "1")
+              this.events.push({
+                start: occupiedSchedule[k].date_begin,
+                end: occupiedSchedule[k].date_end,
+                occupied: 1,
+              });
           }
         }
       }
