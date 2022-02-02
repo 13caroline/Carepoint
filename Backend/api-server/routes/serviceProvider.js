@@ -147,6 +147,27 @@ router.put('/remSlot', auth.validToken, (req, res) => {
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })
+    .catch((err) => {res.status(400).jsonp({ error : err })})
+})
+
+router.put('/acceptSlot', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token);
+    
+    intermediateJson = JSON.parse(req.body.slotJson);
+    intermediateJson["occupied"] = '1';
+    finalJson = JSON.stringify(intermediateJson)
+    
+    User.consult(email)
+    .then((usr) => {
+        ServiceProvider.remSlot(usr.idUser, req.body.slotJson)
+        .then((upd) => {
+            ServiceProvider.addSlot(usr.idUser, finalJson)
+            .then((done) => res.status(200).jsonp({ message: "success" }))
+            .catch((err) => {res.status(400).jsonp({ error : err })})
+        })
+        .catch((err) => {res.status(400).jsonp({ error : err })})
+    })
+    .catch((err) => {res.status(400).jsonp({ error : err })})
 })
 
 // Update an ServiceProvider

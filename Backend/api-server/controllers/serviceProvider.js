@@ -113,7 +113,7 @@ Out.addSlot = (id, jsonObj) => {
 }
 
 Out.remHorario = (id, jsonObj) => {
-    return dbconfig.sequelize.query('CALL remove_slot (:id, :slot)',
+    return dbconfig.sequelize.query('CALL remove_workSchedule_slot (:id, :slot)',
         {replacements : {
             id: id,
             slot: jsonObj
@@ -121,7 +121,7 @@ Out.remHorario = (id, jsonObj) => {
 }
 
 Out.remSlot = (id, jsonObj) => {
-    return dbconfig.sequelize.query('CALL remove_workSchedule_slot (:id, :slot)',
+    return dbconfig.sequelize.query('CALL remove_slot (:id, :slot)',
         {replacements : {
             id: id,
             slot: jsonObj

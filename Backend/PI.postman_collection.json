@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_04@gmail.com",
+									"value": "serviceProvider_08@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1219,17 +1219,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNjU3NzgxLCJleHAiOjE2NDM3MDA5ODF9.5fPbdy28rCB58vFMY7a_1kFvnJXkmvQbVNgTYaljcuw",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNkBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNzI5ODc1LCJleHAiOjE2NDM3NzMwNzV9.iv_85cB2Dsee6A67u2_BimvAWhJYaDqT0fyOh1aSzzc",
 											"type": "text"
 										},
 										{
 											"key": "subscription",
-											"value": "3",
+											"value": "0",
 											"type": "text"
 										},
 										{
 											"key": "visibility",
-											"value": "1",
+											"value": "0",
 											"type": "text"
 										}
 									]
@@ -1662,6 +1662,11 @@
 											"key": "description",
 											"value": "",
 											"type": "default"
+										},
+										{
+											"key": "solidarity",
+											"value": "",
+											"type": "text"
 										}
 									]
 								},
@@ -2415,7 +2420,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDJAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzU2Mzg0NiwiZXhwIjoxNjQzNjA3MDQ2fQ.V1AXGGcxVO2jEHmDosS9sm53Uuu1ImEoC9pSDesUEts",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfMDJAZ21haWwuY29tIiwibGV2ZWwiOjIsImlhdCI6MTY0MzgwMjkzMSwiZXhwIjoxNjQzODQ2MTMxfQ.vzUEf8JVk-4YFt781Vdbz60GOAVIOFWZXuJlv5ZGPAg",
 											"type": "text"
 										},
 										{
@@ -2430,7 +2435,7 @@
 										},
 										{
 											"key": "spId",
-											"value": "201",
+											"value": "205",
 											"type": "text"
 										},
 										{
@@ -2470,17 +2475,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNDY4NTIyLCJleHAiOjE2NDM1MTE3MjJ9.CBr4GYM6EjDrOHpc8a8_L3LqHng1YJvbhB90iHddyZk",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wOEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNzk3Mjc5LCJleHAiOjE2NDM4NDA0Nzl9.cm98ZIECZmkeeWS55qWkDTFz-sh_K3vUjYgtX6LVAw0",
 											"type": "text"
 										},
 										{
 											"key": "dateBegin",
-											"value": "2022-01-04 08:00",
+											"value": "2022-01-05 08:00",
 											"type": "text"
 										},
 										{
 											"key": "dateEnd",
-											"value": "2022-01-04 09:00",
+											"value": "2022-01-05 09:00",
 											"type": "text"
 										}
 									]
@@ -2595,6 +2600,41 @@
 									"path": [
 										"serviceProvider",
 										"requests"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Aceitar um slot requisitado",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wOEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNzk3Mjc5LCJleHAiOjE2NDM4NDA0Nzl9.cm98ZIECZmkeeWS55qWkDTFz-sh_K3vUjYgtX6LVAw0",
+											"type": "text"
+										},
+										{
+											"key": "slotJson",
+											"value": "{\n        \"id\": \"206\",\n        \"date_end\": \"2022-01-06 18:00:00\",\n        \"occupied\": \"0\",\n        \"date_begin\": \"2022-01-06 17:30:00\",\n        \"idCategory\": \"[1,2]\",\n        \"date_requested\": \"2022-02-2 12:01:07\"\n    }",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/acceptSlot",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"acceptSlot"
 									]
 								}
 							},
