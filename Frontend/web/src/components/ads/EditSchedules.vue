@@ -2,9 +2,6 @@
   <div>
     <v-row justify="end" v-if="$store.state.tipo == 3">
       <v-col cols="auto">
-        <SlotsRequests @clicked="updated"></SlotsRequests>
-      </v-col>
-      <v-col cols="auto">
         <NewSlot @clicked="updated"></NewSlot>
       </v-col>
     </v-row>
@@ -219,7 +216,6 @@ export default {
         let response = await axios.get(
           "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
         );
-        console.log(response.data);
         let workSchedule = null;
         let occupiedSchedule = null;
         if (response.data.categories) {
