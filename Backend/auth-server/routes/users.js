@@ -57,67 +57,56 @@ router.post('/upgrade', auth.matchPasswords, (req,res) => {
   }
 })
 
-//Type :: 1 = admin -- 2 = consumer -- 3 = SP -- 4 = company
 router.post('/register', (req, res) => {
-  User.adicionarUser(req.body)                                                                //Tenta inserir um user
-  .then((user) => {                                                                           //Se tiver sucesso, procede a fazer login, ou inserir 
-    switch (req.body.type){                                                                   //informação adicional necessária
-      case '2':
+  switch (req.body.type){
+    case '2':
+      User.adicionarUser(req.body)
+      .then((user) => {
         axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {
-          email: req.body.email,                                                              //Tenta fazer login
+          email: req.body.email,                                                             
           password: req.body.password                               
-        }).then(data => {                                                                     //Se tiver sucesso (1)
-          res.status(201).jsonp({token: data.data.token})                                     //Envia o token como resposta
-        }).catch(e => {                                                                       //Se falhar o sucesso (1)
-          res.status(400).jsonp({error: e})                                                   //Retorna o Erro
+        }).then(data => {                                                                     
+          res.status(201).jsonp({token: data.data.token})                                     
+        }).catch(e => {                                                                       
+          res.status(400).jsonp({error: e})                                                   
         })
-        break;
+      })
+      .catch((err) => {res.status(400).jsonp({error: err})})
+      break;
 
-      case '3':
-        console.log(3)
-        ServiceProvider.adicionarSP(req.body, user.idUser)                                    //Adiciona o SP
-        .then((SP) => {                                                                       //Se tiver sucesso (1)
-          ServiceProvider.addCategorias(req.body.categorias, user.idUser, req.body.experience)
-          .then((SPc) => {
-            axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {      
-              email: req.body.email,                                                            //Tenta fazer login
-              password: req.body.password
-            }).then(data => {                                                                   //Se tiver sucesso (2)
-              res.status(201).jsonp({token: data.data.token})                                   //Envia o token come resposta
-            }).catch(e => {                                                                     //Se falhar o sucesso (2)
-              res.status(400).jsonp({error: e})                                                 //Retorna o erro
-            })  
-          })
-          .catch((err) => res.status(401).jsonp({error:err}))
+    case '3':
+      ServiceProvider.adicionarSP_transaction(req.body)
+      .then(() => {
+        axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {
+          email: req.body.email,                                                             
+          password: req.body.password                               
+        }).then(data => {                                                                     
+          res.status(201).jsonp({token: data.data.token})                                     
+        }).catch(e => {                                                                       
+          res.status(400).jsonp({error: e})                                                   
         })
-        .catch((err) => res.status(401).jsonp({error:err}))                                   //Se falhar o sucesso (1), retorna o erro
-        break;
-
-      case '4':
-        console.log(4)
-        Company.adicionarCP(req.body, user.idUser)                                            //Adiciona Company
-        .then((CP) => {                                                                       //Se tiver sucesso (1)
-          Ad.adicionarAdd(req.body.description, CP.idCompany)                                 //Adiciona a Ad da company
-          .then((info) => {                                                                   //Se tiver sucesso (2)
-            axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {    
-              email: req.body.email,                                                          //Tenta fazer login
-              password: req.body.password
-            }).then(data => {                                                                 //Se tiver sucesso (3)
-              res.status(201).jsonp({token: data.data.token})                                 //Envia o token como resposta
-            }).catch(e => {                                                                   //Se falhar o sucesso (3)
-              res.status(400).jsonp({error: e})                                               //Retorna o Erro
-            })
-          })
-          .catch((err) => res.status(401).jsonp({error:err}))                                 //Falhar o sucesso (2), retorna erro
+      })
+      .catch((err) => {res.status(400).jsonp({error: err})})
+      break;
+    
+    case '4':
+      Company.adicionarCP_transaction(req.body)
+      .then(() => {
+        axios.post(config['auth-host'] + ':' + config['auth-port'] + '/users/login', {
+          email: req.body.email,                                                             
+          password: req.body.password                               
+        }).then(data => {                                                                     
+          res.status(201).jsonp({token: data.data.token})                                     
+        }).catch(e => {                                                                       
+          res.status(400).jsonp({error: e})                                                   
         })
-        .catch((err) => res.status(401).jsonp({error:err}))                                   //Falhar o sucesso (1), retorna erro
+      })
+      .catch((err) => {res.status(400).jsonp({error: err})})
+      break;
+    
+    default:
         break;
-        
-      default:
-        break;
-    }
-  })
-  .catch((err) => res.status(401).jsonp({error:err}))                                         //Se falhar a inserção de um novo user, retorna o erro
+  }
 })
 
 //Type :: 1 = admin -- 2 = consumer -- 3 = SP -- 4 = company 
