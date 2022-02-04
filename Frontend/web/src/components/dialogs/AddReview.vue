@@ -111,7 +111,6 @@ export default {
     review: async function () {
       if (this.$refs.form.validate()) {
         try {
-            console.log(this.dados)
           await axios.post("http://localhost:9040/review", {
             token: store.getters.token,
             receivingId: this.dados,

@@ -4,7 +4,7 @@
       <v-col cols="auto">
         <EditCategories @clicked="updated"></EditCategories>
 
-        <NewSlot  @clicked="updated"></NewSlot>
+        <NewSlot @clicked="updated"></NewSlot>
       </v-col>
     </v-row>
     <div>
@@ -145,31 +145,10 @@ export default {
   },
   methods: {
     getEventColor(event) {
-      var color = "#78C4D4";
-      if (event.occupied == 1) return "#D7CCC8";
-      else {
-        switch (event.category) {
-          case "Companhia":
-            color = "#D7BFDC";
-            break;
-          case "Compras":
-            color = "#FDA172";
-            break;
-          case "Medicação":
-            color = "#F5C3C2";
-            break;
-          case "Higiene":
-            color = "#95C8D8";
-            break;
-          case "Passeios":
-            color = "#C5E1A5";
-            break;
-          case "Refeições":
-            color = "#EEDC82";
-            break;
-        }
-        return color;
-      }
+      var color = "";
+      event.occupied == 1 ? (color = "#D7CCC8") : (color = "#78C4D4");
+
+      return color;
     },
     showEvent({ nativeEvent, event }) {
       const open = () => {
@@ -188,31 +167,7 @@ export default {
       }
       nativeEvent.stopPropagation();
     },
-    categorySchedule(value) {
-      this.events = [];
-      var found = this.received.find((e) => e.name === value);
 
-      let workSchedule = found.workSchedule;
-      for (var i = 0; i < workSchedule.length; i++) {
-        this.events.push({
-          start: workSchedule[i].date_begin,
-          end: workSchedule[i].date_end,
-          occupied: 0,
-          category: found.name,
-        });
-      }
-
-      let occupiedSchedule = found.occupiedSchedule;
-      for (var k = 0; k < occupiedSchedule.length; k++) {
-        if (occupiedSchedule[k].occupied == "1")
-          this.events.push({
-            start: occupiedSchedule[k].date_begin,
-            end: occupiedSchedule[k].date_end,
-            occupied: 1,
-            category: found.name,
-          });
-      }
-    },
     updated: async function () {
       this.events = [];
       try {
@@ -254,7 +209,7 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
-      console.log(response.data);
+
       let workSchedule = null;
       let occupiedSchedule = null;
       if (response.data.categories.length) {

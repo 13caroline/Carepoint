@@ -2,7 +2,7 @@
   <div>
     <app-bar-account />
     <v-container>
-      <v-card flat>
+      <v-card flat class="mt-5">
         <h3 class="group font-weight-light text-uppercase">Dados de Acesso</h3>
         <v-divider></v-divider>
         <v-form ref="form" lazy-validation class="form">
@@ -202,6 +202,7 @@
         </v-col>
       </v-row>
     </v-container>
+    <top-button />
     <Foot />
   </div>
 </template>
@@ -279,7 +280,6 @@ export default {
         if (response2) {
           this.loc = response2.data;
         }
-
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -304,7 +304,6 @@ export default {
             });
             this.$router.push("/consumer/profile");
           } else if (store.getters.tipo == "3") {
-            
             await axios.put("http://localhost:9040/users/update", {
               token: store.getters.token,
               name: this.user.name,
@@ -316,7 +315,7 @@ export default {
               distance: this.user.distance,
               description: this.user.description,
               qualifications: this.user.qualifications,
-              solidarity: this.user.solidarity
+              solidarity: this.user.solidarity,
             });
             this.$router.push("/service/provider/page");
           }
@@ -350,6 +349,7 @@ export default {
     Cancel: () => import("@/components/dialogs/Cancel"),
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
+    TopButton: () => import("@/components/global/TopButton"),
     ChangePassword: () => import("@/components/dialogs/ChangePassword"),
   },
   created: async function () {

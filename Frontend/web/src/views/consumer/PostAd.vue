@@ -21,7 +21,7 @@
                   auto-grow
                   outlined
                   flat
-                  rows="5"
+                  rows="3"
                   color="#78C4D4"
                   required
                   :rules="textRules"
@@ -187,7 +187,7 @@
         </v-col>
       </v-row>
     </v-container>
-
+    <top-button />
     <Foot />
   </div>
 </template>
@@ -222,6 +222,7 @@ export default {
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Cancel: () => import("@/components/dialogs/Cancel"),
+    TopButton: () => import("@/components/global/TopButton"),
     Foot: () => import("@/components/global/Footer"),
   },
 

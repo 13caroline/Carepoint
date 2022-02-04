@@ -99,7 +99,6 @@ export default {
     send: async function () {
       if (this.$refs.form.validate()) {
         try {
-            console.log(this.dados)
           await axios.post("http://localhost:9040/message/addMessage", {
             token: store.getters.token,
             content: this.form.description,

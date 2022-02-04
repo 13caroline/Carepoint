@@ -293,10 +293,10 @@ export default {
             firm: this.form.firm,
             nipc: this.form.nipc,
           });
-          if (res.data.token != undefined) {
-            this.$store.commit("guardaTokenUtilizador", res.data.token);
-            this.$store.commit("guardaTipoUtilizador", this.form.type);
-          }
+          res.data.token != undefined
+            ? this.$store.commit("guardaTokenUtilizador", res.data.token)
+            : this.$store.commit("guardaTipoUtilizador", this.form.type);
+
           this.$router.push("/register/subscription/" + this.form.type);
         } catch (e) {
           this.$snackbar.showMessage({
