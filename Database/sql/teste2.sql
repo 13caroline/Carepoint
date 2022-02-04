@@ -138,3 +138,41 @@ CALL add_workSchedule_slot(51,'{
         "date_end": "2022-01-09 12:32:00",
         "date_begin": "2022-01-09 12:30:00"
     }');
+    
+    
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 18:00:00",
+        "date_begin": "2022-01-09 17:31:00"
+    }');
+
+-- CASO 2
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 17:40:00",
+        "date_begin": "2022-01-09 17:10:00"
+    }');
+
+-- CASO 3
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 18:10:00",
+        "date_begin": "2022-01-09 17:50:00"
+    }');
+
+-- CASO 4
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 18:10:00",
+        "date_begin": "2022-01-09 17:20:00"
+    }');
+    
+-- CASO 5 que tem de inserir
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 17:30:00",
+        "date_begin": "2022-01-09 17:10:00"
+    }');
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 17:29:00",
+        "date_begin": "2022-01-09 17:10:00"
+    }');
+CALL verify_slot(51,'{
+        "date_end": "2022-01-09 18:10:00",
+        "date_begin": "2022-01-09 18:00:00"
+    }');

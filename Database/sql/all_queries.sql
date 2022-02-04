@@ -55,6 +55,7 @@ DROP PROCEDURE IF EXISTS get_service_providers_v3_count;
 DROP PROCEDURE IF EXISTS info_requested_slots;
 DROP PROCEDURE IF EXISTS info_requested_slots_v2;
 DROP PROCEDURE IF EXISTS remove_categoria;
+DROP PROCEDURE IF EXISTS verify_slot;
 
 -- =============================================
 -- Description: Insert review
@@ -1904,6 +1905,15 @@ BEGIN
 END &&  
 DELIMITER ;
 
+-- =============================================
+-- Description: remove category from service provider
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - service provider identification number
+--   @in_idCategoria - category to be removed 
+-- Return: Nothing
+-- =============================================
+
 DELIMITER &&
 CREATE PROCEDURE remove_categoria (IN in_idUser INT, IN in_idCategoria INT)
 BEGIN
@@ -1911,4 +1921,41 @@ BEGIN
 	DELETE FROM category_has_serviceprovider WHERE (category_has_serviceprovider.idServiceProvider = in_idUser AND category_has_serviceprovider.idCategory = in_idCategoria);
 
 END &&
+DELIMITER ;
+
+-- =============================================
+-- Description: Verify if service provider can accept 
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - service provider identification number
+--   @in_slot - slot to be verified
+-- Returns: None
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE verify_slot (IN in_idUser INT,IN in_slot JSON)  
+BEGIN  
+	
+    DECLARE os JSON DEFAULT '[]';
+    DECLARE can_accept TINYINT DEFAULT 1;
+    
+    -- get the occupiedSchedule schedule
+    SET os =  (SELECT serviceprovider.occupiedSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser);
+    
+    SET os = IF (os IS NULL, '[]', os);
+    
+    -- CASO 1: slot no meio
+    -- CASO 2: abaixo do begin e meio
+    -- CASO 3: meio e acima do end
+    -- CASO 4: abaixo do begin e acima do end
+    SET can_accept = (select IF (COUNT(*) > 0, 0, 1) from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
+		where CAST(json_extract(j1, '$.occupied') AS UNSIGNED) = 1 AND (json_extract(j1, '$.date_begin') <= json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') >= json_extract(in_slot, '$.date_end')) OR
+        (json_extract(j1, '$.date_begin') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_begin') < json_extract(in_slot, '$.date_end')) OR
+        (json_extract(j1, '$.date_end') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') < json_extract(in_slot, '$.date_end')) OR
+        (json_extract(j1, '$.date_begin') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') < json_extract(in_slot, '$.date_end')));
+	
+    SELECT can_accept;
+    
+END &&  
 DELIMITER ;
