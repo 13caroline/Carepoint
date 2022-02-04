@@ -377,7 +377,6 @@ export default {
         let response = await axios.post("http://localhost:9040/users/perfil", {
           token: store.getters.token,
         });
-        console.log(response.data);
 
         this.user = response.data.perfil[0];
         this.categories = response.data.categories;
