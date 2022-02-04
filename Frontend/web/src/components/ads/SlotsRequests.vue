@@ -184,11 +184,15 @@ export default {
         this.editedIndex = this.slots.indexOf(item);
         this.editedItem = Object.assign({}, item);
         this.slots.splice(this.editedIndex, 1);
-      } catch (e) {
+      } catch (error) {
+        let message = "";
+          error.response.data.error == "Slot já preenchido com outro trabalho!"
+            ? (message = "Este horário já se encontra preenchido.")
+            : (message = "Ocorreu um erro, por favor tente mais tarde!");
         this.$snackbar.showMessage({
           show: true,
           color: "warning",
-          text: "Ocorreu um erro, por favor tente mais tarde!",
+          text: message,
           timeout: 4000,
         });
       }

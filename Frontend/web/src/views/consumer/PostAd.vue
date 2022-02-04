@@ -91,7 +91,7 @@
                       color="#78c4d4"
                       @input="menu2 = false"
                       locale="pt PT"
-                      :min="new Date().toISOString().substr(0, 10)"
+                      :min="date"
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
@@ -155,6 +155,9 @@
                     outlined
                     v-model="price"
                     suffix="€/hora"
+                    type="number"
+                    required
+                    v-on:keypress="isNumber($event)"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -231,6 +234,11 @@ export default {
       store.getters.tipo == 2
         ? this.$router.push("/my/advertisements")
         : this.$router.push("/service/provider/page");
+    },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
     },
 
     postAd: async function () {
