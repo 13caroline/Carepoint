@@ -72,7 +72,21 @@ router.post('/requests', auth.validToken, (req, res) => {
     User.consult(email)
     .then((usr) => {
         ServiceProvider.getRequestedSlots(usr.idUser)
-        .then((slots) => res.status(200).jsonp({slots: slots}))
+        .then((slots) => {
+            jsonSize = Object.keys(slots).length
+
+            for(let i = 0; i < jsonSize; i++) {
+                let nomes = slots[i].array_categories
+                const filter_nomes = nomes.filter(ct => ct != '\n')
+                let arrSize = filter_nomes.length
+                for(let j = 0; j < arrSize; j++) {
+                    filter_nomes[j] = filter_nomes[j].replace(/(\r\n|\n|\r)/gm, "")
+                }
+                slots[i].array_categories = filter_nomes
+            }
+            //console.log(slots)
+            res.status(200).jsonp({slots: slots})
+        })
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })
 })
