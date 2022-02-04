@@ -146,6 +146,26 @@ export default {
 
       return Object.values(row[0])[2];
     },
+    editItem: async function(item, action){
+      if (action == 1){
+        try {
+          let response = await axios.put(
+            "http://localhost:9040/serviceProvider/acceptSlot", {
+              id: item.id, 
+              dateEnd: item.date_end, 
+              occupied: 0, 
+              dateBegin: item.date_begin, 
+              postDate: item.date_requested, 
+              categories: item.categories,
+            }
+          );
+        console.log(response.data)
+      } catch (e) {
+        console.log(e);
+      }
+      }
+    }
+     
   },
   created: async function () {
     try {
