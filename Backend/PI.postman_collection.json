@@ -53,13 +53,13 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Kazama Iroha 02",
+									"value": "Kazama Iroha",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_02@gmail.com",
+									"value": "theUserTestingEmail_01@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -120,25 +120,25 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "Service Provider Example",
+									"value": "Carolina Alves",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "email",
-									"value": "serviceProvider_11@gmail.com",
+									"value": "carolina.surribes@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "6666",
+									"value": "Carolina1",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "sex",
-									"value": "M",
+									"value": "F",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -150,43 +150,38 @@
 								},
 								{
 									"key": "location",
-									"value": "1",
+									"value": "270",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "phoneNumber",
-									"value": "910214632",
+									"value": "123123123",
 									"description": "Opcional!",
 									"type": "text"
 								},
 								{
 									"key": "description",
-									"value": "Such a big description asdasdasdsfas",
+									"value": "asdcsaas",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
 								{
 									"key": "dateOfBirth",
-									"value": "2020-01-09",
+									"value": "2022-02-02",
 									"description": "Opcional",
 									"type": "text"
 								},
 								{
 									"key": "distance",
-									"value": "69420",
+									"value": "14",
 									"description": "Opcional",
 									"type": "text"
 								},
 								{
 									"key": "qualifications",
-									"value": "I am qualified to walk",
+									"value": "awsdafcdas",
 									"description": "Opcional",
-									"type": "text"
-								},
-								{
-									"key": "categorias",
-									"value": "1",
 									"type": "text"
 								},
 								{
@@ -195,18 +190,13 @@
 									"type": "text"
 								},
 								{
-									"key": "categorias",
-									"value": "3",
-									"type": "text"
-								},
-								{
 									"key": "experience",
-									"value": "5",
+									"value": "14",
 									"type": "text"
 								},
 								{
 									"key": "solidarity",
-									"value": "0",
+									"value": "1",
 									"type": "text"
 								}
 							]
@@ -2559,8 +2549,34 @@
 											"type": "text"
 										},
 										{
-											"key": "slotJson",
+											"key": "id",
 											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "dateEnd",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "occupied",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "postDate",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "",
+											"description": "(array)",
 											"type": "text"
 										}
 									]
@@ -2624,8 +2640,38 @@
 											"type": "text"
 										},
 										{
-											"key": "slotJson",
-											"value": "{\n        \"id\": \"206\",\n        \"date_end\": \"2022-01-06 18:00:00\",\n        \"occupied\": \"0\",\n        \"date_begin\": \"2022-01-06 17:30:00\",\n        \"idCategory\": \"[1,2]\",\n        \"date_requested\": \"2022-02-2 12:01:07\"\n    }",
+											"key": "id",
+											"value": " 206",
+											"type": "text"
+										},
+										{
+											"key": "dateEnd",
+											"value": " 2022-01-06 18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "occupied",
+											"value": " 0",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": " 2022-01-06 17:30:00",
+											"type": "text"
+										},
+										{
+											"key": "postDate",
+											"value": " 2022-02-2 12:01:07",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "categories",
+											"value": "2",
 											"type": "text"
 										}
 									]
