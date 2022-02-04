@@ -53,6 +53,14 @@ Out.get_categories = (id) => {
     }})
 }
 
+Out.verify = (id, obj) => {
+    return dbconfig.sequelize.query('CALL verify_slot (:id, :json)',
+    {replacements: {
+        id: id,
+        json: obj
+    }})
+}
+
 Out.getPerfilUser = (email) => {
     return dbconfig.sequelize.query('CALL get_service_provider_profile_v2 (:em)',
     {replacements: {
