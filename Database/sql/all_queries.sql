@@ -1861,7 +1861,7 @@ BEGIN
     SET os = IF (os IS NULL, '[]', os);
 
 	select CAST(json_extract(j1, '$.id') AS UNSIGNED) AS id, user.name, json_extract(j1, '$.date_begin') AS date_begin, json_extract(j1, '$.date_end') AS date_end, 
-		json_extract(j1, '$.idCategory') AS categories, json_extract(j1, '$.date_requested') AS date_requested, IF ( LENGTH(json_extract(j1, '$.idCategory')) <= 5, CAST(CONCAT('[',
+		CAST(REPLACE(json_extract(j1, '$.idCategory'),'"','') AS JSON) AS categories, json_extract(j1, '$.date_requested') AS date_requested, IF ( LENGTH(json_extract(j1, '$.idCategory')) <= 5, CAST(CONCAT('[',
          IF (json_extract(j1, '$.idCategory') LIKE '%1%', '"Apoio externo"',''),IF (json_extract(j1, '$.idCategory') LIKE '%2%', '"Cuidados de higiene e conforto pessoal"',''),
          IF (json_extract(j1, '$.idCategory') LIKE '%3%', '"Cuidados de lazer"',''),IF (json_extract(j1, '$.idCategory') LIKE '%4%', '"Cuidados médicos"',''),
          IF (json_extract(j1, '$.idCategory') LIKE '%5%', '"Fornecimento e apoio nas refeições"','') ,IF (json_extract(j1, '$.idCategory') LIKE '%6%', '"Higiene habitacional"',''),']') AS JSON),
