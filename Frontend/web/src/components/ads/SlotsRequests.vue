@@ -1,12 +1,19 @@
 <template>
   <v-container>
-    <!--<v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>-->
+    <v-row>
+      <v-col cols="auto">
+        <v-text-field
+          v-model="search"
+          dense
+          append-icon="mdi-magnify"
+          label="Procurar"
+          single-line
+          hide-details
+          class="mb-4"
+          color="#78C4D4"
+        ></v-text-field>
+      </v-col>
+    </v-row>
     <v-data-table
       :headers="headers"
       :items="slots"
@@ -100,12 +107,11 @@ export default {
       {
         text: "Data início",
         align: "start",
-        sortable: false,
         value: "date_begin",
       },
       { text: "Data término", value: "date_end" },
       { text: "Data pedido", value: "date_requested" },
-      { text: "Categorias", value: "array_categories" },
+      { text: "Categorias", value: "array_categories", align: "center" },
       { text: "Cliente", value: "name" },
       { text: "Ações", value: "actions", sortable: false },
     ],
@@ -128,10 +134,12 @@ export default {
       },
       { name: "Higiene habitacional", icon: "fas fa-home", color: "#D7BFDC" },
     ],
+    editedIndex: -1,
+    editedItem: null,
   }),
   methods: {
     formatDate(d) {
-      return moment(d).locale("pt").format("YYYY-MM-DD HH:MM");
+      return moment(d).locale("pt").format("DD-MM-YYYY HH:MM");
     },
     getIcon(c) {
       var row = this.category.filter((obj) => {
@@ -146,26 +154,49 @@ export default {
 
       return Object.values(row[0])[2];
     },
-    editItem: async function(item, action){
-      if (action == 1){
-        try {
-          let response = await axios.put(
-            "http://localhost:9040/serviceProvider/acceptSlot", {
-              id: item.id, 
-              dateEnd: item.date_end, 
-              occupied: 0, 
-              dateBegin: item.date_begin, 
-              postDate: item.date_requested, 
-              categories: item.categories,
-            }
-          );
-        console.log(response.data)
-      } catch (e) {
-        console.log(e);
+    editItem: async function (item, action) {
+      try {
+        let url = "";
+        let message = "";
+        action == 1
+          ? ((url = "http://localhost:9040/serviceProvider/acceptSlot"),
+            (message = "Slot aceite com sucesso."))
+          : ((url = "http://localhost:9040/serviceProvider/remSlot"),
+            (message = "Slot recusado com sucesso."));
+        await axios.put(url, {
+          token: store.getters.token,
+          id: item.id,
+          dateEnd: item.date_end,
+          occupied: 0,
+          dateBegin: item.date_begin,
+          postDate: item.date_requested,
+          categories: item.categories,
+        });
+
+        this.$snackbar.showMessage({
+          show: true,
+          text: message,
+          color: "success",
+          snackbar: true,
+          timeout: 4000,
+        });
+
+        this.editedIndex = this.slots.indexOf(item);
+        this.editedItem = Object.assign({}, item);
+        this.slots.splice(this.editedIndex, 1);
+      } catch (error) {
+        let message = "";
+          error.response.data.error == "Slot já preenchido com outro trabalho!"
+            ? (message = "Este horário já se encontra preenchido.")
+            : (message = "Ocorreu um erro, por favor tente mais tarde!");
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: message,
+          timeout: 4000,
+        });
       }
-      }
-    }
-     
+    },
   },
   created: async function () {
     try {
@@ -177,7 +208,6 @@ export default {
       );
       if (response) {
         this.slots = response.data.slots;
-        console.log(this.slots);
       }
     } catch (e) {
       console.log(e);

@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-card flat>
+    <v-card flat class="mt-5">
       <v-row>
         <v-col cols="auto" class="ml-auto">
           <image-upload :id="user.idUser" @clicked="uploaded()" />

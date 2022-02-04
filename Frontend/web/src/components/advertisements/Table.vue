@@ -1,7 +1,22 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="auto">
+        <v-text-field
+          v-model="search"
+          dense
+          append-icon="mdi-magnify"
+          label="Procurar"
+          single-line
+          hide-details
+          class="mb-4"
+          color="#78C4D4"
+        ></v-text-field>
+      </v-col>
+    </v-row>
     <v-data-table
       :page.sync="page"
+      :search="search"
       :items-per-page="itemsPerPage"
       hide-default-footer
       @page-count="pageCount = $event"
@@ -11,6 +26,8 @@
       item-key="idJobOffer"
       show-expand
       class="elevation-1"
+      no-data-text="Não existem anúncios publicados."
+      no-results-text="Não foram encontrados resultados."
     >
       <template v-slot:expanded-item="{ headers, item }">
         <td :colspan="headers.length">
@@ -23,12 +40,11 @@
         </v-chip>
       </template>
 
-       <template v-slot:[`item.categoryName`]="{ item }">
+      <template v-slot:[`item.categoryName`]="{ item }">
         <v-chip small :color="getColor(item.categoryName)" class="mr-1">
           <v-icon x-small>{{ getIcon(item.categoryName) }}</v-icon>
-
         </v-chip>
-        <span>{{item.categoryName}}</span>
+        <span>{{ item.categoryName }}</span>
       </template>
 
       <template v-slot:[`item.actions`]="{ item }">
@@ -218,8 +234,9 @@ export default {
   data() {
     return {
       page: 1,
+      search: "",
       pageCount: 0,
-      itemsPerPage: 10,
+      itemsPerPage: 6,
       dialog: false,
       expanded: [],
       dialogData: {},
@@ -236,7 +253,6 @@ export default {
         {
           text: "Data início",
           align: "start",
-          sortable: false,
           value: "beginDate",
         },
         { text: "Data término", value: "endDate" },
@@ -253,12 +269,20 @@ export default {
         {
           name: "Cuidados de higiene e conforto pessoal",
           icon: "fas fa-pump-medical",
-          color:"#95C8D8"
+          color: "#95C8D8",
         },
-        { name: "Cuidados de lazer", icon: "fas fa-book-open", color:"#C5E1A5" },
-        { name: "Cuidados médicos", icon: "fas fa-pills", color:"#F5C3C2" },
-        { name: "Fornecimento e apoio nas refeições", icon: "fas fa-utensils", color:"#EEDC82" },
-        { name: "Higiene habitacional", icon: "fas fa-home", color:"#D7BFDC" },
+        {
+          name: "Cuidados de lazer",
+          icon: "fas fa-book-open",
+          color: "#C5E1A5",
+        },
+        { name: "Cuidados médicos", icon: "fas fa-pills", color: "#F5C3C2" },
+        {
+          name: "Fornecimento e apoio nas refeições",
+          icon: "fas fa-utensils",
+          color: "#EEDC82",
+        },
+        { name: "Higiene habitacional", icon: "fas fa-home", color: "#D7BFDC" },
       ],
     };
   },
@@ -284,7 +308,7 @@ export default {
       var row = this.category.filter((obj) => {
         return obj.name === c;
       });
-    
+
       return Object.values(row[0])[2];
     },
     update: async function () {
@@ -294,7 +318,6 @@ export default {
           token: store.getters.token,
         });
         this.ads = response.data;
-        console.log(this.ads);
         this.total = this.ads.length;
       } catch (e) {
         this.$snackbar.showMessage({
@@ -330,7 +353,6 @@ export default {
     },
     postAd: async function () {
       if (this.$refs.form.validate()) {
-        console.log(this.dialogData);
         try {
           await axios.post("http://localhost:9040/joboffer/new", {
             token: store.getters.token,
@@ -362,7 +384,6 @@ export default {
     },
   },
   created: async function () {
-    console.log("fa");
     this.update();
   },
 };

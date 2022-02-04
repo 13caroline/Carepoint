@@ -369,6 +369,7 @@
         <Table />
       </div>
     </v-container>
+    <top-button />
     <Foot />
   </div>
 </template>
@@ -403,6 +404,7 @@ export default {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Foot: () => import("@/components/global/Footer"),
     Cancel: () => import("@/components/dialogs/Cancel"),
+    TopButton: () => import("@/components/global/TopButton"),
     Table: () => import("@/components/advertisements/Table"),
   },
 

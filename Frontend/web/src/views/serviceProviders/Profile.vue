@@ -3,9 +3,10 @@
     <Bar />
     <v-container>
       <v-tabs
+        class="mt-2"
         v-model="tab"
         grow
-        color="#2596be"
+        color="#78C4D4"
         background-color="#fafafa"
         show-arrows
       >
@@ -32,12 +33,12 @@
         </v-tab-item>
       </v-tabs-items>
     </v-container>
+    <top-button />
     <Foot />
   </div>
 </template>
 
 <script>
-//import moment from "moment";
 export default {
   data() {
     return {
@@ -58,6 +59,7 @@ export default {
     personalData: () => import("@/components/serviceProvider/PersonalData.vue"),
     subscriptionData: () =>
       import("@/components/serviceProvider/Subscription.vue"),
+    TopButton: () => import("@/components/global/TopButton"),
     schedules: () => import("@/components/serviceProvider/Schedules.vue"),
     SlotsRequests: () => import("@/components/ads/SlotsRequests.vue"),
   },

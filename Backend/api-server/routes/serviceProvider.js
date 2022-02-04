@@ -91,6 +91,17 @@ router.post('/requests', auth.validToken, (req, res) => {
     })
 })
 
+router.post('/getCategorias', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((user) => {
+        ServiceProvider.get_only_categories(user.idUser)
+        .then((categories) => res.status(200).jsonp({categories : categories}))
+        .catch((err) => res.status(400).jsonp({error : err}))
+    })
+    .catch((err) => res.status(400).jsonp({error : err}))
+})
+
 /****************************************************************************************
  *                                   PUT
  ****************************************************************************************/
@@ -188,11 +199,20 @@ router.put('/acceptSlot', auth.validToken, (req, res) => {
     
     User.consult(email)
     .then((usr) => {
-        ServiceProvider.remSlot(usr.idUser, text)
-        .then((upd) => {
-            ServiceProvider.addSlot(usr.idUser, finalJson)
-            .then((done) => res.status(200).jsonp({ message: "success" }))
-            .catch((err) => {res.status(400).jsonp({ error : err })})
+        ServiceProvider.verify(usr.idUser, text)
+        .then((value) => {
+            if(value[0].can_accept == 1){
+                ServiceProvider.remSlot(usr.idUser, text)
+                .then((upd) => {
+                    ServiceProvider.addSlot(usr.idUser, finalJson)
+                    .then((done) => res.status(200).jsonp({ message: "success" }))
+                    .catch((err) => {res.status(400).jsonp({ error : err })})
+                })
+                .catch((err) => {res.status(400).jsonp({ error : err })})
+            }
+            else{
+                res.status(400).jsonp({ error : "Slot já preenchido com outro trabalho!" })
+            }
         })
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })

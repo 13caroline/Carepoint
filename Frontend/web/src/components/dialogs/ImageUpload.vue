@@ -20,18 +20,6 @@
         <v-divider></v-divider>
         <v-card-text>
           <div class="ml-auto">
-            <!--<v-file-input
-              append-icon="fas fa-camera"
-              v-model="image"
-              type="file"
-              class="input"
-              color="#78C4D4"
-              prepend-icon=""
-              :rules="rules"
-              outlined
-              dense
-              @change="onFileChange"
-            />-->
             <input
               type="file"
               id="file"

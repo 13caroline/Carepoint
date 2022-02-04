@@ -36,10 +36,17 @@
           <span class="solidarity" v-if="serviceProviderData.solidarity == 1">
             Aderente ao banco de horas
           </span>
-          <v-icon small color="#AED581" v-if="serviceProviderData.solidarity == 1">fas fa-check-circle</v-icon>
+          <v-icon
+            small
+            color="#AED581"
+            v-if="serviceProviderData.solidarity == 1"
+            >fas fa-check-circle</v-icon
+          >
         </div>
       </v-col>
-      
+       <v-col cols="auto" class="">
+        <send-message :dados="id" @clicked="update()" />
+      </v-col>
     </v-row>
 
     <v-row>
@@ -63,7 +70,7 @@
         <div class="infos">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" sm="9" md="9" lg="9" class="ml-md-5 ">
+      <v-col cols="12" sm="9" md="9" lg="9" class="ml-md-5">
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
@@ -95,13 +102,22 @@
         <div v-for="(c, index) in categories" :key="index">
           <v-tooltip top color="#78C4D4">
             <template v-slot:activator="{ on, attrs }">
-              <v-btn icon outlined color="#78C4D4" v-bind="attrs" v-on="on" class="my-1">
+              <v-btn
+                icon
+                outlined
+                color="#78C4D4"
+                v-bind="attrs"
+                v-on="on"
+                class="my-1"
+              >
                 <v-icon color="#78C4D4" small>{{ getIcon(c.name) }}</v-icon>
               </v-btn>
             </template>
             <span>{{ c.name }}</span>
           </v-tooltip>
-          <span v-if="c.price" class="infos"> {{c.price.toFixed(1)}} €/hora</span>
+          <span v-if="c.price" class="infos">
+            {{ c.price.toFixed(1) }} €/hora</span
+          >
           <span v-else class="infos"> Preço negociável</span>
         </div>
       </v-col>
@@ -121,9 +137,6 @@
 
       <v-col cols="12" md="4" sm class="d-flex justify-end">
         <add-review :dados="id" @clicked="update()" />
-      </v-col>
-      <v-col cols="12" md="5" sm class="d-flex justify-end">
-        <send-message :dados="id" @clicked="update()" />
       </v-col>
     </v-row>
 
@@ -255,8 +268,8 @@ export default {
     };
   },
   methods: {
-    goTo(){
-      this.$router.push("/chat")
+    goTo() {
+      this.$router.push("/chat");
     },
     formatDate(d) {
       return moment(d, moment.ISO_8601)
@@ -315,7 +328,6 @@ export default {
   },
   created: async function () {
     this.update();
-    
   },
 };
 </script>
@@ -327,7 +339,7 @@ export default {
   text-justify: inter-word;
 }
 .solidarity {
-  color: #78C4D4;
+  color: #78c4d4;
   text-align: justify;
   text-justify: inter-word;
 }

@@ -21,7 +21,7 @@
                   auto-grow
                   outlined
                   flat
-                  rows="5"
+                  rows="3"
                   color="#78C4D4"
                   required
                   :rules="textRules"
@@ -91,7 +91,7 @@
                       color="#78c4d4"
                       @input="menu2 = false"
                       locale="pt PT"
-                      :min="new Date().toISOString().substr(0, 10)"
+                      :min="date"
                     ></v-date-picker>
                   </v-menu>
                 </v-col>
@@ -155,6 +155,9 @@
                     outlined
                     v-model="price"
                     suffix="€/hora"
+                    type="number"
+                    required
+                    v-on:keypress="isNumber($event)"
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -187,7 +190,7 @@
         </v-col>
       </v-row>
     </v-container>
-
+    <top-button />
     <Foot />
   </div>
 </template>
@@ -222,6 +225,7 @@ export default {
   components: {
     Bar: () => import("@/components/global/AppBarAccount.vue"),
     Cancel: () => import("@/components/dialogs/Cancel"),
+    TopButton: () => import("@/components/global/TopButton"),
     Foot: () => import("@/components/global/Footer"),
   },
 
@@ -230,6 +234,11 @@ export default {
       store.getters.tipo == 2
         ? this.$router.push("/my/advertisements")
         : this.$router.push("/service/provider/page");
+    },
+    isNumber(e) {
+      let char = String.fromCharCode(e.keyCode);
+      if (/^[0-9]+$/.test(char)) return true;
+      else e.preventDefault();
     },
 
     postAd: async function () {
