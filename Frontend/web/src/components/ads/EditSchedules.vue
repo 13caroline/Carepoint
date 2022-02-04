@@ -2,7 +2,9 @@
   <div>
     <v-row justify="end" v-if="$store.state.tipo == 3">
       <v-col cols="auto">
-        <NewSlot @clicked="updated"></NewSlot>
+        <EditCategories @clicked="updated"></EditCategories>
+
+        <NewSlot  @clicked="updated"></NewSlot>
       </v-col>
     </v-row>
     <div>
@@ -139,6 +141,7 @@ export default {
   },
   components: {
     NewSlot: () => import("@/components/dialogs/NewSlot"),
+    EditCategories: () => import("@/components/dialogs/EditCategories"),
   },
   methods: {
     getEventColor(event) {

@@ -13,21 +13,18 @@
             dark
             @click="dialog = true"
           >
-            <v-icon small> fas fa-plus</v-icon>
+            <v-icon small> far fa-edit</v-icon>
           </v-btn>
         </template>
-        <span class="caption">Registar horário</span>
+        <span class="caption">Editar categorias</span>
       </v-tooltip>
     </template>
     <v-card>
       <v-form ref="form" v-model="valid">
         <v-card-title class="font-weight-regular text-uppercase">
-          Registar um novo horário
+          Editar categorias
         </v-card-title>
-        <v-card-subtitle
-          >Por favor preencha o seguinte formulário</v-card-subtitle
-        >
-        <v-divider></v-divider>
+        
 
         <v-card-text class="mt-4">
           <v-row align="center">
