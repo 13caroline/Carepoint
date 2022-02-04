@@ -1,74 +1,82 @@
 <template>
   <div>
     <v-app-bar flat color="#78C4D4" height="100" elevation="3" class="mb-4">
-      <v-row justify="center" class="w-100">
-        <v-col cols="7" md="4" sm="4" offset-md="3" offset-sm="3">
-          <v-img
-            id="logo_"
-            class="logo"
-            @click="goToMainPage()"
-            src="@/assets/logo_white.png"
-            max-height="220"
-            max-width="220"
-          >
-          </v-img>
-        </v-col>
-        <v-col cols="5" md="2">
-          <v-menu offset-y offset-overflow>
-            <template v-slot:activator="{ on, attrs }">
-              <v-avatar v-bind="attrs" v-on="on" color="white">
+      <v-img
+        id="logo_"
+        class="logo"
+        src="@/assets/logo_white.png"
+        max-height="220"
+        max-width="220"
+      >
+      </v-img>
+
+      <v-spacer></v-spacer>
+
+      <v-menu
+        offset-y
+        open-on-hover
+        offset-overflow
+        v-if="$store.state.tipo != '4'"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <!--<v-avatar v-bind="attrs" v-on="on" color="white">
                 <v-img
                   class="userImg ml-auto"
                   :src="processImage()"
                 >
                 </v-img>
-              </v-avatar>
-            </template>
-            <v-list>
-              <v-list-item v-if="$store.state.tipo != '4'">
-                <v-list-item-title
-                  class="menuOpcao"
-                  @click="processClick('Anúncios')"
-                  >Anúncios</v-list-item-title
-                >
-              </v-list-item>
-              <v-list-item v-if="$store.state.tipo != '4'">
-                <v-list-item-title
-                  class="menuOpcao"
-                  @click="processClick('Meus anúncios')"
-                  >Meus anúncios</v-list-item-title
-                >
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title
-                  class="menuOpcao"
-                  @click="processClick('Perfil')"
-                  >Perfil</v-list-item-title
-                >
-              </v-list-item>
-              <v-list-item v-if="$store.state.tipo != '4'">
-                <v-list-item-title
-                  class="menuOpcao"
-                  @click="processClick('Publicar anúncio')"
-                  >Publicar anúncio</v-list-item-title
-                >
-              </v-list-item>
-              <v-list-item v-if="$store.state.tipo != '4'">
-                <v-list-item-title
-                  class="menuOpcao"
-                  @click="processClick('Mensagens')"
-                  >Mensagens</v-list-item-title
-                >
-              </v-list-item>
-              <v-list-item>
-                <v-list-item-title class="menuOpcao" @click="logout()"
-                  >Terminar sessão</v-list-item-title
-                >
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-col>
-      </v-row>
+              </v-avatar>-->
+          <v-btn dark class="white--text" text v-bind="attrs" v-on="on">
+            Anúncios
+            <v-icon class="ml-1" color="white" small
+              >fas fa-chevron-down</v-icon
+            >
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title
+              class="menuOpcao"
+              @click="processClick('Anúncios')"
+              >Anúncios</v-list-item-title
+            >
+          </v-list-item>
+
+          <v-divider></v-divider>
+
+          <v-subheader  > Publicar </v-subheader>
+
+          <v-list-item>
+            <v-list-item-title
+              class="menuOpcao"
+              @click="processClick('Meus anúncios')"
+              >Os meus anúncios</v-list-item-title
+            >
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title
+              class="menuOpcao"
+              @click="processClick('Publicar anúncio')"
+              >Publicar anúncio</v-list-item-title
+            >
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-divider vertical class="mx-2"></v-divider>
+
+      <v-icon color="white" @click="messages()" class="mx-2"
+        >fas fa-comment-dots</v-icon
+      >
+
+      <v-icon color="white" @click="goToMainPage()" class="mx-2"
+        >fas fa-home</v-icon
+      >
+
+      <v-icon color="white" @click="logout()" class="mx-2"
+        >fas fa-sign-out-alt</v-icon
+      >
     </v-app-bar>
   </div>
 </template>
@@ -80,15 +88,8 @@ export default {
   name: "appbar",
   data() {
     return {
-      items: [
-        { title: "Anúncios" },
-        { title: "Meus anúncios" },
-        { title: "Perfil" },
-        { title: "Publicar anúncio" },
-        { title: "Terminar Sessão" },
-      ],
       cardOptions: false,
-      image: null,
+  
     };
   },
   methods: {
@@ -100,12 +101,6 @@ export default {
     },
     processClick(itemAtual) {
       switch (itemAtual) {
-        case "Perfil":
-          if (store.getters.tipo == 2) this.$router.push("/consumer/profile");
-          else if (store.getters.tipo == 3)
-            this.$router.push("/service/provider/page");
-          else this.$router.push("/company/page");
-          break;
         case "Publicar anúncio":
           this.$router.push("/post/ad");
           break;
@@ -114,19 +109,20 @@ export default {
           else if (store.getters.tipo == 3)
             this.$router.push("/service/provider/ads");
           break;
-        case "Terminar Sessão":
-          this.logout();
-          this.$router.push("/");
-          break;
         case "Meus anúncios":
           this.$router.push("/my/advertisements");
           break;
-        case "Mensagens":
-          this.$router.push("/messages");
       }
     },
     goToMainPage() {
-      this.$router.push("/page");
+      let url = "";
+      if (store.getters.tipo == "2") url = "/consumer/profile";
+      else if (store.getters.tipo == "3") url = "/service/provider/page";
+      else url = "/company/page";
+      this.$router.push(url);
+    },
+    messages (){
+      this.$router.push("/messages");
     },
     logout: async function () {
       try {
@@ -140,14 +136,14 @@ export default {
         this.$router.push("/");
       }
     },
-    processImage() {
+    /*processImage() {
       return (
         "data:image/png;base64," +
         btoa(String.fromCharCode.apply(null, new Uint8Array(this.image)))
       );
-    },
+    },*/
   },
-  created: async function () {
+  /*created: async function () {
     try {
       let response = await axios.post("http://localhost:9040/users/image", {
         token: store.getters.token,
@@ -156,7 +152,7 @@ export default {
     } catch (e) {
       console.log(e);
     }
-  },
+  },*/
 };
 </script>
 
