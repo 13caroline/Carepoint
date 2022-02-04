@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "carolina@gmail.com",
+									"value": "carolina2@gmail.com",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -1495,7 +1495,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8xMUBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzODI2MTY2LCJleHAiOjE2NDM4NjkzNjZ9.opp1pCxXCd5OV9lxv1uD9obR8TPedLIxed72HEcfH0A",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcm9saW5hMkBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQ0MDEwODEzLCJleHAiOjE2NDQwNTQwMTN9.4A7SP7fYcrbLnzXDwKBN-ZP5jVbCdco3IG3r2w_EE1o",
 											"type": "default"
 										}
 									]
@@ -2836,6 +2836,36 @@
 									"path": [
 										"serviceProvider",
 										"updCategoria"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Categorias",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcm9saW5hQGdtYWlsLmNvbSIsImxldmVsIjozLCJpYXQiOjE2NDQwMTM4MDIsImV4cCI6MTY0NDA1NzAwMn0.SYSSGazego6JjlN7XuM6h6RwUyLoVeNeCDFE5moDVxI",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/serviceProvider/getCategorias",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"serviceProvider",
+										"getCategorias"
 									]
 								}
 							},

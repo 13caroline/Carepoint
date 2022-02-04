@@ -91,6 +91,17 @@ router.post('/requests', auth.validToken, (req, res) => {
     })
 })
 
+router.post('/getCategorias', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((user) => {
+        ServiceProvider.get_only_categories(user.idUser)
+        .then((categories) => res.status(200).jsonp({categories : categories}))
+        .catch((err) => res.status(400).jsonp({error : err}))
+    })
+    .catch((err) => res.status(400).jsonp({error : err}))
+})
+
 /****************************************************************************************
  *                                   PUT
  ****************************************************************************************/
