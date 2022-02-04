@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar flat color="#FFFFFF" height="180">
+    <v-app-bar flat color="#78C4D4" height="120">
       <v-row justify="center" class="w-100">
         <v-col cols="7" md="4" sm="4" offset-md="4" offset-sm="3">
           <v-img
