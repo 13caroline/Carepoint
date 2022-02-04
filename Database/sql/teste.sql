@@ -1,13 +1,15 @@
 USE PI;
- CALL get_service_providers_v2 (1, NULL, 1, 3, 6, NULL,10,0);
- CALL get_service_providers_v2_count(1, NULL, 1, 3, 6, NULL);
+CALL get_service_providers_v2 (1, NULL, 1, 3, 6, NULL,10,0);
+CALL get_service_providers_v2_count(NULL, NULL, 1, 3, 6, NULL); -- 20
+CALL get_service_providers_v2_count(1, NULL, 1, 3, 6, NULL); -- 4
+CALL get_service_providers_v2_count(NULL, NULL, NULL, NULL, 6, NULL); -- 26
  -- get_service_providers (IN id_category INT, IN id_location INT, IN experience INT, IN price DOUBLE, IN rating DOUBLE, IN in_sex VARCHAR(1),IN limite INT, IN inicio INT)
 -- CALL get_companies(NULL,50,0);
 -- CALL get_average_rating(55);
 -- CALL get_reviews(55);
 -- CALL get_service_provider_profile(55);
 -- CALL get_joboffer(4,471,18, 10, 0);
-
+SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
 -- CALL update_company_endSub(151,13);
 -- CALL update_joboffer(4, 'teste', '2026-08-11', 10, '2026-08-14', 6, 180);
 CALL get_max_values();
@@ -26,7 +28,7 @@ CALL get_max_values();
 
 -- UPDATE pi.review SET review.rating = 10 WHERE review.idReview = 75;
  CALL update_averageRating(51);
-
+SELECT @@sql_mode;
 -- category , location, experience, price, rating, sex, limite, offset
   -- CALL get_service_providers_v2 (NULL, NULL, NULL, NULL,NULL, NULL,40,0);
   CALL get_service_providers_v2_count (NULL, NULL, NULL, NULL,NULL, NULL);
