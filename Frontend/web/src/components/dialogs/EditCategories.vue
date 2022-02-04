@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="100%" max-width="500" persistent>
+  <v-dialog v-model="dialog" width="100%" max-width="45%" persistent>
     <template v-slot:activator="{ diag, attrs }">
       <v-tooltip top>
         <template v-slot:activator="{ on }">
@@ -24,114 +24,96 @@
         <v-card-title class="font-weight-regular text-uppercase">
           Editar categorias
         </v-card-title>
-        
 
-        <v-card-text class="mt-4">
+        <v-card-text>
           <v-row align="center">
-            <v-col cols="12" md="10" class="py-0 mx-auto">
-              <span>Dia da semana *</span>
-              <v-autocomplete
-                outlined
-                flat
-                dense
-                v-model="form.date"
-                :items="dates"
-                item-value="date"
-                item-text="id"
-                :rules="textRules"
-                color="#78C4D4"
-                name="date"
-                required
-              />
-            </v-col>
+            <template>
+              <v-container>
+                <v-row justify="end">
+                  <v-col cols="auto">
+                    <v-text-field
+                      v-model="search"
+                      dense
+                      append-icon="mdi-magnify"
+                      label="Procurar"
+                      single-line
+                      hide-details
+                      class="mb-4"
+                      color="#78C4D4"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-data-table
+                  :headers="headers"
+                  :items="categories"
+                  class="elevation-1"
+                  :search="search"
+                  :page.sync="page"
+                  :items-per-page="itemsPerPage"
+                  hide-default-footer
+                  @page-count="pageCount = $event"
+                  no-data-text="Não existem categorias registadas."
+                  no-results-text="Não foram encontrados resultados."
+                >
+                  <template v-slot:[`item.name`]="{ item }">
+                    <v-chip
+                      small
+                      v-bind="attrs"
+                      v-on="on"
+                      :color="getColor(item.name)"
+                      class="mr-1"
+                    >
+                      <v-icon x-small>{{ getIcon(item.name) }}</v-icon>
+                    </v-chip>
+                    <span>{{ item.name }}</span>
+                  </template>
 
-            <v-col cols="12" md="10" class="py-0 mx-auto">
-              <span>Hora início *</span>
-              <v-menu
-                ref="horaInicio"
-                v-model="horaInicio"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="horaInicio"
-                transition="scale-transition"
-                offset-y
-                max-width="290px"
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    append-icon="fas fa-clock"
-                    color="#78C4D4"
-                    v-on="on"
-                    outlined
-                    :rules="textRules"
-                    dense
-                    v-model="hora"
-                  ></v-text-field>
-                </template>
-                <v-time-picker
-                  format="24hr"
-                  v-model="hora"
-                  full-width
-                  min="10:00"
-                  max="19:45"
-                  :allowed-minutes="allowedStep"
-                  color="#78C4D4"
-                ></v-time-picker>
-              </v-menu>
-            </v-col>
+                  <template v-slot:[`item.actions`]="{ item }">
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon
+                          v-bind="attrs"
+                          v-on="on"
+                          color="#80CBC4"
+                          class="mr-2"
+                          @click="editItem(item, 1)"
+                          small
+                        >
+                          fas fa-pen
+                        </v-icon>
+                      </template>
+                      <span>Alterar categoria</span>
+                    </v-tooltip>
 
-            <v-col cols="12" md="10" class="py-0 mx-auto">
-              <span>Hora término *</span>
-              <v-menu
-                ref="horaTermino"
-                v-model="horaTermino"
-                :close-on-content-click="false"
-                :nudge-right="40"
-                :return-value.sync="horaTermino"
-                transition="scale-transition"
-                offset-y
-                max-width="290px"
-                min-width="290px"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    append-icon="fas fa-clock"
-                    color="#78C4D4"
-                    v-on="on"
-                    outlined
-                    dense
-                    :rules="textRules"
-                    v-model="hora2"
-                  ></v-text-field>
-                </template>
-                <v-time-picker
-                  format="24hr"
-                  v-model="hora2"
-                  full-width
-                  :min="hora + 30"
-                  max="19:45"
-                  :allowed-minutes="allowedStep"
+                    <v-tooltip top>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon
+                          v-bind="attrs"
+                          v-on="on"
+                          color="#EF9A9A"
+                          class="mr-2"
+                          @click="remove(item)"
+                          small
+                        >
+                          fas fa-trash
+                        </v-icon>
+                      </template>
+                      <span>Remover categoria</span>
+                    </v-tooltip>
+                  </template>
+                </v-data-table>
+
+                <v-pagination
+                  v-if="categories.length"
+                  v-model="page"
+                  :length="pageCount"
+                  circle
+                  :total-visible="7"
                   color="#78C4D4"
-                ></v-time-picker>
-              </v-menu>
-            </v-col>
-          </v-row>
-          <v-row align="end" justify="end">
-            <v-col cols="auto">
-              <Cancelar :dialogs="cancelar" @clicked="close()"></Cancelar>
-            </v-col>
-            <v-col cols="auto">
-              <v-btn
-                depressed
-                class="white--text"
-                color="#78c4d4"
-                @click="register()"
-                :disabled="!valid"
-              >
-                Registar
-              </v-btn>
-            </v-col>
+                  class="custom mt-2"
+                ></v-pagination>
+              </v-container>
+            </template>
           </v-row>
         </v-card-text>
       </v-form>
@@ -140,96 +122,126 @@
 </template>
 
 <script>
+import moment from "moment";
 import axios from "axios";
 import store from "@/store/index.js";
-import Cancelar from "@/components/dialogs/Cancel.vue";
 export default {
   data: () => ({
-    dialog: false,
-    horaInicio: null,
-    horaTermino: null,
-    hora: "08:00",
-    hora2: "09:00",
-    textRules: [(v) => !!v || "Campo obrigatório"],
-    medicos: [],
-    dates: [
-      { id: "Segunda-feira", date: "2022-01-03" },
-      { id: "Terça-feira", date: "2022-01-04" },
-      { id: "Quarta-feira", date: "2022-01-05" },
-      { id: "Quinta-feira", date: "2022-01-06" },
-      { id: "Sexta-feira", date: "2022-01-07" },
-      { id: "Sábado", date: "2022-01-08" },
-      { id: "Domingo", date: "2022-01-09" },
+    categories: [],
+    search: "",
+    headers: [
+      {
+        text: "Categoria",
+        align: "start",
+        value: "name",
+      },
+      { text: "Preço (€/hora)", value: "price", align: "center" },
+      { text: "Ações", value: "actions", sortable: false },
     ],
-    cat: [],
-    dialogs: {},
-    form: {
-      date: null,
-    },
-    cancelar: {
-      title: "registo de horário",
-      text: "o registo de horário",
-    },
+    page: 1,
+    pageCount: 0,
+    itemsPerPage: 7,
+    category: [
+      { name: "Apoio externo", icon: "fas fa-car-side", color: "#FDA172" },
+      {
+        name: "Cuidados de higiene e conforto pessoal",
+        icon: "fas fa-pump-medical",
+        color: "#95C8D8",
+      },
+      { name: "Cuidados de lazer", icon: "fas fa-book-open", color: "#C5E1A5" },
+      { name: "Cuidados médicos", icon: "fas fa-pills", color: "#F5C3C2" },
+      {
+        name: "Fornecimento e apoio nas refeições",
+        icon: "fas fa-utensils",
+        color: "#EEDC82",
+      },
+      { name: "Higiene habitacional", icon: "fas fa-home", color: "#D7BFDC" },
+    ],
+    editedIndex: -1,
+    editedItem: null,
+    dialog: false,
     valid: false,
   }),
-  components: {
-    Cancelar,
-  },
   methods: {
-    allowedStep: (m) => m % 30 === 0,
-
-    close() {
-      this.dialog = false;
+    formatDate(d) {
+      return moment(d).locale("pt").format("DD-MM-YYYY HH:MM");
     },
+    getIcon(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
+      return Object.values(row[0])[1];
+    },
+    getColor(c) {
+      var row = this.category.filter((obj) => {
+        return obj.name === c;
+      });
 
-    register: async function () {
-      if (this.$refs.form.validate()) {
-        let data1 = this.form.date + " " + this.hora;
-        let data2 = this.form.date + " " + this.hora2;
-        try {
+      return Object.values(row[0])[2];
+    },
+    /*remove: async function(item){
+      try{
+        await axios.put("http://localhost:9040/serviceProvider/remCategoria", {
+          token: store.getters.token, 
           
-          await axios.put("http://localhost:9040/serviceProvider/regHorario", {
-            token: store.getters.token,
-            dateBegin: data1,
-            dateEnd: data2,
-          });
-          this.$emit("clicked", "update");
-          (this.dialog = false),
-            this.$snackbar.showMessage({
-              show: true,
-              text: "Horário registado com sucesso.",
-              color: "success",
-              snackbar: true,
-              timeout: 4000,
-            });
-        } catch (error) {
-          let message = "";
-          error.response.data.error == "Slot do Hórario já se encontra ocupado."
-            ? (message = "Este slot já se encontra registado.")
-            : (message = "Ocorreu um erro, por favor tente mais tarde!");
-          this.$snackbar.showMessage({
-            show: true,
-            color: "warning",
-            text: message,
-            timeout: 4000,
-          });
-        }
-      } else {
+        })
+      }
+    }*/
+    /*editItem: async function (item, action) {
+      try {
+        let url = "";
+        let message = "";
+        action == 1
+          ? ((url = "http://localhost:9040/serviceProvider/acceptSlot"),
+            (message = "Slot aceite com sucesso."))
+          : ((url = "http://localhost:9040/serviceProvider/remSlot"),
+            (message = "Slot recusado com sucesso."));
+        await axios.put(url, {
+          token: store.getters.token,
+          id: item.id,
+          dateEnd: item.date_end,
+          occupied: 0,
+          dateBegin: item.date_begin,
+          postDate: item.date_requested,
+          categories: item.categories,
+        });
+
         this.$snackbar.showMessage({
           show: true,
-          color: "error",
-          text: "Por favor preencha todos os campos.",
+          text: message,
+          color: "success",
+          snackbar: true,
+          timeout: 4000,
+        });
+
+        this.editedIndex = this.categories.indexOf(item);
+        this.editedItem = Object.assign({}, item);
+        this.categories.splice(this.editedIndex, 1);
+      } catch (error) {
+        let message = "";
+        error.response.data.error == "Slot já preenchido com outro trabalho!"
+          ? (message = "Este horário já se encontra preenchido.")
+          : (message = "Ocorreu um erro, por favor tente mais tarde!");
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: message,
           timeout: 4000,
         });
       }
-    },
+    },*/
   },
-
   created: async function () {
     try {
-      let response3 = await axios.get("http://localhost:9040/category");
-      if (response3) {
-        this.cat = response3.data;
+      console.log("jello");
+      let response = await axios.post(
+        "http://localhost:9040/serviceProvider/getCategorias",
+        {
+          token: store.getters.token,
+        }
+      );
+      if (response) {
+        this.categories = response.data.categories;
       }
     } catch (e) {
       console.log(e);
@@ -237,3 +249,23 @@ export default {
   },
 };
 </script>
+
+<style>
+.custom {
+  width: auto;
+  margin-left: auto;
+}
+.custom .v-pagination__navigation {
+  height: 26px !important;
+  width: 26px !important;
+}
+.custom .v-pagination__navigation .v-icon {
+  font-size: 16px !important;
+}
+.custom .v-pagination__item {
+  height: 26px !important;
+  min-width: 26px !important;
+  font-size: 0.85rem !important;
+}
+</style>
+         
