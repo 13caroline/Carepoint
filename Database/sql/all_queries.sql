@@ -218,7 +218,7 @@ DELIMITER ;
 DELIMITER &&
 CREATE PROCEDURE get_sp_only_category_info (IN id INT)
 BEGIN
-	SELECT category.name, category_has_serviceprovider.experience, category_has_serviceprovider.price FROM user
+	SELECT category.idCategory, category.name, category_has_serviceprovider.experience, category_has_serviceprovider.price FROM user
 	INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
     INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory WHERE id = user.idUser;
 END &&
