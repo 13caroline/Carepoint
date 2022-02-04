@@ -56,6 +56,7 @@ DROP PROCEDURE IF EXISTS info_requested_slots;
 DROP PROCEDURE IF EXISTS info_requested_slots_v2;
 DROP PROCEDURE IF EXISTS remove_categoria;
 DROP PROCEDURE IF EXISTS verify_slot;
+DROP PROCEDURE IF EXISTS verify_ws;
 
 -- =============================================
 -- Description: Insert review
@@ -1956,6 +1957,37 @@ BEGIN
         (json_extract(j1, '$.date_begin') > json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') < json_extract(in_slot, '$.date_end')));
 	
     SELECT can_accept;
+    
+END &&  
+DELIMITER ;
+
+
+-- =============================================
+-- Description: Verify if slot requested belongs to the service provider schedule
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - service provider identification number
+--   @in_slot - slot to be verified
+-- Returns: None
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE verify_ws (IN in_idUser INT,IN in_slot JSON)  
+BEGIN  
+	
+    DECLARE os JSON DEFAULT '[]';
+    DECLARE can_be_requested TINYINT DEFAULT 0;
+    
+    -- get the workSchedule schedule
+    SET os =  (SELECT serviceprovider.workSchedule FROM serviceprovider 
+			WHERE serviceprovider.idSP = in_idUser);
+    
+    SET os = IF (os IS NULL, '[]', os);
+    
+    SET can_be_requested = (select IF (COUNT(*) > 0, 1, 0) from json_table(os, '$[*]' columns ( j1 json path '$')) as jt 
+		where (json_extract(j1, '$.date_begin') <= json_extract(in_slot, '$.date_begin') AND json_extract(j1, '$.date_end') >= json_extract(in_slot, '$.date_end')));
+	
+    SELECT can_be_requested;
     
 END &&  
 DELIMITER ;

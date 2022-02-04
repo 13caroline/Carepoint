@@ -176,3 +176,8 @@ CALL verify_slot(51,'{
         "date_end": "2022-01-09 18:10:00",
         "date_begin": "2022-01-09 18:00:00"
     }');
+    
+CALL verify_ws(51,'{"date_end": "2022-01-09 12:30:00","date_begin": "2022-01-09 05:00:00"}');
+CALL verify_ws(51,'{"date_end": "2022-01-09 12:30:00","date_begin": "2022-01-09 04:59:00"}');
+CALL verify_ws(51,'{"date_end": "2022-01-09 12:20:00","date_begin": "2022-01-09 05:59:00"}');
+CALL verify_ws(51,'{"date_end": "2022-01-09 12:31:00","date_begin": "2022-01-09 05:59:00"}');
