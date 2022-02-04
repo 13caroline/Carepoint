@@ -177,13 +177,13 @@ export default {
     start: null,
     end: null,
     occupied: null,
+    weekday: [1, 2, 3, 4, 5, 6, 0],
+    type: "",
     name: null,
     horaInicio: null,
     horaTermino: null,
     hora: "",
     hora2: "",
-    weekday: [1, 2, 3, 4, 5, 6, 0],
-    type: "",
     categories: [],
     cat: [],
     selectedEvent: {},
@@ -204,7 +204,7 @@ export default {
     allowedStep: (m) => m % 30 === 0,
     showEvent({ nativeEvent, event }) {
       const open = () => {
-        this.day = moment(event.start).format("YYYY-MM-DD");
+        this.day = moment(event.start).format("DD-MM-YYYY");
         this.date_begin = moment(event.start).format("HH:mm");
         this.date_end = moment(event.end).format("HH:mm");
         this.selectedEvent = event;

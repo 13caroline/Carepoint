@@ -48,7 +48,6 @@
             <span class="black--text" v-else>
               <strong>Prestador de Serviços Individual</strong>
             </span>
-            
           </v-col>
 
           <v-col class="pb-0" align="right" cols="5">
@@ -146,10 +145,9 @@ export default {
   methods: {
     confirm(visible) {
       this.total = 0;
-      if (visible == 0){ 
-        this.details.visibilityPrice = 0;
-        this.details.visibility = 0; 
-      }
+      visible == 0
+        ? (this.details.visibilityPrice = 0)
+        : (this.details.visibility = 0);
 
       this.total =
         Math.round(
@@ -170,8 +168,9 @@ export default {
           ? this.$router.push("/service/provider/page")
           : this.$router.push("/company/page");
 
-        (this.details.updated === 0) ? this.text = "Bem-vindo ao Carepoint!" 
-        : this.text = "Subscrição renovada com sucesso!"
+        this.details.updated === 0
+          ? (this.text = "Bem-vindo ao Carepoint!")
+          : (this.text = "Subscrição renovada com sucesso!");
         this.$snackbar.showMessage({
           show: true,
           color: "#78c4d4",

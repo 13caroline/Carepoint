@@ -146,7 +146,6 @@ export default {
             newPassword_1: this.form.newPassword,
             newPassword_2: this.form.newPasswordRepeat,
           });
-          console.log("fgasgf");
           this.$emit("clicked", "update");
           (this.dialog = false),
             this.$snackbar.showMessage({

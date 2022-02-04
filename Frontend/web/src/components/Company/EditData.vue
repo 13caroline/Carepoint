@@ -22,18 +22,21 @@
                         ></v-text-field>
                       </v-col>
                     </div>
-                     <v-row class="mx-auto" align="center">
+                    <v-row class="mx-auto" align="center">
                       <v-col md="10">
-                      <span>Password</span>
-                      <v-text-field
-                        outlined
-                        disabled
-                        dense
-                        placeholder="*******"
-                      ></v-text-field>
+                        <span>Password</span>
+                        <v-text-field
+                          outlined
+                          disabled
+                          dense
+                          placeholder="*******"
+                        ></v-text-field>
                       </v-col>
-                        <v-col>
-                      <change-password :id="user.idUser" @clicked="update()"/>
+                      <v-col>
+                        <change-password
+                          :id="user.idUser"
+                          @clicked="update()"
+                        />
                       </v-col>
                     </v-row>
                     <!--<div>
@@ -183,7 +186,7 @@
               </v-card>
             </v-col>
           </v-row>
-          <div >
+          <div>
             <h3 class="mt-6 group font-weight-light text-uppercase">
               Informações
             </h3>
@@ -204,8 +207,6 @@
                           ></v-text-field>
                         </v-col>
                       </div>
-                      
-                     
                     </v-list-item-content>
                   </v-list-item>
                 </v-card>
@@ -282,7 +283,7 @@ export default {
     confirm: async function () {
       if (this.$refs.form.validate()) {
         try {
-          let response = await axios.put("http://localhost:9040/users/update", {
+          await axios.put("http://localhost:9040/users/update", {
             token: store.getters.token,
             name: this.user.name,
             email: this.user.email,
@@ -295,7 +296,6 @@ export default {
             firm: this.user.firm,
             nipc: this.user.nipc,
           });
-          console.log(response);
           this.$router.push("/service/provider/page");
 
           this.$snackbar.showMessage({
@@ -323,35 +323,36 @@ export default {
         });
       }
     },
-    update: async function(){
-        try {
-      let response = await axios.post("http://localhost:9040/users/perfil", {
-        token: store.getters.token,
-      });
-      this.user = response.data.perfil[0];
-      console.log(response.data);
-      if (this.user.sex == "M") this.user.sex = "Masculino";
-      else if (this.user.sex == "F") this.user.sex = "Feminino";
-      else this.user.sex = "Indefinido";
-    } catch (e) {
-      this.$snackbar.showMessage({
-        show: true,
-        color: "error",
-        text: "Ocorreu um erro. Por favor tente mais tarde!",
-        timeout: 4000,
-      });
-    }
-    }
+    update: async function () {
+      try {
+        let response = await axios.post("http://localhost:9040/users/perfil", {
+          token: store.getters.token,
+        });
+        this.user = response.data.perfil[0];
+
+        this.user.sex == "M"
+          ? (this.user.sex = "Masculino")
+          : this.user.sex == "F"
+          ? (this.user.sex = "Feminino")
+          : (this.user.sex = "Indefinido");
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
   },
   components: {
     Cancel: () => import("@/components/dialogs/Cancel"),
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
-    ChangePassword: () => import("@/components/dialogs/ChangePassword")
-
+    ChangePassword: () => import("@/components/dialogs/ChangePassword"),
   },
   created: async function () {
-  this.update();
+    this.update();
   },
 };
 </script>

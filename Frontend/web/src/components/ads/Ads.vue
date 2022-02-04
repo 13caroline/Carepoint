@@ -168,7 +168,6 @@ export default {
         let url = "http://localhost:9040/search/serviceProviders?page=";
       
         let response = await axios.get(url + search);
-        console.log(response.data.ServiceProviders)
         if (response) {
           this.ads = Object.assign([],response.data.ServiceProviders);
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
@@ -181,7 +180,6 @@ export default {
           timeout: 4000,
         });
       }
-      console.log(this.ads)
     },
 
     searchForm: async function(form) {
