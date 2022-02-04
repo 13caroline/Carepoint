@@ -155,7 +155,7 @@ Out.remSlot = (id, jsonObj) => {
 }
 
 Out.getRequestedSlots = (id) => {
-    return dbconfig.sequelize.query('CALL info_requested_slots_v2 (:id)',
+    return dbconfig.sequelize.query('CALL info_requested_slots (:id)',
         {replacements: {
             id: id
         }})
