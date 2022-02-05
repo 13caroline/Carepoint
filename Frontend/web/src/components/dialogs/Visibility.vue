@@ -26,7 +26,7 @@
             experimental.
           </div>
           <div v-else>
-            A visibilidade garante que os seus anúncios se encontrem sempre de
+            A visibilidade garante que os seus anúncios se encontram sempre
             entre os primeiros quando alguém pesquisar por serviços.
           </div>
           <v-item-group>

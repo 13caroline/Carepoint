@@ -34,7 +34,7 @@ const User = require('../controllers/user');
             }
             categories[0].occupiedSchedule = ocupSchd
         }
-        console.log(categories)
+        //console.log(categories)
         res.status(200).jsonp({categories: categories})
     })
     .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));

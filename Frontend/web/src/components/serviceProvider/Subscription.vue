@@ -60,7 +60,7 @@
                 <div>
                   <v-row>
                     <v-col>
-                      <p class="infos mb-0">Data término</p>
+                      <p class="infos mb-0">Data de término</p>
                     </v-col>
                     <v-col>
                       <p class="respos mb-0">
@@ -97,7 +97,7 @@
                 <div>
                   <v-row>
                     <v-col>
-                      <p class="infos mb-0">Data término</p>
+                      <p class="infos mb-0">Data de término</p>
                     </v-col>
                     <v-col>
                       <p v-if="user.endSubVip == null" class="respos">
