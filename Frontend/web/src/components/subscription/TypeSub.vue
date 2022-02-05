@@ -83,7 +83,6 @@
                   </v-icon>
                 </v-col>
               </v-row>
-
               <v-row justify="center" class="mx-auto mt-10">
                 <span class="price" v-if="id == 3">{{ s.priceS }} €</span>
                 <span class="price" v-else>{{ s.priceC }} €</span>

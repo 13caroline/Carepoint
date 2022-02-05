@@ -165,7 +165,7 @@ export default {
           subscription: this.details.subscription.toString(),
           visibility: this.details.visibility.toString(),
         });
-        store.state.tipo == 3
+        (store.state.tipo == 3)
           ? this.$router.push("/service/provider/page")
           : this.$router.push("/company/page");
 

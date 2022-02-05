@@ -185,6 +185,9 @@
         </v-form>
       </v-card>
       <v-row align="end" justify="end" class="w-100">
+        <v-col>
+          <RemoveAccount ></RemoveAccount>
+        </v-col>
         <v-col cols="auto">
           <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
         </v-col>
@@ -350,6 +353,7 @@ export default {
     Foot: () => import("@/components/global/Footer"),
     TopButton: () => import("@/components/global/TopButton"),
     ChangePassword: () => import("@/components/dialogs/ChangePassword"),
+    RemoveAccount: () => import("@/components/dialogs/RemoveAccount")
   },
   created: async function () {
     this.update();
