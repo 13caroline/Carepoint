@@ -278,7 +278,6 @@ export default {
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
 
-      console.log(response.data);
       let workSchedule = null;
       let occupiedSchedule = null;
       if (response.data.categories.length) {
