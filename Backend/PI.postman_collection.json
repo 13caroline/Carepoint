@@ -2500,17 +2500,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wOEBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNzk3Mjc5LCJleHAiOjE2NDM4NDA0Nzl9.cm98ZIECZmkeeWS55qWkDTFz-sh_K3vUjYgtX6LVAw0",
-											"type": "text"
-										},
-										{
-											"key": "dateBegin",
-											"value": "2022-01-05 08:00",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hYWFhYWFoYSIsImxldmVsIjozLCJpYXQiOjE2NDQwOTg2MjgsImV4cCI6MTY0NDE0MTgyOH0.YSOnZo5-nBWQttjtwnZ-rnqm2jbddbuCsg_qSzD8IOg",
 											"type": "text"
 										},
 										{
 											"key": "dateEnd",
-											"value": "2022-01-05 09:00",
+											"value": "2022-01-05 09:00:00",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "2022-01-05 08:00:00",
 											"type": "text"
 										}
 									]
@@ -2540,17 +2540,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcm9saW5hQGdtYWlsLmNvbSIsImxldmVsIjozLCJpYXQiOjE2NDQwMTM4MDIsImV4cCI6MTY0NDA1NzAwMn0.SYSSGazego6JjlN7XuM6h6RwUyLoVeNeCDFE5moDVxI",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hYWFhYWFoYSIsImxldmVsIjozLCJpYXQiOjE2NDQwOTg2MjgsImV4cCI6MTY0NDE0MTgyOH0.YSOnZo5-nBWQttjtwnZ-rnqm2jbddbuCsg_qSzD8IOg",
 											"type": "text"
 										},
 										{
 											"key": "dateEnd",
-											"value": "2022-01-06 18:00:00",
+											"value": "2022-01-06 09:00:00",
 											"type": "text"
 										},
 										{
 											"key": "dateBegin",
-											"value": "2022-01-06 17:30:00",
+											"value": "2022-01-06 08:00:00",
 											"type": "text"
 										}
 									]
@@ -4003,11 +4003,8 @@
 					"item": [
 						{
 							"name": "Send Email!",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "urlencoded",
