@@ -205,7 +205,8 @@ export default {
         });
       }
 
-     try {
+    // RETIRAR COMENTÁRIO PARA APRESENTAÇÃO FINAL
+     /*try {
        let assunto = ""; 
        let mensagem = "";
        action == 1 ? (assunto = "Requisição de horário", mensagem = "O seu pedido de requisição de horário foi aceite." + '\n' + '\n' + "A equipa, " + '\n' + "Carepoint. ")
@@ -218,7 +219,7 @@ export default {
       }
       catch(e){
         console.log(e);
-      }
+      }*/
     },
   },
   created: async function () {
