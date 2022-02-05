@@ -145,9 +145,10 @@ export default {
   methods: {
     confirm(visible) {
       this.total = 0;
-      visible == 0
-        ? (this.details.visibilityPrice = 0)
-        : (this.details.visibility = 0);
+      if (visible == 0){ 
+        this.details.visibilityPrice = 0;
+        this.details.visibility = 0; 
+      }
 
       this.total =
         Math.round(

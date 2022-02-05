@@ -1,23 +1,19 @@
 <template>
-  <v-dialog v-model="dialog" width="100%" max-width="45%" persistent>
+  <v-dialog v-model="dialog" width="100%" max-width="45%">
     <template v-slot:activator="{ diag, attrs }">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            color="#78C4D4"
-            class="mb-2"
-            v-bind="attrs"
-            v-on="{ ...on, ...diag }"
-            small
-            fab
-            dark
-            @click="dialog = true"
-          >
-            <v-icon small> far fa-edit</v-icon>
-          </v-btn>
-        </template>
-        <span class="caption">Editar categorias</span>
-      </v-tooltip>
+      <v-btn
+        color="#78C4D4"
+        class="mb-2"
+        v-bind="attrs"
+        v-on="{  ...diag }"
+        small
+        outlined
+        rounded
+        dark
+        @click="dialog = true"
+      >
+        <v-icon small class="mr-2"> far fa-edit</v-icon> Editar categorias
+      </v-btn>
     </template>
     <v-card>
       <v-form ref="form" v-model="valid">
@@ -30,6 +26,25 @@
             <template>
               <v-container>
                 <v-row justify="end">
+                  <v-col cols="auto">
+                    <v-tooltip right>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn
+                          color="#78C4D4"
+                          small
+                          v-bind="attrs"
+                          v-on="{ ...on }"
+                          dark
+                          @click="dialog2 = true"
+                        >
+                          <v-icon small class="mr-2"> fas fa-plus</v-icon> Nova
+                          categoria
+                        </v-btn>
+                      </template>
+                      <span> Nova categoria </span>
+                    </v-tooltip>
+                  </v-col>
+                  <v-spacer></v-spacer>
                   <v-col cols="auto">
                     <v-text-field
                       v-model="search"
@@ -56,13 +71,7 @@
                   no-results-text="Não foram encontrados resultados."
                 >
                   <template v-slot:[`item.name`]="{ item }">
-                    <v-chip
-                      small
-                      v-bind="attrs"
-                      v-on="on"
-                      :color="getColor(item.name)"
-                      class="mr-1"
-                    >
+                    <v-chip small :color="getColor(item.name)" class="mr-1">
                       <v-icon x-small>{{ getIcon(item.name) }}</v-icon>
                     </v-chip>
                     <span>{{ item.name }}</span>
@@ -76,7 +85,7 @@
                           v-on="on"
                           color="#80CBC4"
                           class="mr-2"
-                          @click="editItem(item, 1)"
+                          @click="editItem(item)"
                           small
                         >
                           fas fa-pen
@@ -116,6 +125,90 @@
             </template>
           </v-row>
         </v-card-text>
+
+        <v-dialog v-model="dialog2" max-width="500px">
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">{{ formTitle }}</span>
+            </v-card-title>
+
+            <v-card-text>
+              <v-container>
+                <div>
+                  <span>Categorias *</span>
+                  <v-select
+                    v-if="formTitle == 'Nova categoria'"
+                    outlined
+                    flat
+                    dense
+                    v-model="editedItem.idCategory"
+                    :items="cat"
+                    item-value="idCategory"
+                    item-text="name"
+                    color="#78C4D4"
+                    name="categories"
+                    required
+                  />
+
+                  <v-text-field
+                    v-else
+                    disabled
+                    outlined
+                    flat
+                    dense
+                    :value="editedItem.idCategory"
+                    v-model="editedItem.name"
+                    color="#78C4D4"
+                    name="categories"
+                    required
+                  />
+                </div>
+                <div>
+                  <span>Preço</span>
+                  <v-text-field
+                    outlined
+                    flat
+                    dense
+                    v-model="editedItem.price"
+                    single-line
+                    color="#78C4D4"
+                    name="experience"
+                    suffix="€/hora"
+                  />
+                </div>
+              </v-container>
+            </v-card-text>
+            <v-card-actions>
+              <v-row class="mb-0 py-0">
+                <v-col cols="12" md="6">
+                  <v-btn
+                    depressed
+                    large
+                    outlined
+                    dark
+                    block
+                    color="#78c4d4"
+                    @click="close()"
+                  >
+                    Cancelar
+                  </v-btn>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-btn
+                    depressed
+                    large
+                    dark
+                    block
+                    color="#78c4d4"
+                    @click="addItem()"
+                  >
+                    Confirmar
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-form>
     </v-card>
   </v-dialog>
@@ -130,11 +223,7 @@ export default {
     categories: [],
     search: "",
     headers: [
-      {
-        text: "Categoria",
-        align: "start",
-        value: "name",
-      },
+      { text: "Categoria", align: "start", value: "name" },
       { text: "Preço (€/hora)", value: "price", align: "center" },
       { text: "Ações", value: "actions", sortable: false },
     ],
@@ -157,9 +246,15 @@ export default {
       },
       { name: "Higiene habitacional", icon: "fas fa-home", color: "#D7BFDC" },
     ],
+    cat: [],
     editedIndex: -1,
-    editedItem: null,
+    editedItem: {
+      name: 0,
+      price: "",
+      idCategory: 0,
+    },
     dialog: false,
+    dialog2: false,
     valid: false,
   }),
   methods: {
@@ -179,61 +274,90 @@ export default {
 
       return Object.values(row[0])[2];
     },
-    /*remove: async function(item){
-      try{
-        await axios.put("http://localhost:9040/serviceProvider/remCategoria", {
-          token: store.getters.token, 
-          
-        })
-      }
-    }*/
-    /*editItem: async function (item, action) {
+    remove: async function (item) {
       try {
-        let url = "";
-        let message = "";
-        action == 1
-          ? ((url = "http://localhost:9040/serviceProvider/acceptSlot"),
-            (message = "Slot aceite com sucesso."))
-          : ((url = "http://localhost:9040/serviceProvider/remSlot"),
-            (message = "Slot recusado com sucesso."));
-        await axios.put(url, {
+        await axios.put("http://localhost:9040/serviceProvider/remCategoria", {
           token: store.getters.token,
-          id: item.id,
-          dateEnd: item.date_end,
-          occupied: 0,
-          dateBegin: item.date_begin,
-          postDate: item.date_requested,
-          categories: item.categories,
+          categoria: item.idCategory,
         });
-
+        this.editedIndex = this.categories.indexOf(item);
+        this.editedItem = Object.assign({}, item);
+        this.categories.splice(this.editedIndex, 1);
         this.$snackbar.showMessage({
           show: true,
-          text: message,
+          text: "Categoria removida com sucesso.",
           color: "success",
           snackbar: true,
           timeout: 4000,
         });
-
-        this.editedIndex = this.categories.indexOf(item);
-        this.editedItem = Object.assign({}, item);
-        this.categories.splice(this.editedIndex, 1);
-      } catch (error) {
-        let message = "";
-        error.response.data.error == "Slot já preenchido com outro trabalho!"
-          ? (message = "Este horário já se encontra preenchido.")
-          : (message = "Ocorreu um erro, por favor tente mais tarde!");
+      } catch (e) {
+        console.log(e);
         this.$snackbar.showMessage({
           show: true,
+          text: "Ocorreu um erro, por favor tente mais tarde!",
           color: "warning",
-          text: message,
+          snackbar: true,
           timeout: 4000,
         });
       }
-    },*/
+    },
+    close() {
+      this.dialog2 = false;
+      this.$nextTick(() => {
+        this.editedItem = { name: 0, price: "", idCategory: 0 };
+        this.editedIndex = -1;
+      });
+    },
+    editItem: async function (item) {
+      this.editedIndex = this.categories.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog2 = true;
+    },
+
+    addItem: async function () {
+      try {
+        let message = "";
+        let url = "";
+        this.formTitle == "Nova categoria"
+          ? ((url = "http://localhost:9040/serviceProvider/addCategoria"),
+            (message = "Categoria adicionada com sucesso."))
+          : ((url = "http://localhost:9040/serviceProvider/updCategoria"),
+            (message = "Categoria editada com sucesso"));
+
+        await axios.put(url, {
+          token: store.getters.token,
+          categoria: this.editedItem.idCategory,
+          price: this.editedItem.price,
+        });
+        this.editedIndex > -1
+          ? Object.assign(this.categories[this.editedIndex], this.editedItem)
+          : this.categories.push(this.editedItem);
+
+        this.close();
+
+        this.$snackbar.showMessage({
+          show: true,
+          color: "success",
+          text: message,
+          timeout: 4000,
+        });
+      } catch (error) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "Ocorreu um erro, por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+    },
+  },
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "Nova categoria" : "Editar categoria";
+    },
   },
   created: async function () {
     try {
-      console.log("jello");
       let response = await axios.post(
         "http://localhost:9040/serviceProvider/getCategorias",
         {
@@ -242,6 +366,15 @@ export default {
       );
       if (response) {
         this.categories = response.data.categories;
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let response3 = await axios.get("http://localhost:9040/category");
+      if (response3) {
+        this.cat = response3.data;
       }
     } catch (e) {
       console.log(e);

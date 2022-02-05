@@ -24,8 +24,9 @@
             @click="redirect()"
             width="200px"
           >
+          <v-icon small class="mr-2">fas fa-pen</v-icon>
             Editar dados
-            <v-icon small class="ml-2">fas fa-pen</v-icon>
+            
           </v-btn>
         </v-col>
       </v-row>

@@ -18,12 +18,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "carolina@gmail.com",
+									"value": "kazama_tan@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "Carolina1",
+									"value": "Th0ldana",
 									"type": "text"
 								}
 							]
@@ -1214,17 +1214,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlcnZpY2VQcm92aWRlcl8wNkBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQzNzI5ODc1LCJleHAiOjE2NDM3NzMwNzV9.iv_85cB2Dsee6A67u2_BimvAWhJYaDqT0fyOh1aSzzc",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthemFtYV90YW5AZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0NDA3MTkzNiwiZXhwIjoxNjQ0MTE1MTM2fQ.crZjs7i8Sd-O-DvrTTtJRfI9jiRZaZ9zHIgfa0htl4w",
 											"type": "text"
 										},
 										{
 											"key": "subscription",
-											"value": "0",
+											"value": "6",
 											"type": "text"
 										},
 										{
 											"key": "visibility",
-											"value": "0",
+											"value": "6",
 											"type": "text"
 										}
 									]
@@ -1495,7 +1495,7 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcm9saW5hMkBnbWFpbC5jb20iLCJsZXZlbCI6MywiaWF0IjoxNjQ0MDEwODEzLCJleHAiOjE2NDQwNTQwMTN9.4A7SP7fYcrbLnzXDwKBN-ZP5jVbCdco3IG3r2w_EE1o",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImthemFtYV90YW5AZ21haWwuY29tIiwibGV2ZWwiOjMsImlhdCI6MTY0NDA3MTkzNiwiZXhwIjoxNjQ0MTE1MTM2fQ.crZjs7i8Sd-O-DvrTTtJRfI9jiRZaZ9zHIgfa0htl4w",
 											"type": "default"
 										}
 									]
@@ -2384,7 +2384,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:9040/serviceProvider/horarios/?id=51",
+									"raw": "http://localhost:9040/serviceProvider/horarios/?id=52",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2398,7 +2398,7 @@
 									"query": [
 										{
 											"key": "id",
-											"value": "51"
+											"value": "52"
 										}
 									]
 								}
@@ -2662,7 +2662,7 @@
 							"response": []
 						},
 						{
-							"name": "Aceitar um slot requisitado",
+							"name": "Aceitar um slot requisitado (R)",
 							"request": {
 								"method": "PUT",
 								"header": [],
@@ -2842,7 +2842,7 @@
 							"response": []
 						},
 						{
-							"name": "Get Categorias",
+							"name": "Get Categorias (R)",
 							"request": {
 								"method": "POST",
 								"header": [],

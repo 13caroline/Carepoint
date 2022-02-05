@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row justify="end" v-if="$store.state.tipo == 3">
+    <v-row justify="end" class="mt-2">
       <v-col cols="auto">
         <EditCategories @clicked="updated"></EditCategories>
 
@@ -25,7 +25,6 @@
         </v-calendar>
         <small v-else> <em> não existem horários registados </em></small>
         <v-menu
-          v-if="$store.state.tipo == 3"
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"

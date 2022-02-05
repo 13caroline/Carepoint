@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" width="auto">
     <template v-slot:activator="{ on, attrs }">
       <v-btn
-        class="body-2 mr-2 rounded-xl button"
+        class="mr-2 rounded-xl button"
         small
         color="#78C4D4"
         outlined
@@ -10,8 +10,8 @@
         v-bind="attrs"
         v-on="on"
       >
+        <v-icon small class="mr-2">fas fa-camera</v-icon>
         Alterar fotografia
-        <v-icon small class="ml-2">fas fa-camera</v-icon>
       </v-btn>
     </template>
     <v-card>

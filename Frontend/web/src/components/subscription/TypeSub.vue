@@ -38,7 +38,8 @@
               </v-row>
 
               <v-row justify="center" class="mx-auto mt-10">
-                <span class="price">{{ exp.priceS }} €</span>
+                <span class="price">{{ exp.priceS }} € </span>
+                <p class="infos font-weight-bold ml-2">(14 dias)</p>
               </v-row>
             </v-card-text>
           </v-card>
@@ -227,6 +228,12 @@ export default {
   text-justify: auto;
   color: grey;
   margin-top: 2em;
+}
+
+.infos{
+  color: #797878;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .activity {

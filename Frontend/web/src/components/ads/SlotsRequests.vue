@@ -31,6 +31,14 @@
         {{ formatDate(item.date_requested) }}
       </template>
 
+      <template v-slot:[`item.date_begin`]="{ item }">
+        {{ formatDate(item.date_begin) }}
+      </template>
+
+      <template v-slot:[`item.date_end`]="{ item }">
+        {{ formatDate(item.date_end) }}
+      </template>
+
       <template v-slot:[`item.actions`]="{ item }">
         <v-tooltip top>
           <template v-slot:activator="{ on, attrs }">

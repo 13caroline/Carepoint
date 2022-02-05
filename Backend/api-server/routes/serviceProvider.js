@@ -14,7 +14,29 @@ const User = require('../controllers/user');
     var iden = req.query.id;
 
     ServiceProvider.get_horarios(iden)
-    .then((categories) => res.status(200).jsonp({categories: categories}))
+    .then((categories) => {
+        let ocupSchd = categories[0].occupiedSchedule
+        if(ocupSchd != null){
+            let os_size = Object.keys(ocupSchd).length
+
+            for(let i = 0; i < os_size; i++){
+                let slot = ocupSchd[i]
+                let ids = slot.idCategory
+            
+                let split = ids.split(',')
+                let split_2 = split[0].split('[')
+                split[0] = split_2[split_2.length - 1]
+                let split_3 = split[split.length - 1].split(']')
+                split[split.length - 1] = split_3[0]
+            
+                slot = split
+                ocupSchd[i].idCategory = slot
+            }
+            categories[0].occupiedSchedule = ocupSchd
+        }
+        console.log(categories)
+        res.status(200).jsonp({categories: categories})
+    })
     .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));
  })
 
