@@ -5,7 +5,7 @@
         color="#78C4D4"
         class="mb-2"
         v-bind="attrs"
-        v-on="{  ...diag }"
+        v-on="{ ...diag }"
         small
         outlined
         rounded
