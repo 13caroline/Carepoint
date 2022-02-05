@@ -30,83 +30,59 @@
           :activator="selectedElement"
           offset-x
           max-width="500px"
+          :disabled="selectedEvent.occupied == 0"
         >
           <v-card color="grey lighten-4" flat>
             <v-card-text>
               <v-row>
                 <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Nome do Animal</span>
+                  <span class="text-uppercase">Data início</span>
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong>{{ selectedEvent.utente }}</strong>
-                    ({{ selectedEvent.raca }})
+                    <strong>{{ selectedEvent.start }}</strong>
                   </span>
                 </v-col>
 
                 <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Motivo da consulta</span>
+                  <span class="text-uppercase">Data término</span>
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
                   <span class="black--text">
-                    <strong>{{ selectedEvent.details }}</strong>
+                    <strong>{{ selectedEvent.end }}</strong>
                   </span>
-                  <br />
-                  <span>{{ selectedEvent.desc }}</span>
                 </v-col>
 
                 <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Data</span>
+                  <span class="text-uppercase">Categorias</span>
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
-                  <!--<span class="black--text">
-                    <strong
-                      >{{ format(selectedEvent.start) }} -
-                      {{ format(selectedEvent.end) }}</strong
-                    >
-                  </span>-->
+                  <v-chip
+                    class="black--text"
+                    small
+                    v-for="c in selectedEvent.categories"
+                    :key="c.idCategory"
+                  >
+                    {{ getCategory(c) }}
+                  </v-chip>
                 </v-col>
-
-                <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">estado</span>
-                </v-col>
-                <v-col class="pl-0 pb-0" cols="7"> </v-col>
               </v-row>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-tooltip top v-if="selectedEvent.state == 'A decorrer'">
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon
-                    color="#66BB6A"
-                    v-bind="attrs"
-                    v-on="{ on }"
-                    @click="confirmar('Concluída')"
-                  >
-                    mdi-calendar-check
-                  </v-icon>
-                </template>
-                <span class="caption">Concluir consulta</span>
-              </v-tooltip>
-              <v-tooltip
-                top
-                v-if="
-                  selectedEvent.state == 'Agendada' ||
-                  selectedEvent.state == 'Pendente'
-                "
-              >
+              <v-tooltip top>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
                     color="#E57373"
                     v-bind="attrs"
                     v-on="{ on }"
-                    @click="confirmar('Cancelada')"
+                    @click="remove(selectedEvent)"
                   >
                     mdi-calendar-remove
                   </v-icon>
                 </template>
-                <span class="caption">Cancelar agendamento</span>
+                <span class="caption">Remover slot</span>
               </v-tooltip>
             </v-card-actions>
           </v-card>
@@ -118,6 +94,7 @@
 
 <script>
 import axios from "axios";
+import store from "@/store/index.js";
 export default {
   props: ["dados"],
   data: () => ({
@@ -127,6 +104,8 @@ export default {
     end: null,
     occupied: null,
     name: null,
+    id: null,
+    requested: null,
     weekday: [1, 2, 3, 4, 5, 6, 0],
     type: "",
     cat: [],
@@ -149,6 +128,11 @@ export default {
 
       return color;
     },
+
+    getCategory(event) {
+      return this.cat[event - 1].name;
+    },
+
     showEvent({ nativeEvent, event }) {
       const open = () => {
         this.selectedEvent = event;
@@ -165,6 +149,44 @@ export default {
         open();
       }
       nativeEvent.stopPropagation();
+    },
+    remove: async function (event) {
+      try {
+        await axios.put("http://localhost:9040/serviceProvider/remSlot", {
+          token: store.getters.token,
+          id: event.id,
+          dateEnd: event.end,
+          occupied: event.occupied,
+          dateBegin: event.start,
+          postDate: event.requested,
+          categories: event.categories,
+        });
+        this.updated();
+        this.$snackbar.showMessage({
+          show: true,
+          text: "Slot removido com sucesso.",
+          color: "success",
+          snackbar: true,
+          timeout: 4000,
+        });
+      } catch (e) {
+        console.log(e);
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+
+      try {
+        let response3 = await axios.get("http://localhost:9040/category");
+        if (response3) {
+          this.cat = response3.data;
+        }
+      } catch (e) {
+        console.log(e);
+      }
     },
 
     updated: async function () {
@@ -194,6 +216,9 @@ export default {
                 start: occupiedSchedule[k].date_begin,
                 end: occupiedSchedule[k].date_end,
                 occupied: 1,
+                categories: occupiedSchedule[k].idCategory,
+                id: occupiedSchedule[k].id,
+                requested: occupiedSchedule[k].date_requested,
               });
             }
           }
@@ -208,7 +233,7 @@ export default {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
-
+      console.log(response.data);
       let workSchedule = null;
       let occupiedSchedule = null;
       if (response.data.categories.length) {
@@ -226,13 +251,26 @@ export default {
         occupiedSchedule = response.data.categories[0].occupiedSchedule;
         if (occupiedSchedule) {
           for (var k = 0; k < occupiedSchedule.length; k++) {
-            this.events.push({
-              start: occupiedSchedule[k].date_begin,
-              end: occupiedSchedule[k].date_end,
-              occupied: 1,
-            });
+            if (occupiedSchedule[k].occupied == "1")
+              this.events.push({
+                start: occupiedSchedule[k].date_begin,
+                end: occupiedSchedule[k].date_end,
+                occupied: 1,
+                categories: occupiedSchedule[k].idCategory,
+                id: occupiedSchedule[k].id,
+                requested: occupiedSchedule[k].date_requested,
+              });
           }
         }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+    try {
+      let response3 = await axios.get("http://localhost:9040/category");
+      if (response3) {
+        this.cat = response3.data;
       }
     } catch (e) {
       console.log(e);

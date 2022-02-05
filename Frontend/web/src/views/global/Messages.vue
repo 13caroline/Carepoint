@@ -11,7 +11,7 @@
             color="#c0e4ec"
           >
             <v-list subheader color="#c0e4ec">
-              <v-subheader>Prestadores de Serviços</v-subheader>
+              <v-subheader>Utilizadores</v-subheader>
               <div v-if="users.length > 0">
                 <v-list-item-group active-class="light-blue lighten-4">
                   <v-list-item
@@ -58,7 +58,7 @@
         </v-col>
 
         <v-col cols="12" md="9">
-          <v-card  >
+          <v-card  style="height: 67vh" >
             <v-card
               flat
               class="mx-auto overflow-x-hidden bCard"
@@ -111,6 +111,7 @@
               <v-row>
                 <v-col>
                   <v-textarea
+                  dense
                     append-outer-icon="mdi-send"
                     @click:append-outer="send(activeUser)"
                     v-model="messageNew.text"

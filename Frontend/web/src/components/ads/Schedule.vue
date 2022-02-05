@@ -204,7 +204,7 @@ export default {
     allowedStep: (m) => m % 30 === 0,
     showEvent({ nativeEvent, event }) {
       const open = () => {
-        this.day = moment(event.start).format("DD-MM-YYYY");
+        this.day = moment(event.start).format("YYYY-MM-DD");
         this.date_begin = moment(event.start).format("HH:mm");
         this.date_end = moment(event.end).format("HH:mm");
         this.selectedEvent = event;
@@ -223,6 +223,7 @@ export default {
     },
     register: async function () {
       if (this.$refs.form.validate()) {
+        
         let data1 = this.day + " " + this.hora;
         let data2 = this.day + " " + this.hora2;
         try {
