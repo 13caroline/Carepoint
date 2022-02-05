@@ -16,7 +16,7 @@
           </v-btn>
 
           <v-btn
-            class="body-2 rounded-xl button mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0"
+            class="rounded-xl button mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0"
             small
             color="#78C4D4"
             outlined
