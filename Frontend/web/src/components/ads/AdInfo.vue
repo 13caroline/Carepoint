@@ -21,7 +21,7 @@
         </div>
       </v-col>
 
-      <v-col xs="9" md="6" sm="6" class="">
+      <v-col xs="9" md="6" sm="6" lg="7" class="">
         <div>
           <p class="infos font-weight-bold headline">
             {{ serviceProviderData.name }}
@@ -44,7 +44,7 @@
           >
         </div>
       </v-col>
-       <v-col cols="auto" class="">
+      <v-col cols="auto" class="ml-lg-5">
         <send-message :dados="id" @clicked="update()" />
       </v-col>
     </v-row>
@@ -67,10 +67,10 @@
           Sem dados de contacto
         </div>
         <div class="infos">{{ serviceProviderData.phoneNumber }}</div>
-        <div class="infos">{{ serviceProviderData.email }}</div>
+        <div class="infomail">{{ serviceProviderData.email }}</div>
       </v-col>
 
-      <v-col cols="12" sm="9" md="9" lg="9" class="ml-md-5">
+      <v-col cols="12" sm="9" md="9" lg="9" class="ml-md-0">
         <span class="infos font-weight-bold">Serviços</span>
         <div class="mt-4">
           <v-chip-group active-class="primary--text" column>
@@ -128,14 +128,14 @@
     </v-row>
 
     <v-row class="w-100" align="start">
-      <v-col cols="12" md="3" sm>
+      <v-col xs="9" sm md="3" lg="3" >
         <span class="infos font-weight-bold">Comentários</span>
         <span class="grey--text text--lighten-2 text-caption mr-2">
           ({{ nrReviews }})
         </span>
       </v-col>
 
-      <v-col cols="12" md="4" sm class="d-flex justify-end">
+      <v-col xs="3" sm md="4" lg="9" class="d-flex justify-end">
         <add-review :dados="id" @clicked="update()" />
       </v-col>
     </v-row>
@@ -362,5 +362,12 @@ export default {
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+
+.infomail {
+  word-wrap: break-word;
+  color: #797878;
+  text-align: justify;
+  text-justify: inter-word;
 }
 </style>

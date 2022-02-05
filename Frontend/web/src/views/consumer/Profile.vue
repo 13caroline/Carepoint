@@ -7,7 +7,18 @@
           <v-col cols="auto" class="ml-auto">
             <image-upload :id="user.idUser" @clicked="uploaded()" />
             <v-btn
-              class="body-2 rounded-xl button"
+              class="body-2 rounded-xl button hidden-xs-only"
+              small
+              color="#78C4D4"
+              outlined
+              dark
+              to="/edit/profile"
+            >
+              Editar dados
+              <v-icon small class="ml-2">fas fa-pen</v-icon>
+            </v-btn>
+            <v-btn
+              class="body-2 rounded-xl button px-10 hidden-sm-and-up"
               small
               color="#78C4D4"
               outlined

@@ -71,7 +71,7 @@
                 v-for="(a, index) in props.items"
                 :key="index"
               >
-                <v-card class="h-100 mt-5" outlined>
+                <v-card class="h-100 mt-0" outlined>
                   <v-card-text>
                     <v-row>
                       <v-col class="pb-0" align="right" cols="">

@@ -12,7 +12,7 @@
           class="rounded-lg"
         >
           <v-icon small class="mr-1">fas fa-comment</v-icon>
-          Enviar uma mensagem
+          Enviar mensagem
         </v-btn>
       </template>
       <v-card class="rounded-lg">

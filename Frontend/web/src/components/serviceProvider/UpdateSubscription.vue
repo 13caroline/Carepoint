@@ -4,7 +4,7 @@
       <v-row justify="center">
         <v-col
           cols="auto"
-          class="mx-auto mx-sm-0"
+          class="mx-auto mx-sm-0  mt-4 mt-sm-7 mt-md-7 mt-lg-7"
           v-for="s in sub"
           :key="s.name"
         >
@@ -24,18 +24,17 @@
 
             <v-card-text>
               <v-row
-                justify="center"
-                class="mx-auto"
+                class="mt-5"
                 v-for="(p, index) in s.pros"
                 :key="index"
               >
-                <v-col cols="12" md="9" sm="7">
+                <v-col cols="9" class="ml-3 ml-sm-4 ml-md-5 ml-lg-4">
                   <span>
                     {{ p.title }}
                   </span>
                 </v-col>
 
-                <v-col cols="12" md="3" sm="2">
+                <v-col cols="2">
                   <v-icon smal :color="p.color">
                     {{ `fas fa-${p.icon}` }}
                   </v-icon>
