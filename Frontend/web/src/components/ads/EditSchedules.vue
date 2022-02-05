@@ -244,11 +244,20 @@ export default {
       }
     },
   },
+  watch: {
+    workSchedule(newVal,oldVal){
+      console.log("Watching you")
+      console.log(newVal)
+      console.log(oldVal)
+ 
+    } 
+  },
   created: async function () {
     try {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
+      
       console.log(response.data);
       let workSchedule = null;
       let occupiedSchedule = null;
