@@ -30,7 +30,6 @@
           :activator="selectedElement"
           offset-x
           max-width="500px"
-
         >
           <v-card color="grey lighten-4" flat>
             <v-card-text>
@@ -62,10 +61,19 @@
                   </span>
                 </v-col>
 
-                <v-col class="pb-0" align="right" cols="5" v-if="selectedEvent.occupied == 1">
-                  <span class="text-uppercase" >Categorias</span>
+                <v-col
+                  class="pb-0"
+                  align="right"
+                  cols="5"
+                  v-if="selectedEvent.occupied == 1"
+                >
+                  <span class="text-uppercase">Categorias</span>
                 </v-col>
-                <v-col class="pl-0 pb-0" cols="7" v-if="selectedEvent.occupied == 1">
+                <v-col
+                  class="pl-0 pb-0"
+                  cols="7"
+                  v-if="selectedEvent.occupied == 1"
+                >
                   <v-chip
                     class="black--text"
                     small
@@ -123,9 +131,6 @@ export default {
     selectedElement: null,
     selectedOpen: false,
   }),
-  mounted() {
-    this.$refs.calendar.scrollToTime("08:00");
-  },
   components: {
     NewSlot: () => import("@/components/dialogs/NewSlot"),
     EditCategories: () => import("@/components/dialogs/EditCategories"),
@@ -138,9 +143,9 @@ export default {
       return color;
     },
 
-    getEventState(event){
+    getEventState(event) {
       let state = "";
-      event.occupied == 1 ? state = "Ocupado" : state = "Livre"
+      event.occupied == 1 ? (state = "Ocupado") : (state = "Livre");
 
       return state;
     },
@@ -168,15 +173,24 @@ export default {
     },
     remove: async function (event) {
       try {
-        await axios.put("http://localhost:9040/serviceProvider/remSlot", {
-          token: store.getters.token,
-          id: event.id,
-          dateEnd: event.end,
-          occupied: event.occupied,
-          dateBegin: event.start,
-          postDate: event.requested,
-          categories: event.categories,
-        });
+        if (event.occupied == 1) {
+          await axios.put("http://localhost:9040/serviceProvider/remSlot", {
+            token: store.getters.token,
+            id: event.id,
+            dateEnd: event.end,
+            occupied: event.occupied,
+            dateBegin: event.start,
+            postDate: event.requested,
+            categories: event.categories,
+          });
+        } else {
+          await axios.put("http://localhost:9040/serviceProvider/remHorario", {
+            token: store.getters.token,
+            dateEnd: event.end,
+            dateBegin: event.start,
+          });
+        }
+        this.selectedOpen = false;
         this.updated();
         this.$snackbar.showMessage({
           show: true,
@@ -228,14 +242,15 @@ export default {
           occupiedSchedule = response.data.categories[0].occupiedSchedule;
           if (occupiedSchedule) {
             for (var k = 0; k < occupiedSchedule.length; k++) {
-              this.events.push({
-                start: occupiedSchedule[k].date_begin,
-                end: occupiedSchedule[k].date_end,
-                occupied: 1,
-                categories: occupiedSchedule[k].idCategory,
-                id: occupiedSchedule[k].id,
-                requested: occupiedSchedule[k].date_requested,
-              });
+              if (occupiedSchedule[k].occupied == "1")
+                this.events.push({
+                  start: occupiedSchedule[k].date_begin,
+                  end: occupiedSchedule[k].date_end,
+                  occupied: 1,
+                  categories: occupiedSchedule[k].idCategory,
+                  id: occupiedSchedule[k].id,
+                  requested: occupiedSchedule[k].date_requested,
+                });
             }
           }
         }
@@ -244,20 +259,25 @@ export default {
       }
     },
   },
-  watch: {
+  /*watch: {
     workSchedule(newVal,oldVal){
       console.log("Watching you")
       console.log(newVal)
       console.log(oldVal)
  
     } 
+  },*/
+  mounted() {
+    //this.getEvents();
+    this.$refs.calendar.scrollToTime("08:00");
+    this.$refs.calendar.checkChange();
   },
   created: async function () {
     try {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
       );
-      
+
       console.log(response.data);
       let workSchedule = null;
       let occupiedSchedule = null;
