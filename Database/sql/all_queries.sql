@@ -1530,7 +1530,7 @@ BEGIN
     
 	UPDATE pi.serviceprovider SET
 		serviceprovider.workSchedule= CASE 
-					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND new_os IS NOT NULL
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL 
                     THEN new_os
                     ELSE serviceprovider.workSchedule
                     END
