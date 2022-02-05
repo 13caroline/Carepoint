@@ -73,8 +73,7 @@
                           outlined
                           flat
                           dense
-                          v-model="location"
-                          :value="user.locationName"
+                          v-model="user.idLocation"
                           single-line
                           :items="loc"
                           item-value="idLocation"
@@ -85,7 +84,6 @@
                           required
                         />
                       </v-col>
-
                       <v-col v-if="$store.state.tipo == '3'">
                         <span>Raio de atividade</span>
                         <v-text-field
@@ -271,6 +269,7 @@ export default {
           token: store.getters.token,
         });
         this.user = response.data.perfil[0];
+        console.log(this.user)
 
         if (this.user.sex == "M") this.user.sex = "Masculino";
         else if (this.user.sex == "F") this.user.sex = "Feminino";
@@ -298,7 +297,7 @@ export default {
               name: this.user.name,
               email: this.user.email,
               type: store.getters.tipo.toString(),
-              location: this.user.locationName,
+              location: this.user.idLocation,
               phoneNumber: this.user.phoneNumber,
               idUser: this.user.idUser,
             });
@@ -309,7 +308,7 @@ export default {
               name: this.user.name,
               email: this.user.email,
               type: store.getters.tipo.toString(),
-              location: this.location,
+              location: this.user.idLocation,
               phoneNumber: this.user.phoneNumber,
               idUser: this.user.idUser,
               distance: this.user.distance,

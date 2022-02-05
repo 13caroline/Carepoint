@@ -1,23 +1,19 @@
 <template>
   <v-dialog v-model="dialog" width="100%" max-width="45%">
     <template v-slot:activator="{ diag, attrs }">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            color="#78C4D4"
-            class="mb-2"
-            v-bind="attrs"
-            v-on="{ ...on, ...diag }"
-            small
-            fab
-            dark
-            @click="dialog = true"
-          >
-            <v-icon small> far fa-edit</v-icon>
-          </v-btn>
-        </template>
-        <span class="caption">Editar categorias</span>
-      </v-tooltip>
+      <v-btn
+        color="#78C4D4"
+        class="mb-2"
+        v-bind="attrs"
+        v-on="{ ...on, ...diag }"
+        small
+        outlined
+        rounded
+        dark
+        @click="dialog = true"
+      >
+        <v-icon small class="mr-2"> far fa-edit</v-icon> Editar categorias
+      </v-btn>
     </template>
     <v-card>
       <v-form ref="form" v-model="valid">
@@ -35,14 +31,14 @@
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn
                           color="#78C4D4"
-                          x-small
-                          fab
+                          small
                           v-bind="attrs"
                           v-on="{ ...on }"
                           dark
                           @click="dialog2 = true"
                         >
-                          <v-icon small> fas fa-plus</v-icon>
+                          <v-icon small class="mr-2"> fas fa-plus</v-icon> Nova
+                          categoria
                         </v-btn>
                       </template>
                       <span> Nova categoria </span>
@@ -153,7 +149,7 @@
                     name="categories"
                     required
                   />
-                  
+
                   <v-text-field
                     v-else
                     disabled
@@ -370,7 +366,6 @@ export default {
       );
       if (response) {
         this.categories = response.data.categories;
-
       }
     } catch (e) {
       console.log(e);

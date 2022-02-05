@@ -4,27 +4,27 @@
       <v-row>
         <v-col cols="auto" class="ml-auto">
           <v-btn
-            class="body-2 rounded-xl button mr-2"
+            class="rounded-xl button mr-2"
             small
             color="#78C4D4"
             outlined
             dark
             to="/subscription/renew"
           >
+            <v-icon small class="mr-2">fas fa-sync</v-icon>
             Renovar subscrição
-            <v-icon small class="ml-2">fas fa-sync</v-icon>
           </v-btn>
 
           <v-btn
-            class="body-2 rounded-xl button"
+            class="rounded-xl button"
             small
             color="#78C4D4"
             outlined
             dark
             @click="cancelSubscription()"
           >
+            <v-icon small class="mr-2">fas fa-times</v-icon>
             Cancelar subscrição
-            <v-icon small class="ml-2">fas fa-times</v-icon>
           </v-btn>
         </v-col>
       </v-row>

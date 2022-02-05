@@ -96,7 +96,7 @@
                 color="#78c4d4"
                 @click="change()"
               >
-                Enviar
+                Alterar
               </v-btn>
             </v-col>
           </v-row>

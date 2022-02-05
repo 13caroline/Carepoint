@@ -255,4 +255,5 @@ export default {
   text-align: justify;
   text-justify: auto;
 }
+
 </style>

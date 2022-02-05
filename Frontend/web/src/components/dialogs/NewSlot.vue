@@ -1,23 +1,18 @@
 <template>
   <v-dialog v-model="dialog" width="100%" max-width="500" persistent>
     <template v-slot:activator="{ diag, attrs }">
-      <v-tooltip top>
-        <template v-slot:activator="{ on }">
-          <v-btn
-            color="#78C4D4"
-            class="mb-2 ml-2"
-            v-bind="attrs"
-            v-on="{ ...on, ...diag }"
-            small
-            fab
-            dark
-            @click="dialog = true"
-          >
-            <v-icon small> fas fa-plus</v-icon>
-          </v-btn>
-        </template>
-        <span class="caption">Registar horário</span>
-      </v-tooltip>
+      <v-btn
+        color="#78C4D4"
+        class="mb-2 ml-2"
+        v-bind="attrs"
+        v-on="{ ...on, ...diag }"
+        small
+        outlined
+        rounded
+        @click="dialog = true"
+      >
+        <v-icon small class="mr-2"> fas fa-plus</v-icon> Registar horário
+      </v-btn>
     </template>
     <v-card>
       <v-form ref="form" v-model="valid">
@@ -190,7 +185,6 @@ export default {
         let data1 = this.form.date + " " + this.hora;
         let data2 = this.form.date + " " + this.hora2;
         try {
-          
           await axios.put("http://localhost:9040/serviceProvider/regHorario", {
             token: store.getters.token,
             dateBegin: data1,

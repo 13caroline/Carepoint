@@ -276,8 +276,32 @@
               class="my-checkbox pa-0 mt-2"
               color="#78c4d4"
               v-model="solidariedade"
-              label="Aderir ao banco de horas"
             >
+              <template v-slot:label>
+                <div>
+                  Aderir ao banco de horas
+                  <v-tooltip right max-width="300px" color="#78C4D4">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-icon
+                        x-small
+                        color="#BDBDBD"
+                        dark
+                        v-bind="attrs"
+                        v-on="on"
+                      >
+                        fas fa-info-circle
+                      </v-icon>
+                    </template>
+                    <span class="description"
+                      >O banco de horas voluntário é um apelo à participação e
+                      envolvimento numa iniciativa solidária dirigido aos nossos
+                      cuidadores. A sua cooperação e o seu tempo fazem toda a
+                      diferença, por isso, abra os braços à nossa causa e doe-se
+                      aos que mais precisam.</span
+                    >
+                  </v-tooltip>
+                </div>
+              </template>
             </v-checkbox>
 
             <v-checkbox
@@ -462,6 +486,10 @@ h3 {
 span {
   color: #797878;
   font-size: small;
+}
+
+.description{
+  color: white
 }
 
 ::v-deep .my-checkbox .v-label {
