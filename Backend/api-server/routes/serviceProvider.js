@@ -154,7 +154,8 @@ router.put('/remHorario', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((usr) => {
-        ServiceProvider.remHorario(usr.idUser,  req.body.slotJson)
+        var text = '{"date_end": "'+req.body.dateEnd+'",' + '"date_begin": "'+req.body.dateBegin+'"}'
+        ServiceProvider.remHorario(usr.idUser,  text)
         .then((upd) => {res.status(200).jsonp({ message: "success" })})
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })

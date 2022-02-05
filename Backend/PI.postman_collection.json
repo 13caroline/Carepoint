@@ -2540,12 +2540,17 @@
 									"urlencoded": [
 										{
 											"key": "token",
-											"value": "",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcm9saW5hQGdtYWlsLmNvbSIsImxldmVsIjozLCJpYXQiOjE2NDQwMTM4MDIsImV4cCI6MTY0NDA1NzAwMn0.SYSSGazego6JjlN7XuM6h6RwUyLoVeNeCDFE5moDVxI",
 											"type": "text"
 										},
 										{
-											"key": "slotJson",
-											"value": "",
+											"key": "dateEnd",
+											"value": "2022-01-06 18:00:00",
+											"type": "text"
+										},
+										{
+											"key": "dateBegin",
+											"value": "2022-01-06 17:30:00",
 											"type": "text"
 										}
 									]
@@ -2638,46 +2643,11 @@
 											"key": "token",
 											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNhcm9saW5hQGdtYWlsLmNvbSIsImxldmVsIjozLCJpYXQiOjE2NDQwMDk2MjAsImV4cCI6MTY0NDA1MjgyMH0.oC3hzyx6fOTieJUbKEDuzd18NtYMQOzujRHoK6r-PzU",
 											"type": "text"
-										},
-										{
-											"key": "id",
-											"value": " 206",
-											"type": "text"
-										},
-										{
-											"key": "dateEnd",
-											"value": " 2022-01-06 18:00:00",
-											"type": "text"
-										},
-										{
-											"key": "occupied",
-											"value": " 0",
-											"type": "text"
-										},
-										{
-											"key": "dateBegin",
-											"value": " 2022-01-06 17:30:00",
-											"type": "text"
-										},
-										{
-											"key": "postDate",
-											"value": " 2022-02-2 12:01:07",
-											"type": "text"
-										},
-										{
-											"key": "categories",
-											"value": "1",
-											"type": "text"
-										},
-										{
-											"key": "categories",
-											"value": "2",
-											"type": "text"
 										}
 									]
 								},
 								"url": {
-									"raw": "http://localhost:9040/serviceProvider/acceptSlot",
+									"raw": "http://localhost:9040/serviceProvider/requests",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -2685,7 +2655,7 @@
 									"port": "9040",
 									"path": [
 										"serviceProvider",
-										"acceptSlot"
+										"requests"
 									]
 								}
 							},
