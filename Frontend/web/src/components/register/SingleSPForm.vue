@@ -314,7 +314,7 @@
             >
               <template v-slot:label>
                 <div>
-                  <Termos />
+                  <Termos/>
                 </div>
               </template>
             </v-checkbox>

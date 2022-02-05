@@ -30,12 +30,11 @@
                       {{ item.name }}
                     </v-list-item-content>
                   </v-list-item>
-              
                 </v-list-item-group>
               </div>
 
-              <div v-else>
-                <p>Sem mensagens</p>
+              <div v-else class="ml-4">
+                <small> <em> sem mensagens </em></small>
               </div>
             </v-list>
             <!--<v-divider></v-divider>
@@ -58,7 +57,7 @@
         </v-col>
 
         <v-col cols="12" md="9">
-          <v-card  style="height: 67vh" >
+          <v-card style="height: 67vh" v-if="users.length > 0">
             <v-card
               flat
               class="mx-auto overflow-x-hidden bCard"
@@ -66,12 +65,11 @@
               outlined
               color="transparent"
             >
-              <v-row justify="end" >
+              <v-row justify="end">
                 <v-col>
                   <v-list disabled rounded class="mb-5">
                     <v-list-item-group color="primary">
                       <v-list-item
-                      
                         v-for="(item, i) in messages"
                         :key="i"
                         :class="item.sent ? 'text-right' : ''"
@@ -111,7 +109,7 @@
               <v-row>
                 <v-col>
                   <v-textarea
-                  dense
+                    dense
                     append-outer-icon="mdi-send"
                     @click:append-outer="send(activeUser)"
                     v-model="messageNew.text"

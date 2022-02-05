@@ -107,7 +107,7 @@
             <br />
             <span class="font-weight-bold">
               <v-icon small>fas fa-envelope</v-icon>
-              carepoint@gmail.com
+              carepointApp@gmail.com
             </span>
           </div>
           <br />

@@ -272,7 +272,6 @@ export default {
           token: store.getters.token,
         });
         this.user = response.data.perfil[0];
-        console.log(this.user)
 
         if (this.user.sex == "M") this.user.sex = "Masculino";
         else if (this.user.sex == "F") this.user.sex = "Feminino";
