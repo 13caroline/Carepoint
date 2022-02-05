@@ -181,3 +181,9 @@ CALL verify_ws(51,'{"date_end": "2022-01-09 12:30:00","date_begin": "2022-01-09 
 CALL verify_ws(51,'{"date_end": "2022-01-09 12:30:00","date_begin": "2022-01-09 04:59:00"}');
 CALL verify_ws(51,'{"date_end": "2022-01-09 12:20:00","date_begin": "2022-01-09 05:59:00"}');
 CALL verify_ws(51,'{"date_end": "2022-01-09 12:31:00","date_begin": "2022-01-09 05:59:00"}');
+
+-- slots do 51, 56 e 57
+CALL remove_user(55);
+CALL remove_user(12);
+CALL remove_user(13);
+CALL remove_user(151);

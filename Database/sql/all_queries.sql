@@ -57,6 +57,7 @@ DROP PROCEDURE IF EXISTS info_requested_slots_v2;
 DROP PROCEDURE IF EXISTS remove_categoria;
 DROP PROCEDURE IF EXISTS verify_slot;
 DROP PROCEDURE IF EXISTS verify_ws;
+DROP PROCEDURE IF EXISTS remove_user;
 
 -- =============================================
 -- Description: Insert review
@@ -1989,5 +1990,43 @@ BEGIN
 	
     SELECT can_be_requested;
     
+END &&  
+DELIMITER ;
+
+-- =============================================
+-- Description: Remove user
+-- Type: Procedure
+-- Parameters: 
+--   @in_idUser - user identification number
+-- Returns: None
+-- =============================================
+
+DELIMITER &&  
+CREATE PROCEDURE remove_user (IN in_idUser INT)  
+BEGIN  
+	SET FOREIGN_KEY_CHECKS=0;
+    SET SQL_SAFE_UPDATES = 0;
+    DELETE FROM pi.category_has_serviceprovider WHERE category_has_serviceprovider.idServiceProvider = in_idUser;
+    DELETE FROM pi.joboffer WHERE joboffer.idUser = in_idUser;
+    DELETE FROM pi.serviceprovider WHERE serviceprovider.idSP = in_idUser;
+    DELETE FROM pi.add WHERE pi.add.idCompany = in_idUser;
+    DELETE FROM pi.company WHERE company.idCompany = in_idUser;
+    DELETE FROM pi.file WHERE file.idUser = in_idUser;
+    DELETE FROM pi.message WHERE message.idGive = in_idUser OR message.idReceive = in_idUser;
+    DELETE FROM pi.review WHERE review.idGive = in_idUser OR review.idReceive = in_idUser;
+    DELETE FROM pi.user WHERE user.idUser = in_idUser;
+    
+
+	UPDATE pi.serviceprovider SET
+		serviceprovider.occupiedSchedule= CASE 
+					WHEN serviceprovider.occupiedSchedule IS NOT NULL
+                    THEN (select json_pretty(json_arrayagg(j1))
+							from json_table(serviceprovider.occupiedSchedule, '$[*]' columns ( j1 json path '$')) as jt 
+							where CAST(json_extract(j1, '$.id') AS UNSIGNED) != in_idUser)
+                    ELSE serviceprovider.occupiedSchedule
+                    END
+	;
+    SET SQL_SAFE_UPDATES = 1;
+    SET FOREIGN_KEY_CHECKS=1;
 END &&  
 DELIMITER ;
