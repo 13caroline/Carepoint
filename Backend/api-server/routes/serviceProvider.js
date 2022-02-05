@@ -15,25 +15,26 @@ const User = require('../controllers/user');
 
     ServiceProvider.get_horarios(iden)
     .then((categories) => {
-        //console.log(categories[0].occupiedSchedule)
         let ocupSchd = categories[0].occupiedSchedule
-        let os_size = Object.keys(ocupSchd).length
+        if(ocupSchd != null){
+            let os_size = Object.keys(ocupSchd).length
 
-        for(let i = 0; i < os_size; i++){
-            let slot = ocupSchd[i]
-            let ids = slot.idCategory
-            let split = ids.split(',')
+            for(let i = 0; i < os_size; i++){
+                let slot = ocupSchd[i]
+                let ids = slot.idCategory
             
-            split[0] = split[0].split('[')[1]
-            split[split.length - 1] = split[split.length - 1].split(']')[0]
+                let split = ids.split(',')
+                let split_2 = split[0].split('[')
+                split[0] = split_2[split_2.length - 1]
+                let split_3 = split[split.length - 1].split(']')
+                split[split.length - 1] = split_3[0]
             
-            slot = split
-            ocupSchd[i].idCategory = slot
+                slot = split
+                ocupSchd[i].idCategory = slot
+            }
+            categories[0].occupiedSchedule = ocupSchd
         }
-
-        categories[0].occupiedSchedule = ocupSchd
-        //console.log(categories[0].occupiedSchedule)
-
+        console.log(categories)
         res.status(200).jsonp({categories: categories})
     })
     .catch((err) => res.status(400).jsonp("Error obtaining Provider: " + err));
