@@ -24,6 +24,7 @@ var serviceProvRouter = require('./routes/serviceProvider');
 var addRouter = require('./routes/add');
 var reviewRouter = require('./routes/review');
 var messageRouter = require('./routes/message');
+var emailRouter = require('./routes/email')
 
 
 // Para construir a DB----------------------------------------------------------------------------------------------------------
@@ -72,6 +73,7 @@ app.use('/serviceProvider', serviceProvRouter);
 app.use('/add', addRouter);
 app.use('/review', reviewRouter);
 app.use('/message', messageRouter);
+app.use('/email', emailRouter);
 // Add the documentation route
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

@@ -59,7 +59,7 @@
 								},
 								{
 									"key": "email",
-									"value": "theUserTestingEmail_01@gmail.com",
+									"value": "wawawa",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -126,7 +126,7 @@
 								},
 								{
 									"key": "email",
-									"value": "carolina2@gmail.com",
+									"value": "naaaaaah",
 									"description": "Obrigatório!",
 									"type": "text"
 								},
@@ -3991,6 +3991,53 @@
 									"path": [
 										"message",
 										"addMessage"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Email",
+					"item": [
+						{
+							"name": "Send Email!",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "jankenpon98@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "assunto",
+											"value": "Void",
+											"type": "text"
+										},
+										{
+											"key": "message",
+											"value": "Abandoned Gmail Account",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/email",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"email"
 									]
 								}
 							},
