@@ -30,7 +30,7 @@
           :activator="selectedElement"
           offset-x
           max-width="500px"
-          :disabled="selectedEvent.occupied == 0"
+
         >
           <v-card color="grey lighten-4" flat>
             <v-card-text>
@@ -54,9 +54,18 @@
                 </v-col>
 
                 <v-col class="pb-0" align="right" cols="5">
-                  <span class="text-uppercase">Categorias</span>
+                  <span class="text-uppercase">Estado</span>
                 </v-col>
                 <v-col class="pl-0 pb-0" cols="7">
+                  <span class="black--text">
+                    <strong>{{ getEventState(selectedEvent) }}</strong>
+                  </span>
+                </v-col>
+
+                <v-col class="pb-0" align="right" cols="5" v-if="selectedEvent.occupied == 1">
+                  <span class="text-uppercase" >Categorias</span>
+                </v-col>
+                <v-col class="pl-0 pb-0" cols="7" v-if="selectedEvent.occupied == 1">
                   <v-chip
                     class="black--text"
                     small
@@ -127,6 +136,13 @@ export default {
       event.occupied == 1 ? (color = "#D7CCC8") : (color = "#78C4D4");
 
       return color;
+    },
+
+    getEventState(event){
+      let state = "";
+      event.occupied == 1 ? state = "Ocupado" : state = "Livre"
+
+      return state;
     },
 
     getCategory(event) {
