@@ -1899,6 +1899,36 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Delete User (R)",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRoZVVzZXJUZXN0aW5nRW1haWxfM0BnbWFpbC5jb20iLCJsZXZlbCI6MiwiaWF0IjoxNjQyMzM2MTQ5LCJleHAiOjE2NDIzMzk3NDl9.22er2ZQ10ttxx1hJNV3sG5_ALyleGZzPP_e6x6HeJOQ",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:9040/users/erase",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "9040",
+									"path": [
+										"users",
+										"erase"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [

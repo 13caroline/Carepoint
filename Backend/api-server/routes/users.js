@@ -215,6 +215,16 @@ router.put('/updatePhoto', upload.single('image'), auth.validToken, (req, res) =
  *                                   DELETE
  ****************************************************************************************/
 
+router.delete('/erase', auth.validToken, (req, res) => {
+    email = auth.getEmailFromJWT(req.body.token)
+    User.consult(email)
+    .then((user) => {
+        User.deleteUser(user.idUser)
+        .then(() => res.status(200).jsonp("Success."))
+        .catch((err) => res.status(400).jsonp({error: err}))
+    })
+    .catch((err) => res.status(400).jsonp({error: err}))
+})
 
 // Delete a user given is id address
 router.delete('/:id', function(req, res, next) {

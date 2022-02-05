@@ -152,3 +152,10 @@ Out.getImage = (email) => {
         em: email
     }})
 }
+
+Out.deleteUser = (id) => {
+    return dbconfig.sequelize.query('CALL remove_user (:id)',
+    {replacements: {
+        id: id
+    }})
+}
