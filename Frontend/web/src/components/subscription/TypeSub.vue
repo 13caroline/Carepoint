@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-item-group>
-      <v-row justify="center">
+      <v-row justify="center" class="mt-5">
         <v-col cols="auto" class="mx-auto mx-sm-0">
           <v-card
             class="card rounded-xl overflow-auto"

@@ -22,11 +22,9 @@
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
-          offset-x
-          width="100%"
-          min-width="85%"
+          offset-x         
         >
-          <v-card flat>
+          <v-card flat max-height="550" max-width="550">
             <v-form ref="form" v-model="valid">
               <v-card-title class="font-weight-regular text-uppercase">
                 Requisitar um horário

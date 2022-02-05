@@ -12,12 +12,12 @@
           class="rounded-lg"
         >
           <v-icon small class="mr-1">fas fa-comment</v-icon>
-          Deixar um comentário
+          Deixar comentário
         </v-btn>
       </template>
       <v-card class="rounded-lg">
         <v-card-title class="font-weight-bold pt-6">
-          Deixar um comentário
+          Deixar comentário
         </v-card-title>
         <v-card-subtitle class="my-4 text-subtitle-1">
           O seu feedback é muito importante para avaliar a qualidade dos

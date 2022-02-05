@@ -5,7 +5,18 @@
         <v-col cols="auto" class="ml-auto">
           <image-upload :id="user.idUser" @clicked="uploaded()" />
           <v-btn
-            class="rounded-xl button"
+            class="body-2 rounded-xl button hidden-xs-only"
+            small
+            color="#78C4D4"
+            outlined
+            dark
+            @click="redirect()"
+          >
+            Editar dados
+            <v-icon small class="ml-2">fas fa-pen</v-icon>
+          </v-btn>
+          <v-btn
+            class="rounded-xl button hidden-sm-and-up mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0"
             small
             color="#78C4D4"
             outlined
