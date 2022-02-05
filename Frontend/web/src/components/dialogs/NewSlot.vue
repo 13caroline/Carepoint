@@ -5,7 +5,7 @@
         color="#78C4D4"
         class="mb-2 ml-2"
         v-bind="attrs"
-        v-on="{ ...on, ...diag }"
+        v-on="{...diag }"
         small
         outlined
         rounded
@@ -71,8 +71,6 @@
                   format="24hr"
                   v-model="hora"
                   full-width
-                  min="10:00"
-                  max="19:45"
                   :allowed-minutes="allowedStep"
                   color="#78C4D4"
                 ></v-time-picker>
@@ -107,8 +105,6 @@
                   format="24hr"
                   v-model="hora2"
                   full-width
-                  :min="hora + 30"
-                  max="19:45"
                   :allowed-minutes="allowedStep"
                   color="#78C4D4"
                 ></v-time-picker>
