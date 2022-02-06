@@ -31,16 +31,18 @@
               >
                 <v-card-text>
                   <v-row>
-                    <v-col cols="12" md="4" sm="2">
+                    <v-col xs="4" sm="4" md="4" lg="4" xl="4">
                       <span class="activity d-flex justify-start pb-2">
                         {{ convertDate(a.postDate) }}
                       </span>
                     </v-col>
-                    <v-col cols="12" md="8" sm="10">
-                      <span class="user d-flex justify-end">{{ a.name }}</span>
-                      <span class="activity d-flex justify-end"
-                        >(última vez ativo {{ difDate(a.lastActivity) }})</span
-                      >
+                    <v-col xs="8" sm="8" md="8" lg="8" xl="8" >
+                      <v-row  class="flex-column text-right justify-end mr-2" >
+                        <span class="user">{{a.name}}</span>
+                        <span class="activity"
+                          >(última vez ativo {{difDate(a.lastActivity)}})
+                        </span>
+                      </v-row>
                     </v-col>
                   </v-row>
 

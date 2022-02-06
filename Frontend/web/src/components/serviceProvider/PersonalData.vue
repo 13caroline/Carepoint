@@ -284,7 +284,7 @@
                       <v-col>
                         <p class="infos">Categorias</p>
                       </v-col>
-                      <v-col class="d-flex justify-end">
+                      <v-col class="d-flex flex-wrap justify-end">
                         <v-chip
                           class="respos ml-1"
                           v-for="(c, index) in categories"
