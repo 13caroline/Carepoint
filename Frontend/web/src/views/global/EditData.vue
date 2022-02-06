@@ -216,7 +216,6 @@ export default {
     dialogPass: false,
     user: {},
     loc: [],
-    location: "",
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;

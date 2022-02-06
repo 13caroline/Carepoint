@@ -121,16 +121,6 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos">URL</p>
-                      </v-col>
-                      <v-col>
-                        <p class="respos">{{ user.link }}</p>
-                      </v-col>
-                    </v-row>
-                  </div>
-                  <div>
-                    <v-row>
-                      <v-col>
                         <p class="infos">Firma</p>
                       </v-col>
                       <v-col>
@@ -151,10 +141,10 @@
                   <div>
                     <v-row>
                       <v-col>
-                        <p class="infos">Localidade</p>
+                        <p class="infos mb-0">Localidade</p>
                       </v-col>
                       <v-col>
-                        <p class="respos">{{ user.locationName }}</p>
+                        <p class="respos mb-0">{{ user.locationName }}</p>
                       </v-col>
                     </v-row>
                   </div>
@@ -343,6 +333,16 @@
                       </v-col>
                       <v-col>
                         <p class="respos">{{ user.description }}</p>
+                      </v-col>
+                    </v-row>
+                  </div>
+                  <div>
+                    <v-row>
+                      <v-col>
+                        <p class="infos mb-0">URL</p>
+                      </v-col>
+                      <v-col>
+                        <p class="respos mb-0">{{ user.link }}</p>
                       </v-col>
                     </v-row>
                   </div>
