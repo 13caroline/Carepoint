@@ -1,82 +1,174 @@
 <template>
   <div>
     <v-app-bar flat color="#78C4D4" height="100" elevation="3" class="mb-4">
-      <v-img
-        id="logo_"
-        class="logo"
-        src="@/assets/logo_white.png"
-        max-height="220"
-        max-width="220"
-      >
-      </v-img>
-
-      <v-spacer></v-spacer>
-
-      <v-menu
-        offset-y
-        open-on-hover
-        offset-overflow
-        v-if="$store.state.tipo != '4'"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <!--<v-avatar v-bind="attrs" v-on="on" color="white">
-                <v-img
-                  class="userImg ml-auto"
-                  :src="processImage()"
+      
+      <v-row class="hidden-xs-only">
+        <v-col sm="auto" md="auto" lg="auto" xl="8" offset-xs="0" offset-sm="3" offset-lg="4"> 
+          <v-img
+              id="logo_"
+              class="logo"
+              src="@/assets/logo_white.png"
+              max-height="220"
+              max-width="220"
+            >
+          </v-img>
+        </v-col>
+        <v-spacer></v-spacer>
+        <v-col sm="auto" md="auto" lg="auto" xl="4">
+          <v-menu
+            offset-y
+            open-on-hover
+            offset-overflow
+            v-if="$store.state.tipo != '4'"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <!--<v-avatar v-bind="attrs" v-on="on" color="white">
+                    <v-img
+                      class="userImg ml-auto"
+                      :src="processImage()"
+                    >
+                    </v-img>
+                  </v-avatar>-->
+              <v-btn dark class="white--text hidden-xs-only pb-10" text v-bind="attrs" v-on="on">
+                Anúncios
+                <v-icon class="ml-1" color="white" small
+                  >fas fa-chevron-down</v-icon
                 >
-                </v-img>
-              </v-avatar>-->
-          <v-btn dark class="white--text" text v-bind="attrs" v-on="on">
-            Anúncios
-            <v-icon class="ml-1" color="white" small
-              >fas fa-chevron-down</v-icon
+              </v-btn>
+              <v-btn dark class="white--text hidden-sm-and-up" text v-bind="attrs" v-on="on">
+                <v-icon class="ml-1" color="white" small
+                  >fas fa-chevron-down</v-icon
+                >
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick('Anúncios')"
+                  >Anúncios</v-list-item-title
+                >
+              </v-list-item>
+
+              <v-divider></v-divider>
+
+              <v-subheader  > Publicar </v-subheader>
+
+              <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick('Meus anúncios')"
+                  >Os meus anúncios</v-list-item-title
+                >
+              </v-list-item>
+
+              <v-list-item>
+                <v-list-item-title
+                  class="menuOpcao"
+                  @click="processClick('Publicar anúncio')"
+                  >Publicar anúncio</v-list-item-title
+                >
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        
+          <v-divider vertical class="mx-sm-2 mx-md-2 mx-lg-2 mx-xl-2"></v-divider>
+        
+          <v-icon color="white" @click="messages()" class="mx-2 pb-10"
+            >fas fa-comment-dots</v-icon
+          >
+
+          <v-icon color="white" @click="goToMainPage()" class="mx-2 pb-10"
+            >fas fa-home</v-icon
+          >
+
+          <v-icon color="white" @click="logout()" class="mx-2 pb-10"
+            >fas fa-sign-out-alt</v-icon
+          >
+        </v-col>
+      </v-row>
+
+      <v-row class="hidden-sm-and-up" no-gutters>
+        <v-row no-gutters>
+          <v-col cols="auto mb-"> 
+            <v-img
+                id="logo_"
+                class="logo"
+                src="@/assets/logo_white.png"
+                max-height="220"
+                max-width="220"
+              >
+            </v-img>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col cols="auto">
+            <v-menu
+              offset-y
+              open-on-hover
+              offset-overflow
+              v-if="$store.state.tipo != '4'"
             >
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title
-              class="menuOpcao"
-              @click="processClick('Anúncios')"
-              >Anúncios</v-list-item-title
+              <template v-slot:activator="{ on, attrs }">
+                <!--<v-avatar v-bind="attrs" v-on="on" color="white">
+                      <v-img
+                        class="userImg ml-auto"
+                        :src="processImage()"
+                      >
+                      </v-img>
+                    </v-avatar>-->
+                <v-btn dark class="white--text ml-8 pb-3" text v-bind="attrs" v-on="on">
+                  Anúncios
+                  <v-icon class="ml-1" color="white" small
+                    >fas fa-chevron-down</v-icon
+                  >
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item>
+                  <v-list-item-title
+                    class="menuOpcao"
+                    @click="processClick('Anúncios')"
+                    >Anúncios</v-list-item-title
+                  >
+                </v-list-item>
+
+                <v-divider></v-divider>
+
+                <v-subheader  > Publicar </v-subheader>
+
+                <v-list-item>
+                  <v-list-item-title
+                    class="menuOpcao"
+                    @click="processClick('Meus anúncios')"
+                    >Os meus anúncios</v-list-item-title
+                  >
+                </v-list-item>
+
+                <v-list-item>
+                  <v-list-item-title
+                    class="menuOpcao"
+                    @click="processClick('Publicar anúncio')"
+                    >Publicar anúncio</v-list-item-title
+                  >
+                </v-list-item>
+              </v-list>
+            </v-menu>
+                    
+            <v-icon color="white" @click="messages()" class="mx-2 pb-3"
+              >fas fa-comment-dots</v-icon
             >
-          </v-list-item>
 
-          <v-divider></v-divider>
-
-          <v-subheader  > Publicar </v-subheader>
-
-          <v-list-item>
-            <v-list-item-title
-              class="menuOpcao"
-              @click="processClick('Meus anúncios')"
-              >Os meus anúncios</v-list-item-title
+            <v-icon color="white" @click="goToMainPage()" class="mx-2 pb-3"
+              >fas fa-home</v-icon
             >
-          </v-list-item>
 
-          <v-list-item>
-            <v-list-item-title
-              class="menuOpcao"
-              @click="processClick('Publicar anúncio')"
-              >Publicar anúncio</v-list-item-title
+            <v-icon color="white" @click="logout()" class="mx-2 pb-3"
+              >fas fa-sign-out-alt</v-icon
             >
-          </v-list-item>
-        </v-list>
-      </v-menu>
-
-      <v-divider vertical class="mx-2"></v-divider>
-
-      <v-icon color="white" @click="messages()" class="mx-2"
-        >fas fa-comment-dots</v-icon
-      >
-
-      <v-icon color="white" @click="goToMainPage()" class="mx-2"
-        >fas fa-home</v-icon
-      >
-
-      <v-icon color="white" @click="logout()" class="mx-2"
-        >fas fa-sign-out-alt</v-icon
-      >
+          </v-col>
+        </v-row>
+      </v-row>
     </v-app-bar>
   </div>
 </template>
