@@ -128,7 +128,7 @@ router.post('/getCategorias', auth.validToken, (req, res) => {
  *                                   PUT
  ****************************************************************************************/
 
-router.put('/regHorario', auth.validToken, (req, res) => {
+router.put('/regHorario', auth.checkSubscription, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
     .then((usr) => {

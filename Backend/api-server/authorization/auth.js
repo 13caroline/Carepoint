@@ -232,3 +232,25 @@ Out.check3MonthSubscription = (req, res, next) => {
         }
     })
 }
+
+Out.checkSubscription = (req, res, next) => {
+    jwt.verify(req.body.token, 'Project_PI', (err, payload) => {
+        if(!err){
+            user_controller.consult(payload.email)
+            .then((user) => {
+                serviceProvider_controller.consult_id(user.idUser)
+                .then((sp) => {
+                    if (sp.idSubscription > 1 || Date(user.freeTrial) > Date.now()){
+                        next();
+                    }
+                    else{
+                        res.status(400).jsonp({error : "A sua subscrição não lhe garante privilegios para adicionar Agenda."})
+                    }
+                })
+            })
+            .catch((err) => res.status(400).jsonp({ error: err }))
+        }else{
+            res.status(400).jsonp({ error: err })
+        }
+    })
+}
