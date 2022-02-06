@@ -62,7 +62,6 @@
                     color="#78C4D4"
                     v-on="on"
                     outlined
-                    :rules="textRules"
                     dense
                     v-model="hora"
                   ></v-text-field>
@@ -97,7 +96,6 @@
                     v-on="on"
                     outlined
                     dense
-                    :rules="textRules"
                     v-model="hora2"
                   ></v-text-field>
                 </template>
@@ -145,8 +143,8 @@ export default {
     dialog: false,
     horaInicio: null,
     horaTermino: null,
-    hora: "08:00",
-    hora2: "09:00",
+    hora: null,
+    hora2: null,
     textRules: [(v) => !!v || "Campo obrigatório"],
     medicos: [],
     dates: [
@@ -194,14 +192,14 @@ export default {
             dateEnd: data2,
           });
           this.$emit("clicked", "update");
-          (this.dialog = false),
-            this.$snackbar.showMessage({
-              show: true,
-              text: "Horário registado com sucesso.",
-              color: "success",
-              snackbar: true,
-              timeout: 4000,
-            });
+          (this.dialog = false), (this.hora = null), (this.hora2 = null);
+          this.$snackbar.showMessage({
+            show: true,
+            text: "Horário registado com sucesso.",
+            color: "success",
+            snackbar: true,
+            timeout: 4000,
+          });
         } catch (error) {
           let message = "";
           error.response.data.error == "Slot do Hórario já se encontra ocupado."
