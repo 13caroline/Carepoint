@@ -48,6 +48,7 @@
                 auto-grow
                 outlined
                 v-model="form.description"
+                :rules="[(v) => !!v || 'Campo obrigatório.']"
                 flat
                 rows="10"
                 row-height="10"
@@ -77,7 +78,8 @@
               <v-btn
                 depressed
                 large
-                dark
+                class="white--text"
+                :disabled="!valid"
                 block
                 color="#78c4d4"
                 @click="review()"

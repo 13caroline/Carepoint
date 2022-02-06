@@ -190,7 +190,6 @@ export default {
     day: "",
     date_begin: "",
     date_end: "",
-    dete_start_limit: "",
   }),
   mounted() {
     this.$refs.calendar.scrollToTime("08:00");

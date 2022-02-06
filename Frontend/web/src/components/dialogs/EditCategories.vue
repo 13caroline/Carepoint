@@ -134,6 +134,7 @@
 
             <v-card-text>
               <v-container>
+                <v-form ref="form" v-model="valid">
                 <div>
                   <span>Categorias *</span>
                   <v-select
@@ -141,6 +142,7 @@
                     outlined
                     flat
                     dense
+                    :rules="[(v) => !!v || 'Campo obrigatório.']"
                     v-model="editedItem.idCategory"
                     :items="cat"
                     item-value="idCategory"
@@ -176,7 +178,10 @@
                     suffix="€/hora"
                   />
                 </div>
+                </v-form>
+                <span class="caption">* Campos obrigatórios</span>
               </v-container>
+              
             </v-card-text>
             <v-card-actions>
               <v-row class="mb-0 py-0">
@@ -197,7 +202,8 @@
                   <v-btn
                     depressed
                     large
-                    dark
+                    class="white--text"
+                    :disabled="!valid"
                     block
                     color="#78c4d4"
                     @click="addItem()"

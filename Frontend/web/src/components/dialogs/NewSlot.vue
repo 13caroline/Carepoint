@@ -63,6 +63,7 @@
                     v-on="on"
                     outlined
                     dense
+                    :rules="[(v) => !!v || 'Campo obrigatório.']"
                     v-model="hora"
                   ></v-text-field>
                 </template>
@@ -95,6 +96,7 @@
                     color="#78C4D4"
                     v-on="on"
                     outlined
+                    :rules="[(v) => !!v || 'Campo obrigatório.']"
                     dense
                     v-model="hora2"
                   ></v-text-field>
@@ -108,6 +110,9 @@
                   color="#78C4D4"
                 ></v-time-picker>
               </v-menu>
+            </v-col>
+            <v-col cols="12" md="10" class="py-0 mx-auto">
+              <span class="caption">* Campos obrigatórios</span>
             </v-col>
           </v-row>
           <v-row align="end" justify="end">
