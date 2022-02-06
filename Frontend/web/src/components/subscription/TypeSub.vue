@@ -126,7 +126,7 @@ export default {
         id: 0,
         name: "Período Experimental",
         pros: [
-          { title: "Publicar anúncios", icon: "times", color: "#EF9A9A" },
+          { title: "Publicar anúncios", icon: "check", color: "#EF9A9A" },
           { title: "Adicionar agenda", icon: "times", color: "#EF9A9A" },
           {
             title: "Visualizar pedidos de consumidores",

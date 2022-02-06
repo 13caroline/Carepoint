@@ -22,6 +22,7 @@ export default new Vuex.Store({
     ],
     token: "",
     tipo: "",
+    sub: "",
     snackbar: {
       text: "",
       color: "",
@@ -36,6 +37,7 @@ export default new Vuex.Store({
     },
     tipo: state => state.tipo,
     token: state => state.token,
+    sub: state => state.sub,
     isAuthenticated: state => !!state.token,
     authStatus: state => state.status,
   },
@@ -48,11 +50,16 @@ export default new Vuex.Store({
     guardaTipoUtilizador(state, tipo) {
       state.tipo = tipo;
     },
+    guardaSubUtilizador(state, sub){
+      state.sub = sub;
+    },
 
     limpaStore(state) {
       state.token = "";
       state.tipo = "";
+      state.sub = "";
     },
+    
     showMessage(state, payload) {
       state.snackbar.text = payload.text;
       state.snackbar.color = payload.color;

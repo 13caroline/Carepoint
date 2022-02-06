@@ -10,9 +10,13 @@
         background-color="#fafafa"
         show-arrows
       >
-        <v-tab v-for="item in items" :key="item.tab">
+        <!--<v-tab v-for="item in items" :key="item.tab">
           {{ item.tab }}
-        </v-tab>
+        </v-tab>-->
+        <v-tab>Dados de utilizador</v-tab>
+        <v-tab>Subscrição</v-tab>
+        <v-tab v-if="$store.state.sub !== 0">Horários</v-tab>
+        <v-tab v-if="$store.state.sub !== 0">Requisição de Horários</v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">

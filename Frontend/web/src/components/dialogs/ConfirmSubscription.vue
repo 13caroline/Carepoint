@@ -172,6 +172,10 @@ export default {
         this.details.updated === 0
           ? (this.text = "Bem-vindo ao Carepoint!")
           : (this.text = "Subscrição renovada com sucesso!");
+
+
+        this.$store.commit("guardaSubUtilizador", this.details.subscription)
+        
         this.$snackbar.showMessage({
           show: true,
           color: "#78c4d4",

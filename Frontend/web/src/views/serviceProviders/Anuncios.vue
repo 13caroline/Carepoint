@@ -7,10 +7,19 @@
           <search />
         </v-col>
         <v-col cols="12" md="9" sm="9" class="ml-auto ml-sm-11 ma-md-0 mb-5">
-          <v-tabs v-model="tab" grow color="#2596be" background-color="#fafafa" show-arrows>
-            <v-tab v-for="item in items" :key="item.tab">
+          <v-tabs
+            v-model="tab"
+            grow
+            color="#2596be"
+            background-color="#fafafa"
+            show-arrows
+          >
+            <!--<v-tab v-for="item in items" :key="item.tab">
               {{ item.tab }}
-            </v-tab>
+            </v-tab>-->
+            <v-tab>Prestadores Individuais</v-tab>
+            <v-tab>Prestadores Coletivos</v-tab>
+            <v-tab v-if="$store.state.sub !== 0">Ofertas de Trabalho</v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab">
