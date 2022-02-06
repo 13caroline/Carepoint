@@ -192,3 +192,10 @@ CALL remove_workSchedule_slot(70,'{
         "date_end": "2022-01-03 11:30:00",
         "date_begin": "2022-01-03 06:00:00"
     }');
+    
+    
+    
+    
+SELECT category_has_serviceprovider.idCategory, user.idLocation, COUNT(*) FROM user
+INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
+GROUP BY category_has_serviceprovider.idCategory,user.idLocation;
