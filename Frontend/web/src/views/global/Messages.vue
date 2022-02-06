@@ -5,7 +5,7 @@
       <v-row no-gutters class="w-100">
         <v-col cols="3">
           <v-card
-            class="mx-auto cardPeople"
+            class="mx-auto cardPeople overflow-x-hidden"
             style="height: 67vh"
             flat
             color="#c0e4ec"
@@ -188,8 +188,10 @@ export default {
             token: store.getters.token,
           }
         );
+        
         this.users = response.data;
 
+        
         if (this.activeUser != 0) this.getMessage(this.activeUser);
         else {
           this.activeUser = response.data[0].idUser;
@@ -197,12 +199,7 @@ export default {
           this.getMessage(this.users[0].idUser);
         }
       } catch (e) {
-        this.$snackbar.showMessage({
-          show: true,
-          color: "error",
-          text: "Ocorreu um erro. Por favor tente mais tarde!",
-          timeout: 4000,
-        });
+        console.log(e)
       }
     },
     processImage(img) {
