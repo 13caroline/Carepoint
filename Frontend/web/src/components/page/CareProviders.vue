@@ -13,8 +13,8 @@
             </v-card-subtitle>
 
             <v-card-text>
-              <v-form>
-                <span>Categoria</span>
+              <v-form ref="form" v-model="valid">
+                <span>Categoria *</span>
                 <v-select
                   v-model="category"
                   :items="cat"
@@ -28,10 +28,11 @@
                   color="#78C4D4"
                 ></v-select>
 
-                <span>Localização</span>
+                <span>Localização *</span>
                 <v-autocomplete
                   v-model="location"
                   outlined
+                  :rules="[(v) => !!v || 'Campo obrigatório.']"
                   item-value="idLocation"
                   item-text="name"
                   dense
@@ -44,7 +45,13 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn dark depressed class="rounded-lg" color="#78C4D4" @click="search()">
+              <v-btn
+                :disabled="!valid"
+                depressed
+                class="white--text rounded-lg"
+                color="#78C4D4"
+                @click="search()"
+              >
                 Procurar
               </v-btn>
             </v-card-actions>
@@ -76,13 +83,14 @@ export default {
       loc: [],
       category: "",
       location: "",
-      info: {}
+      info: {},
+      valid: false,
     };
   },
-  methods:{
-    search(){
-      this.$router.push("/search/" + this.category + "/" + this.location)
-    }
+  methods: {
+    search() {
+      this.$router.push("/search/" + this.category + "/" + this.location);
+    },
   },
   created: async function () {
     try {
