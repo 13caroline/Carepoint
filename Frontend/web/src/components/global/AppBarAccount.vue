@@ -35,11 +35,6 @@
                   >fas fa-chevron-down</v-icon
                 >
               </v-btn>
-              <v-btn dark class="white--text hidden-sm-and-up" text v-bind="attrs" v-on="on">
-                <v-icon class="ml-1" color="white" small
-                  >fas fa-chevron-down</v-icon
-                >
-              </v-btn>
             </template>
             <v-list>
               <v-list-item>

@@ -36,7 +36,7 @@
                         {{ convertDate(a.postDate) }}
                       </span>
                     </v-col>
-                    <v-col xs="8" sm="8" md="8" lg="8" xl="8" >
+                    <v-col xs="8" sm="8" md="8" lg="8" xl="8" class="mt-3 mt-sm-3 mt-md-3 mt-lg-3 mt-xl-3" >
                       <v-row  class="flex-column text-right justify-end mr-2" >
                         <span class="user">{{a.name}}</span>
                         <span class="activity"
@@ -90,7 +90,7 @@
 
                   <v-row justify="center" class="mx-auto">
                     <span class="description">
-                      <v-clamp autoresize :max-lines="4">{{
+                      <v-clamp autoresize :max-lines="5">{{
                         a.description
                       }}</v-clamp>
                     </span>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="100%" max-width="45%">
+  <v-dialog v-model="dialog" width="100%" max-width="500">
     <template v-slot:activator="{ diag, attrs }">
       <v-btn
         color="#78C4D4"
