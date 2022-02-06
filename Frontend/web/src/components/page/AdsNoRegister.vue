@@ -119,26 +119,31 @@
     </v-row>
 
     <v-dialog v-model="dialog" persistent width="450">
-      <v-card class="pa-2">
-        <v-img
-          id="logo_"
-          align-center
-          center
-          src="@/assets/logo_up.png"
-          max-height="300"
-          max-width="300"
-        >
-        </v-img>
+      <v-card class="pa-2" width="100%" height="100%">
+        <v-card-title class="grey--text font-weight-light justify-center mb-2">
+          <div class="text-xs-center">
 
-        <v-card-title class="grey--text font-weight-light justify-center mb-8">
-          Foram encontrados
-          <strong> {{ total }} prestadores de serviço individuais!</strong>
+              <v-img
+                  id="logo_"
+                  mx-auto
+                  src="@/assets/logo_up.png"
+                  height="100"
+                  width="155"
+                  class="ml-sm-16 mb-sm-2"
+                >
+              </v-img>
+              <div>
+                <v-text id="encontrou" class="text-center">Foram encontrados,
+                <strong> {{ total }} prestadores de serviço individuais!</strong></v-text>
+              </div> 
+
+          </div>
         </v-card-title>
         <v-card-text class="text">
           Para poder aceder aos perfis detalhados,
           <strong> junte-se à comunidade Carepoint! </strong>
 
-          <p class="desc mt-6">
+          <p class="desc mt-4 mb-0">
             Tudo faremos para que a assistência a si ou o apoio a um seu
             familiar seja um processo tranquilo e adequado. Se não encontrou o
             perfil de cuidador pretendido, anuncie o que necessita e
@@ -268,6 +273,11 @@ export default {
 .text {
   font-size: 20px;
   text-align: center;
+}
+
+#encontrou{
+
+  word-break: break-word;
 }
 
 #advertise123::-webkit-scrollbar {
