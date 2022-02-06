@@ -20,7 +20,8 @@
           Remover conta
         </v-card-title>
         <v-card-text>
-          Tem a certeza que pretende remover a sua conta de utilizador? <strong>Esta ação é irreversível.</strong>
+          Tem a certeza que pretende remover a sua conta de utilizador?
+          <strong>Esta ação é irreversível.</strong>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -52,21 +53,37 @@
 </template>
 
 <script>
+import axios from "axios";
+import store from "@/store/index.js";
 export default {
-  props: ["dialogs"],
   data: () => ({
     dialog: false,
   }),
   methods: {
-    close() {
-      (this.dialog = false), this.$emit("clicked", "cancel");
+    remove: async function () {
+      try {
+        await axios.post("http://localhost:9040/users/erase", {
+          token: store.getters.token,
+        });
+        this.$store.commit("limpaStore");
+        this.$router.push("/");
+        
+      } catch (e) {
+        console.log(e);
+        this.$snackbar.showMessage({
+          show: true,
+          color: "warning",
+          text: "Ocorreu um erro no processamento, por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
     },
   },
 };
 </script>
 
 <style>
-  #card-title {
-    word-break: keep-all;
-  };
+#card-title {
+  word-break: keep-all;
+}
 </style>

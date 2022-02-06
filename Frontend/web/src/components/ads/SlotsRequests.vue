@@ -204,6 +204,22 @@ export default {
           timeout: 4000,
         });
       }
+
+    // RETIRAR COMENTÁRIO PARA APRESENTAÇÃO FINAL
+     /*try {
+       let assunto = ""; 
+       let mensagem = "";
+       action == 1 ? (assunto = "Requisição de horário", mensagem = "O seu pedido de requisição de horário foi aceite." + '\n' + '\n' + "A equipa, " + '\n' + "Carepoint. ")
+       : (assunto = "Requisição de horário", mensagem = "O seu pedido de requisição de horário foi recusado. Para mais informações, por favor entre em contacto com o prestador de serviços em questão." + '\n' + '\n' + "A equipa, " + '\n' + "Carepoint. ")
+        await axios.post("http://localhost:9040/email", {
+          email: item.email, 
+          assunto: assunto, 
+          message: mensagem
+        })
+      }
+      catch(e){
+        console.log(e);
+      }*/
     },
   },
   created: async function () {
@@ -216,6 +232,7 @@ export default {
       );
       if (response) {
         this.slots = response.data.slots;
+        console.log(this.slots)
       }
     } catch (e) {
       console.log(e);

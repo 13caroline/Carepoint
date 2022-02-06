@@ -23,7 +23,7 @@
                       </v-col>
                     </div>
                     <v-row class="mx-auto" align="center">
-                      <v-col md="10">
+                      <v-col md="9">
                         <span>Password</span>
                         <v-text-field
                           outlined
@@ -32,51 +32,13 @@
                           placeholder="*******"
                         ></v-text-field>
                       </v-col>
-                      <v-col>
+                      <v-col md="3">
                         <change-password
                           :id="user.idUser"
                           @clicked="update()"
                         />
                       </v-col>
                     </v-row>
-                    <!--<div>
-                      <v-col>
-                        <span>Palavra-passe atual</span>
-                        <v-text-field
-                          type="password"
-                          
-                          outlined
-                          dense
-                          v-model="user.password"
-                        ></v-text-field>
-                      </v-col>
-                    </div>-->
-                    <!--<div>
-                      <v-row class="mx-auto">
-                        <v-col cols="12" md="6">
-                          <span>Nova palavra-passe</span>
-                          <v-text-field
-                            type="password"
-                            :rules="passwordRules"
-                            placeholder="*****"
-                            outlined
-                            dense
-                            v-model="password"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                          <span>Repetir nova palavra-passe</span>
-                          <v-text-field
-                            type="password"
-                            placeholder="*****"
-                            outlined
-                            dense
-                            :rules="[(this.password === this.npassword) || 'Password must match']"
-                            v-model="npassword"
-                          ></v-text-field>
-                        </v-col>
-                      </v-row>
-                    </div> -->
                   </v-list-item-content>
                 </v-list-item>
               </v-card>
@@ -113,8 +75,6 @@
                           v-model="user.link"
                         ></v-text-field>
                       </v-col>
-                    </v-row>
-                    <v-row class="mx-auto">
                       <v-col>
                         <span>Firma</span>
                         <v-text-field
@@ -139,17 +99,22 @@
                           v-on:keypress="isNumber($event)"
                         ></v-text-field>
                       </v-col>
-                    </v-row>
-                    <v-row class="mx-auto">
                       <v-col>
                         <span>Localização</span>
-                        <v-text-field
+                        <v-autocomplete
                           outlined
+                          flat
                           dense
-                          color="#2596be"
-                          :rules="textRules"
-                          v-model="user.locationName"
-                        ></v-text-field>
+                          v-model="user.idLocation"
+                          single-line
+                          :items="loc"
+                          item-value="idLocation"
+                          item-text="name"
+                          :rules="[(v) => !!v || 'Localização obrigatória']"
+                          color="#78C4D4"
+                          name="location"
+                          required
+                        />
                       </v-col>
                     </v-row>
                   </v-list-item-content>
@@ -217,7 +182,7 @@
       </v-card>
       <v-row align="end" justify="end" class="w-100">
         <v-col>
-          <RemoveAccount ></RemoveAccount>
+          <RemoveAccount></RemoveAccount>
         </v-col>
         <v-col cols="auto">
           <Cancel :dialogs="cancelar" @clicked="close()"></Cancel>
@@ -244,6 +209,7 @@ import store from "@/store/index.js";
 export default {
   data: () => ({
     user: {},
+    loc: [],
     textRules: [
       (v) => {
         const pattern = /^[a-zA-Z\sÀ-ÿ]+$/;
@@ -291,7 +257,7 @@ export default {
             name: this.user.name,
             email: this.user.email,
             type: store.getters.tipo.toString(),
-            location: 1,
+            location: this.user.idLocation,
             phoneNumber: this.user.phoneNumber,
             idUser: this.user.idUser,
             description: this.user.description,
@@ -299,7 +265,7 @@ export default {
             firm: this.user.firm,
             nipc: this.user.nipc,
           });
-          this.$router.push("/service/provider/page");
+          this.$router.push("/company/page");
 
           this.$snackbar.showMessage({
             show: true,
@@ -338,6 +304,11 @@ export default {
           : this.user.sex == "F"
           ? (this.user.sex = "Feminino")
           : (this.user.sex = "Indefinido");
+
+        let response2 = await axios.get("http://localhost:9040/location");
+        if (response2) {
+          this.loc = response2.data;
+        }
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -353,7 +324,7 @@ export default {
     AppBarAccount: () => import("@/components/global/AppBarAccount"),
     Foot: () => import("@/components/global/Footer"),
     ChangePassword: () => import("@/components/dialogs/ChangePassword"),
-    RemoveAccount: () => import("@/components/dialogs/RemoveAccount")
+    RemoveAccount: () => import("@/components/dialogs/RemoveAccount"),
   },
   created: async function () {
     this.update();

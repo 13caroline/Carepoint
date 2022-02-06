@@ -1530,7 +1530,7 @@ BEGIN
     
 	UPDATE pi.serviceprovider SET
 		serviceprovider.workSchedule= CASE 
-					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND new_os IS NOT NULL
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL 
                     THEN new_os
                     ELSE serviceprovider.workSchedule
                     END
@@ -1641,7 +1641,7 @@ where not exists (
     
 	UPDATE pi.serviceprovider SET
 		serviceprovider.occupiedSchedule= CASE 
-					WHEN in_slot IS NOT NULL AND os IS NOT NULL AND new_os IS NOT NULL
+					WHEN in_slot IS NOT NULL AND os IS NOT NULL
                     THEN new_os
                     ELSE serviceprovider.occupiedSchedule
                     END
@@ -1863,7 +1863,7 @@ BEGIN
 	
     SET os = IF (os IS NULL, '[]', os);
 
-	select CAST(json_extract(j1, '$.id') AS UNSIGNED) AS id, user.name, json_extract(j1, '$.date_begin') AS date_begin, json_extract(j1, '$.date_end') AS date_end, 
+	select CAST(json_extract(j1, '$.id') AS UNSIGNED) AS id, user.name, user.email, json_extract(j1, '$.date_begin') AS date_begin, json_extract(j1, '$.date_end') AS date_end, 
 		CAST(REPLACE(json_extract(j1, '$.idCategory'),'"','') AS JSON) AS categories, json_extract(j1, '$.date_requested') AS date_requested, IF ( LENGTH(json_extract(j1, '$.idCategory')) <= 5, CAST(CONCAT('[',
          IF (json_extract(j1, '$.idCategory') LIKE '%1%', '"Apoio externo"',''),IF (json_extract(j1, '$.idCategory') LIKE '%2%', '"Cuidados de higiene e conforto pessoal"',''),
          IF (json_extract(j1, '$.idCategory') LIKE '%3%', '"Cuidados de lazer"',''),IF (json_extract(j1, '$.idCategory') LIKE '%4%', '"Cuidados médicos"',''),

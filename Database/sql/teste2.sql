@@ -187,3 +187,8 @@ CALL remove_user(55);
 CALL remove_user(12);
 CALL remove_user(13);
 CALL remove_user(151);
+
+CALL remove_workSchedule_slot(70,'{
+        "date_end": "2022-01-03 11:30:00",
+        "date_begin": "2022-01-03 06:00:00"
+    }');

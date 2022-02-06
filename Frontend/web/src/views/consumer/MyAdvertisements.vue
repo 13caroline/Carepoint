@@ -392,7 +392,7 @@ export default {
       ads: [],
       pageCount: 0,
       page: 1,
-      itemsPerPage: 9,
+      itemsPerPage: 6,
       total: 0,
       cancelar: {
         text: "a publicação de um anúncio",
