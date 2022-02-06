@@ -5,7 +5,7 @@
         color="#78C4D4"
         class="mb-2 ml-2"
         v-bind="attrs"
-        v-on="{...diag }"
+        v-on="{ ...diag }"
         small
         outlined
         rounded
@@ -105,6 +105,7 @@
                   format="24hr"
                   v-model="hora2"
                   full-width
+                  :min="addMinTime(hora)"
                   :allowed-minutes="allowedStep"
                   color="#78C4D4"
                 ></v-time-picker>
@@ -136,6 +137,8 @@
 <script>
 import axios from "axios";
 import store from "@/store/index.js";
+import moment from "moment";
+
 import Cancelar from "@/components/dialogs/Cancel.vue";
 export default {
   data: () => ({
@@ -174,6 +177,10 @@ export default {
 
     close() {
       this.dialog = false;
+    },
+
+    addMinTime(startTime) {
+      return moment(startTime, "HH:mm").add(30, "minutes").format("HH:mm");
     },
 
     register: async function () {
