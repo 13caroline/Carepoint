@@ -151,6 +151,12 @@ const routes = [
     path: '/chat',
     name: 'Chat',
     component: () => import('../components/global/Chat.vue')
+  },
+
+  {
+    path: '/search/:id1/:id2',
+    name: 'Search No Register',
+    component: () => import("../views/ads/AdsNoRegister.vue")
   }
 ]
 
