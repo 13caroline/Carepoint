@@ -96,7 +96,7 @@
                 </v-card-text>
                 <v-card-actions class="justify-center">
                   <div class="contact">
-                    <v-btn outlined small> Entrar em Contacto </v-btn>
+                    <contact :dados="a.idUser"/>
                   </div>
                 </v-card-actions>
               </v-card>
@@ -182,6 +182,7 @@ export default {
   },
   components: {
     VClamp,
+    Contact: () => import("@/components/dialogs/Contact"),
   },
   methods: {
     getIcon(c) {
@@ -229,6 +230,7 @@ export default {
 
         if (response) {
           this.ads = response.data.JobOffers;
+          
           this.total = response.data.Total[0].number_offers;
         }
       } catch (error) {
