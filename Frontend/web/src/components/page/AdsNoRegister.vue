@@ -120,8 +120,19 @@
 
     <v-dialog v-model="dialog" persistent width="450">
       <v-card class="pa-2">
+        <v-img
+          id="logo_"
+          align-center
+          center
+          src="@/assets/logo_up.png"
+          max-height="300"
+          max-width="300"
+        >
+        </v-img>
+
         <v-card-title class="grey--text font-weight-light justify-center mb-8">
-          Foram encontrados <strong> {{ total }} prestadores de serviço individuais!</strong>
+          Foram encontrados
+          <strong> {{ total }} prestadores de serviço individuais!</strong>
         </v-card-title>
         <v-card-text class="text">
           Para poder aceder aos perfis detalhados,
@@ -135,7 +146,7 @@
           </p>
         </v-card-text>
         <v-card-actions>
-          <v-btn to="register/type" block large color="#78C4D4" dark>
+          <v-btn to="/register/type" block large color="#78C4D4" dark>
             Inscrever-se
           </v-btn>
         </v-card-actions>
