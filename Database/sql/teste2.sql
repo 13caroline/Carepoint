@@ -196,6 +196,8 @@ CALL remove_workSchedule_slot(70,'{
     
     
     
-SELECT category_has_serviceprovider.idCategory, user.idLocation, COUNT(*) FROM user
+SELECT category_has_serviceprovider.idCategory,category.name AS category, user.idLocation, location.name AS location , COUNT(*)FROM user
 INNER JOIN category_has_serviceprovider ON user.idUser = category_has_serviceprovider.idServiceProvider
-GROUP BY category_has_serviceprovider.idCategory,user.idLocation;
+INNER JOIN category ON category_has_serviceprovider.idCategory = category.idCategory
+INNER JOIN location ON user.idLocation = location.idLocation
+GROUP BY category_has_serviceprovider.idCategory,user.idLocation ORDER BY COUNT(*) DESC;
