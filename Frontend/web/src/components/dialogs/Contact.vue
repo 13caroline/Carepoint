@@ -2,9 +2,9 @@
   <div>
     <v-dialog v-model="dialog" width="100%" max-width="500" persistent>
       <template v-slot:activator="{ on, attrs }">
-          <v-btn outlined small v-bind="attrs"
-          v-on="on"> Entrar em Contacto </v-btn>
-
+        <v-btn outlined small v-bind="attrs" v-on="on">
+          Entrar em Contacto
+        </v-btn>
       </template>
       <v-card class="rounded-lg">
         <v-card-title class="font-weight-bold pt-6">
@@ -15,9 +15,6 @@
         </v-card-subtitle>
         <v-card-text>
           <v-form ref="form" v-model="valid">
-            
-            
-
             <h4 class="mt-6 group font-weight-light text-uppercase">
               Mensagem
             </h4>
@@ -27,6 +24,7 @@
                 auto-grow
                 outlined
                 v-model="form.description"
+                :rules="[(v) => !!v || 'Campo obrigatório.']"
                 flat
                 rows="10"
                 row-height="10"
@@ -53,14 +51,7 @@
               </v-btn>
             </v-col>
             <v-col cols="12" md="6">
-              <v-btn
-                depressed
-                large
-                dark
-                block
-                color="#78c4d4"
-                @click="send()"
-              >
+              <v-btn depressed large class="white--text" :disabled="!valid" block color="#78c4d4" @click="send()">
                 Enviar
               </v-btn>
             </v-col>
@@ -72,7 +63,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 import store from "@/store/index.js";
 
 export default {
@@ -82,8 +73,8 @@ export default {
     length: 10,
     valid: false,
     form: {
-        description: ""
-    }
+      description: "",
+    },
   }),
   methods: {
     send: async function () {
@@ -94,16 +85,15 @@ export default {
             content: this.form.description,
             idUser2: this.dados,
           });
-          this.$emit("clicked","update")
-          this.dialog= false,
-
-          this.$snackbar.showMessage({
-            show: true,
-            text: "Mensagem enviada com sucesso.",
-            color: "success",
-            snackbar: true,
-            timeout: 4000,
-          });
+          this.$emit("clicked", "update");
+          (this.dialog = false),
+            this.$snackbar.showMessage({
+              show: true,
+              text: "Mensagem enviada com sucesso.",
+              color: "success",
+              snackbar: true,
+              timeout: 4000,
+            });
         } catch (e) {
           this.$snackbar.showMessage({
             show: true,

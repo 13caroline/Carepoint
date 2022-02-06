@@ -7,26 +7,26 @@
           <v-col cols="auto" class="ml-auto">
             <image-upload :id="user.idUser" @clicked="uploaded()" />
             <v-btn
-              class="body-2 rounded-xl button hidden-xs-only"
+              class="rounded-xl button hidden-xs-only"
               small
               color="#78C4D4"
               outlined
               dark
               to="/edit/profile"
             >
+              <v-icon small class="mr-2">fas fa-pen</v-icon>
               Editar dados
-              <v-icon small class="ml-2">fas fa-pen</v-icon>
             </v-btn>
             <v-btn
-              class="body-2 rounded-xl button px-10 hidden-sm-and-up"
+              class="rounded-xl button px-10 hidden-sm-and-up"
               small
               color="#78C4D4"
               outlined
               dark
               to="/edit/profile"
             >
+              <v-icon small class="mr-2">fas fa-pen</v-icon>
               Editar dados
-              <v-icon small class="ml-2">fas fa-pen</v-icon>
             </v-btn>
 
             <v-tooltip top>
@@ -91,12 +91,18 @@
             </v-card>
           </v-col>
           <v-col cols="auto" order="first" order-sm="last">
-            <div class="foto h-100 mt-5 ">
+            <div class="foto h-100 mt-5">
               <v-img
                 :src="processImage(user.image)"
                 aspect-ratio="1"
-                :width="115"                
-                class="grey lighten-2 my-2 ml-5 ml-sm-13 ml-md-13 ml-lg-13 rounded"
+                :width="115"
+                class="
+                  grey
+                  lighten-2
+                  my-2
+                  ml-5 ml-sm-13 ml-md-13 ml-lg-13
+                  rounded
+                "
                 cover
               >
                 <template v-slot:placeholder>
