@@ -249,9 +249,10 @@ export default {
             location: this.form.location,
             phoneNumber: this.form.phoneNumber,
           });
-          res.data.token != undefined
-            ? this.$store.commit("guardaTokenUtilizador", res.data.token)
-            : this.$store.commit("guardaTipoUtilizador", this.form.type);
+          if(res.data.token != undefined){
+            this.$store.commit("guardaTokenUtilizador", res.data.token)
+            this.$store.commit("guardaTipoUtilizador", this.form.type);
+          }
 
           this.$router.push("/page");
           this.$snackbar.showMessage({
