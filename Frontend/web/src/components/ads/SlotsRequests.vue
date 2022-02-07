@@ -232,7 +232,6 @@ export default {
       );
       if (response) {
         this.slots = response.data.slots;
-        console.log(this.slots)
       }
     } catch (e) {
       console.log(e);

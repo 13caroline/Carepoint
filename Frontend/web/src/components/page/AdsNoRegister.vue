@@ -133,8 +133,8 @@
                 >
               </v-img>
               <div>
-                <v-text id="encontrou" class="text-center">Foram encontrados,
-                <strong> {{ total }} prestadores de serviço individuais!</strong></v-text>
+                <p id="encontrou" class="text-center">Foram encontrados,
+                <strong> {{ total }} prestadores de serviço individuais!</strong></p>
               </div> 
 
           </div>

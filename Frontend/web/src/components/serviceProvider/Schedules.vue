@@ -1,12 +1,10 @@
 <template>
   <v-container>
-    <schedule :dados="id"></schedule>
+    <schedule></schedule>
   </v-container>
 </template>
 
 <script>
-import axios from "axios";
-import store from "@/store/index.js";
 export default {
   data() {
     return {
@@ -16,21 +14,7 @@ export default {
   components: {
     Schedule: () => import("@/components/ads/EditSchedules"),
   },
-  methods: {
-    updated: async function () {
-      try {
-        let response = await axios.post("http://localhost:9040/users/id", {
-          token: store.getters.token,
-        });
-        this.id = response.data;
-      } catch (e) {
-        console.log(e);
-      }
-    },
-  },
-  created: async function () {
-    this.updated();
-  },
+  
 };
 </script>
 

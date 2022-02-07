@@ -113,10 +113,10 @@
 import axios from "axios";
 import store from "@/store/index.js";
 export default {
-  props: ["dados"],
   data: () => ({
     today: "2022-01-03",
     events: [],
+    dados: "",
     start: null,
     end: null,
     occupied: null,
@@ -273,6 +273,16 @@ export default {
     this.$refs.calendar.checkChange();
   },
   created: async function () {
+
+    try {
+        let response2 = await axios.post("http://localhost:9040/users/id", {
+          token: store.getters.token,
+        });
+        this.dados = response2.data;
+      } catch (e) {
+        console.log(e);
+      }
+
     try {
       let response = await axios.get(
         "http://localhost:9040/serviceProvider/horarios/?id=" + this.dados
