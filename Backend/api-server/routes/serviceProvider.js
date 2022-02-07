@@ -81,14 +81,6 @@ router.get('/:id', function(req, res, next) {
  *                                   POST
  ****************************************************************************************/
 
-// Insert a new ServiceProvider
-router.post('/', function(req, res) {
-    console.log(req.body)
-    ServiceProvider.insert(req.body)
-        .then(data => { res.status(201).jsonp({ data: data }) })
-        .catch(e => res.status(400).jsonp({ error: e }))
-});
-
 router.post('/requests', auth.validToken, (req, res) => {
     email = auth.getEmailFromJWT(req.body.token)
     User.consult(email)
@@ -96,21 +88,13 @@ router.post('/requests', auth.validToken, (req, res) => {
         ServiceProvider.getRequestedSlots(usr.idUser)
         .then((slots) => {
             jsonSize = Object.keys(slots).length
-
-            for(let i = 0; i < jsonSize; i++) {
-                let nomes = slots[i].array_categories
-                const filter_nomes = nomes.filter(ct => ct != '\n')
-                let arrSize = filter_nomes.length
-                for(let j = 0; j < arrSize; j++) {
-                    filter_nomes[j] = filter_nomes[j].replace(/(\r\n|\n|\r)/gm, "")
-                }
-                slots[i].array_categories = filter_nomes
-            }
+            console.log(slots)
             //console.log(slots)
             res.status(200).jsonp({slots: slots})
         })
         .catch((err) => {res.status(400).jsonp({ error : err })})
     })
+    .catch((err) => {res.status(400).jsonp({ error : err })})
 })
 
 router.post('/getCategorias', auth.validToken, (req, res) => {
@@ -123,6 +107,14 @@ router.post('/getCategorias', auth.validToken, (req, res) => {
     })
     .catch((err) => res.status(400).jsonp({error : err}))
 })
+
+// Insert a new ServiceProvider
+router.post('/', function(req, res) {
+    console.log(req.body)
+    ServiceProvider.insert(req.body)
+        .then(data => { res.status(201).jsonp({ data: data }) })
+        .catch(e => res.status(400).jsonp({ error: e }))
+});~
 
 /****************************************************************************************
  *                                   PUT
@@ -170,7 +162,7 @@ router.put('/newSlot', auth.validToken, (req,res) => {
         var dateEnd = req.body.dateEnd;
         var r_categories = req.body.categories;
         var d = new Date();
-        var ymd = d.getFullYear() + "-" + (('0'+(d.getMonth()+1)).slice(-2)) + "-" + (('0'+(d.getDate()+1)).slice(-2));
+        var ymd = d.getFullYear() + "-" + (('0'+(d.getMonth()+1)).slice(-2)) + "-" + (('0'+(d.getDate())).slice(-2));
         var hms = d.getHours() + ":" + (('0'+d.getMinutes()).slice(-2)) + ":" + (('0'+d.getSeconds()).slice(-2));
         var postDate = ymd + " " + hms;
         var occupied = "0";
