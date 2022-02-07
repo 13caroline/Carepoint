@@ -127,6 +127,7 @@ import VClamp from "vue-clamp";
 export default {
   name: "Ads",
 
+
   data() {
     return {
       image: "",
@@ -137,6 +138,7 @@ export default {
       page: 1,
       itemsPerPage: 9,
       total: 0,
+      search: ""
     };
   },
   components: {
@@ -157,17 +159,20 @@ export default {
     },
     nextPage() {
       if (this.page + 1 <= this.numberOfPages) this.page += 1;
-      this.getData(this.page);
+      console.log(this.ads);
+      this.getData();
     },
     formerPage() {
       if (this.page - 1 >= 1) this.page -= 1;
-      this.getData(this.page);
+      this.getData();
     },
-    getData: async function (search) {
+    getData: async function () {
+      // console.log('lslslsl => ', props);
       try {
-        let url = "http://localhost:9040/search/serviceProviders?page=";
-      
-        let response = await axios.get(url + search);
+        let url = "http://localhost:9040/search/serviceProviders?page=" + 
+        this.page + this.search;
+        console.log("asked for => " ,url);
+        let response = await axios.get(url);
         if (response) {
           this.ads = Object.assign([],response.data.ServiceProviders);
           this.total = response.data.ServiceProviders_Sum[0].number_sps;
@@ -185,21 +190,16 @@ export default {
     searchForm: async function(form) {
       try {
        // this.ads = [];
-        let url = "";
 
-        if (form) {
           this.page = 1;
-          url =
-            url +
-            this.page +
+          this.search =
             (form.category ? "&category=".concat(form.category) : "") +
             (form.location ? "&location=".concat(form.location) : "") +
             (form.price ? "&price=".concat(form.price) : "") +
             (form.rating ? "&rating=".concat(form.rating) : "") +
             (form.sex ? "&sex=".concat(form.sex) : "");
-        } else url = url + this.page;
 
-        await this.getData(url);
+        await this.getData();
       } catch (e) {
         this.$snackbar.showMessage({
           show: true,
@@ -208,7 +208,7 @@ export default {
           timeout: 4000,
         });
       }
-      console.log(this.ads);
+      //console.log(this.ads);
     },
   },
   computed: {
@@ -218,8 +218,9 @@ export default {
   },
 
   created: async function () {
-    await this.getData(this.page);
+    await this.getData();
   },
+  
 };
 </script>
 

@@ -38,6 +38,8 @@
                 :key="index"
               >
                 <v-card
+                  width="120"
+                  height="120"
                   v-if="v.sub > 0"
                   class="mt-4 rounded-xl overflow-auto prices"
                   outlined
@@ -46,7 +48,7 @@
                   @click="subscribe(v)"
                   :disabled="dados.subscription < v.sub"
                 >
-                  <v-card-title class="ma-2 card font-weight-normal">
+                  <v-card-title class="ma-2 card font-weight-normal mt-4">
                     <v-row v-if="v.sub == 1" justify="center">
                       {{ v.sub }} mês
                     </v-row>

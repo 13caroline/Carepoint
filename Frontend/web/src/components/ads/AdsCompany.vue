@@ -144,24 +144,11 @@ export default {
       if (this.page - 1 >= 1) this.page -= 1;
       this.getData();
     },
-    getData: async function (form) {
+    getData: async function () {
       try {
-        let url = "http://localhost:9040/search/companies?page=";
+        let url = "http://localhost:9040/search/companies?page=" + 
+        this.page
 
-        this.ads = [];
-        if (form) {
-          this.page = 1;
-
-          url =
-            url +
-            this.page +
-            (form.category ? "&category=".concat(form.category) : "") +
-            (form.location ? "&location=".concat(form.location) : "") +
-            (form.price ? "&price=".concat(form.price) : "") +
-            (form.rating ? "&rating=".concat(form.rating) : "") +
-            (form.sex ? "&sex=".concat(form.sex) : "");
-        } else url = url + this.page;
-        console.log(url);
         let response = await axios.get(url);
 
         if (response) {
@@ -178,6 +165,28 @@ export default {
         });
       }
     },
+    searchForm: async function(form) {
+      try {
+
+          this.page = 1;
+          this.search =
+            (form.category ? "&category=".concat(form.category) : "") +
+            (form.location ? "&location=".concat(form.location) : "") +
+            (form.price ? "&price=".concat(form.price) : "") +
+            (form.rating ? "&rating=".concat(form.rating) : "") +
+            (form.sex ? "&sex=".concat(form.sex) : "");
+
+        await this.getData();
+      } catch (e) {
+        this.$snackbar.showMessage({
+          show: true,
+          color: "error",
+          text: "Ocorreu um erro. Por favor tente mais tarde!",
+          timeout: 4000,
+        });
+      }
+      //console.log(this.ads);
+    }
   },
   computed: {
     numberOfPages() {

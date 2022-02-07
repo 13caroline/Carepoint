@@ -3,7 +3,7 @@
     <template v-slot:activator="{ diag, attrs }">
       <v-btn
         color="#78C4D4"
-        class="mb-2 ml-2"
+        class="mb-2 ml-2 hidden-xs-only"
         v-bind="attrs"
         v-on="{ ...diag }"
         small
@@ -12,6 +12,19 @@
         @click="dialog = true"
       >
         <v-icon small class="mr-2"> fas fa-plus</v-icon> Registar horário
+      </v-btn>
+      <v-btn
+        color="#78C4D4"
+        class="mb-2 hidden-sm-and-up"
+        width="187"
+        v-bind="attrs"
+        v-on="{ ...diag }"
+        small
+        outlined
+        rounded
+        @click="dialog = true"
+      >
+        <v-icon small class="mx-1 justify-center"> fas fa-plus</v-icon> Registar horário
       </v-btn>
     </template>
     <v-card>

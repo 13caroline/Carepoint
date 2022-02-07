@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="100%" max-width="1000" persistent>
+    <v-dialog v-model="dialog" width="100%" max-width="700" persistent>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           dense
@@ -37,7 +37,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col>
+              <v-col cols="12" sm="6" md="6" lg="6" xl="6">
                 <span>Nova palavra-passe</span>
                 <v-text-field
                   outlined
@@ -51,7 +51,7 @@
                   v-model="form.newPassword"
                 ></v-text-field>
               </v-col>
-              <v-col>
+              <v-col cols="12" sm="6" md="6" lg="6" xl="6">
                 <span>Repita a palavra-passe</span>
                 <v-text-field
                   outlined

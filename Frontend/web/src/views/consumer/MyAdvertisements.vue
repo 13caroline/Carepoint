@@ -480,7 +480,7 @@ export default {
           await axios.post("http://localhost:9040/joboffer/new", {
             token: store.getters.token,
             price: this.dialogData.price,
-            description: "DescTeste",
+            description: this.dialogData.description,
             beginDate: this.dateBegin,
             endDate: this.dateEnd,
             idCategory: this.dialogData.idCategory,
