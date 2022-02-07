@@ -193,7 +193,7 @@ CALL remove_workSchedule_slot(70,'{
         "date_begin": "2022-01-03 06:00:00"
     }');
     
-    
+CALL info_requested_slots(53);
     
     
 SELECT category_has_serviceprovider.idCategory,category.name AS category, user.idLocation, location.name AS location , COUNT(*)FROM user
