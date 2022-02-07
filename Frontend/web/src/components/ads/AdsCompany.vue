@@ -147,7 +147,7 @@ export default {
     getData: async function () {
       try {
         let url = "http://localhost:9040/search/companies?page=" + 
-        this.page + this.search;
+        this.page
 
         let response = await axios.get(url);
 

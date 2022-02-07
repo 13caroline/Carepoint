@@ -5,18 +5,23 @@
         <v-col cols="auto" class="ml-auto">
           <image-upload :id="user.idUser" @clicked="uploaded()" />
           <v-btn
-            class="body-2 rounded-xl button hidden-xs-only"
+            class="rounded-xl button hidden-xs-only"
             small
             color="#78C4D4"
             outlined
             dark
             @click="redirect()"
           >
+            <v-icon small class="mr-2">fas fa-pen</v-icon>
             Editar dados
-            <v-icon small class="ml-2">fas fa-pen</v-icon>
           </v-btn>
           <v-btn
-            class="rounded-xl button hidden-sm-and-up mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0"
+            class="
+              rounded-xl
+              button
+              hidden-sm-and-up
+              mt-1 mt-sm-0 mt-md-0 mt-lg-0 mt-xl-0
+            "
             small
             color="#78C4D4"
             outlined
@@ -24,9 +29,8 @@
             @click="redirect()"
             width="200px"
           >
-          <v-icon small class="mr-2">fas fa-pen</v-icon>
+            <v-icon small class="mr-2">fas fa-pen</v-icon>
             Editar dados
-            
           </v-btn>
         </v-col>
       </v-row>
@@ -274,7 +278,7 @@
                       <v-col>
                         <p class="infos">Qualificações</p>
                       </v-col>
-                      <v-col>
+                      <v-col cols="10">
                         <p class="respos">{{ user.qualifications }}</p>
                       </v-col>
                     </v-row>
@@ -298,16 +302,10 @@
                     </v-row>
                   </div>
                   <div>
-                    <span
-                      class="solidarity"
-                      v-if="user.solidarity == 1"
-                    >
+                    <span class="solidarity" v-if="user.solidarity == 1">
                       Aderente ao banco de horas
                     </span>
-                    <v-icon
-                      small
-                      color="#AED581"
-                      v-if="user.solidarity == 1"
+                    <v-icon small color="#AED581" v-if="user.solidarity == 1"
                       >fas fa-check-circle</v-icon
                     >
                   </div>
@@ -423,7 +421,7 @@ export default {
 }
 
 .solidarity {
-  color: #78C4D4;
+  color: #78c4d4;
   text-align: justify;
   text-justify: inter-word;
 }
