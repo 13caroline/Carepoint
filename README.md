@@ -4,7 +4,7 @@
   <img src="https://github.com/RicardoJSFerreira/PI/blob/main/Frontend/web/src/assets/logo.png" height="150" width="370" >
 </p>
 
-Within the curricular unit of **IT Project**, the development of a startup was proposed, in order to understand and learn the process of starting a business, from the creation of an idea and carrying out the value proposition, to its development and application.
+Within the curricular unit of **IT Project**, the development of a startup was proposed, in order to understand and learn the process of starting a business, from the creation of an idea and carrying out the value proposition, to its development and application ([Financial report](https://github.com/13caroline/carepoint/blob/main/An%C3%A1lise%20Financeira/Relatorio_Financeiro_RunTime%20Terror.pdf)).
     
 For this purpose, we developed a platform that allows the interaction of two entities (consumers and care providers) aiming to contribute to the seniors' physical and psychological well-being by strengthening the network of caregivers and valuing the elderly in society as wells of knowledge and experience ([Technical report](https://github.com/13caroline/Carepoint/blob/main/PI_Relat%C3%B3rio_T%C3%A9cnico(RunTime%20Terror).pdf)).
 
